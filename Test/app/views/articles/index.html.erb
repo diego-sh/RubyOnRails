@@ -1,0 +1,13 @@
+
+<h1>Lista de Artículos </h1>
+<div style="width:80%; margin:0 auto;">
+
+<% @articles.each do |article| %>
+    <h1><%= link_to article.titulo, article %></h1>
+    <div>
+        <p><%= article.cuerpo%></p>
+        <%= link_to "Eliminar", article, class:"red", method: :delete  %>
+    </div>
+<%end%>
+
+</div>
