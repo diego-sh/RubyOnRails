@@ -1,0 +1,97 @@
+<%= form_for(patient) do |f| %>
+  <% if patient.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(patient.errors.count, "error") %> prohibited this patient from being saved:</h2>
+
+      <ul>
+      <% patient.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :PAC_HC %>
+    <%= f.text_field :PAC_HC %>
+  </div>
+
+  <div class="field">
+    <%= f.label :PAC_CEDULA %>
+    <%= f.text_field :PAC_CEDULA %>
+  </div>
+
+  <div class="field">
+    <%= f.label :PAC_APELLIDO_PATERNO %>
+    <%= f.text_field :PAC_APELLIDO_PATERNO %>
+  </div>
+
+  <div class="field">
+    <%= f.label :PAC_APELLIDO_MATERNO %>
+    <%= f.text_field :PAC_APELLIDO_MATERNO %>
+  </div>
+
+  <div class="field">
+    <%= f.label :PAC_NOMBRES %>
+    <%= f.text_field :PAC_NOMBRES %>
+  </div>
+
+  <div class="field">
+    <%= f.label :PAC_FECHA_NACIMIENTO %>
+    <%= f.date_select :PAC_FECHA_NACIMIENTO %>
+  </div>
+
+  <div class="field">
+    <%= f.label :PAC_NACIONALIDAD %>
+    <%= f.text_field :PAC_NACIONALIDAD %>
+  </div>
+
+  <div class="field">
+    <%= f.label :PAC_GENERO %>
+    <%= f.text_field :PAC_GENERO %>
+  </div>
+
+  <div class="field">
+    <%= f.label :PAC_ESTADO_CIVIL %>
+    <%= f.text_field :PAC_ESTADO_CIVIL %>
+  </div>
+
+  <div class="field">
+    <%= f.label :PAC_INSTRUCCION %>
+    <%= f.text_field :PAC_INSTRUCCION %>
+  </div>
+
+  <div class="field">
+    <%= f.label :PAC_OCUPACION %>
+    <%= f.text_field :PAC_OCUPACION %>
+  </div>
+
+  <div class="field">
+    <%= f.label :PAC_TELEFONO %>
+    <%= f.text_field :PAC_TELEFONO %>
+  </div>
+
+  <div class="field">
+    <%= f.label :PAC_GRUPO_SANGUINEO %>
+    <%= f.text_field :PAC_GRUPO_SANGUINEO %>
+  </div>
+
+  <div class="field">
+    <%= f.label :FECHA_CREACION %>
+    <%= f.datetime_select :FECHA_CREACION %>
+  </div>
+
+  <div class="field">
+    <%= f.label :FECHA_ACTUALIZACION %>
+    <%= f.datetime_select :FECHA_ACTUALIZACION %>
+  </div>
+
+  <div class="field">
+    <%= f.label :ID_USUARIO_CREACION %>
+    <%= f.number_field :ID_USUARIO_CREACION %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
