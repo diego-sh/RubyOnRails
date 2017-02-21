@@ -7,20 +7,20 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>Nro. Historia</th>
+        <!--<th>Nro. Historia</th>!-->
         <th>Cédula</th>
         <th>Apellido Paterno</th>
         <th>Apellido Materno</th>
         <th>Nombre</th>
         <th>Fecha de Nacimiento</th>
-        <th>Nacionalidad</th>
+        <!--<th>Nacionalidad</th>
         <th>Género</th>
         <th>Estado Civil</th>
         <th>Instrucción</th>
-        <th>Pac ocupacion</th>
+        <th>Pac ocupacion</th>!-->
         <th>Teléfono</th>
-        <th>Grupo Sanguíneo</th>
-        <!--<th>Fecha creacion</th>
+        <!--<th>Grupo Sanguíneo</th>
+        <th>Fecha creacion</th>
         <th>Fecha actualizacion</th>
         <th>Id usuario creacion</th>!-->
         <th colspan="3"></th>
@@ -30,20 +30,20 @@
     <tbody>
       <% @patients.each do |patient| %>
         <tr>
-          <td><%= patient.PAC_HC %></td>
+          <!--<td><%= patient.PAC_HC %></td>!-->
           <td><%= patient.PAC_CEDULA %></td>
           <td><%= patient.PAC_APELLIDO_PATERNO %></td>
           <td><%= patient.PAC_APELLIDO_MATERNO %></td>
           <td><%= patient.PAC_NOMBRES %></td>
           <td><%= patient.PAC_FECHA_NACIMIENTO %></td>
-          <td><%= patient.PAC_NACIONALIDAD %></td>
+          <!--<td><%= patient.PAC_NACIONALIDAD %></td>
           <td><%= patient.PAC_GENERO %></td>
           <td><%= patient.PAC_ESTADO_CIVIL %></td>
           <td><%= patient.PAC_INSTRUCCION %></td>
-          <td><%= patient.PAC_OCUPACION %></td>
+          <td><%= patient.PAC_OCUPACION %></td>!-->
           <td><%= patient.PAC_TELEFONO %></td>
-          <td><%= patient.PAC_GRUPO_SANGUINEO %></td>
-          <!--<td><%= patient.FECHA_CREACION %></td>
+          <!--<td><%= patient.PAC_GRUPO_SANGUINEO %></td>
+          <td><%= patient.FECHA_CREACION %></td>
           <td><%= patient.FECHA_ACTUALIZACION %></td>
           <td><%= patient.ID_USUARIO_CREACION %></td>!-->
           <td><%= link_to 'Mostrar', patient %></td>
