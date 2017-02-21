@@ -1,63 +1,6 @@
-<<<<<<< HEAD
+
 <% provide(:index, 'active') %>
-<p id="notice"><%= notice %></p>
 
-<h1>Patients</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Pac hc</th>
-      <th>Pac cedula</th>
-      <th>Pac apellido paterno</th>
-      <th>Pac apellido materno</th>
-      <th>Pac nombres</th>
-      <th>Pac fecha nacimiento</th>
-      <th>Pac nacionalidad</th>
-      <th>Pac genero</th>
-      <th>Pac estado civil</th>
-      <th>Pac instruccion</th>
-      <th>Pac ocupacion</th>
-      <th>Pac telefono</th>
-      <th>Pac grupo sanguineo</th>
-      <th>Fecha creacion</th>
-      <th>Fecha actualizacion</th>
-      <th>Id usuario creacion</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @patients.each do |patient| %>
-      <tr>
-        <td><%= patient.PAC_HC %></td>
-        <td><%= patient.PAC_CEDULA %></td>
-        <td><%= patient.PAC_APELLIDO_PATERNO %></td>
-        <td><%= patient.PAC_APELLIDO_MATERNO %></td>
-        <td><%= patient.PAC_NOMBRES %></td>
-        <td><%= patient.PAC_FECHA_NACIMIENTO %></td>
-        <td><%= patient.PAC_NACIONALIDAD %></td>
-        <td><%= patient.PAC_GENERO %></td>
-        <td><%= patient.PAC_ESTADO_CIVIL %></td>
-        <td><%= patient.PAC_INSTRUCCION %></td>
-        <td><%= patient.PAC_OCUPACION %></td>
-        <td><%= patient.PAC_TELEFONO %></td>
-        <td><%= patient.PAC_GRUPO_SANGUINEO %></td>
-        <td><%= patient.FECHA_CREACION %></td>
-        <td><%= patient.FECHA_ACTUALIZACION %></td>
-        <td><%= patient.ID_USUARIO_CREACION %></td>
-        <td><%= link_to 'Show', patient %></td>
-        <td><%= link_to 'Edit', edit_patient_path(patient) %></td>
-        <td><%= link_to 'Destroy', patient, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Patient', new_patient_path %>
-=======
 <p id="notice"><%= notice %></p>
 <div class="container">
   <h1>PACIENTES</h1>
@@ -113,4 +56,4 @@
   <%= link_to 'NUEVO PACIENTE', new_patient_path %>
 </div>
 <br>
->>>>>>> origin/master
+
