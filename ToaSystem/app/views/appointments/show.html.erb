@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Med per id:</strong>
+  <%= @appointment.MED_PER_ID %>
+</p>
+
+<p>
+  <strong>Pac id:</strong>
+  <%= @appointment.PAC_ID %>
+</p>
+
+<p>
+  <strong>Per id:</strong>
+  <%= @appointment.PER_ID %>
+</p>
+
+<p>
+  <strong>Cit fecha:</strong>
+  <%= @appointment.CIT_FECHA %>
+</p>
+
+<p>
+  <strong>Cit hora:</strong>
+  <%= @appointment.CIT_HORA %>
+</p>
+
+<p>
+  <strong>Cit estado:</strong>
+  <%= @appointment.CIT_ESTADO %>
+</p>
+
+<p>
+  <strong>Cit tipo:</strong>
+  <%= @appointment.CIT_TIPO %>
+</p>
+
+<p>
+  <strong>Fecha creacion:</strong>
+  <%= @appointment.FECHA_CREACION %>
+</p>
+
+<p>
+  <strong>Fecha actualizacion:</strong>
+  <%= @appointment.FECHA_ACTUALIZACION %>
+</p>
+
+<p>
+  <strong>Id usuario creacion:</strong>
+  <%= @appointment.ID_USUARIO_CREACION %>
+</p>
+
+<%= link_to 'Edit', edit_appointment_path(@appointment) %> |
+<%= link_to 'Back', appointments_path %>

@@ -1,0 +1,67 @@
+<%= form_for(appointment) do |f| %>
+  <% if appointment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(appointment.errors.count, "error") %> prohibited this appointment from being saved:</h2>
+
+      <ul>
+      <% appointment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :MED_PER_ID %>
+    <%= f.number_field :MED_PER_ID %>
+  </div>
+
+  <div class="field">
+    <%= f.label :PAC_ID %>
+    <%= f.text_field :PAC_ID %>
+  </div>
+
+  <div class="field">
+    <%= f.label :PER_ID %>
+    <%= f.number_field :PER_ID %>
+  </div>
+
+  <div class="field">
+    <%= f.label :CIT_FECHA %>
+    <%= f.date_select :CIT_FECHA %>
+  </div>
+
+  <div class="field">
+    <%= f.label :CIT_HORA %>
+    <%= f.time_select :CIT_HORA %>
+  </div>
+
+  <div class="field">
+    <%= f.label :CIT_ESTADO %>
+    <%= f.text_field :CIT_ESTADO %>
+  </div>
+
+  <div class="field">
+    <%= f.label :CIT_TIPO %>
+    <%= f.text_field :CIT_TIPO %>
+  </div>
+
+  <div class="field">
+    <%= f.label :FECHA_CREACION %>
+    <%= f.datetime_select :FECHA_CREACION %>
+  </div>
+
+  <div class="field">
+    <%= f.label :FECHA_ACTUALIZACION %>
+    <%= f.datetime_select :FECHA_ACTUALIZACION %>
+  </div>
+
+  <div class="field">
+    <%= f.label :ID_USUARIO_CREACION %>
+    <%= f.number_field :ID_USUARIO_CREACION %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

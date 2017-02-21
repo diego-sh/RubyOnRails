@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Appointments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Med per id</th>
+      <th>Pac id</th>
+      <th>Per id</th>
+      <th>Cit fecha</th>
+      <th>Cit hora</th>
+      <th>Cit estado</th>
+      <th>Cit tipo</th>
+      <th>Fecha creacion</th>
+      <th>Fecha actualizacion</th>
+      <th>Id usuario creacion</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @appointments.each do |appointment| %>
+      <tr>
+        <td><%= appointment.MED_PER_ID %></td>
+        <td><%= appointment.PAC_ID %></td>
+        <td><%= appointment.PER_ID %></td>
+        <td><%= appointment.CIT_FECHA %></td>
+        <td><%= appointment.CIT_HORA %></td>
+        <td><%= appointment.CIT_ESTADO %></td>
+        <td><%= appointment.CIT_TIPO %></td>
+        <td><%= appointment.FECHA_CREACION %></td>
+        <td><%= appointment.FECHA_ACTUALIZACION %></td>
+        <td><%= appointment.ID_USUARIO_CREACION %></td>
+        <td><%= link_to 'Show', appointment %></td>
+        <td><%= link_to 'Edit', edit_appointment_path(appointment) %></td>
+        <td><%= link_to 'Destroy', appointment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Appointment', new_appointment_path %>
