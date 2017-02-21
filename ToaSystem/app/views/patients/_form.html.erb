@@ -10,8 +10,144 @@
       </ul>
     </div>
   <% end %>
+  <style>
+    th, td {
+        width: 50%;
+        padding: 5px;
+    }
+    td {
+      text-align: right;
+    }
+  </style>
 
-  <div class="field">
+  <div class="container">
+    <div class="row row-centered">
+      <table>
+        <tr>
+          <td>
+            <p>Nro. Historia Clínica</p>
+          </td>
+          <td>
+            <%= f.text_field :PAC_HC%>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <p>Cédula</p>
+          </td>
+          <td>
+            <%= f.text_field :PAC_CEDULA %>
+          </td>
+        </tr>
+        
+        <tr>
+          <td>
+            <p>Apellido Paterno:</p>
+          </td>
+          <td>
+            <%= f.text_field :PAC_APELLIDO_PATERNO %>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <p>Apellido Materno:</p>
+          </td>
+          <td>
+            <%= f.text_field :PAC_APELLIDO_MATERNO %>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <p>Nombre:</p>
+          </td>
+          <td>
+            <%= f.text_field :PAC_NOMBRES %>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <p>Fecha de Nacimiento:</p>
+          </td>
+          <td>
+            <%= f.date_select :PAC_FECHA_NACIMIENTO %>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <p>Nacionalidad:</p>
+          </td>
+          <td>
+            <%= f.text_field :PAC_NACIONALIDAD %>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <p>Género:</p>
+          </td>
+          <td>
+            <%= f.text_field :PAC_GENERO %>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <p>Estado Civil:</p>
+          </td>
+          <td>
+            <%= f.text_field :PAC_ESTADO_CIVIL %>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <p>Instrucción:</p>
+          </td>
+          <td>
+            <%= f.text_field :PAC_INSTRUCCION %>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <p>Ocupación:</p>
+          </td>
+          <td>
+            <%= f.text_field :PAC_OCUPACION %>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <p>Teléfono:</p>
+          </td>
+          <td>
+            <%= f.text_field :PAC_TELEFONO %>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <p>Grupo Sanguíneo:</p>
+          </td>
+          <td>
+            <%= f.text_field :PAC_GRUPO_SANGUINEO %>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="actions">
+      <%= f.submit "GUARDAR" %>
+    </div>
+  </div>
+
+  <!--<div class="field">
+    <label class="title"> Cedula:</label>
     <%= f.label :PAC_HC %>
     <%= f.text_field :PAC_HC %>
   </div>
@@ -89,9 +225,5 @@
   <div class="field">
     <%= f.label :ID_USUARIO_CREACION %>
     <%= f.number_field :ID_USUARIO_CREACION %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  </div>!-->
 <% end %>
