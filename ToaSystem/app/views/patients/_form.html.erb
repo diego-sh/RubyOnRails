@@ -10,43 +10,70 @@
       </ul>
     </div>
   <% end %>
-  <style>
-    th, td {
-        width: 50%;
-        padding: 5px;
-    }
-    td {
-      text-align: right;
-    }
-  </style>
-
+  
   <div class="container">
-    <div class="row row-centered">
-      <table>
-        <tr>
-          <td>
-            <p>Nro. Historia Clínica</p>
-          </td>
-          <td>
-            <%= f.text_field :PAC_HC%>
-          </td>
-        </tr>
+      <table class="table table-bordered">
 
-        <tr>
-          <td>
-            <p>Cédula</p>
-          </td>
-          <td>
-            <%= f.text_field :PAC_CEDULA %>
-          </td>
-        </tr>
-        
+        <tbody>
+          <tr>
+              <td rowspan="3" colspan="3" style="width: 14%" align="center">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/User_Circle.png" height="42%">
+              </td>
+              <td>
+                <p>Apellido Paterno:</p>
+              </td>
+              <td>
+                <%= f.text_field :PAC_APELLIDO_PATERNO %>
+              </td>
+              <td>
+                <p>Cédula</p>
+              </td>
+              <td>
+                <%= f.text_field :PAC_CEDULA %>
+              </td>
+          </tr>
+          <tr>
+              <td>
+            <p>Apellido Materno:</p>
+            </td>
+            <td>
+              <%= f.text_field :PAC_APELLIDO_MATERNO %>
+            </td>
+            <td>
+              <p>Fecha de Nacimiento:</p>
+            </td>
+            <td>
+              <%= f.date_select :PAC_FECHA_NACIMIENTO %>
+            </td>
+          </tr>
+          <tr>
+              <td>
+              <p>Nombre:</p>
+              </td>
+              <td>
+                <%= f.text_field :PAC_NOMBRES %>
+              </td>
+              <td>
+                <p>Teléfono:</p>
+              </td>
+              <td>
+                <%= f.text_field :PAC_TELEFONO %>
+              </td>
+          </tr>
+        </tbody>
+        <!--
         <tr>
           <td>
             <p>Apellido Paterno:</p>
           </td>
           <td>
             <%= f.text_field :PAC_APELLIDO_PATERNO %>
+          </td>
+          <td>
+            <p>Cédula</p>
+          </td>
+          <td>
+            <%= f.text_field :PAC_CEDULA %>
           </td>
         </tr>
 
@@ -57,18 +84,6 @@
           <td>
             <%= f.text_field :PAC_APELLIDO_MATERNO %>
           </td>
-        </tr>
-
-        <tr>
-          <td>
-            <p>Nombre:</p>
-          </td>
-          <td>
-            <%= f.text_field :PAC_NOMBRES %>
-          </td>
-        </tr>
-
-        <tr>
           <td>
             <p>Fecha de Nacimiento:</p>
           </td>
@@ -78,6 +93,32 @@
         </tr>
 
         <tr>
+          <td>
+            <p>Nombre:</p>
+          </td>
+          <td>
+            <%= f.text_field :PAC_NOMBRES %>
+          </td>
+          <td>
+            <p>Teléfono:</p>
+          </td>
+          <td>
+            <%= f.text_field :PAC_TELEFONO %>
+          </td>
+        </tr>
+
+        !-->
+
+        <!--<tr>
+          <td>
+            <p>Fecha de Nacimiento:</p>
+          </td>
+          <td>
+            <%= f.date_select :PAC_FECHA_NACIMIENTO %>
+          </td>
+        </tr>!-->
+
+        <!--<tr>
           <td>
             <p>Nacionalidad:</p>
           </td>
@@ -120,16 +161,16 @@
           <td>
             <%= f.text_field :PAC_OCUPACION %>
           </td>
-        </tr>
+        </tr>!-->
 
-        <tr>
+        <!--<tr>
           <td>
             <p>Teléfono:</p>
           </td>
           <td>
             <%= f.text_field :PAC_TELEFONO %>
           </td>
-        </tr>
+        </tr>!
 
         <tr>
           <td>
@@ -138,9 +179,8 @@
           <td>
             <%= f.text_field :PAC_GRUPO_SANGUINEO %>
           </td>
-        </tr>
+        </tr>!-->
       </table>
-    </div>
     <div class="actions">
       <%= f.submit "GUARDAR" %>
     </div>
