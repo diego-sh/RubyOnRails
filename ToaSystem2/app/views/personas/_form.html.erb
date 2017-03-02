@@ -23,15 +23,15 @@
   <div class="row">
     <div class="col-lg-5">
       <div class="form-group">
-        <label for="apellidopaterno">Apellido Paterno</label>
-        <%= f.text_field :Per_Apellido_Paterno, class:'form-control', id:'apellidopaterno',placeholder:'Apellido Paterno' %>
+        <label for="apellidoPaterno">Apellido Paterno</label>
+        <%= f.text_field :Per_Apellido_Paterno, class:'form-control', id:'apellidoPaterno',placeholder:'Apellido Paterno' %>
       </div>
     </div>
 
     <div class="col-lg-5">
       <div class="form-group">
-        <label for="apellidomaterno">Apellido Materno</label>
-        <%= f.text_field :Per_Apellido_Materno, class:'form-control', id:'apellidomaterno',placeholder:'Apellido Materno' %>
+        <label for="apellidoMaterno">Apellido Materno</label>
+        <%= f.text_field :Per_Apellido_Materno, class:'form-control', id:'apellidoMaterno',placeholder:'Apellido Materno' %>
       </div>
     </div>   
   </div>
@@ -55,9 +55,11 @@
   <div class="row">
     <div class="col-lg-4">
       <div class="form-group">
-        <label for="fechanacimiento">Fecha de Nacimiento</label>
+        <label for="fechaNacimiento">Fecha de Nacimiento</label>
         <div>
-          <%= f.date_select :Per_Fecha_Nacimiento, class:'form-control', id:'fechanacimiento' %>
+          <%= f.date_select :Per_Fecha_Nacimiento,:start_year => Date.current.year, :end_year => 1920,
+             :use_month_names => ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre','Diciembre'], 
+             class:'form-control selectpicker',id:'fechaNacimiento' %>
         </div>
       </div>
     </div>
