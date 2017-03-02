@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Per cedula:</strong>
+  <%= @persona.Per_Cedula %>
+</p>
+
+<p>
+  <strong>Per apellido paterno:</strong>
+  <%= @persona.Per_Apellido_Paterno %>
+</p>
+
+<p>
+  <strong>Per apellido materno:</strong>
+  <%= @persona.Per_Apellido_Materno %>
+</p>
+
+<p>
+  <strong>Per nombres:</strong>
+  <%= @persona.Per_Nombres %>
+</p>
+
+<p>
+  <strong>Per fecha nacimiento:</strong>
+  <%= @persona.Per_Fecha_Nacimiento %>
+</p>
+
+<p>
+  <strong>Per telefono:</strong>
+  <%= @persona.Per_Telefono %>
+</p>
+
+<%= link_to 'Edit', edit_persona_path(@persona) %> |
+<%= link_to 'Back', personas_path %>
