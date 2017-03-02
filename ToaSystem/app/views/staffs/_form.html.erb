@@ -1,0 +1,59 @@
+<%= form_for(staff) do |f| %>
+  <% if staff.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(staff.errors.count, "error") %> prohibited this staff from being saved:</h2>
+
+      <ul>
+      <% staff.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :PER_CEDULA %>
+    <%= f.text_field :PER_CEDULA %>
+  </div>
+
+  <div class="field">
+    <%= f.label :PER_APELLIDOS %>
+    <%= f.text_field :PER_APELLIDOS %>
+  </div>
+
+  <div class="field">
+    <%= f.label :PER_NOMBRES %>
+    <%= f.text_field :PER_NOMBRES %>
+  </div>
+
+  <div class="field">
+    <%= f.label :PER_FECHA_NACIMIENTO %>
+    <%= f.date_select :PER_FECHA_NACIMIENTO %>
+  </div>
+
+  <div class="field">
+    <%= f.label :PER_TELEFONO %>
+    <%= f.text_field :PER_TELEFONO %>
+  </div>
+  
+  
+
+  <!--<div class="field">
+    <%= f.label :FECHA_CREACION %>
+    <%= f.datetime_select :FECHA_CREACION %>
+  </div>
+
+  <div class="field">
+    <%= f.label :FECHA_ACTUALIZACION %>
+    <%= f.datetime_select :FECHA_ACTUALIZACION %>
+  </div>
+
+  <div class="field">
+    <%= f.label :ID_USUARIO_CREACION %>
+    <%= f.number_field :ID_USUARIO_CREACION %>
+  </div>-->
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

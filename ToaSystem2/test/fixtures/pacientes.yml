@@ -1,0 +1,39 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Pac_HC: MyString
+  Pac_Cedula: MyString
+  Pac_Pasaporte: MyString
+  Pac_Apellido_Paterno: MyString
+  Pac_Apellido_Materno: MyString
+  Pac_Nombres: MyString
+  Pac_Fecha_Nacimiento: 2017-02-28
+  Pac_Nacionalidad: MyString
+  Pac_Genero: MyString
+  Pac_Estado_Civil: MyString
+  Pac_Instruccion: MyString
+  Pac_Ocupacion: MyString
+  Pac_Telefono: MyString
+  Pac_Grupo_Sanguineo: MyString
+  creado_at: 2017-02-28 20:13:26
+  actualizado_at: 2017-02-28 20:13:26
+  user_id: 1
+
+two:
+  Pac_HC: MyString
+  Pac_Cedula: MyString
+  Pac_Pasaporte: MyString
+  Pac_Apellido_Paterno: MyString
+  Pac_Apellido_Materno: MyString
+  Pac_Nombres: MyString
+  Pac_Fecha_Nacimiento: 2017-02-28
+  Pac_Nacionalidad: MyString
+  Pac_Genero: MyString
+  Pac_Estado_Civil: MyString
+  Pac_Instruccion: MyString
+  Pac_Ocupacion: MyString
+  Pac_Telefono: MyString
+  Pac_Grupo_Sanguineo: MyString
+  creado_at: 2017-02-28 20:13:26
+  actualizado_at: 2017-02-28 20:13:26
+  user_id: 1

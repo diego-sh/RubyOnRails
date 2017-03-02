@@ -1,0 +1,89 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Pac hc:</strong>
+  <%= @paciente.Pac_HC %>
+</p>
+
+<p>
+  <strong>Pac cedula:</strong>
+  <%= @paciente.Pac_Cedula %>
+</p>
+
+<p>
+  <strong>Pac pasaporte:</strong>
+  <%= @paciente.Pac_Pasaporte %>
+</p>
+
+<p>
+  <strong>Pac apellido paterno:</strong>
+  <%= @paciente.Pac_Apellido_Paterno %>
+</p>
+
+<p>
+  <strong>Pac apellido materno:</strong>
+  <%= @paciente.Pac_Apellido_Materno %>
+</p>
+
+<p>
+  <strong>Pac nombres:</strong>
+  <%= @paciente.Pac_Nombres %>
+</p>
+
+<p>
+  <strong>Pac fecha nacimiento:</strong>
+  <%= @paciente.Pac_Fecha_Nacimiento %>
+</p>
+
+<p>
+  <strong>Pac nacionalidad:</strong>
+  <%= @paciente.Pac_Nacionalidad %>
+</p>
+
+<p>
+  <strong>Pac genero:</strong>
+  <%= @paciente.Pac_Genero %>
+</p>
+
+<p>
+  <strong>Pac estado civil:</strong>
+  <%= @paciente.Pac_Estado_Civil %>
+</p>
+
+<p>
+  <strong>Pac instruccion:</strong>
+  <%= @paciente.Pac_Instruccion %>
+</p>
+
+<p>
+  <strong>Pac ocupacion:</strong>
+  <%= @paciente.Pac_Ocupacion %>
+</p>
+
+<p>
+  <strong>Pac telefono:</strong>
+  <%= @paciente.Pac_Telefono %>
+</p>
+
+<p>
+  <strong>Pac grupo sanguineo:</strong>
+  <%= @paciente.Pac_Grupo_Sanguineo %>
+</p>
+
+<p>
+  <strong>Creado at:</strong>
+  <%= @paciente.creado_at %>
+</p>
+
+<p>
+  <strong>Actualizado at:</strong>
+  <%= @paciente.actualizado_at %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @paciente.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_paciente_path(@paciente) %> |
+<%= link_to 'Back', pacientes_path %>

@@ -1,0 +1,133 @@
+<%= form_for(paciente) do |f| %>
+  <% if paciente.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(paciente.errors.count, "error") %> prohibited this paciente from being saved:</h2>
+
+      <ul>
+        <% paciente.errors.full_messages.each do |message| %>
+          <li>
+            <%= message %>
+          </li>
+          <% end %>
+      </ul>
+    </div>
+    <% end %>
+
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label for="hclinica">N° Historia Clínica</label>
+            <%= f.text_field :Pac_HC, class:'form-control', id:'hclinica',placeholder:'Historia clínica' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label for="cedula">Cédula</label>
+            <%= f.text_field :Pac_Cedula, class:'form-control',id:'cedula', placeholder:'Cédula' %>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label for="pasaporte">Pasaporte</label>
+            <%= f.text_field :Pac_Pasaporte, class:'form-control',id:'pasaporte', placeholder:'pasaporte' %>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label for="telefono">Telefono</label>
+            <%= f.text_field :Pac_Telefono,class:'form-control',id:'telefono', placeholder:'Convencional/Celular' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label for="apellidoPaterno">Apellido Paterno</label>
+            <%= f.text_field :Pac_Apellido_Paterno, class:'form-control',id:'apellidoPaterno', placeholder:'Apellido' %>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label for="apellidoMaterno">Apellido Materno</label>
+            <%= f.text_field :Pac_Apellido_Materno, class:'form-control',id:'apellidoMaterno', placeholder:'Apellido' %>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label for="nombres">Nombres</label>
+            <%= f.text_field :Pac_Nombres, class:'form-control',id:'nombres', placeholder:'Nombres' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label for="fechaNacimiento">Fecha de Nacimiento</label>
+            <%= f.date_select :Pac_Fecha_Nacimiento,:start_year => Date.current.year, :end_year => 1920,
+             :use_month_names => ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre','Diciembre'], 
+             class:'form-control selectpicker',id:'fechaNacimiento' %>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label for="nacionalidad">Nacionalidad</label>
+            <%= f.text_field :Pac_Nacionalidad,class:'form-control',id:'nacionalidad', placeholder:'Nacionalidad' %>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label for="estadoCivil">Estado Civil</label>
+            <%= select_tag(:Pac_Estado_Civil, options_for_select([['Soltero', 1], ['Casado', 2],['Divorciado', 3],['Viudo', 4],['Unión Libre', 5]]), class:"form-control selectpicker") %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label for="genero">Género</label>
+            <div class="radio">
+              <%= radio_button_tag(:Pac_Genero, "M", class:"form-control") %>
+              <%= label_tag(:Pac_Genero_M, "Masculino") %>
+              <%= radio_button_tag(:Pac_Genero, "F", class:"form-control") %>
+              <%= label_tag(:Pac_Genero_F, "Femenino") %>
+            </div>
+            
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label for="instruccion">Nivel de Instrucción</label>
+            <%= select_tag(:Pac_Instruccion, options_for_select([['Ninguno', 1], ['Básica', 2],['Bachillerato', 3],['Superior', 4],['Especial', 5]]), class:"form-control selectpicker") %>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label for="grSanguineo">Grupo Sanguineo</label>
+            <%= f.text_field :Pac_Grupo_Sanguineo,class:'form-control',id:'grSanguineo', placeholder:'Tipo de sangre' %>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="form-group">
+            <label for="ocupacion">A que se dedica</label>
+            <%= f.text_field :Pac_Ocupacion,class:'form-control',id:'ocupacion', placeholder:'Ocupación' %>
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="actions">
+        <%= f.submit "Guardar", class:"btn btn-primary btn-lg btn-block" %>
+      </div>
+      <% end %>

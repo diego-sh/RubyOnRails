@@ -10,6 +10,6 @@ class Patient < ApplicationRecord
     validates :PAC_TELEFONO,
         :numericality => true
 
-    belongs_to :appointment
+    has_many :appointment
 
 end

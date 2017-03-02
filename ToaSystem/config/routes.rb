@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :staffs
   resources :appointments
   get 'welcome/index'
   root 'welcome#index'

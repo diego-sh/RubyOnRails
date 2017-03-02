@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>ToaSystem</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+  <header>
+    <nav class=" navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        
+          <a class="navbar-brand">SISTEMA CLÍNICO</a>
+        
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>Usuario: Diego Geovanny Alpala Cachiguango</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Opciones <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Editar Perfil</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Salir</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container-fluid -->
+    </nav>
+
+
+  </header>
+
+  <nav class="navbar-default sidebar " role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+      </div>
+      <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li role="presentation" class="<%= yield(:home)%>">
+            <%= link_to root_path do %>Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span>
+              <% end %>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuarios <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a>
+            <ul class="dropdown-menu forAnimate" role="menu">
+              <li><a href="{{URL::to('createusuario')}}">Crear</a></li>
+              <li><a href="#">Modificar</a></li>
+              <li><a href="#">Reportar</a></li>
+              <li class="divider"></li>
+              <li><a href="#">Separated link</a></li>
+              <li class="divider"></li>
+            </ul>
+          </li>
+
+          <li class="<%= %>">
+            <%= link_to do %>Citas<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span>
+              <% end %>
+          </li>
+          <li class="<%= yield(:index)%>">
+            <%= link_to pacientes_path do %>Pacientes<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span>
+              <% end %>
+          </li>
+          <li class="<%= %>">
+            <%= link_to do %>Consultas<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-eye-open"></span>
+              <% end %>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <div class="col-xs-10" style="margin-left:10">
+
+    <%= yield %>
+
+  </div>
+
+
+</body>
+
+
+</html>

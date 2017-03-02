@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Per cedula:</strong>
+  <%= @staff.PER_CEDULA %>
+</p>
+
+<p>
+  <strong>Per apellidos:</strong>
+  <%= @staff.PER_APELLIDOS %>
+</p>
+
+<p>
+  <strong>Per nombres:</strong>
+  <%= @staff.PER_NOMBRES %>
+</p>
+
+<p>
+  <strong>Per fecha nacimiento:</strong>
+  <%= @staff.PER_FECHA_NACIMIENTO %>
+</p>
+
+<p>
+  <strong>Per telefono:</strong>
+  <%= @staff.PER_TELEFONO %>
+</p>
+
+<p>
+  <strong>Fecha creacion:</strong>
+  <%= @staff.FECHA_CREACION %>
+</p>
+
+<p>
+  <strong>Fecha actualizacion:</strong>
+  <%= @staff.FECHA_ACTUALIZACION %>
+</p>
+
+<p>
+  <strong>Id usuario creacion:</strong>
+  <%= @staff.ID_USUARIO_CREACION %>
+</p>
+
+<%= link_to 'Edit', edit_staff_path(@staff) %> |
+<%= link_to 'Back', staffs_path %>
