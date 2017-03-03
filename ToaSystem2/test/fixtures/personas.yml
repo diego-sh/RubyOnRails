@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  Per_Cedula: MyString
+  Per_Apellido_Paterno: MyString
+  Per_Apellido_Materno: MyString
+  Per_Nombres: MyString
+  Per_Fecha_Nacimiento: 2017-03-01
+  Per_Telefono: MyString
+
+two:
+  Per_Cedula: MyString
+  Per_Apellido_Paterno: MyString
+  Per_Apellido_Materno: MyString
+  Per_Nombres: MyString
+  Per_Fecha_Nacimiento: 2017-03-01
+  Per_Telefono: MyString
