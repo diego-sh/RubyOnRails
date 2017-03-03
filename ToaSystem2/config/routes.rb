@@ -1,8 +1,17 @@
 
 Rails.application.routes.draw do
+  get 'personarol/index'
+
+  get 'personarol/new'
+
+  get 'personarol/create'
+
+  get 'personarol/update'
+
   resources :residencias
   resources :pacientes
   resources :personas
+  resources :personarol
   get 'welcome/index'
   root 'welcome#index'
 

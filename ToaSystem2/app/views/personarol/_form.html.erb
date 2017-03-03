@@ -18,11 +18,11 @@
         <%= f.text_field :Per_Cedula, class:'form-control', id:'cedula',placeholder:'Cédula' %>
       </div>
     </div>
-     <%= f.fields_for :medico do |med| %>
+     <%= f.fields_for :empleado do |emp| %>
       <div class="col-lg-5">
         <div class="form-group">
-          <label for="especialidad">Especialidad</label>
-           <%= med.text_field :Med_Especialidad, class:'form-control', id:'especialidad',placeholder:'Especialidad' %>
+          <label for="rol">Cargo</label>
+           <%= emp.text_field :Emp_Rol, class:'form-control', id:'rol',placeholder:'Cargo' %>
         </div>
       </div>
      <%end%>
