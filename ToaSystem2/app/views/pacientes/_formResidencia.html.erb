@@ -1,0 +1,10 @@
+<%= fields_for :residencia do |o| %>
+    <div class="field">
+        <%= o.label :Res_Sector %>
+            <%= o.text_field :Res_Sector %>
+    </div>
+    <div class="field">
+        <%= o.label :Res_Calle_Principal %>
+            <%= o.text_field :Res_Calle_Principal %>
+    </div>
+<% end %>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :residencias
   resources :pacientes
   get 'welcome/index'
   root 'welcome#index'

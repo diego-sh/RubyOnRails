@@ -70,6 +70,7 @@
         <div class="col-lg-4">
           <div class="form-group">
             <label for="fechaNacimiento">Fecha de Nacimiento</label>
+            <br>
             <%= f.date_select :Pac_Fecha_Nacimiento,:start_year => Date.current.year, :end_year => 1920,
              :use_month_names => ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre','Diciembre'], 
              class:'form-control selectpicker',id:'fechaNacimiento' %>
@@ -84,7 +85,7 @@
         <div class="col-lg-4">
           <div class="form-group">
             <label for="estadoCivil">Estado Civil</label>
-            <%= select_tag(:Pac_Estado_Civil, options_for_select([['Soltero', 1], ['Casado', 2],['Divorciado', 3],['Viudo', 4],['Unión Libre', 5]]), class:"form-control selectpicker") %>
+            <%= f.select(:Pac_Estado_Civil, options_for_select([['Soltero', 'SOLERO'], ['Casado', 'CASADO'],['Divorciado', 'DIVORCIADO'],['Viudo', 'VIUDO'],['Unión Libre', 'UNION LIBRE']]), class:" form-control   selectpicker") %>
           </div>
         </div>
       </div>
@@ -93,19 +94,21 @@
         <div class="col-lg-4">
           <div class="form-group">
             <label for="genero">Género</label>
-            <div class="radio">
-              <%= radio_button_tag(:Pac_Genero, "M", class:"form-control") %>
-              <%= label_tag(:Pac_Genero_M, "Masculino") %>
-              <%= radio_button_tag(:Pac_Genero, "F", class:"form-control") %>
-              <%= label_tag(:Pac_Genero_F, "Femenino") %>
+            <div class="radio" style="margin-left:30px">
+              <%= f.radio_button(:Pac_Genero, 'M', ) %>
+                <%= label(:Pac_Genero, "Masculino") %>
             </div>
-            
+            <div class="radio" style="margin-left:30px">
+              <%= f.radio_button(:Pac_Genero, 'F', ) %>
+                <%= label(:Pac_Genero, "Femenino") %>
+            </div>
+
           </div>
         </div>
         <div class="col-lg-4">
           <div class="form-group">
             <label for="instruccion">Nivel de Instrucción</label>
-            <%= select_tag(:Pac_Instruccion, options_for_select([['Ninguno', 1], ['Básica', 2],['Bachillerato', 3],['Superior', 4],['Especial', 5]]), class:"form-control selectpicker") %>
+            <%= f.select(:Pac_Instruccion, options_for_select([['Ninguno', "NINGUNO"], ['Básica', "BASICA"],['Bachillerato', "BACHILLERATO"],['Superior', "SUPERIOR"],['Especial', "ESPECIAL"]])) %>
           </div>
         </div>
         <div class="col-lg-4">
@@ -125,9 +128,67 @@
         </div>
       </div>
 
-
-
-      <div class="actions">
-        <%= f.submit "Guardar", class:"btn btn-primary btn-lg btn-block" %>
+      <div class="row">
+        <h3 style="margin-left:20px">Dirección</h3>
       </div>
-      <% end %>
+      <!--FORMULARIO PARA DIRECCION DEL PACIENTE-->
+
+      <%= f.fields_for :residencia do |o| %>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label for="sector">Sector</label>
+              <%= o.text_field :Res_Sector,class:'form-control',id:'sector', placeholder:'Sector' %>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label for="callePrincipal">Calle Principal</label>
+              <%= o.text_field :Res_Calle_Principal,class:'form-control',id:'callePrincipal', placeholder:'Calle Principal' %>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label for="calleSecundaria">Calle Secundaria</label>
+              <%= o.text_field :Res_Calle_Secundaria,class:'form-control',id:'calleSecundaria', placeholder:'Calle Secundaria' %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label for="ncasa">Número Casa</label>
+              <%= o.text_field :Res_Numero_Casa,class:'form-control',id:'ncasa', placeholder:'Número/Nomenclatura' %>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label for="provincia">Provincia</label>
+              <%= o.text_field :Res_Provincia,class:'form-control',id:'provincia' %>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label for="canton">Canton</label>
+              <%= o.text_field :Res_Canton,class:'form-control',id:'canton' %>
+            </div>
+          </div>
+        </div>
+        <% end %>
+        
+          <div class="row" style="margin-top:20px">
+            <div class="col-md-3">
+            </div>
+          <div class="col-md-3">
+            <div class="actions">
+              <%= f.submit "Guardar", class:"btn btn-primary btn-lg btn-block" %>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <%= link_to 'Cancelar', pacientes_path, class:"btn btn-primary btn-lg btn-block" %>
+          </div>
+          <div class="col-md-4"></div>  
+
+        </div>
+
+          <% end %>

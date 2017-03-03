@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Paciente:</strong>
+  <%= @residencia.paciente %>
+</p>
+
+<p>
+  <strong>Res sector:</strong>
+  <%= @residencia.Res_Sector %>
+</p>
+
+<p>
+  <strong>Res calle principal:</strong>
+  <%= @residencia.Res_Calle_Principal %>
+</p>
+
+<p>
+  <strong>Res calle secundaria:</strong>
+  <%= @residencia.Res_Calle_Secundaria %>
+</p>
+
+<p>
+  <strong>Res numero casa:</strong>
+  <%= @residencia.Res_Numero_Casa %>
+</p>
+
+<p>
+  <strong>Res provincia:</strong>
+  <%= @residencia.Res_Provincia %>
+</p>
+
+<p>
+  <strong>Res canton:</strong>
+  <%= @residencia.Res_Canton %>
+</p>
+
+<p>
+  <strong>Creado at:</strong>
+  <%= @residencia.creado_at %>
+</p>
+
+<p>
+  <strong>Actualizado at:</strong>
+  <%= @residencia.actualizado_at %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @residencia.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_residencia_path(@residencia) %> |
+<%= link_to 'Back', residencias_path %>

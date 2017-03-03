@@ -15,9 +15,11 @@ class PacientesController < ApplicationController
   # GET /pacientes/new
   def new
     @paciente = Paciente.new
+    @residencia=Residencia.new
+    @paciente.residencia=@residencia
   end
 
-  # GET /pacientes/1/edit
+  # GET /pacientes/1/edit 
   def edit
   end
 
@@ -25,7 +27,7 @@ class PacientesController < ApplicationController
   # POST /pacientes.json
   def create
     @paciente = Paciente.new(paciente_params)
-
+    #raise
     respond_to do |format|
       if @paciente.save
         format.html { redirect_to @paciente, notice: 'Paciente was successfully created.' }
@@ -69,6 +71,6 @@ class PacientesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def paciente_params
-      params.require(:paciente).permit(:Pac_HC, :Pac_Cedula, :Pac_Pasaporte, :Pac_Apellido_Paterno, :Pac_Apellido_Materno, :Pac_Nombres, :Pac_Fecha_Nacimiento, :Pac_Nacionalidad, :Pac_Genero, :Pac_Estado_Civil, :Pac_Instruccion, :Pac_Ocupacion, :Pac_Telefono, :Pac_Grupo_Sanguineo, :creado_at, :actualizado_at, :user_id)
+      params.require(:paciente).permit(:Pac_HC, :Pac_Cedula, :Pac_Pasaporte, :Pac_Apellido_Paterno, :Pac_Apellido_Materno, :Pac_Nombres, :Pac_Fecha_Nacimiento, :Pac_Nacionalidad, :Pac_Genero, :Pac_Estado_Civil, :Pac_Instruccion, :Pac_Ocupacion, :Pac_Telefono, :Pac_Grupo_Sanguineo,residencia_attributes:[:id,:Res_Sector,:Res_Calle_Principal, :Res_Calle_Secundaria, :Res_Numero_Casa, :Res_Provincia, :Res_Canton])
     end
 end

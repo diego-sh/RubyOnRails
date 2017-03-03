@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Residencias</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Paciente</th>
+      <th>Res sector</th>
+      <th>Res calle principal</th>
+      <th>Res calle secundaria</th>
+      <th>Res numero casa</th>
+      <th>Res provincia</th>
+      <th>Res canton</th>
+      <th>Creado at</th>
+      <th>Actualizado at</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @residencias.each do |residencia| %>
+      <tr>
+        <td><%= residencia.paciente %></td>
+        <td><%= residencia.Res_Sector %></td>
+        <td><%= residencia.Res_Calle_Principal %></td>
+        <td><%= residencia.Res_Calle_Secundaria %></td>
+        <td><%= residencia.Res_Numero_Casa %></td>
+        <td><%= residencia.Res_Provincia %></td>
+        <td><%= residencia.Res_Canton %></td>
+        <td><%= residencia.creado_at %></td>
+        <td><%= residencia.actualizado_at %></td>
+        <td><%= residencia.user_id %></td>
+        <td><%= link_to 'Show', residencia %></td>
+        <td><%= link_to 'Edit', edit_residencia_path(residencia) %></td>
+        <td><%= link_to 'Destroy', residencia, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Residencia', new_residencia_path %>

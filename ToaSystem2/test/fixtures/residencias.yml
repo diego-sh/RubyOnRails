@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  paciente: one
+  Res_Sector: MyString
+  Res_Calle_Principal: MyString
+  Res_Calle_Secundaria: MyString
+  Res_Numero_Casa: MyString
+  Res_Provincia: MyString
+  Res_Canton: MyString
+  creado_at: 2017-03-01 21:51:20
+  actualizado_at: 2017-03-01 21:51:20
+  user_id: 1
+
+two:
+  paciente: two
+  Res_Sector: MyString
+  Res_Calle_Principal: MyString
+  Res_Calle_Secundaria: MyString
+  Res_Numero_Casa: MyString
+  Res_Provincia: MyString
+  Res_Canton: MyString
+  creado_at: 2017-03-01 21:51:20
+  actualizado_at: 2017-03-01 21:51:20
+  user_id: 1

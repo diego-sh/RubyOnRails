@@ -1,0 +1,67 @@
+<%= form_for(residencia) do |f| %>
+  <% if residencia.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(residencia.errors.count, "error") %> prohibited this residencia from being saved:</h2>
+
+      <ul>
+      <% residencia.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :paciente_id %>
+    <%= f.text_field :paciente_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Res_Sector %>
+    <%= f.text_field :Res_Sector %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Res_Calle_Principal %>
+    <%= f.text_field :Res_Calle_Principal %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Res_Calle_Secundaria %>
+    <%= f.text_field :Res_Calle_Secundaria %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Res_Numero_Casa %>
+    <%= f.text_field :Res_Numero_Casa %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Res_Provincia %>
+    <%= f.text_field :Res_Provincia %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Res_Canton %>
+    <%= f.text_field :Res_Canton %>
+  </div>
+
+  <div class="field">
+    <%= f.label :creado_at %>
+    <%= f.datetime_select :creado_at %>
+  </div>
+
+  <div class="field">
+    <%= f.label :actualizado_at %>
+    <%= f.datetime_select :actualizado_at %>
+  </div>
+
+  <div class="field">
+    <%= f.label :user_id %>
+    <%= f.number_field :user_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
