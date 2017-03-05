@@ -1,11 +1,11 @@
-<%= form_for(persona) do |f| %>
-  <% if persona.errors.any? %>
+<%= form_for(@persona, url: empleados_path) do |f| %>
+  <% if @persona.errors.any? %>
     <div id="error_explanation">
       <h2>
-        <%= pluralize(persona.errors.count, "error") %> prohibited this persona from being saved:</h2>
+        <%= pluralize(@persona.errors.count, "error") %> prohibited this persona from being saved:</h2>
 
       <ul>
-        <% persona.errors.full_messages.each do |message| %>
+        <% @persona.errors.full_messages.each do |message| %>
           <li>
             <%= message %>
           </li>
@@ -21,11 +21,11 @@
             <%= f.text_field :Per_Cedula, class:'form-control', id:'cedula',placeholder:'Cédula' %>
           </div>
         </div>
-        <%= f.fields_for :medico do |med| %>
+        <%= f.fields_for :empleado do |emp| %>
           <div class="col-lg-5">
             <div class="form-group">
-              <label for="especialidad">Especialidad</label>
-              <%= med.text_field :Med_Especialidad, class:'form-control', id:'especialidad',placeholder:'Especialidad' %>
+              <label for="rol">Cargo</label>
+              <%= emp.text_field :Emp_Rol, class:'form-control', id:'rol',placeholder:'Cargo' %>
             </div>
           </div>
           <%end%>
@@ -85,9 +85,8 @@
           </div>
         </div>
         <div class="col-md-3">
-          <%= link_to 'Cancelar', personas_path, class:"btn btn-primary center-block" %>
+          <%= link_to 'Cancelar', empleados_path, class:"btn btn-primary center-block" %>
         </div>
         <div class="col-md-4"></div>
-
       </div>
       <% end %>

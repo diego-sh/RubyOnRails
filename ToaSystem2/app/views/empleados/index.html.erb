@@ -2,32 +2,33 @@
 <div class='row' style="margin-left:20px">
   <h1>Empleados</h1>
 </div>
+<div class="row" style="margin-left:20px; margin-top:10px">
+  <div class="col-md-2">
+    <%= link_to 'Agregar', new_empleado_path, class:"btn btn-primary center-block" %>
+  </div>
+</div>
 <div class='row' style="margin-left:20px; margin-top:10px">
   <table class="table table-striped">
     <thead>
       <tr>
         <th>Cédula</th>
         <th>Apellido Paterno</th>
-        <th>Apellido Materno</th>
         <th>Nombre</th>
-        <th>Fecha de Nacimiento</th>
+        <th>Rol</th>
         <th>Teléfono</th>
         <th colspan="3"></th>
       </tr>
     </thead>
 
     <tbody>
-      <% @personas.each do |persona| %>
+      <% @empleados.each do |persona| %>
         <tr>
           <td><%= persona.Per_Cedula %></td>
           <td><%= persona.Per_Apellido_Paterno %></td>
-          <td><%= persona.Per_Apellido_Materno %></td>
           <td><%= persona.Per_Nombres %></td>
-          <td><%= persona.Per_Fecha_Nacimiento %></td>
           <td><%= persona.Per_Telefono %></td>
           <td><%= link_to 'Show', persona %></td>
-          <td><%= link_to 'Edit', edit_persona_path(persona) %></td>
-          <td><%= link_to 'Destroy', persona, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Edit', edit_empleado_path(persona) %></td>
         </tr>
       <% end %>
     </tbody>
@@ -35,6 +36,4 @@
 </div>
 
 <br>
-
-<%= link_to 'New Persona', new_personarol_path %>
 

@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 <div class='row' style="margin-left:20px">
-  <h1>Empleados</h1>
+  <h1>Epecialistas</h1>
+</div>
+<div class="row" style="margin-left:20px; margin-top:10px">
+  <div class="col-md-2">
+    <%= link_to 'Agregar', new_persona_path, class:"btn btn-primary center-block" %>
+  </div>
 </div>
 <div class='row' style="margin-left:20px; margin-top:10px">
   <table class="table table-striped">
@@ -10,7 +15,6 @@
         <th>Apellido Paterno</th>
         <th>Apellido Materno</th>
         <th>Nombre</th>
-        <th>Fecha de Nacimiento</th>
         <th>Teléfono</th>
         <th colspan="3"></th>
       </tr>
@@ -23,7 +27,6 @@
           <td><%= persona.Per_Apellido_Paterno %></td>
           <td><%= persona.Per_Apellido_Materno %></td>
           <td><%= persona.Per_Nombres %></td>
-          <td><%= persona.Per_Fecha_Nacimiento %></td>
           <td><%= persona.Per_Telefono %></td>
           <td><%= link_to 'Show', persona %></td>
           <td><%= link_to 'Edit', edit_persona_path(persona) %></td>
@@ -34,6 +37,3 @@
   </table>
 </div>
 
-<br>
-
-<%= link_to 'New Persona', new_persona_path %>

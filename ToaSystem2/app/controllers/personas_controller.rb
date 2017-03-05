@@ -27,7 +27,6 @@ class PersonasController < ApplicationController
   # POST /personas.json
   def create
     @persona = Persona.new(persona_params)
-raise
     respond_to do |format|
       if @persona.save
         format.html { redirect_to @persona, notice: 'Persona was successfully created.' }
@@ -71,6 +70,6 @@ raise
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def persona_params
-      params.require(:persona).permit(:Per_Cedula, :Per_Apellido_Paterno, :Per_Apellido_Materno, :Per_Nombres, :Per_Fecha_Nacimiento, :Per_Telefono, medico_attributes:[:id, :Med_Especialidad])
+      params.require(:persona).permit(:Per_Cedula, :Per_Apellido_Paterno, :Per_Apellido_Materno, :Per_Nombres, :Per_Fecha_Nacimiento, :Per_Telefono, medico_attributes:[:id, :Med_Especialidad], empleado_attributes:[:id,:Emp_Rol])
     end
 end
