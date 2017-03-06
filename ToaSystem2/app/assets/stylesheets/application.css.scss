@@ -20,12 +20,17 @@
     } 
 }
 
-#titulo{
+body{
     font-family: 'Cairo', sans-serif;
-    a{
-        font-size: 19px;
-    }
+}
+#titulo{
     img{
         float: left;
+    }
+}
+
+#vertical_bar{
+    a{
+        font-size: 20px;
     }
 }
