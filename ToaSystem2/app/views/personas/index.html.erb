@@ -3,12 +3,15 @@
     <p id="notice"><%= notice %></p>
   </div>
 <% end %>
-<div class='row' style="margin-left:20px">
-  <h1>Epecialistas</h1>
+<div class='row' id = "titulo" style="margin-left:20px">
+  <img src="/img/icon/doctor.png" alt="rss feed" />
+  <h1>MÉDICOS</h1>
 </div>
 <div class="row" style="margin-left:20px; margin-top:10px">
-  <div class="col-md-2">
-    <%= link_to 'Agregar', new_persona_path, class:"btn btn-primary center-block" %>
+  <div class=".col-xs-6">
+    <%= link_to new_persona_path, class:"btn btn-primary pull-right" do %>
+      <i class="glyphicon glyphicon-plus"></i> Agregar
+    <% end %>
   </div>
 </div>
 <div class='row' style="margin-left:20px; margin-top:10px">
