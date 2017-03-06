@@ -49,11 +49,12 @@
       <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li role="presentation" class="<%= yield(:home)%>">
-            <%= link_to root_path do %>Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span>
-              <% end %>
+            <%= link_to root_path do %>Home
+              <img src="/img/icon/x16/home.png" alt="rss feed" class="pull-right"/>
+            <% end %>
           </li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuarios <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuarios <span class="caret"></span><img src="/img/icon/x16/team.png" alt="rss feed" class="pull-right"/></a>
             <ul class="dropdown-menu forAnimate" role="menu">
               <li><a href="{{URL::to('createusuario')}}">Crear</a></li>
               <li><a href="#">Modificar</a></li>
@@ -65,24 +66,29 @@
           </li>
 
           <li class="<%= %>">
-            <%= link_to do %>Citas<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span>
-              <% end %>
+            <%= link_to do %>Citas
+              <img src="/img/icon/x16/calendar.png" alt="rss feed" class="pull-right"/>
+            <% end %>
           </li>
           <li class="<%= yield(:index)%>">
-            <%= link_to pacientes_path do %>Pacientes<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span>
-              <% end %>
+            <%= link_to pacientes_path do %>Pacientes
+              <img src="/img/icon/x16/network.png" alt="rss feed" class="pull-right"/>
+            <% end %>
           </li>
           <li class="<%= %>">
-            <%= link_to do %>Consultas<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-eye-open"></span>
-              <% end %>
+            <%= link_to do %>Consultas
+              <img src="/img/icon/x16/first-aid-kit.png" alt="rss feed" class="pull-right"/>
+            <% end %>
           </li>
           <li class="<%= %>">
-            <%= link_to empleados_path do %>Personal<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-eye-open"></span>
-              <% end %>
+            <%= link_to empleados_path do %>Empleados
+                <img src="/img/icon/x16/network.png" alt="rss feed" class="pull-right"/>
+            <% end %>
           </li>
           <li class="<%= %>">
-            <%= link_to personas_path do %>Especialistas<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-eye-open"></span>
-              <% end %>
+            <%= link_to personas_path do %>Médicos
+              <img src="/img/icon/x16/doctor.png" alt="rss feed" class="pull-right"/>
+            <% end %>
           </li>
         </ul>
       </div>
