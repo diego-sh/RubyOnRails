@@ -1,6 +1,9 @@
 <% provide(:index, 'active') %>
-
-  <p id="notice"><%= notice %></p>
+<% if notice %>
+  <div id="notice_panel">
+    <p id="notice"><%= notice %></p>
+  </div>
+<% end %>
 <div class='row' style="margin-left:20px"> 
   <h1>Pacientes</h1>
 </div>

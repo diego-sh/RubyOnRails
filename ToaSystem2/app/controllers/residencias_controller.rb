@@ -28,8 +28,10 @@ class ResidenciasController < ApplicationController
 
     respond_to do |format|
       if @residencia.save
-        format.html { redirect_to @residencia, notice: 'Residencia was successfully created.' }
-        format.json { render :show, status: :created, location: @residencia }
+        flash[:notice] = "Guardado Exitoso!"
+        format.html { redirect_to @residencia}
+        #format.html { redirect_to @residencia, notice: 'Residencia was successfully created.' }
+        #format.json { render :show, status: :created, location: @residencia }
       else
         format.html { render :new }
         format.json { render json: @residencia.errors, status: :unprocessable_entity }

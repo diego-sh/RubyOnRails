@@ -22,10 +22,10 @@ class EmpleadosController < ApplicationController
     @persona = Persona.new(persona_params)
     respond_to do |format|
       if @persona.save
-        #flash[:notice] = "Guardado Exitoso!"
-        #redirect_to @persona
-        format.html { redirect_to empleados_path, notice: 'Empleado was successfully created.' }
-        format.json { render :show, status: :created, location: @persona }
+        flash[:notice] = "Guardado Exitoso!"
+        format.html { redirect_to empleados_path}
+        #format.html { redirect_to empleados_path, notice: 'Empleado was successfully created.' }
+        #format.json { render :show, status: :created, location: @persona }
       else
         format.html { render :new }
         format.json { render json: @persona.errors, status: :unprocessable_entity }
