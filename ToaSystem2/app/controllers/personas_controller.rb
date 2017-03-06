@@ -4,7 +4,7 @@ class PersonasController < ApplicationController
   # GET /personas
   # GET /personas.json
   def index
-    @personas = Persona.all
+    @personas = Persona.find_by_sql("SELECT *,  m.med_especialidad as Especialidad FROM personas p INNER JOIN medicos m on p.persona_id = m.persona_id")
   end
 
   # GET /personas/1

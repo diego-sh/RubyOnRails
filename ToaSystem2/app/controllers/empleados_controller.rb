@@ -2,7 +2,8 @@ class EmpleadosController < ApplicationController
   before_action :set_persona, only: [:show, :edit, :update, :destroy]
 
   def index
-    @empleados=Persona.all
+    #@empleados=Persona.all
+    @empleados = Persona.find_by_sql("SELECT *, e.emp_rol as Rol FROM personas p INNER JOIN empleados e on p.persona_id = e.persona_id;")
   end
 
   def new
@@ -21,6 +22,8 @@ class EmpleadosController < ApplicationController
     @persona = Persona.new(persona_params)
     respond_to do |format|
       if @persona.save
+        #flash[:notice] = "Guardado Exitoso!"
+        #redirect_to @persona
         format.html { redirect_to empleados_path, notice: 'Empleado was successfully created.' }
         format.json { render :show, status: :created, location: @persona }
       else
@@ -31,6 +34,15 @@ class EmpleadosController < ApplicationController
   end
 
   def update
+    respond_to do |format|
+      if @persona.update(persona_params)
+        format.html { redirect_to @persona, notice: 'Persona was successfully updated.' }
+        format.json { render :show, status: :ok, location: @persona }
+      else
+        format.html { render :edit }
+        format.json { render json: @persona.errors, status: :unprocessable_entity }
+      end
+    end
   end
   
   private
