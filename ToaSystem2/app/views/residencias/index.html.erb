@@ -35,9 +35,9 @@
         <td><%= residencia.creado_at %></td>
         <td><%= residencia.actualizado_at %></td>
         <td><%= residencia.user_id %></td>
-        <td><%= link_to 'Show', residencia %></td>
-        <td><%= link_to 'Edit', edit_residencia_path(residencia) %></td>
-        <td><%= link_to 'Destroy', residencia, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Mostrar', residencia %></td>
+        <td><%= link_to 'Editar', edit_residencia_path(residencia) %></td>
+        <td><%= link_to 'Eliminary', residencia, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
