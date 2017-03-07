@@ -3,4 +3,7 @@ class Persona < ApplicationRecord
     has_one :empleado, inverse_of: :persona
     accepts_nested_attributes_for :medico, reject_if: proc { |attributes| attributes[:Med_Especialidad].blank? }
     accepts_nested_attributes_for :empleado, reject_if: proc { |attributes| attributes[:Emp_Rol].blank? }
+    validates :Per_Cedula,
+        :presence => true,
+        :length => { is: 10 }
 end

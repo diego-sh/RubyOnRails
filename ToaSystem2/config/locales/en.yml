@@ -20,4 +20,38 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  errors:
+    # The default format to use in full error messages.
+    format: "%{attribute} %{message}"
+
+    # The values :model, :attribute and :value are always available for interpolation
+    # The value :count is available when applicable. Can be used for pluralization.
+    messages:
+      model_invalid: "Fallo en la Validación: %{errors}"
+      inclusion: "No esta incluido en la lista"
+      exclusion: "Esta reservado"
+      invalid: "Invalido"
+      confirmation: "No coincide %{attribute}"
+      accepted: "Deberia ser aceptado"
+      empty: "No puede estar vacio"
+      blank: "No pude estar vacio"
+      present: "Debe estar vacio"
+      too_long:
+        one: "Demasiado largo (El máximo es 1 caracter)"
+        other: "Demasiado largo (El máximo es %{count} caracteres)"
+      too_short:
+        one: "Demasiado corto (El mínimo es 1 caracter)"
+        other: "Demasiado corto (El mínimo es %{count} caracteres)"
+      wrong_length:
+        one: "Longitud incorrecta (Deberia ser 1 caracter)"
+        other: "Longitud incorrecta (Deberia ser %{count} caracteres)"
+      not_a_number: "Ingrese solo números"
+      not_an_integer: "Deberia ser un entero"
+      greater_than: "Deberia ser mayor que %{count}"
+      greater_than_or_equal_to: "Deberia ser mayor o igual que to %{count}"
+      equal_to: "Deberia ser igual a  %{count}"
+      less_than: "Deberia ser menor que %{count}"
+      less_than_or_equal_to: "Deberia ser menor o igual que %{count}"
+      other_than: "Deberia ser distinto de %{count}"
+      odd: "Deberia ser impar"
+      even: "Deberia ser par"
