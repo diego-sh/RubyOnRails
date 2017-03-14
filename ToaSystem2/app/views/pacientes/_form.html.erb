@@ -1,5 +1,5 @@
-<%= form_for(paciente) do |f| %>
-  <% if paciente.errors.any? %>
+<%= form_for(paciente , validate: true) do |f| %>
+  <!--<% if paciente.errors.any? %>
     <div id="error_explanation">
       <h2>
         <%= pluralize(paciente.errors.count, "error") %> prohibited this paciente from being saved:</h2>
@@ -12,13 +12,13 @@
           <% end %>
       </ul>
     </div>
-    <% end %>
+    <% end %>-->
 
       <div class="row">
         <div class="col-lg-4">
           <div class="form-group">
             <label for="hclinica">N° Historia Clínica</label>
-            <%= f.text_field :Pac_HC, class:'form-control', id:'hclinica',placeholder:'Historia clínica' %>
+            <%= f.text_field :Pac_HC, class:'form-control', id:'hclinica',placeholder:'Historia clínica', :required => true%>
           </div>
         </div>
       </div>

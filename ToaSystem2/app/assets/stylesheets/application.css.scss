@@ -1,7 +1,16 @@
+/*
+ *= require jquery-ui
+ */
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
 @import "welcome";
+
+.field_with_errors .message {
+  color: red;
+  padding-left: 10px;
+  display: inline;
+}
 
 #notice_panel{
     position: absolute;

@@ -1,5 +1,5 @@
-<%= form_for(@persona, url: empleados_path) do |f| %>
-  <% if @persona.errors.any? %>
+<%= form_for(@persona, url: empleados_path, validate: true) do |f| %>
+  <!--<% if @persona.errors.any? %>
     <div id="error_explanation">
       <h2>
         <%= pluralize(@persona.errors.count, "error") %> prohibited this persona from being saved:</h2>
@@ -12,9 +12,8 @@
           <% end %>
       </ul>
     </div>
-    <% end %>
-
-      <div class="row">
+    <% end %>!-->
+    <div class="row">
         <div class="col-lg-5">
           <div class="form-group">
             <label for="cedula">Cédula</label>
@@ -28,7 +27,7 @@
               <%= emp.text_field :Emp_Rol, class:'form-control', id:'rol',placeholder:'Cargo' %>
             </div>
           </div>
-          <%end%>
+        <%end%>
       </div>
 
       <div class="row">
@@ -89,4 +88,4 @@
         </div>
         <div class="col-md-4"></div>
       </div>
-      <% end %>
+  <% end %>

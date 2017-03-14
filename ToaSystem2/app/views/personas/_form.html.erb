@@ -1,5 +1,5 @@
-<%= form_for(persona) do |f| %>
-  <% if persona.errors.any? %>
+<%= form_for(persona, validate: true)  do |f| %>
+  <!--<% if persona.errors.any? %>
     <div id="error_explanation">
       <h2>
         <%= pluralize(persona.errors.count, "error") %> prohibited this persona from being saved:</h2>
@@ -12,7 +12,7 @@
           <% end %>
       </ul>
     </div>
-    <% end %>
+    <% end %>!-->
 
       <div class="row">
         <div class="col-lg-5">
@@ -68,9 +68,7 @@
           <div class="form-group">
             <label for="fechaNacimiento">Fecha de Nacimiento</label>
             <div>
-              <%= f.date_select :Per_Fecha_Nacimiento,:start_year => Date.current.year, :end_year => 1920,
-             :use_month_names => ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre','Diciembre'], 
-             class:'form-control selectpicker',id:'fechaNacimiento' %>
+              <%= f.date_field :Per_Fecha_Nacimiento, id:'fechaNacimiento' %>
             </div>
           </div>
         </div>

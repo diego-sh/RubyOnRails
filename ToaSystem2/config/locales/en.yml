@@ -55,3 +55,4 @@ en:
       other_than: "Deberia ser distinto de %{count}"
       odd: "Deberia ser impar"
       even: "Deberia ser par"
+      uniqueness: "Debe ser Único"
