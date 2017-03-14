@@ -1,0 +1,11 @@
+I"(function() {
+  $(document).on("ajax:success", "form#comentarios-form", function(ev, data) {
+    return console.log(data);
+  });
+
+  $(document).on("ajax:error", "form#comentarios-form", function(ev, data) {
+    return console.log(data);
+  });
+
+}).call(this);
+:ET

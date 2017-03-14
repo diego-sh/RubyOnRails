@@ -1,0 +1,14 @@
+I"e(function() {
+  $(document).on("ajax:success", "form#comentarios-form", function(ev, data) {
+    console.log(data);
+    return $(this).find("textarea").val("");
+  });
+
+  $("#comments-box").append("<li>" + data.body + "</li>");
+
+  $(document).on("ajax:error", "form#comentarios-form", function(ev, data) {
+    return console.log(data);
+  });
+
+}).call(this);
+:ET

@@ -1,0 +1,7 @@
+I"…(function() {
+  $(document).on("ajax:succes", "form#comentarios-form", function(ev, data) {});
+
+  console.log(data);
+
+}).call(this);
+:ET

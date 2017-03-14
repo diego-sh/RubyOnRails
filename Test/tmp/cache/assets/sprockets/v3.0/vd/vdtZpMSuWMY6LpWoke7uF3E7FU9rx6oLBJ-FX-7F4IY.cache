@@ -1,0 +1,12 @@
+I"E(function() {
+  $(document).on("ajax:success", "form#comentarios-form", function(ev, data) {
+    console.log(data);
+    return $("#comentarios-box").append("<li>" + data.cuerpo + "</li>");
+  });
+
+  $(document).on("ajax:error", "form#comentarios-form", function(ev, data) {
+    return console.log(data);
+  });
+
+}).call(this);
+:ET
