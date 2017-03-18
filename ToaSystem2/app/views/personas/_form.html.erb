@@ -18,7 +18,7 @@
         <div class="col-lg-5">
           <div class="form-group">
             <label for="cedula">Cédula</label>
-            <%= f.text_field :Per_Cedula, class:'form-control', id:'cedula',placeholder:'Cédula' %>
+            <%= f.text_field :Per_Cedula, class:'form-control', id:'cedula',placeholder:'Cédula', maxlength:'10' %>
           </div>
         </div>
         <%= f.fields_for :medico do |med| %>
@@ -26,6 +26,14 @@
             <div class="form-group">
               <label for="especialidad">Especialidad</label>
               <%= med.text_field :Med_Especialidad, class:'form-control', id:'especialidad',placeholder:'Especialidad' %>
+            </div>
+          </div>
+          <%end%>
+        <%= f.fields_for :empleado do |emp| %>
+          <div class="col-lg-5">
+            <div class="form-group">
+              <label for="especialidad">Cargo</label>
+              <%= emp.text_field :Emp_Rol, class:'form-control', id:'especialidad',placeholder:'Puesto/Rol' %>
             </div>
           </div>
           <%end%>
@@ -58,7 +66,7 @@
         <div class="col-lg-5">
           <div class="form-group">
             <label for="telefono">Teléfono</label>
-            <%= f.text_field :Per_Telefono, class:'form-control', id:'telefono',placeholder:'Teléfono' %>
+            <%= f.text_field :Per_Telefono, class:'form-control', id:'telefono',placeholder:'Teléfono',  maxlength:'10' %>
           </div>
         </div>
       </div>
@@ -66,9 +74,9 @@
       <div class="row">
         <div class="col-lg-4">
           <div class="form-group">
-            <label for="fechaNacimiento">Fecha de Nacimiento</label>
+            <label for="fecha">Fecha de Nacimiento</label>
             <div>
-              <%= f.date_field :Per_Fecha_Nacimiento, id:'fechaNacimiento' %>
+              <%= f.date_field :Per_Fecha_Nacimiento, id:'fecha' %>
             </div>
           </div>
         </div>

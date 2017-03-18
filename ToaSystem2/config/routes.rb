@@ -5,8 +5,13 @@ Rails.application.routes.draw do
 
   resources :residencias
   resources :pacientes
-  resources :personas
-  resources :empleados
+  resources :personas do
+    collection do
+    get "newEmpleado"
+    get "indexEmpleado"
+   end
+  end
+
   get 'welcome/index'
   root 'welcome#index'
 

@@ -1,34 +1,104 @@
-<p id="notice"><%= notice %></p>
+<div class="panel panel-info" style="margin-top:20px">
+  <div class="panel-heading">Información Actualizada</div>
+  <div class="panel-body">
+    <p id="notice">
+      <%= notice %>
+    </p>
+    <div class="row">
+      <div class="col-md-2" style="margin-left:20px">
+        <h4>Cédula</h4>
+      </div>
+      <div class="col-md-2">
+        <h4><small><strong><%= @persona.Per_Cedula %></strong></small></h4>
+      </div>
+    </div>
 
-<p>
-  <strong>Per cedula:</strong>
-  <%= @persona.Per_Cedula %>
-</p>
+    <div class="row">
+      <div class="col-md-2" style="margin-left:20px">
+        <h4>Apellido Paterno</h4>
+      </div>
+      <div class="col-md-2">
+        <h4><small><strong><%= @persona.Per_Apellido_Paterno %></strong></small></h4>
+      </div>
+    </div>
 
-<p>
-  <strong>Per apellido paterno:</strong>
-  <%= @persona.Per_Apellido_Paterno %>
-</p>
+    <div class="row">
+      <div class="col-md-2" style="margin-left:20px">
+        <h4>Apellido Materno</h4>
+      </div>
+      <div class="col-md-2">
+        <h4><small><strong><%= @persona.Per_Apellido_Materno %></strong></small></h4>
+      </div>
+    </div>
 
-<p>
-  <strong>Per apellido materno:</strong>
-  <%= @persona.Per_Apellido_Materno %>
-</p>
+    <div class="row">
+      <div class="col-md-2" style="margin-left:20px">
+        <h4>Nombres</h4>
+      </div>
+      <div class="col-md-2">
+        <h4><small><strong><%= @persona.Per_Nombres %></strong></small></h4>
+      </div>
+    </div>
 
-<p>
-  <strong>Per nombres:</strong>
-  <%= @persona.Per_Nombres %>
-</p>
+    <div class="row">
+      <div class="col-md-2" style="margin-left:20px">
+        <h4>Fecha de Nacimiento</h4>
+      </div>
+      <div class="col-md-2">
+        <h4><small><strong><%= @persona.Per_Fecha_Nacimiento %></strong></small></h4>
+      </div>
+    </div>
 
-<p>
-  <strong>Per fecha nacimiento:</strong>
-  <%= @persona.Per_Fecha_Nacimiento %>
-</p>
+    <div class="row">
+      <div class="col-md-2" style="margin-left:20px">
+        <h4>Contacto</h4>
+      </div>
+      <div class="col-md-2">
+        <h4><small><strong><%= @persona.Per_Telefono %></strong></small></h4>
+      </div>
+    </div>
 
-<p>
-  <strong>Per telefono:</strong>
-  <%= @persona.Per_Telefono %>
-</p>
+  
 
-<%= link_to 'Edit', edit_persona_path(@persona) %> |
-<%= link_to 'Back', personas_path %>
+    <% if @persona.empleado.respond_to?("Emp_Rol")%>
+      <div class="row">
+        <div class="col-md-2" style="margin-left:20px">
+          <h4>Rol/Cargo</h4>
+        </div>
+        <div class="col-md-2">
+          <h4><small><strong><%= @persona.empleado.Emp_Rol %></strong></small></h4>
+        </div>
+      </div>
+
+      <%else%>
+
+        <div class="row">
+          <div class="col-md-2" style="margin-left:20px">
+            <h4>Especialidad</h4>
+          </div>
+          <div class="col-md-2">
+            <h4><small><strong><%= @persona.medico.Med_Especialidad %></strong></small></h4>
+          </div>
+        </div>
+
+      <%end%>
+          <div class="col-md-2">
+            <%= link_to edit_persona_path(@persona),class:"btn btn-primary  btn-block " do %>
+            <i class="glyphicon glyphicon-pencil"></i> Editar
+            <%end%>
+          </div>
+
+          <div class="col-md-2">
+            <%if @persona.empleado.respond_to?("Emp_Rol")%>
+              <%= link_to indexEmpleado_personas_path ,class:"btn btn-primary  btn-block btn-success" do%>
+              <i class="glyphicon glyphicon-ok"></i> Ok
+            <%end%>
+            <%else%>
+              <%= link_to personas_path ,class:"btn btn-primary  btn-block btn-success" do%>
+              <i class="glyphicon glyphicon-ok"></i> Ok
+            <%end %>
+            <%end %>
+          </div>
+  </div>
+</div>
+</div>

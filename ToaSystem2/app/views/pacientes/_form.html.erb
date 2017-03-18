@@ -27,7 +27,7 @@
         <div class="col-lg-4">
           <div class="form-group">
             <label for="cedula">Cédula</label>
-            <%= f.text_field :Pac_Cedula, class:'form-control',id:'cedula', placeholder:'Cédula' %>
+            <%= f.text_field :Pac_Cedula, class:'form-control',id:'cedula', placeholder:'Cédula', maxlength:'10' %>
           </div>
         </div>
 
@@ -40,7 +40,7 @@
         <div class="col-lg-4">
           <div class="form-group">
             <label for="telefono">Telefono</label>
-            <%= f.text_field :Pac_Telefono,class:'form-control',id:'telefono', placeholder:'Convencional/Celular' %>
+            <%= f.text_field :Pac_Telefono,class:'form-control',id:'telefono', placeholder:'Convencional/Celular', maxlength:'10' %>
           </div>
         </div>
       </div>
@@ -71,9 +71,7 @@
           <div class="form-group">
             <label for="fechaNacimiento">Fecha de Nacimiento</label>
             <br>
-            <%= f.date_select :Pac_Fecha_Nacimiento,:start_year => Date.current.year, :end_year => 1920,
-             :use_month_names => ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre','Diciembre'], 
-             class:'form-control selectpicker',id:'fechaNacimiento' %>
+            <%= f.date_field :Pac_Fecha_Nacimiento,id:'fechaNacimiento' %>
           </div>
         </div>
         <div class="col-lg-4">

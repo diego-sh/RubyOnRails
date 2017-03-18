@@ -1,0 +1,27 @@
+<tbody style="font-size:13px">
+          <% @personas.each do |persona| %>
+            <tr>
+              <td>
+                <%= persona.Per_Cedula %>
+              </td>
+              <td>
+                <%= persona.Per_Apellido_Paterno + " "+ persona.Per_Apellido_Materno %>
+              </td>
+              <td>
+                <%= persona.Per_Nombres %>
+              </td>
+                <% if persona.respond_to?("Rol") %>
+                    <td><%= persona.Per_Telefono %></td>
+                    <td><%= persona.Rol %></td>
+                    <% else%>
+                    <td><%= persona.Especialidad %></td>
+                <% end %>
+              <td>
+                <%= link_to 'Mostrar', persona %>
+              </td>
+              <td>
+                <%= link_to 'Editar', edit_persona_path(persona) %>
+              </td>
+            </tr>
+            <% end %>
+        </tbody>

@@ -1,10 +1,14 @@
 class PersonasController < ApplicationController
   before_action :set_persona, only: [:show, :edit, :update, :destroy]
-
+  before_action :flag
   # GET /personas
   # GET /personas.json
   def index
     @personas = Persona.find_by_sql("SELECT *,  m.med_especialidad as Especialidad FROM personas p INNER JOIN medicos m on p.persona_id = m.persona_id")
+  end
+
+  def indexEmpleado
+      @personas = Persona.find_by_sql("SELECT *, e.emp_rol as Rol FROM personas p INNER JOIN empleados e on p.persona_id = e.persona_id;")
   end
 
   # GET /personas/1
@@ -17,6 +21,14 @@ class PersonasController < ApplicationController
     @persona = Persona.new
     @medico= Medico.new
     @persona.medico=@medico
+    @isDoctor=true
+  end
+
+  def newEmpleado
+    @persona = Persona.new
+    @empleado=Empleado.new
+    @persona.empleado=@empleado
+    @isDoctor=false
   end
 
   # GET /personas/1/edit
@@ -29,10 +41,15 @@ class PersonasController < ApplicationController
     @persona = Persona.new(persona_params)
     respond_to do |format|
       if @persona.save
-        flash[:notice] = "Guardado Exitoso!"
+        if(@isDoctor)
+        flash[:notice] = "Especialista guardado exitosamente!"
         format.html { redirect_to personas_path}
+        else
+        flash[:notice] = "Empleado guardado exitosamente!"
+        format.html { redirect_to indexEmpleado_personas_path}
         #format.html { redirect_to @persona, notice: 'Persona was successfully created.' }
         #format.json { render :show, status: :created, location: @persona }
+        end
       else
         format.html { render :new }
         format.json { render json: @persona.errors, status: :unprocessable_entity }
@@ -45,7 +62,8 @@ class PersonasController < ApplicationController
   def update
     respond_to do |format|
       if @persona.update(persona_params)
-        format.html { redirect_to @persona, notice: 'Persona was successfully updated.' }
+        flash[:notice] = "Actualización exitosa.!"
+        format.html { redirect_to @persona}
         format.json { render :show, status: :ok, location: @persona }
       else
         format.html { render :edit }
@@ -69,6 +87,12 @@ class PersonasController < ApplicationController
     def set_persona
       @persona = Persona.find(params[:id])
     end
+
+    #variable global para saber que ingreso Medico o Empleado0
+    def flag
+      @isDoctor=true
+    end
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def persona_params

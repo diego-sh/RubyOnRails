@@ -52,13 +52,9 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'client_side_validations', 
-    github: 'DavyJonesLocker/client_side_validations', 
-    branch: 'rails5'
-
-gem 'client_side_validations-simple_form', 
-    github: 'DavyJonesLocker/client_side_validations-simple_form', 
-    branch: 'rails5'
+gem 'client_side_validations'
+    #github: 'DavyJonesLocker/client_side_validations' 
+    #branch: 'rails5'
 
 gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'
 
