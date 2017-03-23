@@ -6,6 +6,10 @@
 
 @import "welcome";
 
+.selectbox{
+    border-radius: 25px;
+}
+
 .field_with_errors input[type=text]{
     box-shadow: 0 0 5px rgba(255,0,0,0.5);
   	padding: 3px 0px 3px 3px;

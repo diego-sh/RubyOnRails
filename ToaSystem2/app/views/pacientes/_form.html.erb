@@ -71,7 +71,7 @@
           <div class="form-group">
             <label for="fechaNacimiento">Fecha de Nacimiento</label>
             <br>
-            <%= f.date_field :Pac_Fecha_Nacimiento,id:'fechaNacimiento' %>
+            <%= f.date_field :Pac_Fecha_Nacimiento,id:'fechaNacimiento', class:'form-control' %>
           </div>
         </div>
         <div class="col-lg-4">
@@ -83,12 +83,24 @@
         <div class="col-lg-4">
           <div class="form-group">
             <label for="estadoCivil">Estado Civil</label>
-            <%= f.select(:Pac_Estado_Civil, options_for_select([['Soltero', 'SOLERO'], ['Casado', 'CASADO'],['Divorciado', 'DIVORCIADO'],['Viudo', 'VIUDO'],['Unión Libre', 'UNION LIBRE']]), class:" form-control   selectpicker") %>
+            <%= f.select(:Pac_Estado_Civil, options_for_select([['Soltero', 'SOLERO'], ['Casado', 'CASADO'],['Divorciado', 'DIVORCIADO'],['Viudo', 'VIUDO'],['Unión Libre', 'UNION LIBRE']]),{},{ :class => 'form-control'}) %>
           </div>
         </div>
       </div>
 
       <div class="row">
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label for="instruccion">Nivel de Instrucción</label>
+            <%= f.select(:Pac_Instruccion, options_for_select([['Ninguno', "NINGUNO"], ['Básica', "BASICA"],['Bachillerato', "BACHILLERATO"],['Superior', "SUPERIOR"],['Especial', "ESPECIAL"]]),{},{ :class => 'form-control'}) %>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label for="grSanguineo">Grupo Sanguineo</label>
+            <%= f.select(:Pac_Grupo_Sanguineo, options_for_select([['O Positivo', "O POSITIVO"], ['A Negativo', "A NEGATIVO"], ['A Positivo', "A POSITIVO"], ['B Negativo', "B NEGATIVO"], ['B Positivo', "B POSITIVO"], ['AB Negativo', "AB NEGATIVO"], ['AB Positivo', "AB POSITIVO"]]),{},{ :class => 'form-control'}) %>
+          </div>
+        </div>
         <div class="col-lg-4">
           <div class="form-group">
             <label for="genero">Género</label>
@@ -101,18 +113,6 @@
                 <%= label(:Pac_Genero, "Femenino") %>
             </div>
 
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="form-group">
-            <label for="instruccion">Nivel de Instrucción</label>
-            <%= f.select(:Pac_Instruccion, options_for_select([['Ninguno', "NINGUNO"], ['Básica', "BASICA"],['Bachillerato', "BACHILLERATO"],['Superior', "SUPERIOR"],['Especial', "ESPECIAL"]])) %>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="form-group">
-            <label for="grSanguineo">Grupo Sanguineo</label>
-            <%= f.text_field :Pac_Grupo_Sanguineo,class:'form-control',id:'grSanguineo', placeholder:'Tipo de sangre' %>
           </div>
         </div>
       </div>
