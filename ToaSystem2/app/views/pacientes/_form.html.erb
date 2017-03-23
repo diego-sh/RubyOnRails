@@ -98,7 +98,7 @@
         <div class="col-lg-4">
           <div class="form-group">
             <label for="grSanguineo">Grupo Sanguineo</label>
-            <%= f.select(:Pac_Grupo_Sanguineo, options_for_select([['O Positivo', "O POSITIVO"], ['A Negativo', "A NEGATIVO"], ['A Positivo', "A POSITIVO"], ['B Negativo', "B NEGATIVO"], ['B Positivo', "B POSITIVO"], ['AB Negativo', "AB NEGATIVO"], ['AB Positivo', "AB POSITIVO"]]),{},{ :class => 'form-control'}) %>
+            <%= f.select(:Pac_Grupo_Sanguineo, options_for_select([['O Negativo', "O NEGATIVO"], ['O Positivo', "O POSITIVO"], ['A Negativo', "A NEGATIVO"], ['A Positivo', "A POSITIVO"], ['B Negativo', "B NEGATIVO"], ['B Positivo', "B POSITIVO"], ['AB Negativo', "AB NEGATIVO"], ['AB Positivo', "AB POSITIVO"]]),{},{ :class => 'form-control'}) %>
           </div>
         </div>
         <div class="col-lg-4">
@@ -106,11 +106,11 @@
             <label for="genero">Género</label>
             <div class="radio" style="margin-left:30px">
               <%= f.radio_button(:Pac_Genero, 'M', ) %>
-                <%= label(:Pac_Genero, "Masculino") %>
+              <label for="radio2"><span><span></span></span>Masculino</label>
             </div>
             <div class="radio" style="margin-left:30px">
               <%= f.radio_button(:Pac_Genero, 'F', ) %>
-                <%= label(:Pac_Genero, "Femenino") %>
+              <label for="radio2"><span><span></span></span>Femenino</label>
             </div>
 
           </div>
