@@ -90,9 +90,15 @@
             <%= f.submit "Guardar", class:"btn btn-primary  btn-block" %>
           </div>
         </div>
-        <div class="col-md-3">
-          <%= link_to 'Cancelar', personas_path, class:"btn btn-primary center-block" %>
-        </div>
+          <% if persona.medico != nil%>
+            <div class="col-md-3">
+              <%= link_to 'Cancelar', personas_path, class:"btn btn-primary center-block" %>
+            </div>
+          <% else %>
+            <div class="col-md-3">
+            <%= link_to 'Cancelar', indexEmpleado_personas_path, class:"btn btn-primary center-block" %>
+            </div>
+          <% end %>
         <div class="col-md-4"></div>
 
       </div>

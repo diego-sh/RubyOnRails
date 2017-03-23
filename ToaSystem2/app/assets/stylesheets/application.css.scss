@@ -6,10 +6,17 @@
 
 @import "welcome";
 
-.field_with_errors .message {
-  color: red;
-  padding-left: 10px;
-  display: inline;
+.field_with_errors input[type=text]{
+    box-shadow: 0 0 5px rgba(255,0,0,0.5);
+  	padding: 3px 0px 3px 3px;
+  	margin: 5px 1px 3px 0px;
+  	border: 1px solid rgba(255,0,0,0.5);
+}
+
+.message{
+    color: red;
+    padding-left: 10px;
+    display: inline;
 }
 
 #notice_panel{
