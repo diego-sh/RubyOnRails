@@ -1,6 +1,14 @@
-<h1>Modificar Paciente</h1>
+<% provide(:index, 'active') %>
+<div class="panel panel-info">
+    <div class="panel-heading">MODIFICAR PACIENTE</div>
+    <div class="panel-body">
+        <div>
+             <%= render 'form', paciente: @paciente %>
 
-<%= render 'form', paciente: @paciente %>
+        </div>
+       
 
-<%= link_to 'Show', @paciente %> |
-<%= link_to 'Back', pacientes_path %>
+    </div>
+</div>
+
+

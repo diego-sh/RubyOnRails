@@ -2,7 +2,7 @@
 Rails.application.routes.draw do
 
   
-
+  resources :usuarios , path_names: {new: 'new/:id' }
   resources :residencias
   resources :pacientes
   resources :personas do

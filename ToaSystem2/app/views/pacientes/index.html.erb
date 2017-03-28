@@ -1,12 +1,16 @@
 <% provide(:index, 'active') %>
-<% if notice %>
-  <div id="notice_panel">
-    <p id="notice"><%= notice %></p>
-  </div>
-<% end %>
 <div class='row' id= "titulo" style="margin-left:20px; margin-top:20px"> 
   <img src="/img/icon/people.png" alt="rss feed" />
   <h3><strong>PACIENTES</strong></h3>
+</div>
+<div class="row" style="margin-left:20px; margin-top:10px;">
+    <% if notice %>
+      <div id="notice_panel" style="width: 80%; margin:0 auto">
+        <p id="notice">
+          <%= notice %>
+        </p>
+      </div>
+      <% end %>
 </div>
 
 <div class="row" style="margin-top:10px; width:95%">
@@ -24,8 +28,7 @@
     <tr>
       <th>Nro. HISTORIA</th>
       <th>CÉDULA</th>
-      <th>APELLIDO PATERNO</th>
-      <th>APELLIDO MATERNO</th>
+      <th>APELLIDOS</th>
       <th>NOMBRES</th>
        <th>CONTACTO</th>
       <th>EDAD</th>
@@ -39,15 +42,12 @@
       <tr>
         <td><%= paciente.Pac_HC %></td>
         <td><%= paciente.Pac_Cedula %></td>
-        <td><%= paciente.Pac_Apellido_Paterno %></td>
-        <td><%= paciente.Pac_Apellido_Materno %></td>
+        <td><%= paciente.Pac_Apellido_Paterno + " "+paciente.Pac_Apellido_Materno %></td>
         <td><%= paciente.Pac_Nombres %></td>
          <td><%= paciente.Pac_Telefono %></td>
-        <td><%= paciente.Pac_Fecha_Nacimiento %></td>
+        <td><%= paciente.Age %></td>
         
-       
-        
-        <td><%= link_to 'Mostrar', paciente %></td>
+        <td><%= link_to 'Ver', paciente %></td>
         <td><%= link_to 'Editar', edit_paciente_path(paciente) %></td>
       </tr>
     <% end %>

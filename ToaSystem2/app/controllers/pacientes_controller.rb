@@ -4,7 +4,7 @@ class PacientesController < ApplicationController
   # GET /pacientes
   # GET /pacientes.json
   def index
-    @pacientes = Paciente.all
+    @pacientes = Paciente.find_by_sql("SELECT paciente_id, Pac_HC, Pac_Cedula, Pac_Apellido_Paterno, Pac_Apellido_Materno, Pac_Nombres, Pac_Telefono,TIMESTAMPDIFF(YEAR, Pac_Fecha_Nacimiento,CURDATE()) AS Age FROM pacientes;");
   end
 
   # GET /pacientes/1

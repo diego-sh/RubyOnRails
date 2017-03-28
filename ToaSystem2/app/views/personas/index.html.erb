@@ -1,36 +1,38 @@
 <% provide(:indexM, 'active') %>
-<% if notice %>
-  <div id="notice_panel">
-    <p id="notice">
-      <%= notice %>
-    </p>
+  <div class='row' id="titulo" style="margin-left:20px; margin-top:20px;">
+    <img src="/img/icon/doctor.png" alt="rss feed" />
+    <h1>MÉDICOS</h1>
   </div>
-  <% end %>
-    <div class='row' id="titulo" style="margin-left:20px; margin-top:20px;">
-      <img src="/img/icon/doctor.png" alt="rss feed" />
-      <h1>MÉDICOS</h1>
-    </div>
-    <div class="row" style="margin-left:0px; margin-top:10px">
-      <div class="col-md-3 col-md-offset-3"></div>
-      <div class="col-md-3 col-md-offset-3">
-        <%= link_to new_persona_path, class:"btn btn-primary" do %>
-          <i class="glyphicon glyphicon-plus"></i> Agregar
-          <% end %>
+  <div class="row" style="margin-left:20px; margin-top:10px;">
+    <% if notice %>
+      <div id="notice_panel" style="width: 80%; margin:0 auto">
+        <p id="notice">
+          <%= notice %>
+        </p>
       </div>
+      <% end %>
+  </div>
+  <div class="row" style="margin-left:0px; margin-top:10px">
+    <div class="col-md-3 col-md-offset-3"></div>
+    <div class="col-md-3 col-md-offset-3">
+      <%= link_to new_persona_path, class:"btn btn-primary" do %>
+        <i class="glyphicon glyphicon-plus"></i> Agregar
+        <% end %>
+    </div>
 
 
-    </div>
-    <div class='row' style="margin-left:20px; margin-top:10px">
-      <table class="table table-striped" style="width:80%; margin:0 auto">
-        <thead>
-          <tr>
-            <th>CÉDULA</th>
-            <th>APELLIDOS</th>
-            <th>NOMBRES</th>
-            <th>ESPECIALIDAD</th>
-            <th colspan="2"></th>
-          </tr>
-        </thead>
-        <%= render 'tblInformation'%>
-      </table>
-    </div>
+  </div>
+  <div class='row' style="margin-left:20px; margin-top:10px">
+    <table class="table table-striped" style="width:80%; margin:0 auto">
+      <thead>
+        <tr>
+          <th>CÉDULA</th>
+          <th>APELLIDOS</th>
+          <th>NOMBRES</th>
+          <th>ESPECIALIDAD</th>
+          <th colspan="2"></th>
+        </tr>
+      </thead>
+      <%= render 'tblInformation'%>
+    </table>
+  </div>

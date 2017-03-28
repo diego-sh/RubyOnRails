@@ -1,89 +1,161 @@
-<p id="notice"><%= notice %></p>
+<div class="panel panel-info" style="margin-top:20px">
+  <div class="panel-heading">INFORMACIÓN GENERAL</div>
+  <div class="panel-body">
+    
+    <div class="row">
+      <div class="col-md-2" style="margin-left:20px">
+        <h4><strong> Clínica </strong></h4>
+      </div>
+      <div class="col-md-2">
+        <h4><small><strong><%= @paciente.Pac_HC %></strong></small></h4>
+      </div>
+  <!--SEGUNDA COLUMNA-->
+      <div class="col-md-1"></div>
+      <div class="col-md-2" style="margin-left:20px">
+        <h4><strong>Nacionalidad</strong></h4>
+      </div>
+      <div class="col-md-2">
+        <h4><small><strong><%= @paciente.Pac_Nacionalidad %></strong></small></h4>
+      </div>
 
-<p>
-  <strong>Pac hc:</strong>
-  <%= @paciente.Pac_HC %>
-</p>
+      <!--FIN SEGUNDA COLUMNA-->
+    </div>
 
-<p>
-  <strong>Pac cedula:</strong>
-  <%= @paciente.Pac_Cedula %>
-</p>
+    <div class="row">
+      <div class="col-md-2" style="margin-left:20px">
+        <h4><strong>Cédula</strong></h4>
+      </div>
+      <div class="col-md-2">
+        <h4><small><strong><%= @paciente.Pac_Cedula %></strong></small></h4>
+      </div>
+       <!--SEGUNDA COLUMNA-->
+      <div class="col-md-1"></div>
+      <div class="col-md-2" style="margin-left:20px">
+        <h4><strong>Género</strong></h4>
+      </div>
+      <div class="col-md-2">
+        <% if @paciente.Pac_Genero == 'M'%>
+        <h4><small><strong>MASCULINO</strong></small></h4>
+        <% else %>
+        <h4><small><strong>FEMENINO</strong></small></h4>
+        <% end %>
+      </div>
+      <!--FIN SEGUNDA COLUMNA-->
+    </div>
 
-<p>
-  <strong>Pac pasaporte:</strong>
-  <%= @paciente.Pac_Pasaporte %>
-</p>
+    <div class="row">
+      <div class="col-md-2" style="margin-left:20px">
+        <h4><strong>Pasaporte</strong></h4>
+      </div>
+      <div class="col-md-2">
+        <h4><small><strong><%= @paciente.Pac_Pasaporte %></strong></small></h4>
+      </div>      
+        <!--SEGUNDA COLUMNA-->
+      <div class="col-md-1"></div>
+      <div class="col-md-2" style="margin-left:20px">
+        <h4><strong>Estado Civil</strong></h4>
+      </div>
+      <div class="col-md-2">
+        <h4><small><strong><%= @paciente.Pac_Estado_Civil %></strong></small></h4>
+      </div>
+      <!--FIN SEGUNDA COLUMNA-->
 
-<p>
-  <strong>Pac apellido paterno:</strong>
-  <%= @paciente.Pac_Apellido_Paterno %>
-</p>
+    </div>
 
-<p>
-  <strong>Pac apellido materno:</strong>
-  <%= @paciente.Pac_Apellido_Materno %>
-</p>
+    <div class="row">
+      <div class="col-md-2" style="margin-left:20px">
+        <h4><strong>Apellido Paterno</strong></h4>
+      </div>
+      <div class="col-md-2">
+        <h4><small><strong><%= @paciente.Pac_Apellido_Paterno %></strong></small></h4>
+      </div>
+      <!--SEGUNDA COLUMNA-->
+      <div class="col-md-1"></div>
+      <div class="col-md-2" style="margin-left:20px">
+        <h4><strong>Instruccón</strong></h4>
+      </div>
+      <div class="col-md-2">
+        <h4><small><strong><%= @paciente.Pac_Instruccion %></strong></small></h4>
+      </div>
+      <!--FIN SEGUNDA COLUMNA-->
+    </div>
 
-<p>
-  <strong>Pac nombres:</strong>
-  <%= @paciente.Pac_Nombres %>
-</p>
+    <div class="row">
+      <div class="col-md-2" style="margin-left:20px">
+        <h4><strong>Apellido Materno</strong></h4>
+      </div>
+      <div class="col-md-2">
+        <h4><small><strong><%= @paciente.Pac_Apellido_Materno %></strong></small></h4>
+      </div>
 
-<p>
-  <strong>Pac fecha nacimiento:</strong>
-  <%= @paciente.Pac_Fecha_Nacimiento %>
-</p>
+      <!--SEGUNDA COLUMNA-->
+      <div class="col-md-1"></div>
+      <div class="col-md-2" style="margin-left:20px">
+        <h4><strong>Telefono</strong></h4>
+      </div>
+      <div class="col-md-2">
+        <h4><small><strong><%= @paciente.Pac_Telefono %></strong></small></h4>
+      </div>
+      <!--FIN SEGUNDA COLUMNA-->
 
-<p>
-  <strong>Pac nacionalidad:</strong>
-  <%= @paciente.Pac_Nacionalidad %>
-</p>
+    </div>
 
-<p>
-  <strong>Pac genero:</strong>
-  <%= @paciente.Pac_Genero %>
-</p>
+     <div class="row">
+      <div class="col-md-2" style="margin-left:20px">
+        <h4><strong>Nombres</strong></h4>
+      </div>
+      <div class="col-md-2">
+        <h4><small><strong><%= @paciente.Pac_Nombres %></strong></small></h4>
+      </div>
+      <!--SEGUNDA COLUMNA-->
+      <div class="col-md-1"></div>
+      <div class="col-md-2" style="margin-left:20px">
+        <h4><strong>Grupo Sanguineo</strong></h4>
+      </div>
+      <div class="col-md-2">
+        <h4><small><strong><%= @paciente.Pac_Grupo_Sanguineo %></strong></small></h4>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-2" style="margin-left:20px">
+        <h4><strong>Fecha de Nacimiento</strong></h4>
+      </div>
+      <div class="col-md-2">
+        <h4><small><strong><%= @paciente.Pac_Fecha_Nacimiento %></strong></small></h4>
+      </div>
+    </div>
 
-<p>
-  <strong>Pac estado civil:</strong>
-  <%= @paciente.Pac_Estado_Civil %>
-</p>
+    <div class="row">
+      <div class="col-md-2" style="margin-left:20px">
+        <h4><strong>Ocupación</strong></h4>
+      </div>
+      <div class="col-md-2">
+        <h4><small><strong><%= @paciente.Pac_Ocupacion %></strong></small></h4>
+      </div>
+    </div>
+    <div class="col-md-2">
+            <%= link_to edit_paciente_path(@paciente),class:"btn btn-primary  btn-block " do %>
+            <i class="glyphicon glyphicon-pencil"></i> Editar
+            <%end%>
+    </div>
 
-<p>
-  <strong>Pac instruccion:</strong>
-  <%= @paciente.Pac_Instruccion %>
-</p>
+    <div class="col-md-2">
+        <%= link_to pacientes_path ,class:"btn btn-primary  btn-block btn-success" do%>
+        <i class="glyphicon glyphicon-ok"></i> Ok
+      <%end%>
+    </div>
+    </div>
 
-<p>
-  <strong>Pac ocupacion:</strong>
-  <%= @paciente.Pac_Ocupacion %>
-</p>
+    
 
-<p>
-  <strong>Pac telefono:</strong>
-  <%= @paciente.Pac_Telefono %>
-</p>
 
-<p>
-  <strong>Pac grupo sanguineo:</strong>
-  <%= @paciente.Pac_Grupo_Sanguineo %>
-</p>
+    
 
-<p>
-  <strong>Creado at:</strong>
-  <%= @paciente.creado_at %>
-</p>
+   
+      
+  
+</div>
+  </div>
+</div>
 
-<p>
-  <strong>Actualizado at:</strong>
-  <%= @paciente.actualizado_at %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @paciente.user_id %>
-</p>
-
-<%= link_to 'Edit', edit_paciente_path(@paciente) %> |
-<%= link_to 'Back', pacientes_path %>

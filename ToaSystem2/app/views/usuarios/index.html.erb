@@ -1,0 +1,39 @@
+<% provide(:usuarios, 'active') %>
+<div class='row' id= "titulo" style="margin-left:20px; margin-top:20px"> 
+  <img src="/img/icon/PEOPLE.png" alt="rss feed" />
+  <h3><strong>USUARIOS</strong></h3>
+</div>
+
+<div class="row" style="margin-left:20px; margin-top:10px;">
+  <% if notice %>
+  <div id="notice_panel" style="width: 80%; margin:0 auto">
+    <p id="notice"><%= notice %></p>
+  </div>
+  <% end %>
+</div>
+<div class='row' style="margin-left:20px; margin-top:10px">
+  <table class="table table-striped table-hover" style="width:80%; margin:0 auto">
+    <thead>
+    <tr>
+      <th>APELLIDOS</th>
+      <th>NOMBRES</th>
+      <th>USUARIO</th>
+      <th>PERFIL</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody  style="font-size:13px">
+    <% @usuarios.each do |usuario| %>
+      <tr>
+        <td><%= usuario.Apellidos %></td>
+        <td><%= usuario.Nombres %></td>
+        <td><%= usuario.Username %></td>
+        <td><%= usuario.Perfil %></td>
+        <td><%= link_to 'Editar', edit_usuario_path(usuario)%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<br>

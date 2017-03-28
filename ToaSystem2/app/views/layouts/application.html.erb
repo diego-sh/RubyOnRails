@@ -53,8 +53,10 @@
               <img src="/img/icon/x16/home.png" alt="rss feed" class="pull-right"/>
             <% end %>
           </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuarios <span class="caret"></span><img src="/img/icon/x16/team.png" alt="rss feed" class="pull-right"/></a>
+          <li class="<%= yield(:usuarios)%>">
+            <%= link_to usuarios_path, class:'dropdown-toggle' do %>Usuarios
+            <span class="caret"></span><img src="/img/icon/x16/team.png" alt="rss feed" class="pull-right"/>
+            
             <ul class="dropdown-menu forAnimate" role="menu">
               <li><a href="{{URL::to('createusuario')}}">Crear</a></li>
               <li><a href="#">Modificar</a></li>
@@ -63,6 +65,7 @@
               <li><a href="#">Separated link</a></li>
               <li class="divider"></li>
             </ul>
+            <% end %>
           </li>
 
           <li class="<%= %>">

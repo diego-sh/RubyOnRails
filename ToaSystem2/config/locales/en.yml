@@ -34,7 +34,7 @@ en:
       confirmation: "No coincide %{attribute}"
       accepted: "Deberia ser aceptado"
       empty: "No puede estar vacio"
-      blank: "No pude estar vacio"
+      blank: "Campo obligatorio"
       present: "Debe estar vacio"
       too_long:
         one: "Demasiado largo (El máximo es 1 caracter)"

@@ -1,6 +1,17 @@
-<h1>Editing Persona</h1>
+ <% if @persona.medico != nil%>
+    <% provide(:indexM, 'active') %>
+ <%else%>
+    <% provide(:indexEmpleado, 'active') %>
+ <% end %>
 
-<%= render 'form', persona: @persona %>
+<div class="panel panel-info">
+    <div class="panel-heading">MODIFICAR</div>
+    <div class="panel-body">
+        <div>
+            <%= render 'form', persona: @persona %>
 
-<%= link_to 'Show', @persona %> |
-<%= link_to 'Back', personas_path %>
+        </div>
+       
+
+    </div>
+</div>

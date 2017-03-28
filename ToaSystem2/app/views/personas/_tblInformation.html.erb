@@ -17,11 +17,17 @@
                     <td><%= persona.Especialidad %></td>
                 <% end %>
               <td>
-                <%= link_to 'Mostrar', persona %>
+                <%= link_to 'Ver', persona %>
               </td>
               <td>
                 <%= link_to 'Editar', edit_persona_path(persona) %>
               </td>
+              <% if persona.usuario_id == nil %>
+                <td>
+                  <%= link_to 'Configurar Usuario', new_usuario_path(persona) %>
+                </td>
+              <% end %>
+              
             </tr>
             <% end %>
         </tbody>

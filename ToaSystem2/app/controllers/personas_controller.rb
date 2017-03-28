@@ -1,6 +1,6 @@
 class PersonasController < ApplicationController
   before_action :set_persona, only: [:show, :edit, :update, :destroy]
-  before_action :flag
+  before_action :flag, only: [:new,:newEmpleado]
   # GET /personas
   # GET /personas.json
   def index
@@ -21,14 +21,14 @@ class PersonasController < ApplicationController
     @persona = Persona.new
     @medico= Medico.new
     @persona.medico=@medico
-    @isDoctor=true
+    @@isDoctor=true
   end
 
   def newEmpleado
     @persona = Persona.new
     @empleado=Empleado.new
     @persona.empleado=@empleado
-    @isDoctor=false
+    @@isDoctor=false
   end
 
   # GET /personas/1/edit
@@ -41,12 +41,12 @@ class PersonasController < ApplicationController
     @persona = Persona.new(persona_params)
     respond_to do |format|
       if @persona.save
-        if(@isDoctor)
-        flash[:notice] = "Especialista guardado exitosamente!"
-        format.html { redirect_to personas_path}
-        else
+        if(@@isDoctor)
+        format.html { redirect_to personas_path, notice: 'Especialista guardado exitosamente!' }
+      else        
         flash[:notice] = "Empleado guardado exitosamente!"
         format.html { redirect_to indexEmpleado_personas_path}
+        
         #format.html { redirect_to @persona, notice: 'Persona was successfully created.' }
         #format.json { render :show, status: :created, location: @persona }
         end
@@ -90,7 +90,7 @@ class PersonasController < ApplicationController
 
     #variable global para saber que ingreso Medico o Empleado0
     def flag
-      @isDoctor=true
+      @@isDoctor=false
     end
 
 

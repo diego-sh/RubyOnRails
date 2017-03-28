@@ -5,6 +5,15 @@
 @import "bootstrap";
 
 @import "welcome";
+@import "usuarios";
+
+/*CSS PARA TEXT INPUT*/
+input[type=text]{
+    text-transform:uppercase;
+}
+
+/*FIN CSS PARA TEXT INPUT*/
+
 
 /* INICIO CSS RADIO BUTTON */
 input[type=checkbox]:not(old),
@@ -96,16 +105,17 @@ input[type=radio]:not(old):checked +  label > span > span{
 }
 
 #notice_panel{
-    position: absolute;
+    //position: absolute;
     top: 0;
-    width: 100%;
+    //width: 100%;
     z-index: 999;
-    background: rgba(135, 216, 211, 0.85);
+    background: #80cbc4;//rgba(135, 216, 211, 0.85);
+    border-radius: 8px;
     #notice {
-        padding: 2.5rem 0;
+        padding: 2px 0;
         text-align: center;
         margin: 0;
-        font-size: 2.5rem;
+        font-size: 20px;
         font-weight: 700;
         color: #FFFFFF;
         letter-spacing: 1px;

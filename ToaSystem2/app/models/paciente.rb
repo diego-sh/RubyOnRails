@@ -1,4 +1,7 @@
 class Paciente < ApplicationRecord
+    before_save :upperCase
+
+
     has_one :residencia, inverse_of: :paciente
     accepts_nested_attributes_for :residencia, reject_if: proc { |attributes| attributes[:Res_Sector].blank? }
 
@@ -13,4 +16,14 @@ class Paciente < ApplicationRecord
 
     validates :Pac_Pasaporte, numericality: { only_integer: true }, allow_blank: true
     #validates :Pac_Ocupacion, format: { with: /\A[a-zA-Z]+\z/, message: "Ingrese solo letras" }, allow_blank: true
+  
+  def upperCase
+    self.Pac_HC= self.Pac_HC.upcase
+    self.Pac_Apellido_Materno= self.Pac_Apellido_Materno.upcase
+    self.Pac_Apellido_Paterno= self.Pac_Apellido_Paterno.upcase
+    self.Pac_Nombres= self.Pac_Nombres.upcase
+    self.Pac_Pasaporte= self.Pac_Pasaporte.upcase
+    self.Pac_Nacionalidad= self.Pac_Nacionalidad.upcase
+    self.Pac_Ocupacion= self.Pac_Ocupacion.upcase
+  end
 end 
