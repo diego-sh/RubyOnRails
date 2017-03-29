@@ -22,8 +22,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["paciente_id"], name: "FK_REFERENCE_18", using: :btree
   end
 
-  create_table "cantones", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.integer "id"
+  create_table "cantones", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.text    "nombre",       limit: 65535
     t.integer "provincia_id"
     t.text    "created_at",   limit: 65535
@@ -209,11 +208,10 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["consulta_id"], name: "FK_REFERENCE_26", using: :btree
   end
 
-  create_table "provincias", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.integer "id"
-    t.text    "nombre",     limit: 65535
-    t.text    "created_at", limit: 65535
-    t.text    "updated_at", limit: 65535
+  create_table "provincias", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.text "nombre",     limit: 65535
+    t.text "created_at", limit: 65535
+    t.text "updated_at", limit: 65535
   end
 
   create_table "residencias", primary_key: "residencia_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
