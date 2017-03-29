@@ -27,6 +27,12 @@
                   <%= link_to 'Configurar Usuario', new_usuario_path(persona) %>
                 </td>
               <% end %>
+              <% if !persona.respond_to?("Rol") %>
+                <td>
+                  <%= link_to 'Horario', new_horario_path(:med => persona.medico_id) %>
+                </td>
+              <% end %>
+
               
             </tr>
             <% end %>

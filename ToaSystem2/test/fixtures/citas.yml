@@ -4,8 +4,24 @@ one:
   paciente: one
   empleado: one
   medico: one
+<<<<<<< HEAD
+=======
+  Cit_Fecha: 2017-03-29
+  Cit_Hora: 2017-03-29 02:05:49
+  Cit_Motivo: MyString
+  Cit_Estado: MyString
+  Cit_Observacion: MyString
+>>>>>>> origin/master
 
 two:
   paciente: two
   empleado: two
   medico: two
+<<<<<<< HEAD
+=======
+  Cit_Fecha: 2017-03-29
+  Cit_Hora: 2017-03-29 02:05:49
+  Cit_Motivo: MyString
+  Cit_Estado: MyString
+  Cit_Observacion: MyString
+>>>>>>> origin/master

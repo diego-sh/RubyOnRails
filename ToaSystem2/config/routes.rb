@@ -2,6 +2,7 @@
 Rails.application.routes.draw do
 
   
+<<<<<<< HEAD
 =begin  get 'consultas', to: 'consultas#index', as: 'consultas'
   get 'consultas/:id/edit', to: 'consultas#edit', as: 'edit_consulta'
   get 'consultas/new'
@@ -9,6 +10,10 @@ Rails.application.routes.draw do
   get 'consultas/update'
 =end
   resources :consultas
+=======
+  resources :citas
+  resources :horarios
+>>>>>>> origin/master
   resources :usuarios , path_names: {new: 'new/:id' }
   resources :residencias
   resources :pacientes

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  medico_id: 1
+  Hor_Hora_Inicio: 2017-03-28 15:43:17
+  Hor_Hora_Fin: 2017-03-28 15:43:17
+  Hor_Dia: MyString
+
+two:
+  medico_id: 1
+  Hor_Hora_Inicio: 2017-03-28 15:43:17
+  Hor_Hora_Fin: 2017-03-28 15:43:17
+  Hor_Dia: MyString
