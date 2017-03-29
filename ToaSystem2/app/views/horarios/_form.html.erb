@@ -1,0 +1,50 @@
+<%= form_for(horario) do |f| %>
+  <% if horario.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(horario.errors.count, "error") %> prohibited this horario from being saved:</h2>
+
+      <ul>
+      <% horario.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field" style = "display:none">
+    <%= f.label :medico_id %>
+    <%= f.number_field :medico_id %>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-4">
+      <label>Día</label>
+      <%= f.select(:Hor_Dia, options_for_select([['Lunes', "LUNES"], ['Martes', "MARTES"], ['Miercoles', "MIERCOLES"], ['Jueves', "JUEVES"], ['Viernes', "VIERNES"], ['Sábado', "SÁBADO"], ['Domingo', "DOMINGO"]]),{prompt: "Seleccione"},{ :class => 'form-control'}) %>
+    </div>
+    <div class="col-lg-2">
+      <div class="form-group">
+        <label>Hora de Inicio</label>
+          <%= f.time_select :Hor_Hora_Inicio, { prompt: {hour: 'Seleccione Hora', minute: 'Seleccione Minuto'}, minute_step: 15 },{ class: 'form-control' } %>
+      </div>
+    </div>
+    <div class="col-lg-2">
+      <div class="form-group">
+        <label>Hora de Fin</label>
+          <%= f.time_select :Hor_Hora_Fin, { prompt: {hour: 'Seleccione Hora', minute: 'Seleccione Minuto'}, minute_step: 15 },{ class: 'form-control' } %>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="margin-top:20px">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-3">
+      <div class="actions">
+        <%= f.submit "Guardar", class:"btn btn-primary  btn-block" %>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <%= link_to 'Cancelar', horarios_path, class:"btn btn-primary center-block" %>
+    </div>
+    <div class="col-md-4"></div>  
+  </div>
+<% end %>

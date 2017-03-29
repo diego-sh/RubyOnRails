@@ -83,7 +83,7 @@
         <div class="col-lg-4">
           <div class="form-group">
             <label for="estadoCivil">Estado Civil</label>
-            <%= f.select(:Pac_Estado_Civil, options_for_select([['Soltero', 'SOLERO'], ['Casado', 'CASADO'],['Divorciado', 'DIVORCIADO'],['Viudo', 'VIUDO'],['Unión Libre', 'UNION LIBRE']]),{},{ :class => 'form-control'}) %>
+            <%= f.select(:Pac_Estado_Civil, options_for_select([['Soltero', 'SOLERO'], ['Casado', 'CASADO'],['Divorciado', 'DIVORCIADO'],['Viudo', 'VIUDO'],['Unión Libre', 'UNION LIBRE']]),{prompt: "Seleccione"},{ :class => 'form-control'}) %>
           </div>
         </div>
       </div>
@@ -92,13 +92,13 @@
         <div class="col-lg-4">
           <div class="form-group">
             <label for="instruccion">Nivel de Instrucción</label>
-            <%= f.select(:Pac_Instruccion, options_for_select([['Ninguno', "NINGUNO"], ['Básica', "BASICA"],['Bachillerato', "BACHILLERATO"],['Superior', "SUPERIOR"],['Especial', "ESPECIAL"]]),{},{ :class => 'form-control'}) %>
+            <%= f.select(:Pac_Instruccion, options_for_select([['Ninguno', "NINGUNO"], ['Básica', "BASICA"],['Bachillerato', "BACHILLERATO"],['Superior', "SUPERIOR"],['Especial', "ESPECIAL"]]),{prompt: "Seleccione"},{ :class => 'form-control'}) %>
           </div>
         </div>
         <div class="col-lg-4">
           <div class="form-group">
             <label for="grSanguineo">Grupo Sanguineo</label>
-            <%= f.select(:Pac_Grupo_Sanguineo, options_for_select([['O Negativo', "O NEGATIVO"], ['O Positivo', "O POSITIVO"], ['A Negativo', "A NEGATIVO"], ['A Positivo', "A POSITIVO"], ['B Negativo', "B NEGATIVO"], ['B Positivo', "B POSITIVO"], ['AB Negativo', "AB NEGATIVO"], ['AB Positivo', "AB POSITIVO"]]),{},{ :class => 'form-control'}) %>
+            <%= f.select(:Pac_Grupo_Sanguineo, options_for_select([['O Negativo', "O NEGATIVO"], ['O Positivo', "O POSITIVO"], ['A Negativo', "A NEGATIVO"], ['A Positivo', "A POSITIVO"], ['B Negativo', "B NEGATIVO"], ['B Positivo', "B POSITIVO"], ['AB Negativo', "AB NEGATIVO"], ['AB Positivo', "AB POSITIVO"]]),{prompt: "Seleccione"},{ :class => 'form-control'}) %>
           </div>
         </div>
         <div class="col-lg-4">
@@ -159,19 +159,21 @@
               <%= o.text_field :Res_Numero_Casa,class:'form-control',id:'ncasa', placeholder:'Número/Nomenclatura' %>
             </div>
           </div>
+          <!--COMBO PROVINCIA - CANTONES-->
           <div class="col-lg-4">
-            <div class="form-group">
-              <label for="provincia">Provincia</label>
-              <%= o.text_field :Res_Provincia,class:'form-control',id:'provincia' %>
-            </div>
+                <div class="form-group">
+                  <label for="provincia">Provincia</label>
+                    <%= o.collection_select :Res_Provincia, Provincia.order(:nombre), :id, :nombre, {prompt: "Seleccione"}, {class: "form-control"} %>
+                </div>
           </div>
           <div class="col-lg-4">
-            <div class="form-group">
-              <label for="canton">Canton</label>
-              <%= o.text_field :Res_Canton,class:'form-control',id:'canton' %>
-            </div>
+              <div class="form-group">
+                <label for="canton">Canton</label>
+                <%= o.grouped_collection_select :Res_Canton, Provincia.order(:nombre), :cantones, :nombre, :id, :nombre, {prompt: "Seleccione"}, {class: "form-control"}  %>
+              </div>
           </div>
         </div>
+        <!-- FIN COMBO-->
         <% end %>
         
           <div class="row" style="margin-top:20px">

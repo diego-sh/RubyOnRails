@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20170328204414) do
 
   create_table "antecedentes", primary_key: "antecedente_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "paciente_id"
@@ -20,6 +20,13 @@ ActiveRecord::Schema.define(version: 0) do
     t.datetime "actualizado_at"
     t.integer  "user_id"
     t.index ["paciente_id"], name: "FK_REFERENCE_18", using: :btree
+  end
+
+  create_table "cantones", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "nombre"
+    t.integer  "provincia_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "citas", primary_key: "cita_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -156,6 +163,12 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "Per_Nombres",          limit: 64
     t.date   "Per_Fecha_Nacimiento"
     t.string "Per_Telefono",         limit: 10
+  end
+
+  create_table "provincias", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "nombre"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "residencias", primary_key: "residencia_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|

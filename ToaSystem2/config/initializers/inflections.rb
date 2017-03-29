@@ -8,6 +8,8 @@
 #   inflect.singular /^(ox)en/i, '\1'
    inflect.irregular 'perfil', 'perfiles'
    inflect.irregular 'residencia', 'residencias'
+   inflect.irregular 'canton', 'cantones'
+   inflect.irregular 'provincia', 'provincias'
 #   inflect.uncountable %w( fish sheep )
  end
 
