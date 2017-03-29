@@ -1,4 +1,5 @@
 class Medico < ApplicationRecord
+  before_save :upperCase
   belongs_to :persona,inverse_of: :medico
   has_many :horarios
 

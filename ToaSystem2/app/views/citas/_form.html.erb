@@ -1,0 +1,57 @@
+<%= form_for(cita) do |f| %>
+  <% if cita.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(cita.errors.count, "error") %> prohibited this cita from being saved:</h2>
+
+      <ul>
+      <% cita.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :paciente_id %>
+    <%= f.text_field :paciente_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :empleado_id %>
+    <%= f.text_field :empleado_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :medico_id %>
+    <%= f.text_field :medico_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Cit_Fecha %>
+    <%= f.date_select :Cit_Fecha %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Cit_Hora %>
+    <%= f.time_select :Cit_Hora %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Cit_Motivo %>
+    <%= f.text_field :Cit_Motivo %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Cit_Estado %>
+    <%= f.text_field :Cit_Estado %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Cit_Observacion %>
+    <%= f.text_field :Cit_Observacion %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

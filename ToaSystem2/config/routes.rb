@@ -2,6 +2,7 @@
 Rails.application.routes.draw do
 
   
+  resources :citas
   resources :horarios
   resources :usuarios , path_names: {new: 'new/:id' }
   resources :residencias

@@ -14,12 +14,11 @@
   <table class="table table-striped table-hover" style="width:90%; margin:0 auto">
     <thead>
       <tr>
-        <th>Apellido Paterno</th>
-        <th>Apellido Materno</th>
-        <th>Apellido Nombre</th>
-        <th>Dia</th>
-        <th>Inicio</th>
-        <th>Fin</th>
+        <th>APELLIDOS</th>
+        <th>NOMBRES</th>
+        <th>DÍA</th>
+        <th>HORA INICIO</th>
+        <th>HORA FIN</th>
         <th colspan="3"></th>
       </tr>
     </thead>
@@ -27,13 +26,12 @@
     <tbody style="font-size:13px">
       <% @horarios.each do |horario| %>
         <tr>
-          <td><%= horario.apellidop %></td>
-          <td><%= horario.apellidom %></td>
+          <td><%= horario.apellidop+" "+horario.apellidom %></td>
           <td><%= horario.nombres %></td>
           <td><%= horario.Hor_Dia %></td>
           <td><%= horario.Hor_Hora_Inicio.strftime("%r") %></td>
           <td><%= horario.Hor_Hora_Fin.strftime("%r") %></td>
-          <td><%= link_to 'Mostrar', horario %></td>
+          <td><%= link_to 'Ver', horario %></td>
           <td><%= link_to 'Editar', edit_horario_path(horario) %></td>
         </tr>
       <% end %>

@@ -10,6 +10,7 @@
    inflect.irregular 'residencia', 'residencias'
    inflect.irregular 'canton', 'cantones'
    inflect.irregular 'provincia', 'provincias'
+   inflect.irregular 'cita', 'citas'
 #   inflect.uncountable %w( fish sheep )
  end
 

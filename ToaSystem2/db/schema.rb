@@ -10,23 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170328204414) do
+ActiveRecord::Schema.define(version: 0) do
 
   create_table "antecedentes", primary_key: "antecedente_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "paciente_id"
     t.string   "Ant_tipo",        limit: 32
     t.string   "Ant_Descripcion", limit: 256
-    t.datetime "creado_at"
-    t.datetime "actualizado_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "user_id"
     t.index ["paciente_id"], name: "FK_REFERENCE_18", using: :btree
   end
 
-  create_table "cantones", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.string   "nombre"
-    t.integer  "provincia_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+  create_table "cantones", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer "id"
+    t.text    "nombre",       limit: 65535
+    t.integer "provincia_id"
+    t.text    "created_at",   limit: 65535
+    t.text    "updated_at",   limit: 65535
   end
 
   create_table "citas", primary_key: "cita_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -38,9 +39,9 @@ ActiveRecord::Schema.define(version: 20170328204414) do
     t.string   "Cit_Motivo",      limit: 128
     t.string   "Cit_Estado",      limit: 3
     t.string   "Cit_Observacion", limit: 128
-    t.datetime "creado_at"
-    t.datetime "actualizado_at"
-    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "usuario_id"
     t.index ["empleado_id"], name: "FK_REFERENCE_14", using: :btree
     t.index ["medico_id"], name: "FK_REFERENCE_15", using: :btree
     t.index ["paciente_id"], name: "FK_REFERENCE_4", using: :btree
@@ -90,11 +91,19 @@ ActiveRecord::Schema.define(version: 20170328204414) do
 
   create_table "examen_fisicos", primary_key: "examen_fisico_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "consulta_id"
-    t.text    "Efb_Obnservacion",         limit: 4294967295
-    t.string  "Efb_Tipo",                 limit: 1
+    t.text    "Efb_Observacion",          limit: 4294967295
+    t.string  "Efb_Parte_CH",             limit: 32
     t.string  "Efb_Evidencia_Patologica", limit: 2
     t.string  "Efb_Categoria",            limit: 1
     t.index ["consulta_id"], name: "FK_REFERENCE_8", using: :btree
+  end
+
+  create_table "examenes", primary_key: "examen_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer "prescripcion_id"
+    t.text    "Exa_Descripcion", limit: 4294967295
+    t.string  "Exa_Tipo",        limit: 32
+    t.text    "Exa_Resultado",   limit: 4294967295
+    t.index ["prescripcion_id"], name: "FK_REFERENCE_25", using: :btree
   end
 
   create_table "horarios", primary_key: "horario_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -105,10 +114,23 @@ ActiveRecord::Schema.define(version: 20170328204414) do
     t.index ["medico_id"], name: "FK_REFERENCE_16", using: :btree
   end
 
+  create_table "medicinas", primary_key: "medicina_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer "prescripcion_id"
+    t.string  "Ins_Nombre",      limit: 256
+    t.string  "Ins_Indicacion",  limit: 512
+    t.index ["prescripcion_id"], name: "FK_REFERENCE_23", using: :btree
+  end
+
   create_table "medicos", primary_key: "medico_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "persona_id"
     t.string  "Med_Especialidad", limit: 64, null: false
     t.index ["persona_id"], name: "FK_REFERENCE_12", using: :btree
+  end
+
+  create_table "menus", primary_key: "menu_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string "Menu_Nombre", limit: 64
+    t.string "Menu_Icono"
+    t.string "Menu_Path"
   end
 
   create_table "pacientes", primary_key: "paciente_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -126,8 +148,8 @@ ActiveRecord::Schema.define(version: 20170328204414) do
     t.string   "Pac_Ocupacion",        limit: 128
     t.string   "Pac_Telefono",         limit: 10
     t.string   "Pac_Grupo_Sanguineo",  limit: 16
-    t.datetime "creado_at"
-    t.datetime "actualizado_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "user_id"
   end
 
@@ -156,19 +178,42 @@ ActiveRecord::Schema.define(version: 20170328204414) do
     t.index ["consulta_id"], name: "FK_REFERENCE_9", using: :btree
   end
 
-  create_table "personas", primary_key: "persona_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.string "Per_Cedula",           limit: 10
-    t.string "Per_Apellido_Paterno", limit: 32
-    t.string "Per_Apellido_Materno", limit: 32
-    t.string "Per_Nombres",          limit: 64
-    t.date   "Per_Fecha_Nacimiento"
-    t.string "Per_Telefono",         limit: 10
+  create_table "perfil_menus", primary_key: "perfil_Menu_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer "perfil_id"
+    t.integer "menu_id"
+    t.index ["menu_id"], name: "FK_REFERENCE_22", using: :btree
+    t.index ["perfil_id"], name: "FK_REFERENCE_21", using: :btree
   end
 
-  create_table "provincias", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.string   "nombre"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "perfiles", primary_key: "perfil_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "Nombre_perfil", limit: 32
+    t.string   "Estado",        limit: 8
+    t.datetime "created_at",               default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.datetime "updated_at",                                                    null: false
+  end
+
+  create_table "personas", primary_key: "persona_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer "usuario_id"
+    t.string  "Per_Cedula",           limit: 10
+    t.string  "Per_Apellido_Paterno", limit: 32
+    t.string  "Per_Apellido_Materno", limit: 32
+    t.string  "Per_Nombres",          limit: 64
+    t.date    "Per_Fecha_Nacimiento"
+    t.string  "Per_Telefono",         limit: 10
+    t.index ["usuario_id"], name: "FK_REFERENCE_19", using: :btree
+  end
+
+  create_table "prescripciones", primary_key: "prescripcion_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer "consulta_id"
+    t.text    "Per_Observacion", limit: 4294967295
+    t.index ["consulta_id"], name: "FK_REFERENCE_26", using: :btree
+  end
+
+  create_table "provincias", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer "id"
+    t.text    "nombre",     limit: 65535
+    t.text    "created_at", limit: 65535
+    t.text    "updated_at", limit: 65535
   end
 
   create_table "residencias", primary_key: "residencia_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -208,6 +253,23 @@ ActiveRecord::Schema.define(version: 20170328204414) do
     t.string "Sin_Intensidad",       limit: 4
   end
 
+  create_table "terapias", primary_key: "terapia_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer "prescripcion_id"
+    t.integer "Ter_Numero_Sesiones"
+    t.text    "Ter_indicacion",      limit: 4294967295
+    t.index ["prescripcion_id"], name: "FK_REFERENCE_24", using: :btree
+  end
+
+  create_table "usuarios", primary_key: "usuario_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer  "perfil_id"
+    t.string   "User_Name",  limit: 32
+    t.string   "Password"
+    t.string   "Estado",     limit: 8
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["perfil_id"], name: "FK_REFERENCE_20", using: :btree
+  end
+
   add_foreign_key "antecedentes", "pacientes", primary_key: "paciente_id", name: "FK_REFERENCE_18"
   add_foreign_key "citas", "empleados", primary_key: "empleado_id", name: "FK_REFERENCE_14"
   add_foreign_key "citas", "medicos", primary_key: "medico_id", name: "FK_REFERENCE_15"
@@ -218,9 +280,17 @@ ActiveRecord::Schema.define(version: 20170328204414) do
   add_foreign_key "empleados", "personas", primary_key: "persona_id", name: "FK_REFERENCE_13"
   add_foreign_key "estado_pacientes", "consultas", primary_key: "consulta_id", name: "FK_REFERENCE_11"
   add_foreign_key "examen_fisicos", "consultas", primary_key: "consulta_id", name: "FK_REFERENCE_8"
+  add_foreign_key "examenes", "prescripciones", column: "prescripcion_id", primary_key: "prescripcion_id", name: "FK_REFERENCE_25"
   add_foreign_key "horarios", "medicos", primary_key: "medico_id", name: "FK_REFERENCE_16"
+  add_foreign_key "medicinas", "prescripciones", column: "prescripcion_id", primary_key: "prescripcion_id", name: "FK_REFERENCE_23"
   add_foreign_key "medicos", "personas", primary_key: "persona_id", name: "FK_REFERENCE_12"
   add_foreign_key "percances", "consultas", primary_key: "consulta_id", name: "FK_REFERENCE_9"
+  add_foreign_key "perfil_menus", "menus", primary_key: "menu_id", name: "FK_REFERENCE_22"
+  add_foreign_key "perfil_menus", "perfiles", primary_key: "perfil_id", name: "FK_REFERENCE_21"
+  add_foreign_key "personas", "usuarios", primary_key: "usuario_id", name: "FK_REFERENCE_19"
+  add_foreign_key "prescripciones", "consultas", primary_key: "consulta_id", name: "FK_REFERENCE_26"
   add_foreign_key "residencias", "pacientes", primary_key: "paciente_id", name: "FK_REFERENCE_17"
   add_foreign_key "signos_vitales_basicos", "consultas", primary_key: "consulta_id", name: "FK_REFERENCE_10"
+  add_foreign_key "terapias", "prescripciones", column: "prescripcion_id", primary_key: "prescripcion_id", name: "FK_REFERENCE_24"
+  add_foreign_key "usuarios", "perfiles", primary_key: "perfil_id", name: "FK_REFERENCE_20"
 end

@@ -19,18 +19,18 @@
   <div class="row">
     <div class="col-lg-4">
       <label>Día</label>
-      <%= f.select(:Hor_Dia, options_for_select([['Lunes', "LUNES"], ['Martes', "MARTES"], ['Miercoles', "MIERCOLES"], ['Jueves', "JUEVES"], ['Viernes', "VIERNES"], ['Sábado', "SÁBADO"], ['Domingo', "DOMINGO"]]),{prompt: "Seleccione"},{ :class => 'form-control'}) %>
+      <%= f.select(:Hor_Dia, options_for_select([['LUNES', "LUNES"], ['MARTES', "MARTES"], ['MIERCOLES', "MIERCOLES"], ['JUEVES', "JUEVES"], ['VIERNES', "VIERNES"], ['SÁBADO', "SÁBADO"], ['DOMINGO', "DOMINGO"]]),{prompt: "SELECCIONE"},{ :class => 'form-control'}) %>
     </div>
     <div class="col-lg-2">
       <div class="form-group">
         <label>Hora de Inicio</label>
-          <%= f.time_select :Hor_Hora_Inicio, { prompt: {hour: 'Seleccione Hora', minute: 'Seleccione Minuto'}, minute_step: 15 },{ class: 'form-control' } %>
+          <%= f.time_field :Hor_Hora_Inicio, {class: 'form-control'} %>
       </div>
     </div>
     <div class="col-lg-2">
       <div class="form-group">
         <label>Hora de Fin</label>
-          <%= f.time_select :Hor_Hora_Fin, { prompt: {hour: 'Seleccione Hora', minute: 'Seleccione Minuto'}, minute_step: 15 },{ class: 'form-control' } %>
+          <%= f.time_field :Hor_Hora_Fin, { class: 'form-control' } %>
       </div>
     </div>
   </div>

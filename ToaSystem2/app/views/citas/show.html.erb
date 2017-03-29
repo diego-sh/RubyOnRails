@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Paciente:</strong>
+  <%= @cita.paciente %>
+</p>
+
+<p>
+  <strong>Empleado:</strong>
+  <%= @cita.empleado %>
+</p>
+
+<p>
+  <strong>Medico:</strong>
+  <%= @cita.medico %>
+</p>
+
+<p>
+  <strong>Cit fecha:</strong>
+  <%= @cita.Cit_Fecha %>
+</p>
+
+<p>
+  <strong>Cit hora:</strong>
+  <%= @cita.Cit_Hora %>
+</p>
+
+<p>
+  <strong>Cit motivo:</strong>
+  <%= @cita.Cit_Motivo %>
+</p>
+
+<p>
+  <strong>Cit estado:</strong>
+  <%= @cita.Cit_Estado %>
+</p>
+
+<p>
+  <strong>Cit observacion:</strong>
+  <%= @cita.Cit_Observacion %>
+</p>
+
+<%= link_to 'Edit', edit_cita_path(@cita) %> |
+<%= link_to 'Back', citas_path %>

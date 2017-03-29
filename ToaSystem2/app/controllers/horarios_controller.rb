@@ -5,7 +5,7 @@ class HorariosController < ApplicationController
   # GET /horarios.json
   def index
     #@horarios = Horario.all
-    @horarios = Horario.find_by_sql("SELECT * ,p.per_apellido_paterno AS apellidop ,p.per_apellido_materno AS apellidom,p.per_nombres AS nombres FROM horarios h JOIN medicos m ON h.medico_id=m.medico_id JOIN personas p ON p.persona_id=m.persona_id")
+    @horarios = Horario.find_by_sql("SELECT * , p.per_apellido_paterno AS apellidop ,p.per_apellido_materno AS apellidom,p.per_nombres AS nombres FROM horarios h JOIN medicos m ON h.medico_id=m.medico_id JOIN personas p ON p.persona_id=m.persona_id")
   end
 
   # GET /horarios/1
@@ -16,7 +16,7 @@ class HorariosController < ApplicationController
   # GET /horarios/new
   def new
     #@horario = Horario.new
-    @horario = Horario.new(:medico_id => params[:param])
+    @horario = Horario.new(:medico_id => params[:med])
   end
 
   # GET /horarios/1/edit
