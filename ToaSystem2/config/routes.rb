@@ -2,6 +2,13 @@
 Rails.application.routes.draw do
 
   
+=begin  get 'consultas', to: 'consultas#index', as: 'consultas'
+  get 'consultas/:id/edit', to: 'consultas#edit', as: 'edit_consulta'
+  get 'consultas/new'
+  get 'consultas/create'
+  get 'consultas/update'
+=end
+  resources :consultas
   resources :usuarios , path_names: {new: 'new/:id' }
   resources :residencias
   resources :pacientes

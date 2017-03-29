@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  paciente: one
+  empleado: one
+  medico: one
+
+two:
+  paciente: two
+  empleado: two
+  medico: two
