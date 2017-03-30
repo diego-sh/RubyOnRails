@@ -1,3 +1,34 @@
 // Place all the styles related to the citas controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.etiqueta{
+    color: #1976d2;
+    font-weight: bold;
+    font-size: small;
+}
+
+.etiquetaValor{
+    color: #78909c;
+    font-weight: bold;
+    font-size: small;
+}
+
+.header-pnl{
+    height: 35px;
+    border-bottom-color: #90caf9;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-top-color:  #90caf9;
+    border-top-width: 2px;
+    border-top-style: solid;
+    text-align: center;
+    color: #1976d2;
+    font-weight: bold;
+}
+
+.body-pnl{
+    border-bottom-color: #90caf9;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+}

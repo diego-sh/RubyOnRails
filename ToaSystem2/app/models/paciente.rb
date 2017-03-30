@@ -26,4 +26,12 @@ class Paciente < ApplicationRecord
     self.Pac_Nacionalidad= self.Pac_Nacionalidad.upcase
     self.Pac_Ocupacion= self.Pac_Ocupacion.upcase
   end
+
+  def self.search(term)
+    if term
+        where('Pac_Cedula=?', "#{term}")
+    else
+        nil
+    end
+  end
 end 

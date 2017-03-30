@@ -1,57 +1,148 @@
-<%= form_for(cita) do |f| %>
-  <% if cita.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(cita.errors.count, "error") %> prohibited this cita from being saved:</h2>
-
-      <ul>
-      <% cita.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+<div class="alert alert-warning" role="alert">
+  <div class="row" style="padding-left: 20px">
+    Ingrese el número de cedula del paciente a consultar
+  </div>
+  <div class="row">
+    <%= form_tag(new_cita_path, method: :get, class:'form-inline') do %>
+      <div class="row" style="margin-top: 20px">
+        <div class="center-block" style="width:500px;max-width:100%;">
+          <div class="form-group">
+            <label for="cedula">CÉDULA</label>
+            <%= text_field_tag :term, params[:term], class:'form-control', id:'cedula', placeholder:'Ingrese valor' %>
+          </div>
+          <%= button_tag type: 'submit', class: "btn btn-primary", id: "register-button" do %>
+            <i class="glyphicon glyphicon-search" aria-hidden="true"></i> Buscar
+            <% end %>
+        </div>
+      </div>
       <% end %>
-      </ul>
+  </div>
+</div>
+
+<% if @paciente!=nil %>
+  <div class="center-block" style="width: 80%">
+    <div class="header-pnl">
+      <p style="padding-top: 6px; padding-bottom: 5px;">INFORMACIÓN GENERAL PACIENTE</p>
     </div>
-  <% end %>
+    <div class="body-pnl">
+      <div class="col" style="margin-top: 20px;">
+        <div class="row">
+          <div class="col-md-2" style="margin-left:20px">
+            <div class="etiqueta">HISTORIA CLÍNICA</div>
+          </div>
+          <div class="col-md-2">
+            <div class="etiquetaValor"><%=@paciente[0].Pac_HC%></div>
+          </div>
+          <div class="col-md-3" style="margin-left:20px">
+            <div class="etiqueta">NOMBRES Y APELLIDOS</div>
+          </div>
+          <div class="col-md-4">
+            <div class="etiquetaValor"><%=@paciente[0].Pac_Apellido_Paterno+' '+@paciente[0].Pac_Apellido_Materno+' '+@paciente[0].Pac_Nombres%></div>
+          </div>
+        </div>
 
-  <div class="field">
-    <%= f.label :paciente_id %>
-    <%= f.text_field :paciente_id %>
-  </div>
+        <div class="row" style="margin-top: 5px">
+          <div class="col-md-2" style="margin-left:20px">
+            <div class="etiqueta">IDENTIFICACIÓN</div>
+          </div>
+          <div class="col-md-2">
+            <div class="etiquetaValor"><%=@paciente[0].Pac_Cedula%></div>
+          </div>
+          <div class="col-md-3" style="margin-left:20px">
+            <div class="etiqueta">CONTACTO</div>
+          </div>
+          <div class="col-md-4">
+            <div class="etiquetaValor"><%=@paciente[0].Pac_Telefono%></div>
+          </div>
+        </div>
+        <div class="row" style="margin-bottom: 30px"></div>
+      </div>
 
-  <div class="field">
-    <%= f.label :empleado_id %>
-    <%= f.text_field :empleado_id %>
-  </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :medico_id %>
-    <%= f.text_field :medico_id %>
-  </div>
+    <div>
+      <%= form_for(cita) do |f| %>
+        <div class="row" style="margin-top: 20px">
+          <div class="center-block" style="width:500px;max-width:100%;">
+            <div class="form-group">
+              <label for="perfil">ESPECIALISTA</label>
+              <%= f.collection_select :medico_id, @especialistas, :medico_id, :Nombre,{prompt: "SELECCIONE"},{ :class => 'form-control'} %>
+            </div>
+          </div>
+        </div>
 
-  <div class="field">
-    <%= f.label :Cit_Fecha %>
-    <%= f.date_select :Cit_Fecha %>
-  </div>
+        <div class="row">
+          <div class="center-block" style="width:54%;">
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label for="fechacita">FECHA</label>
+                <%= f.date_field :Cit_Fecha, class:'form-control',id:'fechacita'%>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label for="fechacita">HORA</label>
+                <%= f.time_field :Cit_Hora, class:'form-control',id:'fechacita'%>
+              </div>
+            </div>
+          </div>
+        </div>
 
-  <div class="field">
-    <%= f.label :Cit_Hora %>
-    <%= f.time_select :Cit_Hora %>
-  </div>
+        <div class="row">
+          <div class="center-block" style="width:500px;max-width:100%;">
+            <div class="form-group">
+              <label for="motivo">MOTIVO</label>
+              <%= f.text_area :Cit_Motivo, class:'form-control', id:'motivo', placeholder:'Describa el motivo de la consulta' %>
+            </div>
+          </div>
+        </div>
 
-  <div class="field">
-    <%= f.label :Cit_Motivo %>
-    <%= f.text_field :Cit_Motivo %>
-  </div>
+        <div class="row">
+          <div class="center-block" style="width:500px;max-width:100%;">
+            <div class="form-group">
+              <label for="motivo">OBSERVACIÓN</label>
+              <%= f.text_area :Cit_Observacion, class:'form-control', id:'motivo', placeholder:'' %>
+            </div>
+          </div>
+        </div>
 
-  <div class="field">
-    <%= f.label :Cit_Estado %>
-    <%= f.text_field :Cit_Estado %>
-  </div>
+        <div class="row">
+          <div class="center-block" style="width:50%">
+            <div class="col-md-3"></div>
+            <div class="col-md-3">
+              <div class="actions">
+                <%= f.submit "Guardar", class:"btn btn-primary  btn-block" %>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <%= link_to 'Cancelar', citas_path, class:"btn btn-primary center-block" %>
+            </div>
+            <div class="col-md-3"></div>
+          </div>
+        </div>
 
-  <div class="field">
-    <%= f.label :Cit_Observacion %>
-    <%= f.text_field :Cit_Observacion %>
-  </div>
 
-  <div class="actions">
-    <%= f.submit %>
+        <%end%>
+    </div>
+
   </div>
-<% end %>
+  <%end%>
+
+    <!--<div class="panel panel-info">
+  <div class="panel-heading">PACIENTE INFORMACIÓN GENERAL</div>
+  <div class="panel-body">
+    <p id="notice">
+      <%= notice %>
+    </p>
+    <% if @paciente!=nil %>
+
+      <% @paciente.each do |pcte|%>
+        <p>
+          <%= pcte.Pac_HC%>
+        </p>
+        <% end %>
+          <%else%>
+            <%end%>
+  </div>
+</div>
+-->

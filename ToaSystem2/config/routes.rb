@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get 'consultas/update'
 =end
   resources :consultas
-  resources :citas
+  resources :citas  
   resources :horarios
   resources :usuarios , path_names: {new: 'new/:id' }
   resources :residencias

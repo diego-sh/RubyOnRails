@@ -1,5 +1,6 @@
 class CitasController < ApplicationController
   before_action :set_cita, only: [:show, :edit, :update, :destroy]
+  before_action :set_paciente, only: [:new]
 
   # GET /citas
   # GET /citas.json
@@ -15,6 +16,14 @@ class CitasController < ApplicationController
   # GET /citas/new
   def new
     @cita = Cita.new
+    @especialistas=Persona.find_by_sql("SELECT CONCAT(CONCAT(p.Per_Apellido_Paterno,' '), p.Per_Nombres) AS Nombre, m.medico_id, p.persona_id FROM personas p INNER JOIN medicos m on p.persona_id = m.persona_id")
+    @paciente=Paciente.search(params[:term])
+    if !@paciente
+      flash[:notice]='Paciente no existe!!'
+    else
+      @@pacienteActual=@paciente[0]     
+    end
+    
   end
 
   # GET /citas/1/edit
@@ -25,7 +34,7 @@ class CitasController < ApplicationController
   # POST /citas.json
   def create
     @cita = Cita.new(cita_params)
-
+    @cita.paciente_id=@@pacienteActual.paciente_id
     respond_to do |format|
       if @cita.save
         format.html { redirect_to @cita, notice: 'Cita was successfully created.' }
@@ -67,8 +76,13 @@ class CitasController < ApplicationController
       @cita = Cita.find(params[:id])
     end
 
+    def set_paciente
+      @@pacienteActual=nil
+    end
+    
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def cita_params
-      params.require(:cita).permit(:paciente_id, :empleado_id, :medico_id, :Cit_Fecha, :Cit_Hora, :Cit_Motivo, :Cit_Estado, :Cit_Observacion)
+      params.require(:cita).permit(:empleado_id, :medico_id, :Cit_Fecha, :Cit_Hora, :Cit_Motivo, :Cit_Estado, :Cit_Observacion)
     end
 end
