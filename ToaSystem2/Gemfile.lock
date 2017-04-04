@@ -60,6 +60,10 @@ GEM
     debug_inspector (0.0.2)
     erubis (2.7.0)
     execjs (2.7.0)
+    fullcalendar-rails (3.1.0.0)
+      jquery-rails (>= 4.0.5, < 5.0.0)
+      jquery-ui-rails (>= 5.0.2)
+      momentjs-rails (>= 2.9.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
     i18n (0.8.1)
@@ -84,6 +88,8 @@ GEM
     mime-types-data (3.2016.0521)
     mini_portile2 (2.1.0)
     minitest (5.10.1)
+    momentjs-rails (2.17.1)
+      railties (>= 3.1)
     multi_json (1.12.1)
     mysql2 (0.4.5-x86-mingw32)
     nio4r (1.2.1)
@@ -163,9 +169,11 @@ DEPENDENCIES
   byebug
   client_side_validations
   coffee-rails (~> 4.2)
+  fullcalendar-rails
   jbuilder (~> 2.5)
   jquery-rails
   jquery-ui-rails (~> 5.0, >= 5.0.5)
+  momentjs-rails
   mysql2
   puma (~> 3.0)
   rails (~> 5.0.1)

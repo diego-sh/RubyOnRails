@@ -1,0 +1,8 @@
+.fc-content-skeleton {
+  z-index: auto !important;
+}
+
+.fc-bgevent {
+  background-color: transparent !important;
+  opacity: 1 !important;
+}

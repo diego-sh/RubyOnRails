@@ -1,41 +1,33 @@
-<p id="notice"><%= notice %></p>
+<p id="notice">
+  <%= notice %>
+</p>
 
 <h1>Citas</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Paciente</th>
-      <th>Empleado</th>
-      <th>Medico</th>
-      <th>Cit fecha</th>
-      <th>Cit hora</th>
-      <th>Cit motivo</th>
-      <th>Cit estado</th>
-      <th>Cit observacion</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @citas.each do |cita| %>
-      <tr>
-        <td><%= cita.paciente_id %></td>
-        <td><%= cita.empleado_id %></td>
-        <td><%= cita.medico_id %></td>
-        <td><%= cita.Cit_Fecha %></td>
-        <td><%= cita.Cit_Hora %></td>
-        <td><%= cita.Cit_Motivo %></td>
-        <td><%= cita.Cit_Estado %></td>
-        <td><%= cita.Cit_Observacion %></td>
-        <td><%= link_to 'Show', cita %></td>
-        <td><%= link_to 'Edit', edit_cita_path(cita) %></td>
-        <td><%= link_to 'Destroy', cita, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<label for="perfil">ESPECIALISTA</label>
+<div class="row">
+  <%= form_for :cita, url:citas_path(format: 'json'), method: :get do |f| %>
+      <div class="col-md-3">
+        <div class="form-group">
+          <%= f.collection_select :medico_id, @especialistas, :medico_id, :Nombre,{prompt: "Seleccione"},{ :class => 'form-control'} %>
+        </div>
+      </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <%= button_tag type: 'submit', class: "btn btn-primary", id: "register-button" do %>
+              <i class="glyphicon glyphicon-search" aria-hidden="true"></i> Buscar
+              <% end %>
+          </div>
+        </div>
     <% end %>
-  </tbody>
-</table>
+</div>
 
-<br>
+<div class="row" style="margin-left:20px; margin-top:10px">
+  <div class=".col-xs-6">
+    <%= link_to new_cita_path, class:"btn btn-primary pull-right" do %>
+      <i class="glyphicon glyphicon-plus"></i> AGENDAR CITA
+      <% end %>
+  </div>
+</div>
+</br>
 
-<%= link_to 'New Cita', new_cita_path %>
+<div class="calendar"></div>

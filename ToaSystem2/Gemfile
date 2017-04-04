@@ -59,3 +59,7 @@ gem 'client_side_validations'
 gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'
 
 gem 'bootstrap_form'
+
+#Calendario
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
