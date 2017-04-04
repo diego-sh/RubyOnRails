@@ -1,4 +1,5 @@
 var initialize_calendar;
+var initialLangCode = 'es';
 initialize_calendar = function(){
     $('.calendar').each(function(){
         var calendar = $(this);
