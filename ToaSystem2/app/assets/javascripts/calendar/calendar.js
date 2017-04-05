@@ -1,6 +1,9 @@
 var initialize_calendar;
 var initialLangCode = 'es';
 initialize_calendar = function(){
+    $('#citas_selector').change(function(){
+        $('.calendar').fullCalendar('rerenderEvents');
+    });
     $('.calendar').each(function(){
         var calendar = $(this);
         calendar.fullCalendar({
@@ -28,7 +31,10 @@ initialize_calendar = function(){
             selectable: true,
             selectHelper: true,
             editable: true,
-            eventLimit: true
+            eventLimit: true,
+            eventRender: function eventRender( event, element, view ) {
+                return ['', event.url].indexOf($('#citas_selector').val()) >= 0
+            }
         });
     })
 };

@@ -1,23 +1,19 @@
 <p id="notice">
   <%= notice %>
 </p>
-
-<h1>Citas</h1>
+<div class='row' id="titulo" style="margin-left:20px; margin-top:20px;">
+  <img src="/img/icon/calendar.png" alt="rss feed" />
+  <h3><strong>CITAS</strong></h3>
+</div>
+</br>
 <label for="perfil">ESPECIALISTA</label>
 <div class="row">
-  <%= form_for :cita, url:citas_path(format: 'json'), method: :get do |f| %>
-      <div class="col-md-3">
-        <div class="form-group">
-          <%= f.collection_select :medico_id, @especialistas, :medico_id, :Nombre,{prompt: "Seleccione"},{ :class => 'form-control'} %>
-        </div>
+  <%= form_for :cita do |f| %>
+    <div class="col-md-3">
+      <div class="form-group">
+        <%= f.collection_select :medico_id, @especialistas, :medico_id, :Nombre,{prompt: 'TODOS'},{ :class => 'form-control', :id => 'citas_selector'} %>
       </div>
-        <div class="col-md-2">
-          <div class="form-group">
-            <%= button_tag type: 'submit', class: "btn btn-primary", id: "register-button" do %>
-              <i class="glyphicon glyphicon-search" aria-hidden="true"></i> Buscar
-              <% end %>
-          </div>
-        </div>
+    </div>
     <% end %>
 </div>
 

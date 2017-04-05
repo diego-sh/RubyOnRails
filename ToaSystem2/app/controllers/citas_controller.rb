@@ -6,20 +6,9 @@ class CitasController < ApplicationController
   # GET /citas.json
 
   def index
-    @citas = Cita.all
+    #@citas = Cita.all
     @especialistas=Persona.find_by_sql("SELECT CONCAT(CONCAT(p.Per_Apellido_Paterno,' '), p.Per_Nombres) AS Nombre, m.medico_id, p.persona_id FROM personas p INNER JOIN medicos m on p.persona_id = m.persona_id")
-    #@citas = Cita.find_by_sql("SELECT *, p.pac_apellido_paterno AS apellidop, p.pac_nombres AS nombrep , pe.per_apellido_paterno AS apellidod, pe.per_nombres AS nombred, c.cit_fecha AS fecha, c.cit_hora AS hora, CONCAT(c.cit_fecha,c.cit_hora) AS fechahora from citas c join pacientes p on p.paciente_id=c.paciente_id join medicos m on m.medico_id=c.medico_id join personas pe on pe.persona_id=m.persona_id")
-    begin
-      @medico_filter = params[:cita][:medico_id]
-    rescue
-      @medico_filter = [1]
-    end
-    @citasAPI = @citas.where(medico_id: @medico_filter)
-
-    respond_to do |format|
-      format.html {render 'index'}
-      format.json {}
-    end
+    @citas = Cita.find_by_sql("SELECT *, p.pac_apellido_paterno AS apellidop, p.pac_nombres AS nombrep , pe.per_apellido_paterno AS apellidod, pe.per_nombres AS nombred, c.cit_fecha AS fecha, c.cit_hora AS hora, CONCAT(c.cit_fecha,c.cit_hora) AS fechahora from citas c join pacientes p on p.paciente_id=c.paciente_id join medicos m on m.medico_id=c.medico_id join personas pe on pe.persona_id=m.persona_id")
   end
 
   # GET /citas/1
