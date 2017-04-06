@@ -33,7 +33,7 @@ initialize_calendar = function(){
             editable: true,
             eventLimit: true,
             eventRender: function eventRender( event, element, view ) {
-                return ['', event.url].indexOf($('#citas_selector').val()) >= 0
+                return ['', event.medico].indexOf($('#citas_selector').val()) >= 0
             }
         });
     })
