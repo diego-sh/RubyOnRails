@@ -1,3 +1,21 @@
 // Place all the styles related to the consultas controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.header-pnl-consultas{
+    height: 35px;
+    border-bottom-color: #a1887f;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-top-color:  #a1887f;
+    border-top-width: 2px;
+    border-top-style: solid;
+    text-align: center;
+    color: #1976d2;
+    font-weight: bold;
+}
+
+.body-pnl-consultas{
+    border-bottom-color: #a1887f;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+}

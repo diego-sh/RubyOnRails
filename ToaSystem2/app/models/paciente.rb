@@ -1,6 +1,8 @@
 class Paciente < ApplicationRecord
     before_save :upperCase
-
+    
+    has_many :antecedentes, inverse_of: :paciente
+    has_many :citas, inverse_of: :paciente
 
     has_one :residencia, inverse_of: :paciente
     accepts_nested_attributes_for :residencia, reject_if: proc { |attributes| attributes[:Res_Sector].blank? }

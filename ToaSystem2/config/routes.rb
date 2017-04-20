@@ -7,12 +7,20 @@ Rails.application.routes.draw do
   get 'consultas/create'
   get 'consultas/update'
 =end
-  resources :consultas
+  resources :consultas do
+    collection do
+      post "createAntecedente"
+    end
+  end
+  
   resources :citas  
   resources :horarios
   resources :usuarios , path_names: {new: 'new/:id' }
   resources :residencias
-  resources :pacientes
+  resources :pacientes do
+    resources :antecedentes
+  end
+  
   resources :personas do
     collection do
     get "newEmpleado"

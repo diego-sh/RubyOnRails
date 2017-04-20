@@ -1,2 +1,120 @@
-<h1>Consultas#new</h1>
-<p>Find me in app/views/consultas/new.html.erb</p>
+
+<div class="alert alert-warning" role="alert" style="margin-top:20px">
+  <div class="center-block" style="width: 80%">
+    <div class="header-pnl-consultas">
+      <p style="padding-top: 6px; padding-bottom: 5px;">INFORMACIÓN GENERAL DEL PACIENTE</p>
+    </div>
+    <div class="body-pnl-consultas">
+      <div class="col" style="margin-top: 20px;">
+        <div class="row">
+          <div class="col-md-2" style="margin-left:20px">
+            <div class="etiqueta">HISTORIA CLÍNICA</div>
+          </div>
+          <div class="col-md-2">
+            <div class="etiquetaValor">
+              <%=@paciente.Pac_HC%>
+            </div>
+          </div>
+          <div class="col-md-3" style="margin-left:20px">
+            <div class="etiqueta">NOMBRES Y APELLIDOS</div>
+          </div>
+          <div class="col-md-4">
+            <div class="etiquetaValor">
+              <%=@paciente.Pac_Apellido_Paterno+' '+@paciente.Pac_Apellido_Materno+' '+@paciente.Pac_Nombres%>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 5px">
+          <div class="col-md-2" style="margin-left:20px">
+            <div class="etiqueta">IDENTIFICACIÓN</div>
+          </div>
+          <div class="col-md-2">
+            <div class="etiquetaValor">
+              <%=@paciente.Pac_Cedula%>
+            </div>
+          </div>
+          <div class="col-md-3" style="margin-left:20px">
+            <div class="etiqueta">CONTACTO</div>
+          </div>
+          <div class="col-md-4">
+            <div class="etiquetaValor">
+              <%=@paciente.Pac_Telefono%>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 5px">
+          <div class="col-md-2" style="margin-left:20px">
+            <div class="etiqueta">GÉNERO</div>
+          </div>
+          <div class="col-md-2">
+            <% if @paciente.Pac_Genero.eql? 'M' %>
+              <div class="etiquetaValor">MASCULINO</div>
+              <% else %>
+                <div class="etiquetaValor">FEMENINO</div>
+                <% end %>
+          </div>
+          <div class="col-md-3" style="margin-left:20px">
+            <div class="etiqueta">EDAD</div>
+          </div>
+          <div class="col-md-4">
+            <div class="etiquetaValor">
+              <%=@paciente.Edad.to_s+'  AÑOS' %>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 5px">
+          <div class="col-md-2" style="margin-left:20px">
+            <div class="etiqueta">GRUPO SANGUINEO</div>
+          </div>
+          <div class="col-md-2">
+            <div class="etiquetaValor">
+              <%=@paciente.Pac_Grupo_Sanguineo%>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin-bottom: 20px"></div>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top:20px">
+      <div class="col-xs-12 col-sm-6 col-md-8"></div>
+      <div class="col-xs-6 col-sm-6 col-md-4">
+        <%= link_to new_cita_path, class:"btn btn-warning pull-right" do %>
+          <i class="glyphicon glyphicon-search"></i> Ver Historial
+          <% end %>
+          <%= link_to '#', class:"btn btn-warning pull-right", style:"margin-right:10px" do %>
+          <i class="glyphicon glyphicon-pencil"></i> Editar
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#antecedentes">Antecedentes</a></li>
+  <li><a data-toggle="tab" href="#menu1">Información General</a></li>
+  <li><a data-toggle="tab" href="#menu2">Antescedentes</a></li>
+  <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+</ul>
+
+<div class="tab-content">
+  <div id="antecedentes" class="tab-pane fade in active">
+    <h3>Antecedentes</h3>
+    <%= render 'frmAntecedentes' %>
+  </div>
+  <div id="menu1" class="tab-pane fade">
+    <h3>Menu 1</h3>
+    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+  </div>
+  <div id="menu2" class="tab-pane fade">
+    <h3>Menu 2</h3>
+    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+  </div>
+  <div id="menu3" class="tab-pane fade">
+    <h3>Menu 3</h3>
+    <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+  </div>
+</div>
