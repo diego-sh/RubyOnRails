@@ -22,9 +22,10 @@ class CitasController < ApplicationController
     @especialistas=Persona.find_by_sql("SELECT CONCAT(CONCAT(p.Per_Apellido_Paterno,' '), p.Per_Nombres) AS Nombre, m.medico_id, p.persona_id FROM personas p INNER JOIN medicos m on p.persona_id = m.persona_id")
     @paciente=Paciente.search(params[:term])
     if !@paciente
-      flash[:notice]='Paciente no existe!!'
+      #flash[:notice]='Paciente no existe!!'
     else
-      @@pacienteActual=@paciente[0]     
+      @pacienteActual=@paciente[0]
+      @@pacienteTMP=@paciente[0]  
     end
     
   end
@@ -37,7 +38,7 @@ class CitasController < ApplicationController
   # POST /citas.json
   def create
     @cita = Cita.new(cita_params)
-    @cita.paciente_id=@@pacienteActual.paciente_id
+    @cita.paciente_id=@@pacienteTMP.paciente_id
     respond_to do |format|
       if @cita.save
         format.html { redirect_to @cita, notice: 'Cita was successfully created.' }
@@ -76,11 +77,19 @@ class CitasController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cita
-      @cita = Cita.find(params[:id])
+      #@cita = Cita.find(params[:id])
+      @citas= Cita.find_by_sql("SELECT c.cita_id, c.cit_fecha, c.cit_hora, c.cit_motivo, c.cit_observacion,p.paciente_id, p.pac_apellido_paterno AS paciente_apellido, 
+                              p.pac_nombres AS paciente_nombres, pr.per_apellido_paterno AS medico_apellido, pr.per_nombres AS medico_nombres 
+                              FROM citas c INNER JOIN pacientes p ON c.paciente_id=p.paciente_id 
+                              INNER JOIN medicos m ON m.medico_id=c.medico_id 
+                              INNER JOIN personas pr ON pr.persona_id=m.persona_id WHERE cita_id="+params[:id])
+                      
+      @cita=@citas[0]
     end
 
     def set_paciente
-      @@pacienteActual=nil
+      @pacienteActual=nil
+      @@pacienteTMP=nil
     end
     
 

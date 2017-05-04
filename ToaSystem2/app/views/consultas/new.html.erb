@@ -1,4 +1,3 @@
-
 <div class="alert alert-warning" role="alert" style="margin-top:20px">
   <div class="center-block" style="width: 80%">
     <div class="header-pnl-consultas">
@@ -85,26 +84,48 @@
         <%= link_to new_cita_path, class:"btn btn-warning pull-right" do %>
           <i class="glyphicon glyphicon-search"></i> Ver Historial
           <% end %>
-          <%= link_to '#', class:"btn btn-warning pull-right", style:"margin-right:10px" do %>
-          <i class="glyphicon glyphicon-pencil"></i> Editar
-          <% end %>
+            <%= link_to '#', class:"btn btn-warning pull-right", style:"margin-right:10px" do %>
+              <i class="glyphicon glyphicon-pencil"></i> Editar
+              <% end %>
       </div>
     </div>
   </div>
 </div>
 
 <ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#antecedentes">Antecedentes</a></li>
+  <li class="active"><a data-toggle="tab" href="#antecedentes">ANTECEDENTES</a></li>
   <li><a data-toggle="tab" href="#menu1">Información General</a></li>
   <li><a data-toggle="tab" href="#menu2">Antescedentes</a></li>
   <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
 </ul>
 
 <div class="tab-content">
+  <!-- BEGIN ANTECEDENTE-->
+
   <div id="antecedentes" class="tab-pane fade in active">
-    <h3>Antecedentes</h3>
-    <%= render 'frmAntecedentes' %>
+    <div class="row" style="margin-top:10px;">
+      <div class="col-md-6">
+        <h5>LISTADO DE ANTECEDENTES RELEVANTES</h5>
+        <% @antecedentes.each do |antecedente| %>
+          <!--<div>
+            <p>
+              <%= antecedente.Ant_tipo%>-
+                <%= antecedente.Ant_Descripcion%>
+            </p>
+          </div>-->
+          <dl class="dl-horizontal">
+            <dt> <%= antecedente.Ant_tipo%></dt>
+            <dd><%= antecedente.Ant_Descripcion%>- <%= link_to "Eliminar", class:"red", method: :delete  %></dd>
+          </dl>
+          <% end %>
+      </div>
+      <div class="col-md-6">
+        <%= render 'frmAntecedentes' %>
+      </div>
+    </div>
   </div>
+  <!--END ANTECEDENTE-->
+
   <div id="menu1" class="tab-pane fade">
     <h3>Menu 1</h3>
     <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>

@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.datetime "updated_at"
     t.integer  "usuario_id"
     t.time     "Cit_Hora_Fin"
+    t.integer  "Cit_Entre_Cita",  limit: 1
     t.index ["empleado_id"], name: "FK_REFERENCE_14", using: :btree
     t.index ["medico_id"], name: "FK_REFERENCE_15", using: :btree
     t.index ["paciente_id"], name: "FK_REFERENCE_4", using: :btree

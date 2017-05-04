@@ -1,44 +1,74 @@
-<p id="notice"><%= notice %></p>
+<div class="panel panel-info" style="margin-top:20px">
+  <div class="panel-heading">INFORMACIÓN CITA MÉDICA GENERADA</div>
+  <div class="panel-body">
 
-<p>
-  <strong>Paciente:</strong>
-  <%= @cita.paciente_id %>
+    <div class="row">
+      <div class="col-md-2" style="margin-left:20px">
+        <h4><strong> Paciente </strong></h4>
+      </div>
+      <div class="col-md-3">
+        <h4><small><strong><%= @cita.paciente_apellido%> <%= @cita.paciente_nombres%></strong></small></h4>
+      </div>
+      <!--SEGUNDA COLUMNA-->
+      
+      <div class="col-md-2" style="margin-left:20px">
+        <h4><strong>Especialista</strong></h4>
+      </div>
+      <div class="col-md-3">
+        <h4><small><strong><%= @cita.medico_apellido %> <%= @cita.medico_nombres %></strong></small></h4>
+      </div>
+      <!--FIN SEGUNDA COLUMNA-->
+    </div>
+
+    <div class="row">
+      <div class="col-md-2" style="margin-left:20px">
+        <h4><strong> Fecha </strong></h4>
+      </div>
+      <div class="col-md-2">
+        <h4><small><strong><%= @cita.cit_fecha %></strong></small></h4>
+      </div>
+      <!--SEGUNDA COLUMNA-->
+      <div class="col-md-1"></div>
+      <div class="col-md-2" style="margin-left:20px">
+        <h4><strong>Hora</strong></h4>
+      </div>
+      <div class="col-md-2">
+        <h4><small><strong><%= @cita.cit_hora.strftime('%r') %></strong></small></h4>
+      </div>
+      <!--FIN SEGUNDA COLUMNA-->
+    </div>
+
+    <div class="row">
+      <div class="col-md-2" style="margin-left:20px">
+        <h4><strong> Motivo </strong></h4>
+      </div>
+      <div class="col-md-6">
+        <h4><small><strong><%= @cita.cit_motivo %></strong></small></h4>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-2" style="margin-left:20px">
+        <h4><strong> Observación </strong></h4>
+      </div>
+      <div class="col-md-2">
+        <h4><small><strong><%= @cita.cit_observacion %></strong></small></h4>
+      </div>
+    </div>
+    <div class="row" style="margin-top: 10px">
+      <div class="col-md-2" style="margin-left:20px">
+        <%= link_to citas_path ,class:"btn btn-primary  btn-block btn-success" do%>
+          <i class="glyphicon glyphicon-ok"></i> Aceptar
+          <%end%>
+      </div>
+    </div>
+
+
+
+  </div>
+</div>
+
+
+<p id="notice">
+  <%= notice %>
 </p>
-
-<p>
-  <strong>Empleado:</strong>
-  <%= @cita.empleado_id %>
-</p>
-
-<p>
-  <strong>Medico:</strong>
-  <%= @cita.medico_id %>
-</p>
-
-<p>
-  <strong>Cit fecha:</strong>
-  <%= @cita.Cit_Fecha %>
-</p>
-
-<p>
-  <strong>Cit hora:</strong>
-  <%= @cita.Cit_Hora %>
-</p>
-
-<p>
-  <strong>Cit motivo:</strong>
-  <%= @cita.Cit_Motivo %>
-</p>
-
-<p>
-  <strong>Cit estado:</strong>
-  <%= @cita.Cit_Estado %>
-</p>
-
-<p>
-  <strong>Cit observacion:</strong>
-  <%= @cita.Cit_Observacion %>
-</p>
-
-<%= link_to 'Edit', edit_cita_path(@cita) %> |
-<%= link_to 'Back', citas_path %>

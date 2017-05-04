@@ -8,7 +8,7 @@
         <div class="center-block" style="width:500px;max-width:100%;">
           <div class="form-group">
             <label for="cedula">CÉDULA</label>
-            <%= text_field_tag :term, params[:term], class:'form-control', id:'cedula', placeholder:'Ingrese valor' %>
+            <%= text_field_tag :term, params[:term], class:'form-control', id:'cedula', placeholder:'Ingrese valor', maxlength:'10' %>
           </div>
           <%= button_tag type: 'submit', class: "btn btn-primary", id: "register-button" do %>
             <i class="glyphicon glyphicon-search" aria-hidden="true"></i> Buscar
@@ -19,7 +19,7 @@
   </div>
 </div>
 
-<% if @paciente!=nil %>
+<% if @pacienteActual!=nil %>
   <div class="center-block" style="width: 80%">
     <div class="header-pnl">
       <p style="padding-top: 6px; padding-bottom: 5px;">INFORMACIÓN GENERAL PACIENTE</p>
@@ -126,6 +126,16 @@
     </div>
 
   </div>
+  <%end%>
+  <% if @pacienteActual==nil%>
+    <div class="alert alert-danger" >
+      <p>
+      No existe información para mostrar..!! 
+    </p>
+    <p>
+      Favor ingrese un valor válido para buscar o cree un Paciente  <%=link_to 'CREAR PACIENTE',pacientes_path, class:'btn btn-primary  btn-xs'%>
+    </p>
+    </div>
   <%end%>
 
     <!--<div class="panel panel-info">

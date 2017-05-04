@@ -8,6 +8,6 @@ class Empleado < ApplicationRecord
     message: "Ingrese solo letras" }
 
   def upperCase
-        self.Emp_Rol= self.Emp_Rol.upcase
-    end
+      self.Emp_Rol= self.Emp_Rol.upcase
+  end
 end
