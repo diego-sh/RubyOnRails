@@ -1,27 +1,13 @@
 <%= form_for(paciente , validate: true) do |f| %>
-  <!--<% if paciente.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(paciente.errors.count, "error") %> prohibited this paciente from being saved:</h2>
-
-      <ul>
-        <% paciente.errors.full_messages.each do |message| %>
-          <li>
-            <%= message %>
-          </li>
-          <% end %>
-      </ul>
-    </div>
-    <% end %>-->
-
-      <div class="row">
+ 
+      <!--<div class="row">
         <div class="col-lg-4">
           <div class="form-group">
             <label for="hclinica">N° Historia Clínica</label>
-            <%= f.text_field :Pac_HC, class:'form-control', id:'hclinica',placeholder:'Historia clínica', :required => true%>
+            <%= f.text_field :Pac_HC, class:'form-control', id:'hclinica',placeholder:'Historia clínica',maxlength:'8', :required => true%>
           </div>
         </div>
-      </div>
+      </div>-->
 
       <div class="row">
         <div class="col-lg-4">

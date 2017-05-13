@@ -1,7 +1,8 @@
 jQuery(function() {
-  var cantones;
+  debugger;
+  //var cantones;
   $('#paciente_residencia_attributes_Res_Canton').prop('disabled', true);
-  cantones = $('#paciente_residencia_attributes_Res_Canton').html();
+  var cantones = $('#paciente_residencia_attributes_Res_Canton').html();
   console.log(cantones);
   return $('#paciente_residencia_attributes_Res_Provincia').change(function() {
     var provincia, escaped_provincia, options;

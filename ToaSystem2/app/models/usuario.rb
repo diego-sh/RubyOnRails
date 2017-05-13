@@ -27,6 +27,16 @@ class Usuario < ApplicationRecord
     end
   end
 
+  def self.autenticar(user_name,pass)
+    usuario= self.find_by_User_Name(user_name)
+    if usuario
+      #if usuario.Password != Digest::SHA1.hexdigest(pass)
+      if usuario.Password != pass
+        usuario=nil
+      end      
+    end
+    usuario
+  end
   
   
 end

@@ -1,10 +1,11 @@
+<% provide(:citas, 'active') %>
 <p id="notice">
   <%= notice %>
 </p>
-<div class='row' id="titulo" style="margin-left:20px; margin-top:20px;">
+<!--<div class='row' id="titulo" style="margin-left:20px; margin-top:20px;">
   <img src="/img/icon/calendar.png" alt="rss feed" />
   <h3><strong>CITAS</strong></h3>
-</div>
+</div>-->
 </br>
 
 <div id="bloque" class="alert alert-warning" role="alert" style="width: 100%">
@@ -33,20 +34,21 @@
               </button>
               </span>
             </div>
-          </div>
-      </div>
+          </div>                 
+      </div>      
   </div>
-</div>
-
-<div class="row" style="margin-left:20px; margin-top:10px">
+  <div class="row" style="margin-left:20px; margin-top:0px">
   <div class=".col-xs-6">
     <%= link_to new_cita_path, class:"btn btn-primary pull-right" do %>
-      <i class="glyphicon glyphicon-plus"></i> AGENDAR CITA
-      <% end %>
+    <i class="glyphicon glyphicon-plus"></i> AGENDAR CITA
+    <% end %>  
   </div>
 </div>
+</div>
+
+
 </br>
-<div class="row" style="margin-top: 20px">
+<div class="row" style="margin-top: 5px">
   <div class="center-block" style="width:85%">
     <div class="calendar"></div>
   </div>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="main2">
+        <div class="container">            
+            <center>
+                <div class="middle">                    
+                    <div id="login">
+                        <%= yield %>
+                        <%= notice %>
+                    </div>
+                    <!-- end login -->
+                    <div class="logo">
+                        <div class="clearfix">
+                            <img src="/img/icon/clinicaTOA2.png" alt="rss feed" width=90% height=80%/>
+                        </div>
+                        
+                    </div>
+                </div>
+            </center>
+        </div>
+
+    </div>
+
+   
+</body>
+
+</html>

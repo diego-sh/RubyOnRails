@@ -4,10 +4,10 @@
 <head>
   <title>ToaSystem</title>
 
-
   <%= csrf_meta_tags %>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-      <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+      
 </head>
 <body>
   <header>
@@ -23,23 +23,22 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
           <ul class="nav navbar-nav navbar-right">
-            <li><a>Usuario: Diego Geovanny Alpala Cachiguango</a></li>
-            <li class="dropdown">
+            <li><a>Usuario: <%=session[:persona]["Per_Apellido_Paterno"]%> <%=session[:persona]["Per_Apellido_Materno"]%> <%=session[:persona]["Per_Nombres"]%></a></li>
+            <li><%= link_to  "Cerrar Sesión", logout_usuarios_path, method: :logout %></li>
+            <!--<li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Opciones <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li><a href="#">Editar Perfil</a></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="#">Salir</a></li>
+                <li><%= link_to  "Salir", logout_usuarios_path, method: :logout %></li>
               </ul>
-            </li>
+            </li>-->
           </ul>
         </div>
         <!-- /.navbar-collapse -->
       </div>
       <!-- /.container-fluid -->
     </nav>
-
-
   </header>
 
   <nav class="navbar-default sidebar " role="navigation">
@@ -48,51 +47,54 @@
       </div>
       <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li role="presentation" class="<%= yield(:home)%>">
-            <%= link_to root_path do %>Inicio
-              <img src="/img/icon/x16/home.png" alt="rss feed" class="pull-right"/>
-            <% end %>
-          </li>
-          <li class="<%= yield(:usuarios)%>">
-            <%= link_to usuarios_path, class:'dropdown-toggle' do %>Usuarios
-            <span class="caret"></span><img src="/img/icon/x16/team.png" alt="rss feed" class="pull-right"/>
-            
-            <ul class="dropdown-menu forAnimate" role="menu">
-              <li><a href="{{URL::to('createusuario')}}">Crear</a></li>
-              <li><a href="#">Modificar</a></li>
-              <li><a href="#">Reportar</a></li>
-              <li class="divider"></li>
-              <li><a href="#">Separated link</a></li>
-              <li class="divider"></li>
-            </ul>
-            <% end %>
-          </li>
 
-          <li class="<%= %>">
-            <%= link_to citas_path do %>Citas
-              <img src="/img/icon/x16/calendar.png" alt="rss feed" class="pull-right"/>
+          <%session[:menus].each do |menu| %>
+            <% case menu["menu_nombre"]%>
+              <% when 'Inicio' %>
+                <li class="<%= yield(:inicio) %>">
+                  <%= link_to root_path do %>Inicio
+                    <img src="/img/icon/x16/home.png" alt="rss feed" class="pull-right"/>
+                  <% end %>
+                </li>
+              <% when 'Citas' %>
+                <li class="<%= yield(:citas) %>">
+                  <%= link_to citas_path do %>Citas
+                    <img src="/img/icon/x16/calendar.png" alt="rss feed" class="pull-right"/>
+                  <% end %>
+                </li>
+              <% when 'Pacientes' %>
+                <li class="<%= yield(:pacientes) %>">
+                  <%= link_to pacientes_path do %>Pacientes
+                    <img src="/img/icon/x16/network.png" alt="rss feed" class="pull-right"/>
+                  <% end %>
+                </li>
+              <% when 'Consultas' %>
+                <li class="<%= yield(:consultas) %>">
+                  <%= link_to consultas_path do %>Consultas
+                    <img src="/img/icon/x16/first-aid-kit.png" alt="rss feed" class="pull-right"/>
+                  <% end %>
+                </li>
+              <% when 'Médicos' %>
+                <li class="<%= yield(:medicos) %>">
+                  <%= link_to personas_path do %>Médicos
+                    <img src="/img/icon/x16/doctor.png" alt="rss feed" class="pull-right"/>
+                  <% end %>
+                </li>
+              <% when 'Empleados' %>
+                <li class="<%= yield(:empleados)%>">
+                  <%= link_to indexEmpleado_personas_path do %>Empleados
+                      <img src="/img/icon/x16/network.png" alt="rss feed" class="pull-right"/>
+                  <% end %>
+                </li>
+              <% when 'Usuarios' %>
+                <li class="<%= yield(:usuarios) %>">
+                  <%= link_to usuarios_path do %>Usuarios
+                      <img src="/img/icon/x16/team.png" alt="rss feed" class="pull-right"/>
+                  <% end %>
+                </li>
             <% end %>
-          </li>
-          <li class="<%= yield(:index)%>">
-            <%= link_to pacientes_path do %>Pacientes
-              <img src="/img/icon/x16/network.png" alt="rss feed" class="pull-right"/>
-            <% end %>
-          </li>
-          <li class="<%= %>">
-            <%= link_to consultas_path do %>Consultas
-              <img src="/img/icon/x16/first-aid-kit.png" alt="rss feed" class="pull-right"/>
-            <% end %>
-          </li>
-          <li class="<%= yield(:indexEmpleado)%>">
-            <%= link_to indexEmpleado_personas_path do %>Empleados
-                <img src="/img/icon/x16/network.png" alt="rss feed" class="pull-right"/>
-            <% end %>
-          </li>
-          <li class="<%= yield(:indexM) %>">
-            <%= link_to personas_path do %>Médicos
-              <img src="/img/icon/x16/doctor.png" alt="rss feed" class="pull-right"/>
-            <% end %>
-          </li>
+                 
+          <% end %>
         </ul>
       </div>
     </div>

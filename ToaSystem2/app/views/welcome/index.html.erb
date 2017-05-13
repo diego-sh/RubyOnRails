@@ -1,2 +1,17 @@
 <% provide(:home, 'active') %>
 <h1>CLINICA TOA</h1>
+<%= notice%>
+<!--<% if session[:usuario] %> 
+    <%= session[:menus] %>
+    <%session[:menus].each do |menu| %>
+        
+        <li class="<%= %>">
+            <%= link_to menu["menu_path"] do %><%= menu["menu_nombre"]%>
+              <%= image_tag(menu["menu_icono"], :alt => "rss feed", :class=>"pull-right") %>
+            <% end %>
+          </li>
+        
+    <% end %>
+    <%= link_to  "Salir", logout_usuarios_path, method: :logout %>
+<% else %>
+<% end %>-->

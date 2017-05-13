@@ -4,6 +4,13 @@ class UsuariosController < ApplicationController
   before_action :idPersona, only: [:create, :new]
   before_action :flagEditar, only: [:edit]
   before_action :set_persona_by_usuario, only: [:edit]
+  layout "security", only: [:login]
+
+  # Para saltar el filtro de comprobar si ya est alogeado
+  skip_before_filter :comprobar_login, :only=>[:login]
+
+
+
   # GET /usuarios
   # GET /usuarios.json
   def index
@@ -47,6 +54,33 @@ class UsuariosController < ApplicationController
       end
     end
   end
+
+  def login
+    if request.post?
+      usuario= Usuario.autenticar(params[:usuario][:User_Name], params[:usuario][:Password])
+      if usuario        
+        session[:usuario]= usuario
+        persona=Persona.find_by_usuario_id(usuario.usuario_id)
+        session[:persona]=persona
+        session[:menus]=Usuario.find_by_sql("SELECT m.menu_id, m.menu_nombre, m.menu_icono, m.menu_path 
+        FROM perfiles p INNER JOIN perfil_menus pm ON p.perfil_id=pm.perfil_id 
+        INNER JOIN menus m ON pm.menu_id=m.menu_id WHERE p.perfil_id="+usuario.perfil_id.to_s)
+        flash[:notice] = "Ingreso satisfactorio!"
+        redirect_to root_path
+      else
+        #otras cosas
+        flash[:notice] = "Error en el usuario o contraseña.\n Intentelo nuevamente!"
+      end      
+    end    
+  end
+
+  def logout
+    session[:usuario]=nil
+    flash[:notice]="Sesión cerrada correctamente"
+    redirect_to login_usuarios_path
+  end
+  
+  
 
   # PATCH/PUT /usuarios/1
   # PATCH/PUT /usuarios/1.json

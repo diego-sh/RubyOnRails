@@ -1,0 +1,14 @@
+<%= form_for :usuario, :url=>{:action=> :login} do |f|%>  
+       
+             <p ><span class="fa fa-user"></span>
+        <%= f.text_field :User_Name, class:'inputlogin form-control', placeholder:"NOMBRE USUARIO" %>
+             </p>
+   
+    <p><span class="fa fa-lock"></span>
+    <%= f.password_field :Password, class:'inputlogin form-control', placeholder:"CONTRASEÑA" %>
+    </p>
+        <p></p>
+        <%= f.submit "INGRESAR"%>
+        
+
+            <% end %>

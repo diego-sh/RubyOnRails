@@ -15,7 +15,15 @@ Rails.application.routes.draw do
   
   resources :citas  
   resources :horarios
-  resources :usuarios , path_names: {new: 'new/:id' }
+  resources :usuarios , path_names: {new: 'new/:id' } do
+    collection do
+      get "login"
+      post "login"
+      post "logout"
+    end
+    
+  end
+  
   resources :residencias
   resources :pacientes do
     resources :antecedentes
