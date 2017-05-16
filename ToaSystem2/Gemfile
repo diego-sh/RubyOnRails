@@ -60,6 +60,10 @@ gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'
 
 gem 'bootstrap_form'
 
+#dataTables
+gem 'jquery-datatables-rails', '~> 3.4'
+gem 'jquery-turbolinks'
+
 #Calendario
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'

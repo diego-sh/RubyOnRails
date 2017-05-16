@@ -149,13 +149,13 @@
           <div class="col-lg-4">
                 <div class="form-group">
                   <label for="provincia">Provincia</label>
-                    <%= o.collection_select :Res_Provincia, Provincia.order(:nombre), :id, :nombre, {prompt: "Seleccione"}, {class: "form-control"} %>
+                    <%= o.collection_select :Res_Provincia, Provincia.order(:nombre), :id, :nombre, {},{class: 'form-control'} %>
                 </div>
           </div>
           <div class="col-lg-4">
               <div class="form-group">
                 <label for="canton">Canton</label>
-                <%= o.grouped_collection_select :Res_Canton, Provincia.order(:nombre), :cantones, :nombre, :id, :nombre, {prompt: "Seleccione"}, {class: "form-control"}  %>
+                <%= o.grouped_collection_select :Res_Canton, Provincia.order(:nombre), :cantones, :nombre, :id, :nombre, {}, {class: "form-control"}  %>
               </div>
           </div>
         </div>
