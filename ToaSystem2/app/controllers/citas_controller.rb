@@ -39,13 +39,27 @@ class CitasController < ApplicationController
   def create
     @cita = Cita.new(cita_params)
     @cita.paciente_id=@@pacienteTMP.paciente_id
-    respond_to do |format|
-      if @cita.save
-        format.html { redirect_to @cita, notice: 'Cita was successfully created.' }
-        format.json { render :show, status: :created, location: @cita }
-      else
-        format.html { render :new }
-        format.json { render json: @cita.errors, status: :unprocessable_entity }
+    @citaV = Cita.find_by_sql(["SELECT * FROM citas WHERE medico_id=? and Cit_Fecha=? and Cit_Hora=?",@cita.medico_id,@cita.Cit_Fecha,@cita.Cit_Hora.strftime('%r')])
+    @citaP = Cita.find_by_sql(["SELECT * FROM citas WHERE paciente_id=? and Cit_Fecha=?",@cita.paciente_id,@cita.Cit_Fecha])
+    #puts 'ID: '+ @citaV[0].cita_id.to_i
+    if @citaV.any?
+      respond_to do |format|
+        format.html { redirect_to :back , alert: 'Fecha u horario No Disponibles!' }
+      end
+    elsif @citaP.any?
+      respond_to do |format|
+        format.html { redirect_to :back , alert: 'El Paciente ya cueta con una Cita para la fecha seleccionada!' }
+      end
+    else
+      #flash[:notice] = 'Fecha u horario No Disponibles!'
+      respond_to do |format|
+        if @cita.save
+          format.html { redirect_to @cita, notice: 'Cita was successfully created.' }
+          format.json { render :show, status: :created, location: @cita }
+        else
+          format.html { render :new }
+          format.json { render json: @cita.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

@@ -13,6 +13,16 @@ initialize_calendar = function(){
                 center: 'title',
                 right: 'month,agendaWeek,agendaDay'
             },
+            defaultView: 'agendaDay',
+            scrollTime: '09:00',
+            businessHours: {
+                start: '9:00',
+                end: '18:00',
+            },
+            lang: 'es',
+            editable: false,
+            selectable: false,
+            allDaySlot: false,
             buttonText: {
                 today: 'HOY',
                 day: 'DIARIO',

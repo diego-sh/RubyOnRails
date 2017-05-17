@@ -13,8 +13,8 @@ class Paciente < ApplicationRecord
 
     validates :Pac_Cedula, :Pac_Telefono, numericality: { only_integer: true }
     validates  :Pac_Apellido_Paterno, :Pac_Apellido_Materno, :Pac_Nacionalidad, 
-    format: { with: /\A[a-zA-Z]+\z/, message: "Ingrese solo letras" }
-    validates :Pac_Nombres, format: { with: /\A[a-zA-Z\s ]+\z/, message: "Ingrese solo letras" }
+    format: { with: /\A[a-zA-Z\ñ]+\z/, message: "Ingrese solo letras" }
+    validates :Pac_Nombres, format: { with: /\A[a-zA-Z\sñ]+\z/, message: "Ingrese solo letras" }
 
     validates :Pac_Pasaporte, numericality: { only_integer: true }, allow_blank: true
     #validates :Pac_Ocupacion, format: { with: /\A[a-zA-Z]+\z/, message: "Ingrese solo letras" }, allow_blank: true
