@@ -48,14 +48,14 @@ $(document).on 'turbolinks:load', ->
   provincia2 = undefined
   options2 = undefined
   provincia2 = $('#paciente_residencia_attributes_Res_Provincia :selected').text()
-  options2 = $(cantones).filter('optgroup[label=' + provincia2 + ']').html()
+  options2 = $(cantones).filter("optgroup[label=' + provincia2 + ']").html()
   $('#paciente_residencia_attributes_Res_Canton').html options2
   console.log cantones
   $('#paciente_residencia_attributes_Res_Provincia').change ->
     provincia = undefined
     options = undefined
     provincia = $('#paciente_residencia_attributes_Res_Provincia :selected').text()
-    options = $(cantones).filter('optgroup[label=' + provincia + ']').html()
+    options = $(cantones).filter("optgroup[label=' + provincia + ']").html()
     console.log options
     if options
       $('#paciente_residencia_attributes_Res_Canton').html options

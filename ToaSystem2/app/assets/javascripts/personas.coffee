@@ -24,7 +24,7 @@ $(document).on 'turbolinks:load', ->
                 "sPrevious": "Anterior"
             },
         }
-    });
+    })
 
 $(document).on 'turbolinks:load', ->
     $('#tblMedicos').dataTable({
@@ -48,6 +48,6 @@ $(document).on 'turbolinks:load', ->
                 "sPrevious": "Anterior"
             },
         }
-    });
+    })
 
    
