@@ -44,17 +44,17 @@ class CitasController < ApplicationController
     #puts 'ID: '+ @citaV[0].cita_id.to_i
     if @citaV.any?
       respond_to do |format|
-        format.html { redirect_to :back , alert: 'Fecha u horario No Disponibles!' }
+        format.html { redirect_to :back , alert: 'FECHA U HORARIO NO DISPONIBLES!' }
       end
     elsif @citaP.any?
       respond_to do |format|
-        format.html { redirect_to :back , alert: 'El Paciente ya cueta con una Cita para la fecha seleccionada!' }
+        format.html { redirect_to :back , alert: 'EL PACIENTE YA CUENTA CON UNA CITA PARA LA FECHA SELECCIONADA!' }
       end
     else
       #flash[:notice] = 'Fecha u horario No Disponibles!'
       respond_to do |format|
         if @cita.save
-          format.html { redirect_to @cita, notice: 'Cita was successfully created.' }
+          format.html { redirect_to @cita, notice: 'Cita fue creada exitosamente.' }
           format.json { render :show, status: :created, location: @cita }
         else
           format.html { render :new }

@@ -1,8 +1,4 @@
-<div class="row">
-  <% flash.each do |name, msg| %>
-      <%= content_tag :div, msg, class: "mensajeAlert" %>
-  <% end %>
-</div>
+
 <div class="alert alert-warning" role="alert">
   <div class="row" style="padding-left: 20px">
     Ingrese el número de cedula del paciente a consultar
@@ -62,7 +58,11 @@
         </div>
         <div class="row" style="margin-bottom: 30px"></div>
       </div>
-
+<div class="row">
+  <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg, class: "mensajeAlert" %>
+  <% end %>
+</div>
     </div>
 
     <div>
