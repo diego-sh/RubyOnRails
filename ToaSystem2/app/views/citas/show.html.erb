@@ -1,4 +1,9 @@
 <% provide(:citas, 'active') %>
+<div class="row">
+  <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg, class: "mensajeAlert" %>
+  <% end %>
+</div>
 <div class="panel panel-info" style="margin-top:20px">
   <div class="panel-heading">INFORMACIÓN CITA MÉDICA GENERADA</div>
   <div class="panel-body">

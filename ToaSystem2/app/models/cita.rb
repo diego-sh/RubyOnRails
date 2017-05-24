@@ -5,10 +5,9 @@ class Cita < ApplicationRecord
   belongs_to :medico, inverse_of: :cita
   has_one :consulta, inverse_of: :cita
 
-
   def fields_complete
     self.Cit_Estado= "PENDIENTE"
-    self.Cit_Hora_Fin= self.Cit_Hora+ 30.minutes
+    self.Cit_Hora_Fin= self.Cit_Hora+30.minutes
   end
   
   def upperCase

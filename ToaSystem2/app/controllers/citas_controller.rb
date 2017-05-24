@@ -39,13 +39,23 @@ class CitasController < ApplicationController
   def create
     @cita = Cita.new(cita_params)
     @cita.paciente_id=@@pacienteTMP.paciente_id
-    @citaV = Cita.find_by_sql(["SELECT * FROM citas WHERE medico_id=? and Cit_Fecha=? and Cit_Hora=?",@cita.medico_id,@cita.Cit_Fecha,@cita.Cit_Hora.strftime('%r')])
+    @citaV = Cita.find_by_sql(["SELECT * FROM citas WHERE medico_id=? and Cit_Fecha=? and Cit_Hora=?",@cita.medico_id,@cita.Cit_Fecha,@cita.Cit_Hora])
     @citaP = Cita.find_by_sql(["SELECT * FROM citas WHERE paciente_id=? and Cit_Fecha=?",@cita.paciente_id,@cita.Cit_Fecha])
     #puts 'ID: '+ @citaV[0].cita_id.to_i
     if @citaV.any?
+      @cita.Cit_Entre_Cita = 1
       respond_to do |format|
-        format.html { redirect_to :back , alert: 'FECHA U HORARIO NO DISPONIBLES!' }
+        if @cita.save
+          format.html { redirect_to :show, alert: 'INGRESADO COMO CITA ADICIONAL' }
+          #format.json { render :show, status: :created, location: @cita }
+        else
+          format.html { render :new }
+          format.json { render json: @cita.errors, status: :unprocessable_entity }
+        end
       end
+      #respond_to do |format|
+      #  format.html { redirect_to :back , alert: 'FECHA U HORARIO NO DISPONIBLES!' }
+      #end
     elsif @citaP.any?
       respond_to do |format|
         format.html { redirect_to :back , alert: 'EL PACIENTE YA CUENTA CON UNA CITA PARA LA FECHA SELECCIONADA!' }
@@ -54,7 +64,7 @@ class CitasController < ApplicationController
       #flash[:notice] = 'Fecha u horario No Disponibles!'
       respond_to do |format|
         if @cita.save
-          format.html { redirect_to @cita, notice: 'Cita fue creada exitosamente.' }
+          format.html { redirect_to @cita}
           format.json { render :show, status: :created, location: @cita }
         else
           format.html { render :new }

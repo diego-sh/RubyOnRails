@@ -71,7 +71,7 @@
           <div class="center-block" style="width:500px;max-width:100%;">
             <div class="form-group">
               <label for="perfil">ESPECIALISTA</label>
-              <%= f.collection_select :medico_id, @especialistas, :medico_id, :Nombre,{prompt: "SELECCIONE"},{ :class => 'form-control'} %>
+              <%= f.collection_select :medico_id, @especialistas, :medico_id, :Nombre,{},{ :class => 'form-control'} %>
             </div>
           </div>
         </div>
@@ -81,13 +81,13 @@
             <div class="col-lg-6">
               <div class="form-group">
                 <label for="fechacita">FECHA</label>
-                <%= f.date_field :Cit_Fecha, class:'form-control',id:'fechacita'%>
+                <%= f.date_field :Cit_Fecha, value: Date.today.strftime("%Y-%m-%d"),class:'form-control',id:'fechacita'%>
               </div>
             </div>
             <div class="col-lg-6">
               <div class="form-group">
                 <label for="fechacita">HORA</label>
-                <%= f.time_field :Cit_Hora, class:'form-control',id:'fechacita'%>
+                <%= f.time_field :Cit_Hora, value: "12:00", class:'form-control',id:'fechacita'%>
               </div>
             </div>
           </div>
