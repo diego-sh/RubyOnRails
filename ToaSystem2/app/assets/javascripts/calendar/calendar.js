@@ -60,7 +60,7 @@ initialize_calendar = function(){
                 if(filtro == true){
                     return ['', event.medico].indexOf($('#citas_selector').val()) >= 0
                 }else{
-                   return ['', event.url].indexOf($('#paciente').val()) >= 0
+                   return ['', event.className].indexOf($('#paciente').val()) >= 0
                 }
             }
         });

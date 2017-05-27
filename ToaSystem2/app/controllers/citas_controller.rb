@@ -46,7 +46,7 @@ class CitasController < ApplicationController
       respond_to do |format|
         format.html { redirect_to :back , alert: 'EL PACIENTE YA CUENTA CON UNA CITA PARA LA FECHA SELECCIONADA!' }
       end
-      
+
     elsif @citaV.any?
       @cita.Cit_Entre_Cita = 1
       respond_to do |format|
@@ -95,7 +95,7 @@ class CitasController < ApplicationController
   def destroy
     @cita.destroy
     respond_to do |format|
-      format.html { redirect_to citas_url, notice: 'Cita was successfully destroyed.' }
+      format.html { redirect_to citas_url, alert: 'Cita Eliminada.' }
       format.json { head :no_content }
     end
   end
