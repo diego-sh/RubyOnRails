@@ -1,8 +1,22 @@
 var initialize_calendar;
 var initialLangCode = 'es';
+var filtro = true;
+
+function filtroPaciente(){
+    filtro = false;
+    $('.calendar').fullCalendar('rerenderEvents');
+}
+
 initialize_calendar = function(){
     $('#citas_selector').change(function(){
+        filtro = true;
         $('.calendar').fullCalendar('rerenderEvents');
+    });
+    $('#paciente').keyup(function(event){
+        if(event.keyCode == 13){
+            filtro = false;
+            $('.calendar').fullCalendar('rerenderEvents');
+        }
     });
     $('.calendar').each(function(){
         var calendar = $(this);
@@ -43,7 +57,11 @@ initialize_calendar = function(){
             editable: true,
             eventLimit: true,
             eventRender: function eventRender( event, element, view ) {
-                return ['', event.medico].indexOf($('#citas_selector').val()) >= 0
+                if(filtro == true){
+                    return ['', event.medico].indexOf($('#citas_selector').val()) >= 0
+                }else{
+                   return ['', event.url].indexOf($('#paciente').val()) >= 0
+                }
             }
         });
     })

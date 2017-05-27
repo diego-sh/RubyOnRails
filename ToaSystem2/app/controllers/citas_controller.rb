@@ -8,7 +8,7 @@ class CitasController < ApplicationController
   def index
     #@citas = Cita.all
     @especialistas=Persona.find_by_sql("SELECT CONCAT(CONCAT(p.Per_Apellido_Paterno,' '), p.Per_Nombres) AS Nombre, m.medico_id, p.persona_id FROM personas p INNER JOIN medicos m on p.persona_id = m.persona_id")
-    @citas = Cita.find_by_sql("SELECT *, p.pac_apellido_paterno AS apellidop, p.pac_nombres AS nombrep , pe.per_apellido_paterno AS apellidod, pe.per_nombres AS nombred, c.cit_fecha AS fecha, c.cit_hora AS hora, CONCAT(c.cit_fecha,c.cit_hora) AS fechahora from citas c join pacientes p on p.paciente_id=c.paciente_id join medicos m on m.medico_id=c.medico_id join personas pe on pe.persona_id=m.persona_id")
+    @citas = Cita.find_by_sql("SELECT *, p.pac_apellido_paterno AS apellidop, p.pac_nombres AS nombrep, p.pac_cedula AS cedulap, pe.per_apellido_paterno AS apellidod, pe.per_nombres AS nombred, c.cit_fecha AS fecha, c.cit_hora AS hora, CONCAT(c.cit_fecha,c.cit_hora) AS fechahora from citas c join pacientes p on p.paciente_id=c.paciente_id join medicos m on m.medico_id=c.medico_id join personas pe on pe.persona_id=m.persona_id")
   end
 
   # GET /citas/1
@@ -39,15 +39,20 @@ class CitasController < ApplicationController
   def create
     @cita = Cita.new(cita_params)
     @cita.paciente_id=@@pacienteTMP.paciente_id
-    @citaV = Cita.find_by_sql(["SELECT * FROM citas WHERE medico_id=? and Cit_Fecha=? and Cit_Hora=?",@cita.medico_id,@cita.Cit_Fecha,@cita.Cit_Hora])
+    @citaV = Cita.find_by_sql(["SELECT * FROM citas WHERE medico_id=? and Cit_Fecha=? and Cit_Hora=?",@cita.medico_id,@cita.Cit_Fecha,@cita.Cit_Hora.strftime("%r")])
     @citaP = Cita.find_by_sql(["SELECT * FROM citas WHERE paciente_id=? and Cit_Fecha=?",@cita.paciente_id,@cita.Cit_Fecha])
-    #puts 'ID: '+ @citaV[0].cita_id.to_i
-    if @citaV.any?
+
+    if @citaP.any?
+      respond_to do |format|
+        format.html { redirect_to :back , alert: 'EL PACIENTE YA CUENTA CON UNA CITA PARA LA FECHA SELECCIONADA!' }
+      end
+      
+    elsif @citaV.any?
       @cita.Cit_Entre_Cita = 1
       respond_to do |format|
         if @cita.save
-          format.html { redirect_to :show, alert: 'INGRESADO COMO CITA ADICIONAL' }
-          #format.json { render :show, status: :created, location: @cita }
+          format.html { redirect_to @cita, alert: 'INGRESADO COMO CITA ADICIONAL'}
+          format.json { render :show, status: :created, location: @cita }
         else
           format.html { render :new }
           format.json { render json: @cita.errors, status: :unprocessable_entity }
@@ -56,10 +61,7 @@ class CitasController < ApplicationController
       #respond_to do |format|
       #  format.html { redirect_to :back , alert: 'FECHA U HORARIO NO DISPONIBLES!' }
       #end
-    elsif @citaP.any?
-      respond_to do |format|
-        format.html { redirect_to :back , alert: 'EL PACIENTE YA CUENTA CON UNA CITA PARA LA FECHA SELECCIONADA!' }
-      end
+
     else
       #flash[:notice] = 'Fecha u horario No Disponibles!'
       respond_to do |format|
