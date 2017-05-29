@@ -9,5 +9,5 @@ json.array!(@citas) do |cita|
     dia = cita.Cit_Fecha
     json.start DateTime.new(dia.year, dia.month,dia.day, hora.hour,hora.min, hora.sec)
     json.end DateTime.new(dia.year, dia.month,dia.day, horaFin.hour,horaFin.min, horaFin.sec)
-    json.url cita_url(cita, format: :json)
+    json.url cita_url(cita, format: :html)
 end
