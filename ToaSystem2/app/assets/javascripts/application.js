@@ -22,6 +22,7 @@
 //= require_tree .
 //= require moment
 //= require fullcalendar
+//= require fullcalendar/lang/es
 //= require turbolinks
 
 $(document).ready(function(){

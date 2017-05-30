@@ -27,8 +27,7 @@ initialize_calendar = function(){
                 center: 'title',
                 right: 'month,agendaWeek,agendaDay'
             },
-            //defaultView: 'agendaDay',
-            scrollTime: '09:00',
+            scrollTime: '08:00:00',
             businessHours: {
                 start: '9:00',
                 end: '18:00',
@@ -37,20 +36,6 @@ initialize_calendar = function(){
             editable: false,
             selectable: false,
             allDaySlot: false,
-            buttonText: {
-                today: 'HOY',
-                day: 'DIARIO',
-                week:'SEMANAL',
-                month:'MENSUAL'
-            },
-            monthNames: ["ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"],
-            monthNamesShort: ["ENE","FEB","MAR","ABR","MAY","JUN","JUL","AGO","SEP","OCT","NOV","DEC"],
-            dayNames: ["DOMINGO","LUNES","MARTES","MIERCOLES","JUEVES","VIERNES","SABADO"],
-            dayNamesShort: ["DOM","LUN","MAR","MIE","JUE","VIE","SAB"],
-            prev: "&nbsp;&#9668;&nbsp;",
-            next: "&nbsp;&#9658;&nbsp;",
-            prevYear: "&nbsp;&lt;&lt;&nbsp;",
-            nextYear: "&nbsp;&gt;&gt;&nbsp;",
             lang: initialLangCode,
             selectable: true,
             selectHelper: true,
