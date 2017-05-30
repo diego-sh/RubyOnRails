@@ -1,7 +1,7 @@
 <% provide(:citas, 'active') %>
 <div class="row">
   <% flash.each do |name, msg| %>
-      <%= content_tag :div, msg, class: "mensajeAlert" %>
+      <%= content_tag :div, msg, class: "mensajeWarning" %>
   <% end %>
 </div>
 <div class="panel panel-info" style="margin-top:20px">
@@ -67,9 +67,12 @@
           <i class="glyphicon glyphicon-ok"></i> Aceptar
           <%end%>
       </div>
+
+      <div class="col-md-2" style="margin-left:20px">
+          <%= link_to @citas, method: :delete, data: { confirm: '¿Está seguro de que desea eliminar?'}, class:"btn btn-primary  btn-block btn-danger" do%>
+            <i class="glyphicon glyphicon-trash"></i> Eliminar
+          <%end%>
+      </div>
     </div>
-
-
-
   </div>
 </div>

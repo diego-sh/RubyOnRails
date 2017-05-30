@@ -1,5 +1,9 @@
 <% provide(:citas, 'active') %>
-
+<div class="row">
+  <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg, class: "mensajeAlert"%>
+  <% end %>
+</div>
 <!--<div class='row' id="titulo" style="margin-left:20px; margin-top:20px;">
   <img src="/img/icon/calendar.png" alt="rss feed" />
   <h3><strong>CITAS</strong></h3>

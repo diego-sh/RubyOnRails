@@ -27,7 +27,7 @@ initialize_calendar = function(){
                 center: 'title',
                 right: 'month,agendaWeek,agendaDay'
             },
-            defaultView: 'agendaDay',
+            //defaultView: 'agendaDay',
             scrollTime: '09:00',
             businessHours: {
                 start: '9:00',
@@ -57,10 +57,55 @@ initialize_calendar = function(){
             editable: true,
             eventLimit: true,
             eventRender: function eventRender( event, element, view ) {
+                switch(event.medico) {
+                    case "1":
+                        element.css('background-color', '#0000ff');
+                        element.css('border-color',  '#0000ff');
+                        break;
+                    case "2":
+                        element.css('background-color', '#cc00cc');
+                        element.css('border-color',  '#cc00cc');
+                        break;
+                    case "3":
+                        element.css('background-color', '#ffff00');
+                        element.css('border-color',  '#ffff00');
+                        break;
+                    case "4":
+                        element.css('background-color', '#ff0066');
+                        element.css('border-color',  '#ff0066');
+                        break;
+                    case "5":
+                        element.css('background-color', '#00b300');
+                        element.css('border-color',  '#00b300');
+                        break;
+                    case "6":
+                        element.css('background-color', '#ff8000');
+                        element.css('border-color',  '#ff8000');
+                        break;
+                    case "7":
+                        element.css('background-color', '#999966');
+                        element.css('border-color',  '#999966');
+                        break;
+                    case "8":
+                        element.css('background-color', '#ffcc99');
+                        element.css('border-color',  '#ffcc99');
+                        break;
+                    case "9":
+                        element.css('background-color', '#cc00cc');
+                        element.css('border-color',  '#cc00cc');
+                        break;
+                    case "10":
+                        element.css('background-color', '#cc6600');
+                        element.css('border-color',  '#cc6600');
+                        break;
+                    default:
+                        element.css('background-color', '#000');
+                        element.css('border-color',  '#000');
+                }
                 if(filtro == true){
                     return ['', event.medico].indexOf($('#citas_selector').val()) >= 0
                 }else{
-                   return ['', event.className].indexOf($('#paciente').val()) >= 0
+                    return ['', event.cedula].indexOf($('#paciente').val()) >= 0
                 }
             }
         });

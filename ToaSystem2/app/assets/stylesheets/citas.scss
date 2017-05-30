@@ -18,6 +18,22 @@
     letter-spacing: 1px;
 }
 
+.mensajeWarning{
+    margin: auto;
+    border-radius: 25px;
+    //position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+    background: rgba(230,230,0,0.75);
+    padding: 2.5rem 0;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
 .etiqueta{
     color: #1976d2;
     font-weight: bold;
