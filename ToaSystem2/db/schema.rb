@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.string   "Ant_Descripcion", limit: 256
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
+    t.integer  "usuario_id"
     t.index ["paciente_id"], name: "FK_REFERENCE_18", using: :btree
   end
 
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.date     "Cit_Fecha"
     t.time     "Cit_Hora"
     t.string   "Cit_Motivo",      limit: 128
-    t.string   "Cit_Estado",      limit: 3
+    t.string   "Cit_Estado",      limit: 16
     t.string   "Cit_Observacion", limit: 128
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -50,20 +50,22 @@ ActiveRecord::Schema.define(version: 0) do
 
   create_table "consultas", primary_key: "consulta_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "cita_id"
-    t.string   "Con_Cronologia",  limit: 256
-    t.string   "Con_Observacion", limit: 256
+    t.string   "Con_Cronologia",        limit: 256
+    t.string   "Con_Observacion",       limit: 256
     t.datetime "creado_at"
     t.datetime "actualizado_at"
-    t.integer  "user_id"
+    t.integer  "usuario_id"
+    t.text     "Con_Diagnostico_Final", limit: 4294967295
+    t.string   "Con_Codigo_CIE",        limit: 16
+    t.string   "Con_Motivo",            limit: 512
     t.index ["cita_id"], name: "FK_REFERENCE_3", using: :btree
   end
 
   create_table "diagnosticos", primary_key: "diagnostico_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "sintoma_id"
     t.integer "consulta_id"
-    t.string  "Tipo_Diagnostico", limit: 16
-    t.string  "Diagnostico",      limit: 512
-    t.string  "Cie_Codigo",       limit: 16
+    t.string  "Diagnostico_Presuntivo", limit: 512
+    t.string  "Codigo_CIE",             limit: 16
     t.index ["consulta_id"], name: "FK_REFERENCE_6", using: :btree
     t.index ["sintoma_id"], name: "FK_REFERENCE_5", using: :btree
   end
@@ -104,6 +106,9 @@ ActiveRecord::Schema.define(version: 0) do
     t.text    "Exa_Descripcion", limit: 4294967295
     t.string  "Exa_Tipo",        limit: 32
     t.text    "Exa_Resultado",   limit: 4294967295
+    t.string  "Exa_Motivo",      limit: 512
+    t.string  "Exa_Prioridad",   limit: 16
+    t.date    "Exa_Fecha_Orden"
     t.index ["prescripcion_id"], name: "FK_REFERENCE_25", using: :btree
   end
 
@@ -206,7 +211,9 @@ ActiveRecord::Schema.define(version: 0) do
 
   create_table "prescripciones", primary_key: "prescripcion_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "consulta_id"
-    t.text    "Per_Observacion", limit: 4294967295
+    t.text    "Pre_Observacion",            limit: 4294967295
+    t.text    "Pre_Procedimiento",          limit: 4294967295
+    t.text    "Pre_Indicaciones_Generales", limit: 4294967295
     t.index ["consulta_id"], name: "FK_REFERENCE_26", using: :btree
   end
 
@@ -246,11 +253,11 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "Sin_Descripcion",      limit: 512
     t.string "Sin_Region_Anatomica", limit: 64
     t.string "Sin_Punto_Doloroso",   limit: 64
-    t.string "Sin_Evolucion",        limit: 3
-    t.string "Sin_Tipo",             limit: 4
-    t.string "Sin_Modificaciones",   limit: 4
-    t.string "Sin_Alivia",           limit: 3
-    t.string "Sin_Intensidad",       limit: 4
+    t.string "Sin_Evolucion",        limit: 16
+    t.string "Sin_Tipo",             limit: 16
+    t.string "Sin_Modificaciones",   limit: 16
+    t.string "Sin_Alivia",           limit: 16
+    t.string "Sin_Intensidad",       limit: 16
   end
 
   create_table "terapias", primary_key: "terapia_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -280,9 +287,9 @@ ActiveRecord::Schema.define(version: 0) do
   add_foreign_key "empleados", "personas", primary_key: "persona_id", name: "FK_REFERENCE_13"
   add_foreign_key "estado_pacientes", "consultas", primary_key: "consulta_id", name: "FK_REFERENCE_11"
   add_foreign_key "examen_fisicos", "consultas", primary_key: "consulta_id", name: "FK_REFERENCE_8"
-  add_foreign_key "examenes", "prescripciones", column: "prescripcion_id", primary_key: "prescripcion_id", name: "FK_REFERENCE_25"
+  add_foreign_key "examenes", "prescripciones", primary_key: "prescripcion_id", name: "FK_REFERENCE_25"
   add_foreign_key "horarios", "medicos", primary_key: "medico_id", name: "FK_REFERENCE_16"
-  add_foreign_key "medicinas", "prescripciones", column: "prescripcion_id", primary_key: "prescripcion_id", name: "FK_REFERENCE_23"
+  add_foreign_key "medicinas", "prescripciones", primary_key: "prescripcion_id", name: "FK_REFERENCE_23"
   add_foreign_key "medicos", "personas", primary_key: "persona_id", name: "FK_REFERENCE_12"
   add_foreign_key "percances", "consultas", primary_key: "consulta_id", name: "FK_REFERENCE_9"
   add_foreign_key "perfil_menus", "menus", primary_key: "menu_id", name: "FK_REFERENCE_22"
@@ -291,6 +298,6 @@ ActiveRecord::Schema.define(version: 0) do
   add_foreign_key "prescripciones", "consultas", primary_key: "consulta_id", name: "FK_REFERENCE_26"
   add_foreign_key "residencias", "pacientes", primary_key: "paciente_id", name: "FK_REFERENCE_17"
   add_foreign_key "signos_vitales_basicos", "consultas", primary_key: "consulta_id", name: "FK_REFERENCE_10"
-  add_foreign_key "terapias", "prescripciones", column: "prescripcion_id", primary_key: "prescripcion_id", name: "FK_REFERENCE_24"
+  add_foreign_key "terapias", "prescripciones", primary_key: "prescripcion_id", name: "FK_REFERENCE_24"
   add_foreign_key "usuarios", "perfiles", primary_key: "perfil_id", name: "FK_REFERENCE_20"
 end

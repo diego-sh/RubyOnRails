@@ -10,6 +10,14 @@ Rails.application.routes.draw do
   resources :consultas do
     collection do
       post "createAntecedente"
+      post "createConsulta"
+      post "createSintoma"
+      post "createExamenFisico"
+      post "createPedido"
+      post "createTratamiento"
+      post "createReceta"
+      post "createTerapia"
+      
     end
   end
   

@@ -1,0 +1,87 @@
+<%= form_for @consulta, :url => { :action => "createSintoma" }, remote: true, html:{id: "sintomas-form",format: :json} do |f| %>
+  <div>
+        <%= f.fields_for @sintoma do |s|%>
+             <div class="row">
+                 <div class="col-lg-12">
+                    <div class="form-group">
+                        <label for="rgAnatomica">REGIÓN ANATÓMICA</label>
+                        <%= s.text_field :Sin_Region_Anatomica, class:'form-control', id:'rgAnatomica',placeholder:'Nombre de la región'%>
+                    </div>
+                </div>            
+             </div>
+             <div class="row">
+                 <div class="col-lg-12">
+                    <div class="form-group">
+                        <label for="pdoloroso">PUNTO DOLOROSO</label>
+                        <%= s.text_field :Sin_Punto_Doloroso, class:'form-control', id:'pdoloroso',placeholder:''%>
+                    </div>
+                </div>
+             </div>
+            <div class="row">
+                <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="cmbSEvolucion">EVOLUCIÓN</label>
+                    <%= s.select(:Sin_Evolucion, options_for_select([['Agudo', 'AGUDO'], ['Sub Agudo', 'SUB AGUDO'],['Crónico', 'CRONICO']]),{prompt: "SELECCIONE"},{ :class => 'form-control',:id=>'cmbSEvolucion'}) %>
+                </div>
+                </div>
+
+                <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="cmbSTipo">TIPO</label>
+                    <%= s.select(:Sin_Tipo, options_for_select([['Episodico', 'EPISODICO'], ['Continuo', 'CONTINUO'],['Colico', 'COLICO']]),{prompt: "SELECCIONE"},{ :class => 'form-control',:id=>'cmbSTipo'}) %>
+                </div>
+                </div>
+
+                <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="cmbSModificacion">MODIFICACIONES</label>
+                    <%= s.select(:Sin_Modificaciones, options_for_select([['Psición', 'POSICION'], ['Ingesta', 'INGESTA'],['Esfuerzo', 'ESFUERZO'],['Digito Presión','DIGITO PRESION'],['Se Irradia','SE IRRADIA']]),{prompt: "SELECCIONE"},{ :class => 'form-control',:id=>'cmbSModificacion'}) %>  
+                </div>
+                </div>              
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="cmbSIntensidad">INTENSIDAD</label>
+                    <%= s.select(:Sin_Intensidad, options_for_select([['Leve', 'LEVE'], ['Moderado', 'MODERADO'],['Grave', 'GRAVE']]),{prompt: "Seleccione"},{ :class => 'form-control',:id=>'cmbSIntensidad'}) %>  
+                </div>
+                </div>
+
+                <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="cmbSAlivia">ALIVIA CON</label>
+                    <%= s.select(:Sin_Alivia, options_for_select([['Anties Pasmodico', 'ANTIES PASMODICO'], ['Opiaceo', 'OPIACEO'],['Anie', 'ANIE'],['No Alivia','NO ALIVIA']]),{prompt: "Seleccione"},{ :class => 'form-control',:id=>'cmbSAlivia'}) %>  
+                </div>
+                </div>
+            </div>
+    
+        <%end%>
+
+         <%= f.fields_for @diagnostico do |dd|%>
+         <div class="row">
+            <div class="col-lg-12">
+            <div class="form-group">
+                <label for="dgPresuntivo">DIAGNÓSTICO PRESUNTIVO</label>
+                <%= dd.text_area :Diagnostico_Presuntivo, class:'form-control', id:'dgPresuntivo',placeholder:'Detalle su observación'%>
+            </div>
+            </div>
+         </div>
+         <%end%>
+         <div class="row" style="margin-top:10px">
+            <div class="col-lg-3">
+                <div class="actions">
+                    <button type="submit" class="btn btn-primary">
+                    <span><i class="glyphicon glyphicon-plus"></i> Guardar</span>
+                    </button>
+                </div>                
+            </div>
+            <div class="col-lg-3">
+                <button id="btnCancelSintomas" type="button" class="btn btn-primary">Cancelar</button>
+            </div>
+        </div>
+                
+    </div>
+
+
+<% end %>

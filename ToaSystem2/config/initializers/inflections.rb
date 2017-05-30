@@ -13,6 +13,10 @@
    inflect.irregular 'canton', 'cantones'
    inflect.irregular 'provincia', 'provincias'
    inflect.irregular 'cita', 'citas'
+   inflect.irregular 'examen', 'examenes'
+   inflect.irregular 'prescripcion', 'prescripciones'
+   inflect.irregular 'terapia', 'terapias'
+   
 #   inflect.uncountable %w( fish sheep )
  end
 

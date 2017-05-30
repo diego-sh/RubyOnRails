@@ -1,0 +1,43 @@
+<%= form_for @consulta, :url => { :action => "createTratamiento" }, remote: true, html:{id: "tratamiento-form",format: :json} do |f| %>
+    <div style="margin-top: 10px">
+        <%= f.fields_for :prescripcion do |pr|%>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label for="procedimiento">PROCEDIMIENTOS</label>
+                        <%= pr.text_area :Pre_Procedimiento, class:'form-control', id:'procedimiento',placeholder:'Describa procesos realizados al paciente', rows:'5'%>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label for="indicacionesGenerales">INDICACIONES GENERALES</label>
+                        <%= pr.text_area :Pre_Indicaciones_Generales, class:'form-control', id:'indicacionesGenerales',placeholder:'Indicaciones', rows:'4'%>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label for="prescripObservacion">OBSERVACIÓN</label>
+                        <%= pr.text_area :Pre_Observacion, class:'form-control', id:'prescripObservacion',placeholder:'Detalle'%>
+                    </div>
+                </div>
+            </div> 
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="actions">
+                        <button type="submit" class="btn btn-primary">
+                        <span><i class="glyphicon glyphicon-plus"></i> Guardar</span>
+                        </button>
+                    </div>                
+                </div>
+            </div>
+             
+        <% end %>
+        <div class="row" style="margin-bottom: 20px"></div>
+    </div>
+
+<% end %>

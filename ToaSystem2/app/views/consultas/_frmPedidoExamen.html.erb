@@ -1,0 +1,52 @@
+<%= form_for @consulta, :url => { :action => "createPedido" }, remote: true, html:{id: "pedidoExamen-form",format: :json} do |f| %>
+
+         <%= f.fields_for :examen do |ex|%>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="tipo">TIPO DE ESTUDIO</label>
+                        <%= ex.select(:Exa_Tipo, options_for_select([['Rx Convencional', 'RX CONVENCIONAL'], ['Tomografia', 'TOMOGRAFIA'],['Resonancia', 'RESONANCIA'],
+                        ['Ecografia', 'ECOGRAFIA'],['Procedimientos', 'PROCEDIMIENTOS'],['Otros','OTROS']]),{prompt: "SELECCIONE"},{ :class => 'form-control'}) %>
+                    </div>                    
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="prioridad">PRIORIDAD</label>
+                        <%= ex.select(:Exa_Prioridad, options_for_select([['Urgente', 'URGENTE'], ['Normal', 'NORMAL'],['Control', 'CONTROL'],]),{prompt: "SELECCIONE"},{ :class => 'form-control'})%>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label for="estudioDescripcion">DESCRIPCIÓN DE ESTUDIO</label>
+                        <%= ex.text_area :Exa_Descripcion, class:'form-control', id:'estudioDescripcion',placeholder:'Describa tipo de estudio'%>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label for="estudioMotivo">MOTIVO DE ESTUDIO</label>
+                        <%= ex.text_area :Exa_Motivo, class:'form-control', id:'estudioMotivo',placeholder:'Describa motivo de estudio'%>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="actions">
+                        <button type="submit" class="btn btn-primary">
+                        <span><i class="glyphicon glyphicon-plus"></i> Guardar</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                     <button id="btnCancelPedidoExamen" type="button" class="btn btn-primary">Cancelar</button>
+                </div>
+            </div>
+         <% end %>
+    
+<% end %>

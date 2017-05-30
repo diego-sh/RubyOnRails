@@ -27,7 +27,7 @@
                                 <%= pcte.cit_motivo %>
                             </td>
                             <td>
-                                <%= link_to 'Atender', new_consulta_path(:pcte => pcte.paciente_id) %>
+                                <%= link_to 'Atender', new_consulta_path(:pcte => pcte.paciente_id, :cit => pcte.cita_id) %>
                             </td>
                             <td>
                                 <%= link_to 'Editar', consultas_path %>

@@ -22,27 +22,31 @@ $(document).on 'turbolinks:load', ->
         }
     })
     
-###$(document).on 'turbolinks:load', ->
-  #var cantones;
-  $('#paciente_residencia_attributes_Res_Canton').prop 'disabled', false
+$(document).on 'turbolinks:load', ->
+  provincia = $('#paciente_residencia_attributes_Res_Provincia :selected').text()
   cantones = $('#paciente_residencia_attributes_Res_Canton').html()
-  console.log cantones
+  escaped_provincia = provincia.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/@])/g, '\\$1')
+  options = $(cantones).filter("optgroup[label= '#{escaped_provincia}']").html()
+  $('#paciente_residencia_attributes_Res_Canton').html options
+
   $('#paciente_residencia_attributes_Res_Provincia').change ->
     provincia = undefined
     escaped_provincia = undefined
     options = undefined
     provincia = $('#paciente_residencia_attributes_Res_Provincia :selected').text()
     escaped_provincia = provincia.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/@])/g, '\\$1')
-    options = $(cantones).filter('optgroup[label=' + escaped_provincia + ']').html()
-    console.log options
+    options = $(cantones).filter("optgroup[label= '#{escaped_provincia}']").html()
+    ##console.log options
     if options
       $('#paciente_residencia_attributes_Res_Canton').html options
       $('#paciente_residencia_attributes_Res_Canton').prop 'disabled', false
     else
       $('#paciente_residencia_attributes_Res_Canton option:selected').text 'Seleccione'
       $('#paciente_residencia_attributes_Res_Canton').prop 'disabled', true
-###
-$(document).on 'turbolinks:load', ->
+
+
+###$(document).on 'turbolinks:load', ->
+  debugger
   cantones = undefined
   cantones = $('#paciente_residencia_attributes_Res_Canton').html()
   provincia2 = undefined
@@ -52,6 +56,7 @@ $(document).on 'turbolinks:load', ->
   $('#paciente_residencia_attributes_Res_Canton').html options2
   console.log cantones
   $('#paciente_residencia_attributes_Res_Provincia').change ->
+    debugger
     provincia = undefined
     options = undefined
     provincia = $('#paciente_residencia_attributes_Res_Provincia :selected').text()
@@ -60,4 +65,4 @@ $(document).on 'turbolinks:load', ->
     if options
       $('#paciente_residencia_attributes_Res_Canton').html options
     else
-      $('#paciente_residencia_attributes_Res_Canton').empty()
+      $('#paciente_residencia_attributes_Res_Canton').empty()###

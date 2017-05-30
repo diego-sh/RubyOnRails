@@ -1,0 +1,58 @@
+<%= form_for @consulta, :url => { :action => "createExamenFisico" }, remote: true, html:{id: "examenFisico-form",format: :json} do |f| %>
+    <div class="col" style="margin-top: 10px">
+            <%= f.fields_for :examenFisico do |ef|%>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="estadoCivil">P. REGIONAL / SISTEMICO</label>
+                            <%= ef.select(:Efb_Parte_CH, grouped_options_for_select('REGIONAL'=>[['Piel y Faneras', 'PIEL Y FANERAS'], ['Cabeza', 'CABEZA'],['Ojos', 'OJOS'],['Oidos', 'OIDOS'],
+                                        ['Nariz', 'NARIZ'],['Boca','BOCA'],['Oro Faringe','ORO FARINGE'],['Cuello','CUELLO'],['Axilas-Mamas','AXILAS-MAMAS'],
+                                        ['Torax','TORAX'],['Abdomen','ABDOMEN'],['Columna Vertebral','COLUMNA VERTEBRAL'],['Ingle-Perine','INGLE-PERINE'],
+                                        ['Miembros Superiores','MIEMBROS SUPERIORES'],['Miembros Inferiores','MIEMBROS INFERIORES']],
+                                        'SISTÉMICO'=>[['Organos De Los Sentidos','ORGANOS DE LOS SENTIDOS'],['Respiratorio','RESPIRATORIO'],['Cardio Vascular','CARDIO VASCULAR'],
+                                        ['Gigestivo','DIGESTIVO'],['Gentital','GENITAL'],['Urinario','URINARIO'],['Musculo Esquelético','MUSCULO ESQUELETICO'],['Endocrino','ENDOCRINO'],
+                                        ['Hemo Linfático','HEMO LINFATICO'],['Neurológico','NEUROLOGICO']]),{prompt: "SELECCIONE"},{ :class => 'form-control',:id=>'parteCH'}) %>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="genero">EVIDENCIA PATOLOGICA</label>
+                            <div class="radio" style="margin-left:30px">
+                            <%= ef.radio_button(:Efb_Evidencia_Patologica, 'SI',inline: true ) %>
+                            <label for="radio2" style="margin-right: 20px"><span><span></span></span>SI</label>
+                             <%= ef.radio_button(:Efb_Evidencia_Patologica, 'NO',inline: true) %>
+                            <label for="radio2"><span><span></span></span>NO</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="efobservacion">OBSERVACIÓN</label>
+                            <%= ef.text_area :Efb_Observacion, class:'form-control', id:'efobservacion',placeholder:'Describa su observación'%>
+                        </div>
+                    </div>
+                </div>
+                
+            <% end %>
+
+            <div class="row" style="margin-top:10px">
+                <div class="col-md-3">
+                <div class="actions">
+                    <button type="submit" class="btn btn-primary">
+                    <span><i class="glyphicon glyphicon-plus"></i> Guardar</span>
+                    </button>
+                </div>
+                </div>
+                <div class="col-md-3">
+                    <button id="btnCancelExamenFisico" type="button" class="btn btn-primary">Cancelar</button>
+                </div>
+                <div class="col-md-4"></div>
+
+            </div>
+    </div>
+
+<% end %>

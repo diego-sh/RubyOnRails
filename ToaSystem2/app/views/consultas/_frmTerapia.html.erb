@@ -1,0 +1,38 @@
+<%= form_for @consulta, :url => { :action => "createTerapia" }, remote: true, html:{id: "terapia-form",format: :json} do |f| %>
+    <%= f.fields_for :terapia do |t|%>
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="form-group">
+                    <label for="sesionesNumero">NÚMERO DE SESIONES</label>
+                    <%= t.number_field :Ter_Numero_Sesiones, class:'form-control', id:'sesionesNumero', value:'0'%>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="sesionIndicacion">INDICACIÓN</label>
+                    <%= t.text_area :Ter_indicacion, class:'form-control', id:'sesionIndicacion', placeholder:'Indicaciones para la terapia'%>
+                </div>
+            </div>
+        </div>
+
+         <div class="row" style="margin-top:10px">
+            <div class="col-lg-3">
+                <div class="actions">
+                    <button type="submit" class="btn btn-primary">
+                    <span><i class="glyphicon glyphicon-plus"></i> Guardar</span>
+                    </button>
+                </div>                
+            </div>
+            <div class="col-lg-3">
+                <button id="btnCancelTerapia" type="button" class="btn btn-primary">Cancelar</button>
+            </div>
+        </div>
+
+    <%end%>
+
+
+
+<% end %>

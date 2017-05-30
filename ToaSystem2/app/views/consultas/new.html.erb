@@ -95,48 +95,150 @@
 
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab" href="#antecedentes">ANTECEDENTES</a></li>
-  <li><a data-toggle="tab" href="#menu1">Información General</a></li>
-  <li><a data-toggle="tab" href="#menu2">Antescedentes</a></li>
-  <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+  <li><a data-toggle="tab" href="#consulta">CONSULTA</a></li>
+  <li><a data-toggle="tab" href="#planTratamiento">PLAN TRATAMIENTO</a></li>
 </ul>
 
 <div class="tab-content">
   <!-- BEGIN ANTECEDENTE-->
 
-  <div id="antecedentes" class="tab-pane fade in active">
-    <div class="row" style="margin-top:10px;">
-      <div class="col-md-6">
-        <h5>LISTADO DE ANTECEDENTES RELEVANTES</h5>
-        <% @antecedentes.each do |antecedente| %>
-          <!--<div>
-            <p>
-              <%= antecedente.Ant_tipo%>-
-                <%= antecedente.Ant_Descripcion%>
-            </p>
-          </div>-->
-          <dl class="dl-horizontal">
-            <dt> <%= antecedente.Ant_tipo%></dt>
-            <dd><%= antecedente.Ant_Descripcion%>- <%= link_to "Eliminar", class:"red", method: :delete  %></dd>
-          </dl>
-          <% end %>
+  <div id="antecedentes" class="tab-pane fade in active", style="background-color: #fff8e1">
+    <div class="row" style="margin-top:0px;">
+      <div class="row" style="margin-left:20px; margin-top:10px;">
+          <% if notice %>
+            <div id="notice_panel" style="width: 80%; margin:0 auto">
+              <p id="notice">
+                <%= notice %>
+              </p>
+            </div>
+            <% end %>
       </div>
-      <div class="col-md-6">
-        <%= render 'frmAntecedentes' %>
+
+      <div class="col-lg-7">
+        <h5>LISTADO DE ANTECEDENTES RELEVANTES</h5>
+        <dl class="dl-horizontal" id="antecedente-box">
+          <% @antecedentes.each do |antecedente| %>          
+              <dt> <%= antecedente.Ant_tipo%></dt>
+              <dd><%= antecedente.Ant_Descripcion%></dd>
+          <% end %>
+        </dl>
+      </div>
+      <div class="col-lg-5">
+        <div class="panel panel-info">
+          <div class="panel-heading">NUEVO ANTECEDENTE</div>
+          <div class="panel-body">
+              <div>
+                 <%= render 'frmAntecedentes' %>
+              </div>
+          </div>
+        </div>
+        
       </div>
     </div>
   </div>
   <!--END ANTECEDENTE-->
+  
+  <!-- BEGIN CONSULTA-->
+  <div id="consulta" class="tab-pane fade">
 
-  <div id="menu1" class="tab-pane fade">
-    <h3>Menu 1</h3>
-    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    <div class="row", style="background-color: #fff8e1; margin-left: 1px; margin-right: 1px">
+      <div class="col-lg-7">
+      <%= render 'frmConsulta' %>  
+    </div>
+    <div class="col-lg-5" style="padding-top:20px; background-color: #fff8e1">
+      <div id="pnlOpciones">
+        <div class="row">
+          <button id="btnCaracteristicasDolor" type="button" class="btn btn-warning" style="width: 350px">REGISTRAR CARACTERISTICA DEL DOLOR</button>
+        </div>        
+        <div class="row" style="margin-top: 10px">
+          <button id="btnExamenFisico" type="button" class="btn btn-warning" style="width: 350px">REGISTRAR EXAMEN FÍSICO</button>
+        </div>
+        <div class="row" style="margin-top: 10px">
+          <button id="btnPedidoExamen" type="button" class="btn btn-warning" style="width: 350px">REGISTRAR PEDIDO IMAGENOLOGIA</button>
+        </div>
+        <div class="row" style="margin-top: 10px">
+          <button id="btnModal" type="button" class="btn btn-warning" style="width: 350px">MODAL</button>
+        </div>
+      </div>
+      
+      <div id="frmCaracteristicasDolor">
+        <div class="panel panel-info">
+          <div class="panel-heading">CARACTERISTICA DEL DOLOR</div>
+          <div class="panel-body">
+              <div>
+                 <%= render 'frmSintomas' %>
+              </div>
+          </div>
+        </div>        
+      </div>
+      <div id="frmPedidoImagenologia">
+        <div class="panel panel-info">
+          <div class="panel-heading">PEDIDO IMAGENOLOGIA</div>
+          <div class="panel-body">
+              <div>
+                 <%= render 'frmPedidoExamen' %> 
+              </div>
+          </div>
+        </div>   
+               
+      </div>
+      <div id="frmExamenFisico">
+        <div class="panel panel-info">
+          <div class="panel-heading">EXAMEN FÍSICO</div>
+          <div class="panel-body">
+              <div>
+                 <%= render 'frmExamenFisico' %>  
+              </div>
+          </div>
+        </div>          
+      </div>
+    </div>
+    </div>
+    
+      
   </div>
-  <div id="menu2" class="tab-pane fade">
-    <h3>Menu 2</h3>
-    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+  <!--END CONUSLTA-->
+  
+
+  <div id="planTratamiento" class="tab-pane fade">
+    <div class="row"  style="background-color: #fff8e1; margin-left: 1px; margin-right: 1px">
+      <div class="col-lg-7">
+        <%= render 'frmTratamiento' %>
+      </div>
+        <div class="col-lg-5">
+          <div id="pnlOpcionesTratamiento">
+            <div class="row">
+              <button id="btnRecetaMedica" type="button" class="btn btn-warning" style="width: 350px">REGISTRAR RECETA MÉDICA</button>
+            </div>
+            <div class="row" style="margin-top: 10px">
+              <button id="btnTerapia" type="button" class="btn btn-warning" style="width: 350px">REGISTRAR TERAPIA</button>
+            </div>
+          </div>
+          <div id="frmRecetaMedica">
+            <div class="panel panel-info">
+              <div class="panel-heading">RECETA MÉDICA</div>
+              <div class="panel-body">
+                  <div>
+                    <%= render 'frmReceta' %> 
+                  </div>
+              </div>
+            </div> 
+          </div>
+          <div id="frmTerapia">
+            <div class="panel panel-info">
+              <div class="panel-heading">TERAPIA</div>
+              <div class="panel-body">
+                  <div>
+                    <%= render 'frmTerapia' %> 
+                  </div>
+              </div>
+            </div> 
+          </div>          
+        </div>
+    </div>
+    
   </div>
-  <div id="menu3" class="tab-pane fade">
-    <h3>Menu 3</h3>
-    <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-  </div>
+  
 </div>
+
+<!--MODAL-->
