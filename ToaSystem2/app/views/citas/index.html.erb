@@ -20,7 +20,7 @@
         <div class="col-md-4">
           <div class="form-group">
             <label for="perfil">POR ESPECIALISTA</label>
-            <%= f.collection_select :medico_id, @especialistas, :medico_id, :Nombre,{},{ :class => 'form-control', :id => 'citas_selector'} %>
+            <%= f.collection_select :medico_id, @especialistas, :medico_id, :Nombre,{prompt: "TODOS"},{ :class => 'form-control', :id => 'citas_selector'} %>
           </div>
         </div>
         <% end %>
@@ -30,7 +30,7 @@
       <div class="col-md-4">
        <label>POR PACIENTE</label>
          <div class="input-group">
-           <input type="text" class="form-control" id = 'paciente'>
+           <input type="text" class="form-control" id = 'paciente' placeholder="Cédula">
               <span class="input-group-btn">
                   <button class="btn btn-default" type="button" name="cedula" id="cedula" onclick="filtroPaciente()">
                     <span class="glyphicon glyphicon-search"></span>
