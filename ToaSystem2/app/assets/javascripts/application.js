@@ -18,7 +18,7 @@
 //= require dataTables/jquery.dataTables
 //= require jquery-ui
 //= require bootstrap-sprockets
-//= require rails.validations
+//= require rails.validations.coffee
 //= require_tree .
 //= require moment
 //= require fullcalendar
