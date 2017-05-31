@@ -4,7 +4,7 @@
                 <div class="col-lg-12">
                     <div class="form-group" style="padding-right: 20px">
                         <label for="enfermedadActual">MOTIVO DE CONSULTA</label>
-                        <%= f.text_field :Con_Motivo, class:'form-control', id:'enfermedadActual',placeholder:'Describa'%>
+                        <%= f.text_field :Con_Motivo, class:'form-control', id:'enfermedadActual',placeholder:'Describa', style:'text-transform:none'%>
                     </div>
                 </div>
             </div>
@@ -13,7 +13,7 @@
                 <div class="col-lg-12">
                     <div class="form-group" style="padding-right: 20px">
                         <label for="enfermedadActual">ENFERMEDAD ACTUAL</label>
-                        <%= f.text_area :Con_Cronologia, class:'form-control', id:'enfermedadActual',placeholder:'Describa los hallasgos, novedades', rows:'6'%>
+                        <%= f.text_area :Con_Cronologia, class:'form-control', id:'enfermedadActual',placeholder:'Describa los hallazgos, novedades', rows:'6'%>
                     </div>
                 </div>
             </div>
@@ -22,7 +22,7 @@
                 <div class="col-lg-12">
                     <div class="form-group" style="padding-right: 20px">
                         <label for="diagnostico">DIAGNÓSTICO</label>
-                        <%= f.text_area :Con_Diagnostico_Final, class:'form-control', id:'diagnostico',placeholder:'diagnóstico final', rows:'3'%>
+                        <%= f.text_area :Con_Diagnostico_Final, class:'form-control', id:'diagnostico',placeholder:'Diagnóstico Definitivo', rows:'3'%>
                     </div>
                 </div>
             </div>
@@ -40,15 +40,11 @@
                  <div class="col-lg-12">
                     <div class="form-group" style="padding-right: 20px">
                         <label for="diagnostico">OBSERVACIÓN</label>
-                        <%= f.text_field :Con_Observacion, class:'form-control', id:'diagnostico',placeholder:'detalle'%>
+                        <%= f.text_field :Con_Observacion, class:'form-control', id:'diagnostico',placeholder:'Detalle',style:'text-transform:none'%>
                     </div>
                  </div>
             </div>
-
-            <div class="row">
-                <div id="consulta-box">
-                </div>
-            </div>
+           
             <div class="row">
                 <div class="col-lg-4" >
                     <div class="actions">

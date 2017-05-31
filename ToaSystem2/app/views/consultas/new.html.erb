@@ -140,7 +140,6 @@
   
   <!-- BEGIN CONSULTA-->
   <div id="consulta" class="tab-pane fade">
-
     <div class="row", style="background-color: #fff8e1; margin-left: 1px; margin-right: 1px">
       <div class="col-lg-7">
       <%= render 'frmConsulta' %>  
@@ -148,16 +147,13 @@
     <div class="col-lg-5" style="padding-top:20px; background-color: #fff8e1">
       <div id="pnlOpciones">
         <div class="row">
-          <button id="btnCaracteristicasDolor" type="button" class="btn btn-warning" style="width: 350px">REGISTRAR CARACTERISTICA DEL DOLOR</button>
+          <button id="btnCaracteristicasDolor" type="button" class="btn btn-warning pull-right" style="width: 350px">REGISTRAR CARACTERISTICA DEL DOLOR</button>
         </div>        
         <div class="row" style="margin-top: 10px">
-          <button id="btnExamenFisico" type="button" class="btn btn-warning" style="width: 350px">REGISTRAR EXAMEN FÍSICO</button>
+          <button id="btnExamenFisico" type="button" class="btn btn-warning pull-right" style="width: 350px">REGISTRAR EXAMEN FÍSICO</button>
         </div>
         <div class="row" style="margin-top: 10px">
-          <button id="btnPedidoExamen" type="button" class="btn btn-warning" style="width: 350px">REGISTRAR PEDIDO IMAGENOLOGIA</button>
-        </div>
-        <div class="row" style="margin-top: 10px">
-          <button id="btnModal" type="button" class="btn btn-warning" style="width: 350px">MODAL</button>
+          <button id="btnPedidoExamen" type="button" class="btn btn-warning pull-right" style="width: 350px">REGISTRAR PEDIDO IMAGENOLOGIA</button>
         </div>
       </div>
       
@@ -205,18 +201,18 @@
       <div class="col-lg-7">
         <%= render 'frmTratamiento' %>
       </div>
-        <div class="col-lg-5">
+        <div class="col-lg-5" style="padding-top:20px">
           <div id="pnlOpcionesTratamiento">
             <div class="row">
-              <button id="btnRecetaMedica" type="button" class="btn btn-warning" style="width: 350px">REGISTRAR RECETA MÉDICA</button>
+              <button id="btnRecetaMedica" type="button" class="btn btn-warning pull-right" style="width: 350px">REGISTRAR RECETA MÉDICA</button>
             </div>
             <div class="row" style="margin-top: 10px">
-              <button id="btnTerapia" type="button" class="btn btn-warning" style="width: 350px">REGISTRAR TERAPIA</button>
+              <button id="btnTerapia" type="button" class="btn btn-warning pull-right" style="width: 350px">REGISTRAR TERAPIA</button>
             </div>
           </div>
           <div id="frmRecetaMedica">
             <div class="panel panel-info">
-              <div class="panel-heading">RECETA MÉDICA</div>
+              <div class="panel-heading">REGISTRAR RECETA MÉDICA</div>
               <div class="panel-body">
                   <div>
                     <%= render 'frmReceta' %> 
@@ -241,4 +237,37 @@
   
 </div>
 
-<!--MODAL-->
+<!--MODAL ERROR-->
+
+<div class="modal fade" id="modalError" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #f44336">
+        <h5 class="modal-title" id="titleError" style="color: #fff"></h5>
+      </div>
+      <div class="modal-body" id="bodyError">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">ACEPTAR</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--MODAL SUCCESS-->
+
+<div class="modal fade" id="modalSuccess" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #66bb6a">
+        <h5 class="modal-title" id="titleSuccess" style="color: #fff"></h5>
+      </div>
+      <div class="modal-body" id="bodySuccess">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">ACEPTAR</button>
+      </div>
+    </div>
+  </div>
+</div>
+

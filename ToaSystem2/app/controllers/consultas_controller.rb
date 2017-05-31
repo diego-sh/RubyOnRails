@@ -35,8 +35,8 @@ class ConsultasController < ApplicationController
     @antecedente.usuario_id=session[:usuario]["usuario_id"]
     respond_to do |format|
       if @antecedente.save
-        flash[:notice] = "Antecedente guardado exitosamente!"
-        format.json { render json: @antecedente, status: :created }
+        @msg="Antecedente creado satisfactoriamente"
+        format.json { render json: {data:@antecedente, mensaje:@msg}, status: :created }
         format.html
       else
          format.json { render json: @antecedente.errors, status: :unprocessable_entity }
@@ -57,17 +57,16 @@ class ConsultasController < ApplicationController
         @consulta.usuario_id=session[:usuario]["usuario_id"]     
         if @consulta.save          
           @@consultaTMP=@consulta
-          format.json { render json: @consulta, status: :created }
-          format.html                
+          @msg="Consulta guardada satisfactoriamente."
+          format.json { render json: {data:@consulta, mensaje:@msg}, status: :created }              
         else
           format.json { render json: @consulta.errors, status: :unprocessable_entity }
         end
       else
         @@consultaTMP.update(:Con_Cronologia=>params[:consulta][:Con_Cronologia],:Con_Diagnostico_Final=>params[:consulta][:Con_Diagnostico_Final],:Con_Codigo_CIE=>params[:consulta][:Con_Codigo_CIE],:Con_Observacion=>params[:consulta][:Con_Observacion],:Con_Motivo=>params[:consulta][:Con_Motivo] )
-        format.json { render json: @consulta, status: :created }
-        format.html   
-      end
-      
+        @msg="Consulta guardada satisfactoriamente."
+        format.json { render json: {data:@consulta, mensaje:@msg}, status: :created }  
+      end      
    end    
     
   end
@@ -91,15 +90,16 @@ class ConsultasController < ApplicationController
           @diagnostico.Diagnostico_Presuntivo=params[:consulta][:diagnostico][:Diagnostico_Presuntivo]
           @diagnostico.Codigo_CIE=params[:consulta][:diagnostico][:Codigo_CIE]
           @diagnostico.save
-          format.json { render json: @sintoma, status: :created }
+          @msg="Característica guardada satisfactoriamente"
+          format.json { render json: {data:@sintoma, mensaje:@msg}, status: :created }
           format.html   
         else
           format.json { render json: @sintoma.errors, status: :unprocessable_entity }
         end
             
       else
-        puts "priemro crea consulta"
-        format.json { render json: @sintoma.errors, status: :unprocessable_entity }      
+        @msg="Guarde primero la consulta"
+        format.json { render json:{mensaje:@msg}, status: :unprocessable_entity }      
       end
     end
   end
@@ -113,16 +113,18 @@ class ConsultasController < ApplicationController
         @examenFisico.Efb_Parte_CH=params[:consulta][:examenFisico][:Efb_Parte_CH]
         @examenFisico.Efb_Evidencia_Patologica=params[:consulta][:examenFisico][:Efb_Evidencia_Patologica]
         if @examenFisico.save
-          format.json { render json: @examenFisico, status: :created }
+          @msg="Examen físico guardado satisfactoriamente"
+          format.json { render json:{ data:@examenFisico, mensaje:@msg}, status: :created }
         else
         end
                 
       else
-        puts "priemro crea consulta"
-        format.json { render json: @examenFisico.errors, status: :unprocessable_entity }
+        @msg="Guarde primero la consulta"
+        format.json { render json:{mensaje:@msg}, status: :unprocessable_entity } 
       end
     end     
   end
+
 
   def createPedido
     @examen=Examen.new
@@ -142,14 +144,15 @@ class ConsultasController < ApplicationController
         @examen.Exa_Descripcion=params[:consulta][:examen][:Exa_Descripcion]
         @examen.prescripcion_id=@@prescripcionTMP.prescripcion_id
         if @examen.save
-          format.json { render json: @examen, status: :created }
+          @msg="Pedido de imagenologia guardado satisfactoriamente"
+          format.json { render json: {data:@examen, mensaje:@msg}, status: :created }
         else
           format.json { render json: @examen.errors, status: :unprocessable_entity }
         end
         
       else
-        puts "priemro crea consulta"
-        format.json { render json: @examen.errors, status: :unprocessable_entity }
+        @msg="Guarde primero la consulta"
+        format.json { render json:{mensaje:@msg}, status: :unprocessable_entity } 
       end
       
     end    
@@ -161,7 +164,8 @@ class ConsultasController < ApplicationController
       if @@consultaTMP!=nil
         if @@prescripcionTMP!=nil
           @@prescripcionTMP.update(:Pre_Procedimiento=>params[:consulta][:prescripcion][:Pre_Procedimiento], :Pre_Indicaciones_Generales=>params[:consulta][:prescripcion][:Pre_Indicaciones_Generales], :Pre_Observacion=>params[:consulta][:prescripcion][:Pre_Observacion])
-          format.json { render json: @prescripcion, status: :created }
+          @msg="Tratamiento guardado satisfactoriamente"
+          format.json { render json:{data: @prescripcion, mensaje:@msg}, status: :created }
         else
           @prescripcion.consulta_id=@@consultaTMP.consulta_id
           @prescripcion.Pre_Procedimiento=params[:consulta][:prescripcion][:Pre_Procedimiento]
@@ -169,15 +173,16 @@ class ConsultasController < ApplicationController
           @prescripcion.Pre_Observacion=params[:consulta][:prescripcion][:Pre_Observacion]
           if @prescripcion.save
             @@prescripcionTMP=@prescripcion
-            format.json { render json: @prescripcion, status: :created }            
+            @msg="Tratamiento guardado satisfactoriamente"
+            format.json { render json:{data: @prescripcion, mensaje:@msg}, status: :created }           
           else
             format.json { render json: @prescripcion.errors, status: :unprocessable_entity }
           end
           
         end        
       else
-        puts "priemro crea consulta"
-        format.json { render json: @examen.errors, status: :unprocessable_entity }
+        @msg="Guarde primero la consulta"
+        format.json { render json:{mensaje:@msg}, status: :unprocessable_entity }
       end      
     end    
   end
@@ -198,14 +203,15 @@ class ConsultasController < ApplicationController
         @medicina.Ins_Indicacion=params[:consulta][:medicina][:Ins_Indicacion]
         @medicina.Ins_Cantidad=params[:consulta][:medicina][:Ins_Cantidad]
         if @medicina.save
-          format.json { render json: @medicina, status: :created }     
+          @msg="Medicamento añadido satisfactoriamente"
+          format.json { render json: {data:@medicina,mensaje:@msg}, status: :created }     
         else
           format.json { render json: @medicina.errors, status: :unprocessable_entity }
         end
           
       else
-          puts "priemro crea consulta"
-          format.json { render json: @medicina.errors, status: :unprocessable_entity }
+        @msg="Guarde primero la consulta"
+        format.json { render json:{mensaje:@msg}, status: :unprocessable_entity }
       end              
 
     end    
@@ -226,13 +232,14 @@ class ConsultasController < ApplicationController
         @terapia.Ter_Numero_Sesiones=params[:consulta][:terapia][:Ter_Numero_Sesiones]
         @terapia.Ter_indicacion=params[:consulta][:terapia][:Ter_indicacion]
         if @terapia.save
-          format.json { render json: @terapia, status: :created } 
+          @msg="Terapia guardada satisfactoriamente"
+          format.json { render json:{data: @terapia, mensaje:@msg}, status: :created } 
         else
           format.json { render json: @terapia.errors, status: :unprocessable_entity }
         end
       else
-        puts "priemro crea consulta"
-        format.json { render json: @medicina.errors, status: :unprocessable_entity }
+        @msg="Guarde primero la consulta"
+        format.json { render json:{mensaje:@msg}, status: :unprocessable_entity }
       end      
     end    
   end

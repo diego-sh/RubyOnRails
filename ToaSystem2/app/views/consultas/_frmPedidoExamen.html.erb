@@ -6,13 +6,13 @@
                     <div class="form-group">
                         <label for="tipo">TIPO DE ESTUDIO</label>
                         <%= ex.select(:Exa_Tipo, options_for_select([['Rx Convencional', 'RX CONVENCIONAL'], ['Tomografia', 'TOMOGRAFIA'],['Resonancia', 'RESONANCIA'],
-                        ['Ecografia', 'ECOGRAFIA'],['Procedimientos', 'PROCEDIMIENTOS'],['Otros','OTROS']]),{prompt: "SELECCIONE"},{ :class => 'form-control'}) %>
+                        ['Ecografia', 'ECOGRAFIA'],['Procedimientos', 'PROCEDIMIENTOS'],['Otros','OTROS']]),{prompt: "Seleccione"},{ :class => 'form-control'}) %>
                     </div>                    
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="prioridad">PRIORIDAD</label>
-                        <%= ex.select(:Exa_Prioridad, options_for_select([['Urgente', 'URGENTE'], ['Normal', 'NORMAL'],['Control', 'CONTROL'],]),{prompt: "SELECCIONE"},{ :class => 'form-control'})%>
+                        <%= ex.select(:Exa_Prioridad, options_for_select([['Urgente', 'URGENTE'], ['Normal', 'NORMAL'],['Control', 'CONTROL'],]),{prompt: "Seleccione"},{ :class => 'form-control'})%>
                     </div>
                 </div>
             </div>

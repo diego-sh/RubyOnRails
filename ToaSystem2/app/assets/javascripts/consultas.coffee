@@ -7,7 +7,8 @@ $(document).on 'turbolinks:load', ->
     $('#frmCaracteristicasDolor').hide();
     $('#frmExamenFisico').hide();
     $('#frmRecetaMedica').hide();
-    $('#frmTerapia').hide();    
+    $('#frmTerapia').hide(); 
+    $('#showReceta').hide();   
     $('#btnPedidoExamen').click ->
         $('#pnlOpciones').hide();
         $('#frmPedidoImagenologia').show();
@@ -42,63 +43,83 @@ $(document).on 'turbolinks:load', ->
 #ANTECEDENTE
 $(document).on "ajax:success","form#antecedente-form", (ev,data,xhr, settings)->
     $('#DesAntecedente').val( "")
-    $("#antecedente-box").append("<dt>#{data.Ant_tipo}</dt><dd>#{data.Ant_Descripcion}</dd>")
+    $("#antecedente-box").append("<dt>#{data.data.Ant_tipo}</dt><dd>#{data.data.Ant_Descripcion}</dd>")
+    showModal data.mensaje, 'success'
 
 #CARACTERISTICAS-DEL-DOLOR  
 $(document).on "ajax:success","form#sintomas-form", (ev,data,xhr, settings)->
     $('#rgAnatomica').val("")
     $('#pdoloroso').val("")
     $('#dgPresuntivo').val("")
-    alert "Caracteristica Guardada exitosamente"  
+    showModal data.mensaje, 'success'  
 $(document).on "ajax:error","form#sintomas-form", (ev,data)->
-    console.log data
-    alert "Crea primero la consulta"
+    showModal data.responseJSON.mensaje, 'error'    
 
 #CONSULTA
 $(document).on "ajax:success","form#consulta-form", (ev,data,xhr, settings)->
-    alert "Consulta Guardada exitosamente"
+    showModal data.mensaje, 'success'
 $(document).on "ajax:error","form#consulta-form", (ev,data,xhr, settings)->
     console.log data
 
 #EXAMEN-FISICO
 $(document).on "ajax:success","form#examenFisico-form", (ev,data,xhr, settings)->
     $('#efobservacion').val("")
-    alert "Examen Fisico Guardado exitosamente"
+    showModal data.mensaje, 'success'
 $(document).on "ajax:error","form#examenFisico-form", (ev,data)->
-    console.log data
-    alert "Crea primero la consulta"
+    showModal data.responseJSON.mensaje, 'error'
 
 #PEDIDO-EXAMEN
 $(document).on "ajax:success","form#pedidoExamen-form", (ev,data,xhr, settings)->
     $('#estudioDescripcion').val("")
     $('#estudioMotivo').val("")
-    alert "Pedido Guardado exitosamente"
+    showModal data.mensaje, 'success'
 $(document).on "ajax:error","form#pedidoExamen-form", (ev,data,xhr, settings)->
-    console.log data
-    alert "Crea primero la consulta"
+    showModal data.responseJSON.mensaje, 'error'
 
 #TRATAMIENTO
 $(document).on "ajax:success","form#tratamiento-form", (ev,data,xhr, settings)->
-    alert "Tratamiento Guardado exitosamente"
+    showModal data.mensaje, 'success'    
 $(document).on "ajax:error","form#tratamiento-form", (ev,data,xhr, settings)->
-    console.log data
-    alert "Crea primero la consulta"
+    showModal data.responseJSON.mensaje, 'error'
 
 #RECETA-MEDICA
 $(document).on "ajax:success","form#receta-form", (ev,data,xhr, settings)->
-    alert "Item Guardado exitosamente"
+    $('#showReceta').show()
+    $('#cantidad').val(0)
+    $('#medicamento').val("")
+    $('#medIndicacion').val("")
+    $('#prescipcion1').append("<li>#{data.data.Ins_Nombre}</li>
+                                <p class='styleIndicacion'>Indicación: #{data.data.Ins_Indicacion}</p>");
+    showModal data.mensaje, 'success'
 $(document).on "ajax:error","form#receta-form", (ev,data,xhr, settings)->
-    console.log data
-    alert "Crea primero la consulta"
+    showModal data.responseJSON.mensaje, 'error'
 
 #TERAPIA
 $(document).on "ajax:success","form#terapia-form", (ev,data,xhr, settings)->
-    alert "Terapia Guardada exitosamente"
+    $('#sesionesNumero').val(0)
+    $('#sesionIndicacion').val("")    
+    showModal data.mensaje, 'success'
 $(document).on "ajax:error","form#terapia-form", (ev,data,xhr, settings)->
-    console.log data
-    alert "Crea primero la consulta"
+    showModal data.responseJSON.mensaje, 'error'
 
 #PRUEBA MODAL
 $(document).on 'turbolinks:load', ->
-    $('#btnModal').click ->
-        $('#modal').dialog()
+    $('#btnModal').click ->        
+        $('#exampleModalLongTitle').html("ERROR")
+        $('#body').html("<p>felicidades</p>")
+        $('#exampleModalLong').modal()
+
+
+
+
+###FUNCIONES DE AYUDA ###
+showModal = (message, type) ->
+  if type == 'success'
+    $('#titleSuccess').html 'ÉXITO'
+    $('#bodySuccess').html "#{message}"
+    $('#modalSuccess').modal()
+  if type == 'error'
+    $('#titleError').html 'ERROR'
+    $('#bodyError').html "#{message}"
+    $('#modalError').modal()
+  return
