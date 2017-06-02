@@ -58,11 +58,12 @@
         </div>
         <div class="row" style="margin-bottom: 30px"></div>
       </div>
-<div class="row">
-  <% flash.each do |name, msg| %>
-      <%= content_tag :div, msg, class: "mensajeAlert" %>
-  <% end %>
-</div>
+    </div>
+
+    <div class="row">
+      <% flash.each do |name, msg| %>
+          <%= content_tag :div, msg, class: "mensajeAlert" %>
+      <% end %>
     </div>
 
     <div>
@@ -81,14 +82,14 @@
             <div class="col-lg-6">
               <div class="form-group">
                 <label for="fechacita">FECHA</label>
-                <%= f.date_field :Cit_Fecha, value: Date.today.strftime("%Y-%m-%d"),class:'form-control',id:'fechacita'%>
+                <%= f.date_field :Cit_Fecha, value: Date.today.strftime("%Y-%m-%d"),min: Date.today,class:'form-control',id:'fechacita'%>
               </div>
             </div>
             <div class="col-lg-6">
               <div class="form-group">
                 <label for="fechacita">HORA</label>
-                <%= f.time_field :Cit_Hora, value: "12:00", class:'form-control',id:'fechacita'%>
-              </div>
+                <%= f.select(:Cit_Hora, options_for_select([['09:00'], ['09:30'], ['10:00'],['10:30'],['11:00'],['11:30'],['12:00'],['12:30'],['13:00'],['13:30'],['14:00'],['14:30'],['15:00'],['15:30'],['16:00'],['16:30'],['17:00']]),{}, { :class=> 'form-control' }) %>
+              </div>              
             </div>
           </div>
         </div>
