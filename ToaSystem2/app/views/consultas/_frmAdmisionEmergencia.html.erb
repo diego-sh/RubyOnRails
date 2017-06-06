@@ -1,0 +1,352 @@
+<%= form_for @consulta, :url => { :action => "createEmergencia" }, remote: true, html:{id: "emergencia-form",format: :json} do |f| %>
+    <div class="panel-group" style="margin-top: 15px">
+        <%= f.fields_for :estadoPaciente do |ep|%>
+        <div class="panel">
+            <div class="panel-heading" style="background-color: #b0bec5">
+                <h5 class="panel-title" style="color: #fff">
+                <a data-toggle="collapse" href="#collapse2">REGISTRO DE ADMISIÓN</a>
+                </h5>
+            </div>
+            <div id="collapse2" class="panel-collapse collapse">
+                <div class="panel-body" style="background-color:  #fff8e1">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="nombrePN">NOMBRE DE PERSONA PARA NOTIFICACIÓN</label>
+                                <%= ep.text_field :Stp_Persona_Notificacion, class:'form-control', id:'nombrePN', placeHolder:'Nombre y Apellido'%>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label for="parentesco">PARENTESCO</label>
+                                <%= ep.text_field :Stp_Parentesco_Afinidad, class:'form-control', id:'parentesco', placeHolder:'Parentesco'%>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="direccionPN">DIRECCIÓN</label>
+                                <%= ep.text_field :Stp_Direccion_PN, class:'form-control', id:'direccionPN', placeHolder:'Dirección'%>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label for="telefonoPN">TELEFONO</label>
+                                <%= ep.number_field :Stp_Telefono_PN, class:'form-control', id:'telefonoPN', placeHolder:'Telefono'%>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="nombreAcompañante">NOMBRE DEL ACOMPAÑANTE</label>
+                                <%= ep.text_field :Stp_Nombre_Acompaniante, class:'form-control', id:'nombreAcompañante', placeHolder:'Nombre y Apellido'%>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label for="cedulaAcompañante">CEDULA DE IDENTIDAD</label>
+                                <%= ep.text_field :Stp_Cedula_Acompaniante, class:'form-control', id:'cedulaAcompañante', placeHolder:'Cedula', maxlength:'10'%>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="direccionAcompañante">DIRECCIÓN</label>
+                                <%= ep.text_field :Stp_Direccion_AC, class:'form-control', id:'direccionAcompañante', placeHolder:'Direccón'%>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label for="telefonoAcompañante">TELEFONO</label>
+                                <%= ep.number_field :Stp_Telefono_Acompaniante, class:'form-control', id:'telefonoAcompañante', placeHolder:'Telefono', maxlength:'10'%>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label for="cmbFormaLlegada">FORMA DE LLEGADA</label>
+                                <%= ep.select(:Stp_Forma_Llegada, options_for_select([['Ambulatorio', 'AMBULATORIO'], ['Silla de Ruedas', 'SILLA DE RUEDAS'],['Camilla', 'CAMILLA']]),{prompt: "Seleccione"},{ :class => 'form-control',:id=>'cmbFormaLlegada'}) %>  
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="fuenteInformacion">FUENTE INFORMACIÓN</label>
+                                <%= ep.text_field :Stp_Fuente_Informacion, class:'form-control', id:'fuenteInformacion', placeHolder:'Fuente'%>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label for="institucion">INSTITUCION QUE ENTREGA AL PACIENTE</label>
+                                <%= ep.text_field :Stp_Institucion, class:'form-control', id:'institucion', placeHolder:'Nombre'%>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="institucionTelefono">TELEFONO</label>
+                                <%= ep.number_field :Stp_Telefono_Institucion, class:'form-control', id:'institucionTelefono', placeHolder:'Telefono'%>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>            
+
+        <div class="panel">
+            <div class="panel-heading" style="background-color: #b0bec5">
+                <h5 class="panel-title" style="color: #fff">
+                    <a data-toggle="collapse" href="#collapse3">INICIO DE ATENCIÓN</a>
+                </h5>
+            </div>
+             <div id="collapse3" class="panel-collapse collapse">
+                <div class="panel-body" style="background-color:  #fff8e1">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label for="horaAtencion">HORA</label>
+                                <%= ep.time_field :Stp_Hora_Inicio, class:'form-control', id:'horaAtencion', value: Time.now.strftime("%H:%M")%>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="viaAerea">VIA AEREA</label>
+                                <%= ep.select(:Stp_Via_Aerea, options_for_select([['Libre', 'LIBRE'], ['Obstruida', 'OBSTRIUDA']]),{prompt: "Seleccione"},{ :class => 'form-control',:id=>'viaAerea'}) %>                      
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                <label for="cmbCondicionesLlegada">CONDICIÓN DE LLEGADA</label>
+                                <%= ep.select(:Stp_Condicion_Llegada, options_for_select([['Estable', 'ESTABLE'], ['Inestable', 'INESTABLE'],['Otro','OTRO']]),{prompt: "Seleccione"},{ :class => 'form-control',:id=>'cmbCondicionesLlegada'}) %>                      
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4" id="condicionesLlegadaTextoColum">
+                            <div class="form-group">
+                                <label for="condicionesLlegadaTexto">DESCRIBA CONDICIÓN DE LLEGADA</label>
+                                <%= ep.text_field :Stp_Condicion_Llegada, class:'form-control', id:'condicionesLlegadaTexto', placeHolder:'Describa la condición'  %>
+                            </div>
+                        </div>               
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <div class="form-group">
+                                <label for="motivoLlegada">MOTIVO DE LLEGADA</label>
+                                <%= ep.text_area :Stp_Motivo_Llegada, class:'form-control', id:'motivoLlegada', placeHolder:'Describa el motivo'  %>                      
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+              
+        <% end %>
+    
+        <div class="panel">
+            <div class="panel-heading" style="background-color: #b0bec5">
+                <h5 class="panel-title" style="color: #fff">
+                    <a data-toggle="collapse" href="#collapse1">ACCIDENTE, VIOLENCIA, INTOXICACIÓN</a>
+                </h5>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse">
+                <div class="panel-body" style="background-color:  #fff8e1">
+                    <%= f.fields_for :percance do |p|%>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="lugarEvento">LUGAR DEL EVENTO</label>
+                                    <%= p.text_field :Pca_Lugar_Evento, class:'form-control', id:'lugarEvento', placeHolder:'Nombre'  %>                      
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label for="direccionEvento">DIRECCIÓN DEL EVENTO</label>
+                                    <%= p.text_field :Pca_Direccion_Evento, class:'form-control', id:'direccionEvento', placeHolder:'Dirección'  %>                      
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label for="fechaEvento">FECHA</label>
+                                    <%= p.date_field :Pca_Fecha, class:'form-control', id:'fechaEvento'%>                      
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label for="horaEvento">HORA</label>
+                                    <%= p.time_field :Pca_Hora, class:'form-control', id:'horaEvento'%>                      
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="direccionEvento">VEHÍCULO O ARMA</label>
+                                    <%= p.text_field :Pca_Tipo_Objeto, class:'form-control', id:'direccionEvento', placeHolder:'Describa'%>                      
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="cmbTipoEvento">TIPO DE EVENTO</label>
+                                    <%= p.select(:Pca_Tipo_Evento, options_for_select([['Accidente', 'ACCIDENTE'], ['Envenenamiento', 'ENVENENAMIENTO'],['Violencia','VIOLENCIA'],['Otro','OTRO']]),{prompt: "Seleccione"},{ :class => 'form-control',:id=>'cmbTipoEvento'}) %>              
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="nombreTipoEvento">NOMBRE TIPO DE EVENTO</label>
+                                    <%= p.text_field :Pca_Tipo_Evento, class:'form-control', id:'nombreTipoEvento', placeHolder:'Otro tipo de evento'%>
+                                    </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="row" style="text-align: center">AUTORIDAD COMPETENTE</div>
+                                <div class="form-group">
+                                    <div class="col-lg-6">
+                                        <label for="cmbTipoEvento">HORA DENUNCIA</label>
+                                        <%= p.time_field :Pca_Hora_Denuncia, class:'form-control'%>   
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="checkbox" style="margin-left: 10px">                                
+                                            <%= p.check_box(:Pca_Custodia_Policial, id:'alientoEtilico') %>
+                                            <label for="radio2"><span><span></span></span>CUSTODIA POLICIAL</label>                            
+                                        </div> 
+                                    </div>                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10">
+                                <div class="form-group">
+                                    <label for="observacionesTipoEvento">OBSERVACIONES DEL EVENTO</label>
+                                    <%= p.text_area :Pca_Observacion_Evento, class:'form-control', id:'observacionesTipoEvento', placeHolder:'Describa'%>   
+                                </div>                    
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <div class="row" style="text-align: center">INTOXICACIÓN</div>
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <div class="checkbox" style="margin-left: 10px">                                
+                                                <%= p.check_box(:Pca_Aliento_Etilico, id:'alientoEtilico') %>
+                                                <label for="radio2"><span><span></span></span>ALIENTO ETÍLICO</label>                                
+                                            </div>                            
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <label for="cmbTipoEvento">V.ALCOCHECK</label>
+                                            <%= p.number_field :Pca_Valor_Alcocheck, class:'form-control'%>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <label for="cmbTipoEvento"> HORA EXAMEN</label>
+                                            <%= p.time_field :Pca_Hora_Examen, class:'form-control'%>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="checkbox">                                
+                                                <%= p.check_box(:Pca_Otras, id:'alientoEtilico') %>
+                                                <label for="radio2"><span><span></span></span>OTRAS SUSTANCIAS</label>                                
+                                            </div>                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="row" style="text-align: center">VIOLENCIA</div>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <div class="checkbox">                                
+                                            <%= p.check_box(:Pca_Violencia_Sospecha, id:'alientoEtilico') %>
+                                            <label for="radio2"><span><span></span></span>SOSPECHA</label>                            
+                                        </div> 
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="checkbox">                                
+                                            <%= p.check_box(:Pca_Violencia_AbusoFisico, id:'alientoEtilico') %>
+                                            <label for="radio2"><span><span></span></span>ABUSO FÍSICO</label>                            
+                                        </div> 
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="checkbox">                                
+                                            <%= p.check_box(:Pca_Violencia_AbusoPsicologico, id:'alientoEtilico') %>
+                                            <label for="radio2"><span><span></span></span>ABUSO PSICOLOGICO</label>                            
+                                        </div> 
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="checkbox">                                
+                                            <%= p.check_box(:Pca_Violencia_AbusoSexual, id:'alientoEtilico') %>
+                                            <label for="radio2"><span><span></span></span>ABUSO SEXUAL</label>                            
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-10">
+                                <div class="form-group">
+                                    <label for="obseervacionesAccidente">OBSERVACIONES INTOXICACIÓN Y/O VIOLENCIA</label>
+                                    <%= p.text_area :Pca_Observacion_Intoxicacion_Violencia, class:'form-control', id:'obseervacionesAccidente', placeHolder:'Describa'  %>                      
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label for="cmbQuemadura">QUEMADURA</label>
+                                    <%= p.select(:Pca_Grado_Quemadura, options_for_select([['Grado I', 1], ['Grado II', 2],['Grado III',3]]),{prompt: "Seleccione"},{ :class => 'form-control',:id=>'cmbQuemadura'}) %>                   
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="cmbQuemadura">PORCENTAJE SUPERFICIE</label>
+                                    <%= p.number_field :Pca_Quemadura_Porcentaje, class:'form-control'%>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="cmbQuemadura">PICADURA</label>
+                                    <%= p.text_field :Pca_Picadura, class:'form-control'%>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label for="cmbQuemadura">MORDEDURA</label>
+                                    <%= p.text_field :Pca_Mordedura, class:'form-control'%>
+                                </div>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+     <div class="row">
+        <div class="col-lg-4" >
+            <div class="actions">
+            <button type="submit" class="btn btn-primary" style="width: 200px">
+            <span><i class="glyphicon glyphicon-plus"></i> Guardar</span>
+            </button>
+        </div>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom: 20px"></div>
+<% end %>

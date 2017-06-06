@@ -19,12 +19,106 @@ class ConsultasController < ApplicationController
     @sintoma=Sintoma.new
     @diagnostico=Diagnostico.new
     @examenFisico= ExamenFisico.new
-
-    
   end
 
   def create
     
+  end
+
+  def createEmergencia
+    respond_to do |format|
+      if @@estadoPacienteTMP==nil && @@percanceTMP==nil
+              
+        @consulta=Consulta.new
+        @estadoPaciente=EstadoPaciente.new
+        @percance=Percance.new
+        unless @@inserted
+          @consulta.save
+          @@consultaTMP=@consulta
+          @@inserted=true
+        end      
+        
+        @estadoPaciente.consulta_id=@consulta.consulta_id
+        @estadoPaciente.Stp_Persona_Notificacion=params[:consulta][:estadoPaciente][:Stp_Persona_Notificacion]
+        @estadoPaciente.Stp_Parentesco_Afinidad=params[:consulta][:estadoPaciente][:Stp_Parentesco_Afinidad]
+        @estadoPaciente.Stp_Direccion_PN=params[:consulta][:estadoPaciente][:Stp_Direccion_PN]
+        @estadoPaciente.Stp_Telefono_PN=params[:consulta][:estadoPaciente][:Stp_Telefono_PN]
+        @estadoPaciente.Stp_Nombre_Acompaniante=params[:consulta][:estadoPaciente][:Stp_Nombre_Acompaniante]
+        @estadoPaciente.Stp_Cedula_Acompaniante=params[:consulta][:estadoPaciente][:Stp_Cedula_Acompaniante]
+        @estadoPaciente.Stp_Direccion_AC=params[:consulta][:estadoPaciente][:Stp_Direccion_AC]
+        @estadoPaciente.Stp_Telefono_Acompaniante=params[:consulta][:estadoPaciente][:Stp_Telefono_Acompaniante]
+        @estadoPaciente.Stp_Forma_Llegada=params[:consulta][:estadoPaciente][:Stp_Forma_Llegada]
+        @estadoPaciente.Stp_Fuente_Informacion=params[:consulta][:estadoPaciente][:Stp_Fuente_Informacion]
+        @estadoPaciente.Stp_Institucion=params[:consulta][:estadoPaciente][:Stp_Institucion]
+        @estadoPaciente.Stp_Telefono_Institucion=params[:consulta][:estadoPaciente][:Stp_Telefono_Institucion]
+        @estadoPaciente.Stp_Hora_Inicio=params[:consulta][:estadoPaciente][:Stp_Hora_Inicio]
+        @estadoPaciente.Stp_Via_Aerea=params[:consulta][:estadoPaciente][:Stp_Via_Aerea]
+        @estadoPaciente.Stp_Condicion_Llegada=params[:consulta][:estadoPaciente][:Stp_Condicion_Llegada]
+        @estadoPaciente.Stp_Motivo_Llegada=params[:consulta][:estadoPaciente][:Stp_Motivo_Llegada]
+        if params[:consulta][:percance][:Pca_Lugar_Evento]!=""
+          puts "INGRESO A PERCANCE"
+          @percance.consulta_id=@@consultaTMP.consulta_id
+          @percance.Pca_Lugar_Evento=params[:consulta][:percance][:Pca_Lugar_Evento]
+          @percance.Pca_Direccion_Evento=params[:consulta][:percance][:Pca_Direccion_Evento]
+          @percance.Pca_Fecha=params[:consulta][:percance][:Pca_Fecha]
+          @percance.Pca_Hora=params[:consulta][:percance][:Pca_Hora]
+          @percance.Pca_Tipo_Objeto=params[:consulta][:percance][:Pca_Tipo_Objeto]
+          @percance.Pca_Tipo_Evento=params[:consulta][:percance][:Pca_Tipo_Evento]
+          @percance.Pca_Hora_Denuncia=params[:consulta][:percance][:Pca_Hora_Denuncia]
+          @percance.Pca_Custodia_Policial=params[:consulta][:percance][:Pca_Custodia_Policial]
+          @percance.Pca_Observacion_Evento=params[:consulta][:percance][:Pca_Observacion_Evento]
+          @percance.Pca_Aliento_Etilico=params[:consulta][:percance][:Pca_Aliento_Etilico]
+          @percance.Pca_Valor_Alcocheck=params[:consulta][:percance][:Pca_Valor_Alcocheck]
+          @percance.Pca_Hora_Examen=params[:consulta][:percance][:Pca_Hora_Examen]
+          @percance.Pca_Otras=params[:consulta][:percance][:Pca_Otras]
+          @percance.Pca_Violencia_Sospecha=params[:consulta][:percance][:Pca_Violencia_Sospecha]
+          @percance.Pca_Violencia_AbusoFisico=params[:consulta][:percance][:Pca_Violencia_AbusoFisico]
+          @percance.Pca_Violencia_AbusoPsicologico=params[:consulta][:percance][:Pca_Violencia_AbusoPsicologico]
+          @percance.Pca_Violencia_AbusoSexual=params[:consulta][:percance][:Pca_Violencia_AbusoSexual]
+          @percance.Pca_Observacion_Intoxicacion_Violencia=params[:consulta][:percance][:Pca_Observacion_Intoxicacion_Violencia]
+          @percance.Pca_Grado_Quemadura=params[:consulta][:percance][:Pca_Grado_Quemadura]
+          @percance.Pca_Quemadura_Porcentaje=params[:consulta][:percance][:Pca_Quemadura_Porcentaje]
+          @percance.Pca_Picadura=params[:consulta][:percance][:Pca_Picadura]
+          @percance.Pca_Mordedura=params[:consulta][:percance][:Pca_Mordedura]
+        end
+        
+        if @estadoPaciente.save
+          @@estadoPacienteTMP=@estadoPaciente
+          if params[:consulta][:percance][:Pca_Lugar_Evento]!=""
+            @percance.save
+            @@percanceTMP=@percance        
+          end
+          @msg="Datos de Emergencia guardados satisfactoriamente."
+          format.json { render json: {data:@estadoPaciente, mensaje:@msg}, status: :created }
+        else
+          @msg="Revise los datos ingresados"
+          format.json { render json:{mensaje:@msg}, status: :unprocessable_entity }
+        end
+
+      else
+        @@estadoPacienteTMP.update(:Stp_Persona_Notificacion=>params[:consulta][:estadoPaciente][:Stp_Persona_Notificacion], :Stp_Parentesco_Afinidad=>params[:consulta][:estadoPaciente][:Stp_Parentesco_Afinidad], :Stp_Direccion_PN=>params[:consulta][:estadoPaciente][:Stp_Direccion_PN],
+        :Stp_Telefono_PN=>params[:consulta][:estadoPaciente][:Stp_Telefono_PN], :Stp_Nombre_Acompaniante=>params[:consulta][:estadoPaciente][:Stp_Nombre_Acompaniante], :Stp_Cedula_Acompaniante=>params[:consulta][:estadoPaciente][:Stp_Cedula_Acompaniante], :Stp_Direccion_AC=>params[:consulta][:estadoPaciente][:Stp_Direccion_AC],
+        :Stp_Telefono_Acompaniante=>params[:consulta][:estadoPaciente][:Stp_Telefono_Acompaniante], :Stp_Forma_Llegada=>params[:consulta][:estadoPaciente][:Stp_Forma_Llegada], :Stp_Fuente_Informacion=>params[:consulta][:estadoPaciente][:Stp_Fuente_Informacion], :Stp_Institucion=>params[:consulta][:estadoPaciente][:Stp_Institucion],
+        :Stp_Telefono_Institucion=>params[:consulta][:estadoPaciente][:Stp_Telefono_Institucion], :Stp_Hora_Inicio=>params[:consulta][:estadoPaciente][:Stp_Hora_Inicio], :Stp_Via_Aerea=>params[:consulta][:estadoPaciente][:Stp_Via_Aerea], :Stp_Condicion_Llegada=>params[:consulta][:estadoPaciente][:Stp_Condicion_Llegada], :Stp_Motivo_Llegada=>params[:consulta][:estadoPaciente][:Stp_Motivo_Llegada])
+
+        if params[:consulta][:percance][:Pca_Lugar_Evento]!=""
+          if @@percanceTMP==nil
+            @percance=Percance.new
+            @percance.consulta_id=@@consultaTMP.consulta_id
+            @percance.save
+            @@percanceTMP=@percance          
+          end          
+          @@percanceTMP.update(:Pca_Lugar_Evento=>params[:consulta][:percance][:Pca_Lugar_Evento], :Pca_Direccion_Evento=>params[:consulta][:percance][:Pca_Direccion_Evento], :Pca_Fecha=>params[:consulta][:percance][:Pca_Fecha], :Pca_Hora=>params[:consulta][:percance][:Pca_Hora],
+          :Pca_Tipo_Objeto=>params[:consulta][:percance][:Pca_Tipo_Objeto], :Pca_Tipo_Evento=>params[:consulta][:percance][:Pca_Tipo_Evento], :Pca_Hora_Denuncia=>params[:consulta][:percance][:Pca_Hora_Denuncia], :Pca_Custodia_Policial=>params[:consulta][:percance][:Pca_Custodia_Policial],
+          :Pca_Observacion_Evento=>params[:consulta][:percance][:Pca_Observacion_Evento], :Pca_Aliento_Etilico=>params[:consulta][:percance][:Pca_Aliento_Etilico], :Pca_Valor_Alcocheck=>params[:consulta][:percance][:Pca_Valor_Alcocheck], :Pca_Hora_Examen=>params[:consulta][:percance][:Pca_Hora_Examen],
+          :Pca_Otras=>params[:consulta][:percance][:Pca_Otras], :Pca_Violencia_Sospecha=>params[:consulta][:percance][:Pca_Violencia_Sospecha], :Pca_Violencia_AbusoFisico=>params[:consulta][:percance][:Pca_Violencia_AbusoFisico], :Pca_Violencia_AbusoPsicologico=>params[:consulta][:percance][:Pca_Violencia_AbusoPsicologico],
+          :Pca_Violencia_AbusoSexual=>params[:consulta][:percance][:Pca_Violencia_AbusoSexual], :Pca_Observacion_Intoxicacion_Violencia=>params[:consulta][:percance][:Pca_Observacion_Intoxicacion_Violencia], :Pca_Grado_Quemadura=>params[:consulta][:percance][:Pca_Grado_Quemadura],
+          :Pca_Quemadura_Porcentaje=>params[:consulta][:percance][:Pca_Quemadura_Porcentaje], :Pca_Picadura=>params[:consulta][:percance][:Pca_Picadura], :Pca_Mordedura=>params[:consulta][:percance][:Pca_Mordedura])
+        end
+        @msg="Datos de Emergencia guardados satisfactoriamente."
+        format.json { render json: {data:@estadoPaciente, mensaje:@msg}, status: :created }
+      end      
+    end
   end
 
   def createAntecedente
@@ -63,7 +157,8 @@ class ConsultasController < ApplicationController
           format.json { render json: @consulta.errors, status: :unprocessable_entity }
         end
       else
-        @@consultaTMP.update(:Con_Cronologia=>params[:consulta][:Con_Cronologia],:Con_Diagnostico_Final=>params[:consulta][:Con_Diagnostico_Final],:Con_Codigo_CIE=>params[:consulta][:Con_Codigo_CIE],:Con_Observacion=>params[:consulta][:Con_Observacion],:Con_Motivo=>params[:consulta][:Con_Motivo] )
+        @@consultaTMP.update(:Con_Cronologia=>params[:consulta][:Con_Cronologia],:Con_Diagnostico_Final=>params[:consulta][:Con_Diagnostico_Final],:Con_Codigo_CIE=>params[:consulta][:Con_Codigo_CIE],:Con_Observacion=>params[:consulta][:Con_Observacion],
+        :Con_Motivo=>params[:consulta][:Con_Motivo], :usuario_id=>session[:usuario]["usuario_id"] )
         @msg="Consulta guardada satisfactoriamente."
         format.json { render json: {data:@consulta, mensaje:@msg}, status: :created }  
       end      
@@ -257,6 +352,8 @@ class ConsultasController < ApplicationController
       @@inserted=false
       @@consultaTMP=nil
       @@prescripcionTMP=nil
+      @@estadoPacienteTMP=nil
+      @@percanceTMP=nil
     end
 
     def save_cita

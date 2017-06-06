@@ -8,7 +8,9 @@ $(document).on 'turbolinks:load', ->
     $('#frmExamenFisico').hide();
     $('#frmRecetaMedica').hide();
     $('#frmTerapia').hide(); 
-    $('#showReceta').hide();   
+    $('#showReceta').hide();
+    $('#condicionesLlegadaTexto').prop('disabled', true);
+    $('#nombreTipoEvento').prop('disabled',true);
     $('#btnPedidoExamen').click ->
         $('#pnlOpciones').hide();
         $('#frmPedidoImagenologia').show();
@@ -39,6 +41,24 @@ $(document).on 'turbolinks:load', ->
     $('#btnCancelTerapia').click ->
         $('#frmTerapia').hide();
         $('#pnlOpcionesTratamiento').show();
+    ##COMBO CONDICION DE LLEGADA
+    $('#cmbCondicionesLlegada').change ->
+        condicion=$('#cmbCondicionesLlegada :selected').text()
+        if condicion == 'Otro'
+            $('#condicionesLlegadaTexto').prop('disabled', false);
+        else
+            $('#condicionesLlegadaTexto').prop('disabled', true);
+        return
+    
+    ##COMBO TIPO DE EVENTO
+    $('#cmbTipoEvento').change ->
+        condicion=$('#cmbTipoEvento :selected').text()
+        if condicion == 'Otro'
+            $('#nombreTipoEvento').prop('disabled', false);
+        else
+            $('#nombreTipoEvento').prop('disabled', true);
+        return
+
 
 #ANTECEDENTE
 $(document).on "ajax:success","form#antecedente-form", (ev,data,xhr, settings)->
@@ -101,6 +121,10 @@ $(document).on "ajax:success","form#terapia-form", (ev,data,xhr, settings)->
     showModal data.mensaje, 'success'
 $(document).on "ajax:error","form#terapia-form", (ev,data,xhr, settings)->
     showModal data.responseJSON.mensaje, 'error'
+
+#EMERGENCIA
+$(document).on "ajax:success","form#emergencia-form", (ev,data,xhr, settings)->   
+    showModal data.mensaje, 'success'
 
 #PRUEBA MODAL
 $(document).on 'turbolinks:load', ->

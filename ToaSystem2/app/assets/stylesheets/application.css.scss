@@ -23,6 +23,12 @@ input[type=text]{
 }
 /*FIN CSS PARA TEXT INPUT*/
 
+/*PANEL CON SCROLL*/
+.fixed-panel {
+  //min-height: 10;
+ /*max-height: 750px;
+    overflow-y: scroll;*/
+}
 
 /* INICIO CSS RADIO BUTTON */
 input[type=checkbox]:not(old),
