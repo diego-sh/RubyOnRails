@@ -79,16 +79,24 @@ ActiveRecord::Schema.define(version: 0) do
   create_table "estado_pacientes", primary_key: "estado_paciente_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "consulta_id"
     t.time    "Stp_Hora_Inicio"
-    t.string  "Stp_Via_Aerea",               limit: 2
-    t.string  "Stp_Condicion_Llegada",       limit: 16
-    t.string  "Stp_Forma_Llegada",           limit: 16
+    t.string  "Stp_Via_Aerea",             limit: 16
+    t.string  "Stp_Condicion_Llegada",     limit: 16
+    t.string  "Stp_Forma_Llegada",         limit: 16
     t.time    "Stp_Hora_Salida"
-    t.text    "Stp_Observacion_Salida",      limit: 4294967295
-    t.string  "Stp_Condicion_Salida",        limit: 32
-    t.string  "Stp_Nombre_Acompaniante",     limit: 64
-    t.string  "Stp_Cedula_Acompaniante",     limit: 10
-    t.string  "Stp_Parentesco_Acompaniante", limit: 16
-    t.string  "Stp_Telefono_Acompaniante",   limit: 10
+    t.text    "Stp_Observacion_Salida",    limit: 4294967295
+    t.string  "Stp_Condicion_Salida",      limit: 32
+    t.string  "Stp_Nombre_Acompaniante",   limit: 64
+    t.string  "Stp_Cedula_Acompaniante",   limit: 10
+    t.string  "Stp_Parentesco_Afinidad",   limit: 32
+    t.string  "Stp_Telefono_Acompaniante", limit: 10
+    t.text    "Stp_Motivo_Llegada",        limit: 4294967295
+    t.string  "Stp_Persona_Notificacion",  limit: 64
+    t.string  "Stp_Direccion_AC",          limit: 128
+    t.string  "Stp_Direccion_PN",          limit: 128
+    t.string  "Stp_Telefono_PN",           limit: 10
+    t.string  "Stp_Institucion",           limit: 64
+    t.string  "Stp_Telefono_Institucion",  limit: 10
+    t.string  "Stp_Fuente_Informacion",    limit: 64
     t.index ["consulta_id"], name: "FK_REFERENCE_11", using: :btree
   end
 
@@ -124,6 +132,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer "prescripcion_id"
     t.string  "Ins_Nombre",      limit: 256
     t.string  "Ins_Indicacion",  limit: 512
+    t.integer "Ins_Cantidad"
     t.index ["prescripcion_id"], name: "FK_REFERENCE_23", using: :btree
   end
 
@@ -161,26 +170,30 @@ ActiveRecord::Schema.define(version: 0) do
 
   create_table "percances", primary_key: "percance_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "consulta_id"
-    t.string  "Pca_Lugar_Evento",         limit: 256
-    t.string  "Pca_Direccion_Evento",     limit: 256
+    t.string  "Pca_Lugar_Evento",                       limit: 256
+    t.string  "Pca_Direccion_Evento",                   limit: 256
     t.date    "Pca_Fecha"
     t.time    "Pca_Hora"
-    t.string  "Pca_Tipo_Objeto",          limit: 64
-    t.string  "Pca_Tipo_Evento",          limit: 64
-    t.string  "Pca_Observacion",          limit: 512
-    t.string  "Pca_Autoridad",            limit: 64
+    t.string  "Pca_Tipo_Objeto",                        limit: 64
+    t.string  "Pca_Tipo_Evento",                        limit: 64
+    t.text    "Pca_Observacion_Evento",                 limit: 4294967295
+    t.string  "Pca_Autoridad",                          limit: 64
     t.time    "Pca_Hora_Denuncia"
-    t.string  "Pca_Custodia_Policial",    limit: 1
-    t.string  "Pca_Aliento_Etilico",      limit: 1
-    t.decimal "Pca_Valor_Alcocheck",                  precision: 4, scale: 2
+    t.string  "Pca_Custodia_Policial",                  limit: 1
+    t.string  "Pca_Aliento_Etilico",                    limit: 1
+    t.decimal "Pca_Valor_Alcocheck",                                       precision: 4, scale: 2
     t.time    "Pca_Hora_Examen"
-    t.string  "Pca_Alcoholemia",          limit: 1
-    t.string  "Pca_Otras",                limit: 512
-    t.string  "Pca_Violencia_Tipo",       limit: 64
+    t.string  "Pca_Alcoholemia",                        limit: 1
+    t.string  "Pca_Otras",                              limit: 512
+    t.string  "Pca_Violencia_Sospecha",                 limit: 2
     t.integer "Pca_Grado_Quemadura"
-    t.decimal "Pca_Quemadura_Porcentaje",             precision: 4, scale: 2
-    t.string  "Pca_Picadura",             limit: 256
-    t.string  "Pca_Mordedura",            limit: 256
+    t.decimal "Pca_Quemadura_Porcentaje",                                  precision: 4, scale: 2
+    t.string  "Pca_Picadura",                           limit: 256
+    t.string  "Pca_Mordedura",                          limit: 256
+    t.string  "Pca_Violencia_AbusoFisico",              limit: 2
+    t.string  "Pca_Violencia_AbusoPsicologico",         limit: 2
+    t.string  "Pca_Violencia_AbusoSexual",              limit: 2
+    t.text    "Pca_Observacion_Intoxicacion_Violencia", limit: 4294967295
     t.index ["consulta_id"], name: "FK_REFERENCE_9", using: :btree
   end
 

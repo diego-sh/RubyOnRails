@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       post "createTratamiento"
       post "createReceta"
       post "createTerapia"
+      post "createEmergencia"
       
     end
   end
