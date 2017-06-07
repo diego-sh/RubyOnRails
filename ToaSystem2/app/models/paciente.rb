@@ -20,7 +20,6 @@ class Paciente < ApplicationRecord
     #validates :Pac_Ocupacion, format: { with: /\A[a-zA-Z]+\z/, message: "Ingrese solo letras" }, allow_blank: true
   
   def upperCase
-    self.Pac_HC= self.Pac_HC.upcase
     self.Pac_Apellido_Materno= self.Pac_Apellido_Materno.upcase
     self.Pac_Apellido_Paterno= self.Pac_Apellido_Paterno.upcase
     self.Pac_Nombres= self.Pac_Nombres.upcase

@@ -1,6 +1,6 @@
-<%= form_for @consulta, :url => { :action => "createAntecedente" }, remote: true, html:{id: "antecedente-form",format: :json} do |f| %>
+<%= form_for(@consulta, :url => { :action => "createAntecedente" }, remote: true, html:{id: "antecedente-form",format: :json}, validate: true) do |f| %>
     
-        <%= f.fields_for :antecedente do |o|%>
+        <%= f.fields_for(@antecedente, validate: true) do |o|%>
             
         <div class="row">
             <div class="col-lg-6">
@@ -14,7 +14,7 @@
             <div class="col-lg-9">
                 <div class="form-group">
                     <label for="DesAntecedente">DESCRIPCIÓN</label>
-                    <%= o.text_area :Ant_Descripcion, class:'form-control', id:'DesAntecedente',placeholder:'Añada alguna particularidad'%>
+                    <%= o.text_area :Ant_Descripcion, class:'form-control', id:'DesAntecedente',placeholder:'Añada alguna particularidad', validate: { presence: true } %>
                 </div>
             </div>
         </div>

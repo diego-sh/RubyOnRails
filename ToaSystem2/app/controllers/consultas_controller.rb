@@ -19,8 +19,11 @@ class ConsultasController < ApplicationController
     @sintoma=Sintoma.new
     @diagnostico=Diagnostico.new
     @examenFisico= ExamenFisico.new
-
-    
+    @pacienteHC = Paciente.find_by_sql("SELECT * FROM pacientes WHERE paciente_id="+@@pacienteTMP.paciente_id.to_s)
+    if @pacienteHC[0].Pac_HC == ""
+      @hc = Paciente.find_by_sql("SELECT PAC_HC AS HC FROM pacientes ORDER BY Pac_HC DESC LIMIT 1")
+      Paciente.where(paciente_id: @@pacienteTMP.paciente_id.to_s).update_all(Pac_HC: 'HCL' + (@hc[0].HC.scan(/\d/).join('').to_i + 1).to_s.rjust(5, '0'))
+    end    
   end
 
   def create

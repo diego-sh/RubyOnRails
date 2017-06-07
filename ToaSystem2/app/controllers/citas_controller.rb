@@ -41,7 +41,6 @@ class CitasController < ApplicationController
     @cita.paciente_id=@@pacienteTMP.paciente_id
     @citaV = Cita.find_by_sql(["SELECT * FROM citas WHERE medico_id=? and Cit_Fecha=? and Cit_Hora=?",@cita.medico_id,@cita.Cit_Fecha,@cita.Cit_Hora.strftime("%H:%M:%S")])
     @citaP = Cita.find_by_sql(["SELECT * FROM citas WHERE paciente_id=? and Cit_Fecha=?",@cita.paciente_id,@cita.Cit_Fecha])
-    puts @cita.Cit_Hora.strftime("%H:%M:%S")
 
     if @citaP.any?
       respond_to do |format|
