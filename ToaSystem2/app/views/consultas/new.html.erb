@@ -80,7 +80,15 @@
     </div>
 
     <div class="row" style="margin-top:20px">
-      <div class="col-xs-12 col-sm-6 col-md-8"></div>
+      <div class="col-xs-12 col-sm-6 col-md-8">
+        <div class="form-group">
+          <label for="cedula">TIPO DE CONSULTA</label>
+          <select class="form-control" id="cmbTipoConsulta">
+              <option value="EXTERNA">CONSULTA EXTERNA</option>
+              <option value="EMERGENCIA">CONSULTA POR EMERGENCIA</option>
+          </select>
+        </div>
+      </div>
       <div class="col-xs-6 col-sm-6 col-md-4">
         <%= link_to new_cita_path, class:"btn btn-warning pull-right" do %>
           <i class="glyphicon glyphicon-search"></i> Ver Historial
@@ -93,7 +101,7 @@
   </div>
 </div>
 
-<ul class="nav nav-tabs">
+<ul class="nav nav-tabs" id="tabPanelConsulta">
   <li><a data-toggle="tab" href="#admision">ADMISIÓN EMERGENCIA</a></li>
   <li class="active"><a data-toggle="tab" href="#antecedentes">ANTECEDENTES</a></li>
   <li><a data-toggle="tab" href="#consulta">CONSULTA</a></li>
@@ -203,7 +211,7 @@
   </div>
   <!--END CONUSLTA-->
   
-
+  <!--END TRATAMIENTO-->
   <div id="planTratamiento" class="tab-pane fade">
     <div class="row"  style="background-color: #fff8e1; margin-left: 1px; margin-right: 1px">
       <div class="col-lg-7">
@@ -216,6 +224,9 @@
             </div>
             <div class="row" style="margin-top: 10px">
               <button id="btnTerapia" type="button" class="btn btn-warning pull-right" style="width: 350px">REGISTRAR TERAPIA</button>
+            </div>
+            <div class="row" style="margin-top: 10px">
+              <button id="btnCirugia" type="button" class="btn btn-warning pull-right" style="width: 350px">REGISTRAR CIRUGÍA</button>
             </div>
           </div>
           <div id="frmRecetaMedica">
@@ -243,6 +254,37 @@
     
   </div>
   
+</div>
+
+<!--DIALOG REGISTRAR CIRUGIA -->
+<div class="modal fade bd-example-modal-lg" id="modalCirugia" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="width: 1300px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">REGISTRAR CIRUGÍA</h5>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+        <div class="col-lg-6">
+          <div class="center-block">
+            <div class="calendar"></div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="panel panel-info">
+            <div class="panel-heading">PARTE OPERATORIO</div>
+              <div class="panel-body fixed-panel2">
+                 <%= render 'frmParteOperatorio' %>
+              </div>
+          </div>            
+        </div>
+        </div>
+      </div>
+     <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">ACEPTAR</button>
+      </div>-->
+    </div>
+  </div>
 </div>
 
 <!--MODAL ERROR-->

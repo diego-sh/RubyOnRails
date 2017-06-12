@@ -11,6 +11,14 @@ $(document).on 'turbolinks:load', ->
     $('#showReceta').hide();
     $('#condicionesLlegadaTexto').prop('disabled', true);
     $('#nombreTipoEvento').prop('disabled',true);
+    #INICIALIZADOR DE SELECTED-PARTE OPERAATORIO
+    $('#cmbCirujano').selectpicker();
+    $('#cmbAyudantes').selectpicker();
+    $('#cmbAnestesiologo').selectpicker();
+    $('#cmbInstrumentista').selectpicker();
+    $('#cmbCirculante').selectpicker();    
+    # DIV INFO DEL PACIENTE
+    $('#pnlPacienteRecuperado').hide()
     $('#btnPedidoExamen').click ->
         $('#pnlOpciones').hide();
         $('#frmPedidoImagenologia').show();
@@ -49,6 +57,10 @@ $(document).on 'turbolinks:load', ->
         else
             $('#condicionesLlegadaTexto').prop('disabled', true);
         return
+    ##OPCIONES NO HABILITIDAS PARA CONSULTA EMERGENCIA
+    $('#tabPanelConsulta a:first').hide()
+    $('#btnCaracteristicasDolor').prop('disabled', true);
+    $('#btnExamenFisico').prop('disabled', true)
     
     ##COMBO TIPO DE EVENTO
     $('#cmbTipoEvento').change ->
@@ -58,7 +70,89 @@ $(document).on 'turbolinks:load', ->
         else
             $('#nombreTipoEvento').prop('disabled', true);
         return
+    
+    ##CONSULTA EMERGENCIA-EXTERNA
+    $('#cmbTipoConsulta').change ->
+        debugger
+        value=$('#cmbTipoConsulta :selected').text()
+        console.log "hey"
+        console.log value
+        if value == 'CONSULTA POR EMERGENCIA'          
+            $('#tabPanelConsulta a:first').show()
+            $('#tabPanelConsulta a:first').prop('style', display: 'block')
+            $('#btnCaracteristicasDolor').prop('disabled', false);
+            $('#btnExamenFisico').prop('disabled', false)
+        if value == 'CONSULTA EXTERNA'
+            $('#tabPanelConsulta a:first').hide()
+            $('#btnCaracteristicasDolor').prop('disabled', true);
+            $('#btnExamenFisico').prop('disabled', true)
+    
+    ##PANEL REGISTRAR PARTE OPERATORIO CIRUGIA MOSTRAR MODAL
+    $('#btnCirugia').click ->
+        $('#modalCirugia').modal()
 
+    #BLOQUEO DE OPCIONES CIRUJANO-AYUDANTES EN PARTE OPERATORIO DE ACUERDO LA VALOR
+    $('#cmbCirujano').change ->
+        op = document.getElementById('cmbAyudantes').getElementsByTagName('option')
+        x=0
+        while x < op.length
+           op[x].disabled = false
+           $('#cmbAyudantes').selectpicker('refresh');
+           x++
+
+        selected = $(':selected', this).text()
+        $('#cmbAyudantes option:contains("' + selected + '")').attr 'disabled', 'disabled'
+        $('#cmbAyudantes').selectpicker('refresh');
+        $('#cmbAnestesiologo option:contains("' + selected + '")').attr 'disabled', 'disabled'
+        $('#cmbAnestesiologo').selectpicker('refresh');
+
+    #BLOQUEO DE OPCIONES AYUDANTES-ANESTESIOLOGO EN PARTE OPERATORIO DE ACUERDO LA VALOR
+    $('#cmbAyudantes').change ->
+        debugger
+        selected = $('#cmbAyudantes').val();
+        if selected.length != undefined
+            i=0
+            op = document.getElementById('cmbAnestesiologo').getElementsByTagName('option')
+            while i < selected.length
+                j=0
+                while j < op.length
+                    if selected[i]== op[j].value
+                        op[j].disabled = true
+                        $('#cmbAnestesiologo').selectpicker('refresh');
+                    j++                
+                i++
+
+    #BLOQUEO DE OPCIONES CIRUJANO-AYUDANTES EN PARTE OPERATORIO DE ACUERDO LA VALOR
+    $('#cmbInstrumentista').change ->
+        op = document.getElementById('cmbCirculante').getElementsByTagName('option')
+        x=0
+        while x < op.length
+           op[x].disabled = false
+           $('#cmbCirculante').selectpicker('refresh');
+           x++
+        selected = $(':selected', this).text()
+        $('#cmbCirculante option:contains("' + selected + '")').attr 'disabled', 'disabled'
+        $('#cmbCirculante').selectpicker('refresh');
+
+    #CARGA DIAGNOSTICO FINAL EN PARTE OPERATORIO
+    $('#btnCirugia').click ->
+        valor= $('#diagnostico').val()
+        $('#diagnosticoPreoperatorio').val(valor)
+
+#BUSCAR PACIENTE-CONSULTA
+$(document).on "ajax:success","form#buscarPaciente-form", (ev,data,xhr, settings)->
+    if data.data[0]== undefined
+        showModal 'Paciente no encontrado..! Verifique los datos ingresados', 'error'
+        $('#pnlPacienteRecuperado').hide()
+    else
+        showModal 'Paciente encontrado.!', 'success'
+        $('#pnlPacienteRecuperado').show()
+        $('#pnlDatosPaciente').html("<strong>Nombre: </strong>#{data.data[0].Pac_Apellido_Paterno} #{data.data[0].Pac_Apellido_Materno} #{data.data[0].Pac_Nombres}")
+        $('#pnlDatosPacienteCedula').html("<strong>Cédula: </strong>#{data.data[0].Pac_Cedula}")        
+        $('#pnlButtonPaciente').html("<a href='/consultas/new?pcte=#{data.data[0].paciente_id}' class='btn btn-primary' id='btnEmpezarConsulta'>Empezar Consulta</a>")
+
+$(document).on "ajax:error","form#buscarPaciente-form", (ev,data,xhr, settings)->
+    showModal data.responseJSON.mensaje, 'error'
 
 #ANTECEDENTE
 $(document).on "ajax:success","form#antecedente-form", (ev,data,xhr, settings)->
@@ -125,14 +219,11 @@ $(document).on "ajax:error","form#terapia-form", (ev,data,xhr, settings)->
 #EMERGENCIA
 $(document).on "ajax:success","form#emergencia-form", (ev,data,xhr, settings)->   
     showModal data.mensaje, 'success'
-
-#PRUEBA MODAL
-$(document).on 'turbolinks:load', ->
-    $('#btnModal').click ->        
-        $('#exampleModalLongTitle').html("ERROR")
-        $('#body').html("<p>felicidades</p>")
-        $('#exampleModalLong').modal()
-
+#PARTE OPERATORIO
+$(document).on "ajax:success","form#parteOperatorio-form", (ev,data,xhr, settings)->   
+    showModal data.mensaje, 'success'
+$(document).on "ajax:error","form#parteOperatorio-form", (ev,data,xhr, settings)->
+    showModal data.responseJSON.mensaje, 'error'
 
 
 

@@ -4,14 +4,30 @@ class ConsultasController < ApplicationController
   after_action :save_cita, only:[:createConsulta]
   
   def index
+      @medico= Medico.find_by_persona_id(session[:persona]["persona_id"])
       @lstPacientesAtender=Cita.find_by_sql("SELECT c.cita_id,c.cit_fecha,c.cit_hora,c.cit_motivo, p.paciente_id, CONCAT(CONCAT(p.pac_apellido_paterno,' '),p.pac_apellido_materno)AS Apellidos, p.pac_nombres 
                                             FROM citas c INNER JOIN pacientes p ON p.paciente_id=c.paciente_id 
-                                            WHERE c.medico_id=1 AND c.cit_fecha=CURDATE() ORDER by c.cit_hora ASC")
+                                            WHERE c.medico_id='#{@medico.medico_id}' AND c.cit_fecha=CURDATE() ORDER by c.cit_hora ASC")
 
   end
 
-  def edit
+#ACCION QUE BUSCA AL PACIENTE
+  def buscarPaciente
+    respond_to do |format|
+      if params[:term]!= ""
+        @paciente=Paciente.search(params[:term])
+        @msg="Paciente encontrado"
+        format.json { render json: {data:@paciente}, status: :created }
+        format.html
+        
+      else
+        @msg="Favor ingresa un número de cédula.!"
+        format.json { render json:{mensaje:@msg}, status: :unprocessable_entity }
+      end
+      
+    end  
   end
+
 
   def new
     @consulta=Consulta.new
@@ -23,13 +39,84 @@ class ConsultasController < ApplicationController
     if @pacienteHC[0].Pac_HC == nil || @pacienteHC[0].Pac_HC ==""
       @hc = Paciente.find_by_sql("SELECT PAC_HC AS HC FROM pacientes ORDER BY Pac_HC DESC LIMIT 1")
       Paciente.where(paciente_id: @@pacienteTMP.paciente_id.to_s).update_all(Pac_HC: 'HCL' + (@hc[0].HC.scan(/\d/).join('').to_i + 1).to_s.rjust(5, '0'))
-    end    
+    end
+    @especialistas=Persona.find_by_sql("SELECT CONCAT(CONCAT(p.Per_Apellido_Paterno,' '), p.Per_Nombres) AS Nombre, m.medico_id, p.persona_id FROM personas p INNER JOIN medicos m on p.persona_id = m.persona_id")
+    @personal=Persona.find_by_sql("SELECT CONCAT(CONCAT(p.Per_Apellido_Paterno,' '), p.Per_Nombres) AS Nombre,p.persona_id FROM personas p INNER JOIN usuarios u ON p.usuario_id=u.usuario_id INNER JOIN perfiles pr ON u.perfil_id=pr.perfil_id where pr.Nombre_Perfil='ENFERMERA' ")
   end
 
-  def create
+
+  # ACCION CREAR PARTE OPERATORIO
+  def createParteOperatorio
+    respond_to do |format|
+      @parteOperatorio=PartesOperatorio.new    
+      if @@consultaTMP!=nil
+        unless @@prescripcionTMP!=nil
+          puts "ingresa a prescripcion"
+          @prescripcion=Prescripcion.new
+          @prescripcion.consulta_id=@@consultaTMP.consulta_id
+          @prescripcion.save
+          @@prescripcionTMP=@prescripcion
+        end
+        @parteOperatorio.prescripcion_id=@@prescripcionTMP.prescripcion_id
+        @parteOperatorio.Pop_Diagnostico_PreOperatorio=params[:consulta][:partesOperatorio][:Pop_Diagnostico_PreOperatorio]
+        @parteOperatorio.Pop_Cirugia_Propuesta=params[:consulta][:partesOperatorio][:Pop_Cirugia_Propuesta]
+        @parteOperatorio.Pop_Fecha_Cirugia=params[:consulta][:partesOperatorio][:Pop_Fecha_Cirugia]
+        @parteOperatorio.Pop_Hora_Cirugia=params[:consulta][:partesOperatorio][:Pop_Hora_Cirugia]
+        @parteOperatorio.Pop_Cirugia_Tipo=params[:consulta][:partesOperatorio][:Pop_Cirugia_Tipo]
+        @parteOperatorio.Pop_Tiempo_Cirugia=params[:consulta][:partesOperatorio][:Pop_Tiempo_Cirugia]
+        @parteOperatorio.Pop_Instrumental_Especial=params[:consulta][:partesOperatorio][:Pop_Instrumental_Especial]
+        @parteOperatorio.usuario_id=session[:usuario]["usuario_id"] 
+
+        if @parteOperatorio.save  
+          if params[:consulta][:partesOperatorio][:Pop_Cirujano]!=""
+            @equipo=Equipo.new
+            @equipo.persona_id= params[:consulta][:partesOperatorio][:Pop_Cirujano]
+            @equipo.partes_operatorio_id=@parteOperatorio.partes_operatorio_id
+            @equipo.Rol_Funcion="CIRUJANO"
+            @equipo.save
+          end          
+          params[:consulta][:partesOperatorio][:Pop_Ayudantes].each do |ayudante|
+            if ayudante!=""
+              @equipo=Equipo.new
+              @equipo.persona_id=ayudante
+              @equipo.partes_operatorio_id=@parteOperatorio.partes_operatorio_id
+              @equipo.Rol_Funcion="AYUDANTE"
+              @equipo.save
+            end            
+          end
+          if params[:consulta][:partesOperatorio][:Pop_Anestesiologo]!=""
+            @equipo=Equipo.new
+            @equipo.persona_id=params[:consulta][:partesOperatorio][:Pop_Anestesiologo]
+            @equipo.partes_operatorio_id=@parteOperatorio.partes_operatorio_id
+            @equipo.Rol_Funcion="ANESTESIOLOGO"
+            @equipo.save
+          end
+          if params[:consulta][:partesOperatorio][:Pop_Instrumentista]!=""
+            @equipo=Equipo.new
+            @equipo.persona_id=params[:consulta][:partesOperatorio][:Pop_Instrumentista]
+            @equipo.partes_operatorio_id=@parteOperatorio.partes_operatorio_id
+            @equipo.Rol_Funcion="INSTRUMENTISTA"
+            @equipo.save
+          end
+          if params[:consulta][:partesOperatorio][:Pop_Circulante]!=""
+            @equipo=Equipo.new
+            @equipo.persona_id=params[:consulta][:partesOperatorio][:Pop_Circulante]
+            @equipo.partes_operatorio_id=@parteOperatorio.partes_operatorio_id
+            @equipo.Rol_Funcion="CIRCULANTE"
+            @equipo.save
+          end
+          @msg="CIRUGÍA PROGRAMADA satisfactorimente"
+          format.json { render json: {data:@parteOperatorio, mensaje:@msg}, status: :created }                 
+        end
+      else
+        @msg="Guarde primero la consulta"
+        format.json { render json:{mensaje:@msg}, status: :unprocessable_entity }  
+      end      
+    end
     
   end
 
+  # ACCION CREAR ANTECEDENTE
   def createAntecedente
     @antecedente=Antecedente.new
     @antecedente.Ant_tipo=params[:consulta][:antecedente][:Ant_tipo]

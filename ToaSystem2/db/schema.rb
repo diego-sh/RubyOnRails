@@ -22,7 +22,8 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["paciente_id"], name: "FK_REFERENCE_18", using: :btree
   end
 
-  create_table "cantones", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "cantones", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer "id"
     t.text    "nombre",       limit: 65535
     t.integer "provincia_id"
     t.text    "created_at",   limit: 65535
@@ -35,14 +36,14 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer  "medico_id"
     t.date     "Cit_Fecha"
     t.time     "Cit_Hora"
+    t.time     "Cit_Hora_Fin"
     t.string   "Cit_Motivo",      limit: 128
     t.string   "Cit_Estado",      limit: 16
+    t.boolean  "Cit_Entre_Cita"
     t.string   "Cit_Observacion", limit: 128
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "usuario_id"
-    t.time     "Cit_Hora_Fin"
-    t.integer  "Cit_Entre_Cita",  limit: 1
     t.index ["empleado_id"], name: "FK_REFERENCE_14", using: :btree
     t.index ["medico_id"], name: "FK_REFERENCE_15", using: :btree
     t.index ["paciente_id"], name: "FK_REFERENCE_4", using: :btree
@@ -51,13 +52,13 @@ ActiveRecord::Schema.define(version: 0) do
   create_table "consultas", primary_key: "consulta_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "cita_id"
     t.string   "Con_Cronologia",        limit: 256
-    t.string   "Con_Observacion",       limit: 256
-    t.datetime "creado_at"
-    t.datetime "actualizado_at"
-    t.integer  "usuario_id"
     t.text     "Con_Diagnostico_Final", limit: 4294967295
     t.string   "Con_Codigo_CIE",        limit: 16
+    t.string   "Con_Observacion",       limit: 256
     t.string   "Con_Motivo",            limit: 512
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "usuario_id"
     t.index ["cita_id"], name: "FK_REFERENCE_3", using: :btree
   end
 
@@ -74,6 +75,13 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer "persona_id"
     t.string  "Emp_Rol",    limit: 32, null: false
     t.index ["persona_id"], name: "FK_REFERENCE_13", using: :btree
+  end
+
+  create_table "equipos", primary_key: ["partes_operatorio_id", "persona_id"], force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.bigint  "partes_operatorio_id",            null: false
+    t.integer "persona_id",                      null: false
+    t.string  "Rol_Funcion",          limit: 64
+    t.index ["persona_id"], name: "FK_REFERENCE_29", using: :btree
   end
 
   create_table "estado_pacientes", primary_key: "estado_paciente_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -105,7 +113,6 @@ ActiveRecord::Schema.define(version: 0) do
     t.text    "Efb_Observacion",          limit: 4294967295
     t.string  "Efb_Parte_CH",             limit: 32
     t.string  "Efb_Evidencia_Patologica", limit: 2
-    t.string  "Efb_Categoria",            limit: 1
     t.index ["consulta_id"], name: "FK_REFERENCE_8", using: :btree
   end
 
@@ -113,10 +120,10 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer "prescripcion_id"
     t.text    "Exa_Descripcion", limit: 4294967295
     t.string  "Exa_Tipo",        limit: 32
-    t.text    "Exa_Resultado",   limit: 4294967295
     t.string  "Exa_Motivo",      limit: 512
     t.string  "Exa_Prioridad",   limit: 16
     t.date    "Exa_Fecha_Orden"
+    t.text    "Exa_Resultado",   limit: 4294967295
     t.index ["prescripcion_id"], name: "FK_REFERENCE_25", using: :btree
   end
 
@@ -149,23 +156,41 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   create_table "pacientes", primary_key: "paciente_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.string   "Pac_HC",               limit: 8
-    t.string   "Pac_Cedula",           limit: 10
-    t.string   "Pac_Pasaporte",        limit: 16
-    t.string   "Pac_Apellido_Paterno", limit: 32
-    t.string   "Pac_Apellido_Materno", limit: 32
-    t.string   "Pac_Nombres",          limit: 128
+    t.string   "Pac_HC",                 limit: 8
+    t.string   "Pac_Cedula",             limit: 10
+    t.string   "Pac_Pasaporte",          limit: 16
+    t.string   "Pac_Apellido_Paterno",   limit: 32
+    t.string   "Pac_Apellido_Materno",   limit: 32
+    t.string   "Pac_Nombres",            limit: 128
     t.date     "Pac_Fecha_Nacimiento"
-    t.string   "Pac_Nacionalidad",     limit: 64
-    t.string   "Pac_Genero",           limit: 1
-    t.string   "Pac_Estado_Civil",     limit: 16
-    t.string   "Pac_Instruccion",      limit: 16
-    t.string   "Pac_Ocupacion",        limit: 128
-    t.string   "Pac_Telefono",         limit: 10
-    t.string   "Pac_Grupo_Sanguineo",  limit: 16
+    t.string   "Pac_Nacionalidad",       limit: 64
+    t.string   "Pac_Genero",             limit: 1
+    t.string   "Pac_Estado_Civil",       limit: 16
+    t.string   "Pac_Instruccion",        limit: 16
+    t.string   "Pac_Ocupacion",          limit: 128
+    t.string   "Pac_Telefono",           limit: 10
+    t.string   "Pac_Grupo_Sanguineo",    limit: 16
+    t.string   "Pac_Correo_Electronico", limit: 64
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
+    t.integer  "usuario_id"
+  end
+
+  create_table "partes_operatorios", primary_key: "partes_operatorio_id", id: :bigint, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer  "prescripcion_id"
+    t.date     "Pop_Fecha_Parte"
+    t.date     "Pop_Fecha_Cirugia"
+    t.time     "Pop_Hora_Cirugia"
+    t.text     "Pop_Cirugia_Propuesta",         limit: 4294967295
+    t.text     "Pop_Diagnostico_PreOperatorio", limit: 4294967295
+    t.time     "Pop_Tiempo_Cirugia"
+    t.string   "Pop_Instrumental_Especial",     limit: 512
+    t.string   "Pop_Servicio",                  limit: 128
+    t.string   "Pop_Cirugia_Tipo",              limit: 16
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "usuario_id"
+    t.index ["prescripcion_id"], name: "FK_REFERENCE_27", using: :btree
   end
 
   create_table "percances", primary_key: "percance_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -179,21 +204,21 @@ ActiveRecord::Schema.define(version: 0) do
     t.text    "Pca_Observacion_Evento",                 limit: 4294967295
     t.string  "Pca_Autoridad",                          limit: 64
     t.time    "Pca_Hora_Denuncia"
-    t.string  "Pca_Custodia_Policial",                  limit: 1
-    t.string  "Pca_Aliento_Etilico",                    limit: 1
+    t.string  "Pca_Custodia_Policial",                  limit: 2
+    t.string  "Pca_Aliento_Etilico",                    limit: 2
     t.decimal "Pca_Valor_Alcocheck",                                       precision: 4, scale: 2
     t.time    "Pca_Hora_Examen"
-    t.string  "Pca_Alcoholemia",                        limit: 1
+    t.string  "Pca_Alcoholemia",                        limit: 2
     t.string  "Pca_Otras",                              limit: 512
     t.string  "Pca_Violencia_Sospecha",                 limit: 2
     t.integer "Pca_Grado_Quemadura"
     t.decimal "Pca_Quemadura_Porcentaje",                                  precision: 4, scale: 2
     t.string  "Pca_Picadura",                           limit: 256
     t.string  "Pca_Mordedura",                          limit: 256
+    t.text    "Pca_Observacion_Intoxicacion_Violencia", limit: 4294967295
     t.string  "Pca_Violencia_AbusoFisico",              limit: 2
     t.string  "Pca_Violencia_AbusoPsicologico",         limit: 2
     t.string  "Pca_Violencia_AbusoSexual",              limit: 2
-    t.text    "Pca_Observacion_Intoxicacion_Violencia", limit: 4294967295
     t.index ["consulta_id"], name: "FK_REFERENCE_9", using: :btree
   end
 
@@ -224,29 +249,27 @@ ActiveRecord::Schema.define(version: 0) do
 
   create_table "prescripciones", primary_key: "prescripcion_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "consulta_id"
-    t.text    "Pre_Observacion",            limit: 4294967295
     t.text    "Pre_Procedimiento",          limit: 4294967295
     t.text    "Pre_Indicaciones_Generales", limit: 4294967295
+    t.text    "Pre_Observacion",            limit: 4294967295
     t.index ["consulta_id"], name: "FK_REFERENCE_26", using: :btree
   end
 
-  create_table "provincias", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.text "nombre",     limit: 65535
-    t.text "created_at", limit: 65535
-    t.text "updated_at", limit: 65535
+  create_table "provincias", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer "id"
+    t.text    "nombre",     limit: 65535
+    t.text    "created_at", limit: 65535
+    t.text    "updated_at", limit: 65535
   end
 
   create_table "residencias", primary_key: "residencia_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.integer  "paciente_id"
-    t.string   "Res_Sector",           limit: 128
-    t.string   "Res_Calle_Principal",  limit: 64
-    t.string   "Res_Calle_Secundaria", limit: 64
-    t.string   "Res_Numero_Casa",      limit: 8
-    t.string   "Res_Provincia",        limit: 16
-    t.string   "Res_Canton",           limit: 16
-    t.datetime "creado_at"
-    t.datetime "actualizado_at"
-    t.integer  "user_id"
+    t.integer "paciente_id"
+    t.string  "Res_Sector",           limit: 128
+    t.string  "Res_Calle_Principal",  limit: 64
+    t.string  "Res_Calle_Secundaria", limit: 64
+    t.string  "Res_Numero_Casa",      limit: 8
+    t.string  "Res_Provincia",        limit: 16
+    t.string  "Res_Canton",           limit: 16
     t.index ["paciente_id"], name: "FK_REFERENCE_17", using: :btree
   end
 
@@ -298,12 +321,15 @@ ActiveRecord::Schema.define(version: 0) do
   add_foreign_key "diagnosticos", "consultas", primary_key: "consulta_id", name: "FK_REFERENCE_6"
   add_foreign_key "diagnosticos", "sintomas", primary_key: "sintoma_id", name: "FK_REFERENCE_5"
   add_foreign_key "empleados", "personas", primary_key: "persona_id", name: "FK_REFERENCE_13"
+  add_foreign_key "equipos", "partes_operatorios", primary_key: "partes_operatorio_id", name: "FK_REFERENCE_28"
+  add_foreign_key "equipos", "personas", primary_key: "persona_id", name: "FK_REFERENCE_29"
   add_foreign_key "estado_pacientes", "consultas", primary_key: "consulta_id", name: "FK_REFERENCE_11"
   add_foreign_key "examen_fisicos", "consultas", primary_key: "consulta_id", name: "FK_REFERENCE_8"
   add_foreign_key "examenes", "prescripciones", primary_key: "prescripcion_id", name: "FK_REFERENCE_25"
   add_foreign_key "horarios", "medicos", primary_key: "medico_id", name: "FK_REFERENCE_16"
   add_foreign_key "medicinas", "prescripciones", primary_key: "prescripcion_id", name: "FK_REFERENCE_23"
   add_foreign_key "medicos", "personas", primary_key: "persona_id", name: "FK_REFERENCE_12"
+  add_foreign_key "partes_operatorios", "prescripciones", primary_key: "prescripcion_id", name: "FK_REFERENCE_27"
   add_foreign_key "percances", "consultas", primary_key: "consulta_id", name: "FK_REFERENCE_9"
   add_foreign_key "perfil_menus", "menus", primary_key: "menu_id", name: "FK_REFERENCE_22"
   add_foreign_key "perfil_menus", "perfiles", primary_key: "perfil_id", name: "FK_REFERENCE_21"

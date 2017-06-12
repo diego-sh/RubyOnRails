@@ -1,0 +1,110 @@
+<%= form_for @consulta, :url => { :action => "createParteOperatorio" }, remote: true, html:{id: "parteOperatorio-form",format: :json} do |f| %>
+    <div class="col" style="margin-top: 10px">
+        <%= f.fields_for :partesOperatorio do |pop|%>
+            <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="diagnosticoPreoperatorio">DIAGNÓSTICO PREOPERATORIO</label>
+                            <%=pop.text_area :Pop_Diagnostico_PreOperatorio, class:'form-control', id:'diagnosticoPreoperatorio',placeholder:'Describa su diagnóstico'%>
+                        </div>
+                    </div>
+            </div>
+            <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="cirugiaPropuesta">CIRUGÍA PROPUESTA</label>
+                            <%=pop.text_area :Pop_Cirugia_Propuesta, class:'form-control', id:'cirugiaPropuesta',placeholder:'Describa la cirugía a realizarse'%>
+                        </div>
+                    </div>
+            </div>
+             <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="cirugiaFecha">FECHA CIRUGÍA</label>
+                            <%=pop.date_field :Pop_Fecha_Cirugia, value: Date.today.strftime("%Y-%m-%d"),min: Date.today, class:'form-control', id:'cirugiaFecha'%>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="cirugiaHora">HORA CIRUGÍA</label>
+                            <%=pop.time_field :Pop_Hora_Cirugia, class:'form-control', id:'cirugiaHora'%>
+                        </div>
+                    </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="cirugiaTiempo">TIEMPO DE CIRUGÍA</label>
+                        <%=pop.number_field :Pop_Tiempo_Cirugia, class:'form-control', id:'cirugiaTiempo', value: 1%>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="cirugiaTiempo">TIPO CIRUGÍA</label>
+                            <%= pop.select(:Pop_Cirugia_Tipo, options_for_select([['Emergencia', 'EMERGENCIA'], ['Electiva', 'ELECTIVA']]),{prompt: "Seleccione"},{ :class => 'form-control'}) %>
+
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label for="instrumental">CIRUJANO</label>
+                        <%= pop.collection_select :Pop_Cirujano, @especialistas, :persona_id, :Nombre,{},{:id=> 'cmbCirujano', :class => 'form-control ',:title=>"Seleccione"} %>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">                    
+                    <div class="form-group">
+                        <label for="instrumental">AYUDANTES</label>
+                        <%= pop.collection_select :Pop_Ayudantes, @especialistas, :persona_id, :Nombre,{},{:id=> 'cmbAyudantes', :class => 'form-control selectpicker', :multiple=> 'true', :title=>"Seleccione"} %>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">                    
+                    <div class="form-group">
+                        <label for="instrumental">ANESTESIÓLOGO</label>
+                        <%= pop.collection_select :Pop_Anestesiologo, @especialistas, :persona_id, :Nombre,{},{:id=> 'cmbAnestesiologo', :class => 'form-control selectpicker', :title=>"Seleccione"} %>
+                    </div>
+                </div>
+                <div class="col-lg-6">                    
+                    <div class="form-group">
+                        <label for="instrumental">INSTRUMENTISTA</label>
+                        <%= pop.collection_select :Pop_Instrumentista, @personal, :persona_id, :Nombre,{},{:id=> 'cmbInstrumentista', :class => 'form-control selectpicker', :title=>"Seleccione"} %>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">                    
+                    <div class="form-group">
+                        <label for="instrumental">CIRCULANTE</label>
+                        <%= pop.collection_select :Pop_Circulante, @personal, :persona_id, :Nombre,{},{:id=> 'cmbCirculante', :class => 'form-control selectpicker', :title=>"Seleccione"} %>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label for="instrumental">INSTRUMENTAL ESPECIAL</label>
+                        <%=pop.text_area :Pop_Instrumental_Especial, class:'form-control', id:'instrumental',placeholder:'Instrumental necesario'%>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                <div class="actions">
+                    <button type="submit" class="btn btn-primary">
+                    <span><i class="glyphicon glyphicon-plus"></i> Guardar</span>
+                    </button>
+                </div>
+            </div>
+            </div>
+            
+        <% end %>
+    </div>
+
+<% end %>

@@ -1,6 +1,6 @@
 <% provide(:consultas, 'active') %>
-<div class="panel panel-info">
-    <div class="panel-heading">CONSULTAS</div>
+<div class="panel panel-info" style="margin-top: 50px">
+    <div class="panel-heading">LISTA DE PACIENTES PARA SER ATENDIDOS</div>
     <div class="panel-body">
         <div class='row' style="margin-left:20px; margin-top:10px">
             <table class="table table-striped table-hover" style="width:70%; margin:0 auto">
@@ -29,13 +29,85 @@
                             <td>
                                 <%= link_to 'Atender', new_consulta_path(:pcte => pcte.paciente_id, :cit => pcte.cita_id) %>
                             </td>
-                            <td>
-                                <%= link_to 'Editar', consultas_path %>
-                            </td>
                         </tr>
                         <% end %>
                 </tbody>
             </table>
         </div>
     </div>
+</div>
+<div class="alert alert-warning">
+    <div class="row" style="padding-left: 20px">
+        <strong>Ingrese el número de cedula del paciente a consultar</strong>
+    </div>
+    <div class="row">
+        <%= form_tag({controller: "consultas", action: "buscarPaciente"}, method: "post", class: "form-inline", remote: true, id: "buscarPaciente-form",format: :json) do %>
+        <div class="row" style="margin-top: 20px">
+            <div class="center-block" style="width:500px;max-width:100%;">
+                <div class="form-group">
+                    <label for="cedula">CÉDULA</label>
+                    <%= text_field_tag :term, params[:term], class:'form-control', id:'cedula', placeholder:'Ingrese valor', maxlength:'10' %>
+                </div>
+                <%= button_tag type: 'submit', class: "btn btn-primary", id: "register-button" do %>
+                    <i class="glyphicon glyphicon-search" aria-hidden="true"></i> Buscar
+                <% end %>
+                
+            </div>
+        </div>
+        <% end %>
+    </div>
+</div>
+
+<div class="alert alert-success" id="pnlPacienteRecuperado">
+    <div class="center-block" style="width:500px;max-width:100%;">
+        <div class="row" style="text-decoration: underline"><strong>DATOS DEL PACIENTE CONSULTADO </strong></div>
+        <div class="row" style="margin-top: 15px" id="pnlDatosPaciente"></div>
+        <div class="row" id="pnlDatosPacienteCedula"></div>
+
+        <div class="row" style="margin-top: 10px" id="pnlButtonPaciente">
+
+        </div>
+    </div>
+</div>
+<div class="alert alert-info" id="pnlPacienteRecuperado">
+    <form action="../pacientes/new" method="get">
+          PARA REGISTRAR UN PACIENTE <strong>ACCEDA:  </strong> <button type="submit" class="btn btn-primary btn-xs">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> CREAR PACIENTE
+          </button>
+      </form>
+</div>
+
+
+<!--MODAL ERROR-->
+
+<div class="modal fade" id="modalError" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #f44336">
+        <h5 class="modal-title" id="titleError" style="color: #fff"></h5>
+      </div>
+      <div class="modal-body" id="bodyError">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">ACEPTAR</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--MODAL SUCCESS-->
+
+<div class="modal fade" id="modalSuccess" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #66bb6a">
+        <h5 class="modal-title" id="titleSuccess" style="color: #fff"></h5>
+      </div>
+      <div class="modal-body" id="bodySuccess">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">ACEPTAR</button>
+      </div>
+    </div>
+  </div>
 </div>

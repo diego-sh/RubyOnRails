@@ -23,6 +23,7 @@
 //= require moment
 //= require fullcalendar
 //= require fullcalendar/lang/es
+//= require bootstrap-select
 //= require turbolinks
 
 $(document).ready(function(){

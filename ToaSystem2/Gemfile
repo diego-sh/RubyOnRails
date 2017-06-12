@@ -64,6 +64,8 @@ gem 'bootstrap_form'
 gem 'jquery-datatables-rails', '~> 3.4'
 gem 'jquery-turbolinks'
 
+#selectedBootstrap
+gem 'bootstrap-select-wrapper-rails'
 #Calendario
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
