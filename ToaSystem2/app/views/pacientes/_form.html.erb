@@ -13,7 +13,11 @@
         <div class="col-lg-4">
           <div class="form-group">
             <label for="cedula">Cédula</label>
-            <%= f.text_field :Pac_Cedula, class:'form-control',id:'cedula', placeholder:'Cédula', maxlength:'10' %>
+            <% if paciente.persisted? %>
+              <%= f.text_field :Pac_Cedula, :readonly => true ,class:'form-control',id:'cedula', placeholder:'Cédula', maxlength:'10' %>
+            <% else %>
+              <%= f.text_field :Pac_Cedula, :readonly => false, class:'form-control',id:'cedula', placeholder:'Cédula', maxlength:'10' %>
+            <% end %>
           </div>
         </div>
 
