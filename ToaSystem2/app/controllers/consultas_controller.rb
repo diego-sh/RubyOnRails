@@ -11,6 +11,17 @@ class ConsultasController < ApplicationController
 
   end
 
+  def show
+    @medicinas = Medicina.find_by_sql("SELECT * FROM medicinas m JOIN prescripciones p ON m.prescripcion_id = p.prescripcion_id JOIN consultas c ON p.consulta_id = c.consulta_id  WHERE c.consulta_id ="+params[:id])
+    respond_to do |format|
+      format.html
+      format.json
+      format.pdf do
+        render template: 'consultas/Receta', pdf: "Receta"
+      end
+    end   
+  end
+
 #ACCION QUE BUSCA AL PACIENTE
   def buscarPaciente
     respond_to do |format|
@@ -294,7 +305,7 @@ class ConsultasController < ApplicationController
         @medicina.Ins_Cantidad=params[:consulta][:medicina][:Ins_Cantidad]
         if @medicina.save
           @msg="Medicamento añadido satisfactoriamente"
-          format.json { render json: {data:@medicina,mensaje:@msg}, status: :created }     
+          format.json { render json: {data:@medicina,consulta: @@consultaTMP,mensaje:@msg}, status: :created }     
         else
           format.json { render json: @medicina.errors, status: :unprocessable_entity }
         end

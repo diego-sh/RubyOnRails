@@ -1,0 +1,9 @@
+body{
+    font-size: 85%;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 70%;
+    background-image: url('img/LogoReporte.png');
+    background-repeat: no-repeat;
+    background-position: right 225px;
+    background-size: 90%;
+}
