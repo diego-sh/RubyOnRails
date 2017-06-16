@@ -1,5 +1,5 @@
 class ConsultasController < ApplicationController
-  before_action :set_paciente, only:[:show, :new]
+  before_action :set_paciente, only:[:new]
   before_action :list_antecedentes, only:[:new]
   after_action :save_cita, only:[:createConsulta]
   
