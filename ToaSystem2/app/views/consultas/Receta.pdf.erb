@@ -42,11 +42,15 @@
             </div>
         </div>
         <div style="height: 64px">
-            <div style="float: left; width: 74%; border: solid; border-color:transparent;">
+            <div style="float: left; width: 70%; border: solid; border-color:transparent;">
             </div>
-            <div style="float: left; width: 24%">
-                <br><br><br><br><hr>
-                NOMBRE Y FIRMA DEL MÉDICO
+            <div style="float: left; width: 29%">
+                <br><br><br><br><div>
+                    <hr>
+                </div>
+                <div align="center">
+                    DR.<%=" "+session[:persona]["Per_Apellido_Paterno"]+" "+session[:persona]["Per_Nombres"] %>
+                </div>
                 <br><br><br>
                 <br><br><br>
             </div>
@@ -72,13 +76,14 @@
                 Quito, <%=l Time.now, :format => :long %>
             </div>
             <div><br><br>
-                <table style="width: 100%">
+                <table>
                     <thead>
                     </thead>
                     <tbody>
                         <% @medicinas.each do |medicina| %>
                             <tr>
-                                <td style="width: 7%"><%= medicina.Ins_Indicacion %></td>
+                                <td><%= medicina.Ins_Nombre %> : </td>
+                                <td><%= medicina.Ins_Indicacion %></td>
                             </tr>
                         <% end %>
                     <tbody>
@@ -86,11 +91,16 @@
             </div>
         </div>
         <div style="height: 64px">
-            <div style="float: left; width: 74%; border: solid; border-color:transparent;">
+            <div style="float: left; width: 70%; border: solid; border-color:transparent;">
             </div>
-            <div style="float: left; width: 24%">
-                <br><br><br><br><hr>
-                NOMBRE Y FIRMA DEL MÉDICO
+            <div style="float: left; width: 29%">
+                <br><br><br><br>
+                <div>
+                    <hr>
+                </div>
+                <div align="center">
+                    DR.<%=" "+session[:persona]["Per_Apellido_Paterno"]+" "+session[:persona]["Per_Nombres"] %>
+                </div>
                 <br><br><br>
                 <br><br><br>
             </div>

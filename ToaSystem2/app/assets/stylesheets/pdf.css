@@ -7,3 +7,8 @@ body{
     background-position: right 225px;
     background-size: 90%;
 }
+
+td{
+    font-size: 130%;
+    line-height: 150%;
+}
