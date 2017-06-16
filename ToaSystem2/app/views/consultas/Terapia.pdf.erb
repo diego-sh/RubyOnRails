@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>TERAPIA</title>
+    <%= wicked_pdf_stylesheet_link_tag 'pdf' %>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  </head>
+  <body>
+    <div id="backgroud"></div>
+    <div style="width: 100%; height: 630px">
+        <div style="height:106px;">
+            <div style="float: left; width: 70%;"><br>                
+                <p id>PONCIANO ALTO CALLE MOISES LUNA ANDRADE OE-238 Y MARIANO POZO ESQ.</p>
+                <p>TELÉFONOS: 2473002 - 2478381 - 2476212 - 2471633</p>
+                <p>info@toaclinica.net - servicioalcliente@toaclinica.net</p>
+                <p>www.clinicatoa.com</p>
+            </div>
+            <div style="float: left; width: 30%;" align="right">
+                <%= wicked_pdf_image_tag("/img/Logo.png", :alt => "rss feed") %><br>
+            </div>
+        </div><hr>
+        <div style="clear: both; height: 800px"><br>
+            <div style="float: left; width: 70%;">
+                Terapia.
+            </div>
+            <div style="float: left; width: 30%;" align="right">
+                Quito, <%=l Time.now, :format => :long %>
+            </div>
+            <div><br><br>
+                <% @terapias.each do |terapia| %>                   
+                    <ul>
+                        <li type="circle"><%= terapia.Ter_indicacion %></li>
+                        <p>Sesiones: <%= terapia.Ter_Numero_Sesiones %></p>
+                    </ul>
+                <% end %>
+            </div>
+        </div>
+        <div style="height: 64px">
+            <div style="float: left; width: 70%; border: solid; border-color:transparent;">
+            </div>
+            <div style="float: left; width: 29%">
+                <br><br><br><br><div>
+                    <hr>
+                </div>
+                <div align="center">
+                    DR.<%=" "+session[:persona]["Per_Apellido_Paterno"]+" "+session[:persona]["Per_Nombres"] %>
+                </div>
+                <br><br><br>
+                <br><br><br>
+            </div>
+        </div>
+    </div>
+  </body>
+</html>

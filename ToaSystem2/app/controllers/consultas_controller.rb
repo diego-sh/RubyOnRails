@@ -12,14 +12,28 @@ class ConsultasController < ApplicationController
   end
 
   def show
-    @medicinas = Medicina.find_by_sql("SELECT * FROM medicinas m JOIN prescripciones p ON m.prescripcion_id = p.prescripcion_id JOIN consultas c ON p.consulta_id = c.consulta_id  WHERE c.consulta_id ="+params[:id])
+  end
+
+  def pdfReceta
+    @medicinas = Medicina.find_by_sql("SELECT * FROM medicinas m JOIN prescripciones p ON m.prescripcion_id = p.prescripcion_id JOIN consultas c ON p.consulta_id = c.consulta_id  WHERE c.consulta_id ="+params[:rec])
     respond_to do |format|
       format.html
       format.json
       format.pdf do
         render template: 'consultas/Receta', pdf: "Receta"
       end
-    end   
+    end
+  end
+
+  def pdfTerapia
+    @terapias = Terapia.find_by_sql("SELECT * FROM terapias t JOIN prescripciones p ON t.prescripcion_id = p.prescripcion_id JOIN consultas c ON p.consulta_id = c.consulta_id  WHERE c.consulta_id ="+params[:tep])
+    respond_to do |format|
+      format.html
+      format.json
+      format.pdf do
+        render template: 'consultas/Terapia', pdf: "Terapia"
+      end
+    end
   end
 
 #ACCION QUE BUSCA AL PACIENTE
@@ -325,6 +339,7 @@ class ConsultasController < ApplicationController
       if @@consultaTMP!=nil
         unless @@prescripcionTMP!=nil
           puts "ingresa a prescripcion"
+          @prescripcion = Prescripcion.new
           @prescripcion.consulta_id=@@consultaTMP.consulta_id
           @prescripcion.save
           @@prescripcionTMP=@prescripcion
@@ -334,7 +349,7 @@ class ConsultasController < ApplicationController
         @terapia.Ter_indicacion=params[:consulta][:terapia][:Ter_indicacion]
         if @terapia.save
           @msg="Terapia guardada satisfactoriamente"
-          format.json { render json:{data: @terapia, mensaje:@msg}, status: :created } 
+          format.json { render json:{data: @terapia,consulta: @@consultaTMP, mensaje:@msg}, status: :created } 
         else
           format.json { render json: @terapia.errors, status: :unprocessable_entity }
         end

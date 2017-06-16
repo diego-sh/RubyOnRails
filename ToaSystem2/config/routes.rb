@@ -20,7 +20,8 @@ Rails.application.routes.draw do
       post "createEmergencia"
       post "buscarPaciente"
       post "createParteOperatorio"
-      post "pdfTerapia"
+      get "pdfTerapia"
+      get "pdfReceta"
       
     end
   end

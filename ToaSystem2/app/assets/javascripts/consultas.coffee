@@ -9,6 +9,7 @@ $(document).on 'turbolinks:load', ->
     $('#frmRecetaMedica').hide();
     $('#frmTerapia').hide(); 
     $('#showReceta').hide();
+    $('#showTerapia').hide();
     $('#condicionesLlegadaTexto').prop('disabled', true);
     $('#nombreTipoEvento').prop('disabled',true);
     #INICIALIZADOR DE SELECTED-PARTE OPERAATORIO
@@ -205,15 +206,19 @@ $(document).on "ajax:success","form#receta-form", (ev,data,xhr, settings)->
     $('#prescipcion1').append("<li>#{data.data.Ins_Nombre}</li>
                                 <p class='styleIndicacion'>Cantidad: #{data.data.Ins_Cantidad}</p>
                                 <p class='styleIndicacion'>Indicación: #{data.data.Ins_Indicacion}</p>");
-    $('#prescripcion2').html("<a href='/consultas/#{data.consulta.consulta_id}.pdf?pcte=1' onclick='window.open(this.href,\"popupwindow\", \"width=800,height=790,left=400,top=5,scrollbars,toolbar=0,resizable\"); return false;' class='btn btn-primary pull-right' id='btnEmpezarConsulta'><span class='glyphicon glyphicon-print' aria-hidden='true'></span> IMPRIMIR</a>");
+    $('#prescripcion2').html("<a href='/consultas/pdfReceta.pdf?rec=#{data.consulta.consulta_id}' onclick='window.open(this.href,\"popupwindow\", \"width=800,height=790,left=400,top=5,scrollbars,toolbar=0,resizable\"); return false;' class='btn btn-primary pull-right' id='btnEmpezarConsulta'><span class='glyphicon glyphicon-print' aria-hidden='true'></span> IMPRIMIR</a>");
     showModal data.mensaje, 'success'
 $(document).on "ajax:error","form#receta-form", (ev,data,xhr, settings)->
     showModal data.responseJSON.mensaje, 'error'
 
 #TERAPIA
 $(document).on "ajax:success","form#terapia-form", (ev,data,xhr, settings)->
+    $('#showTerapia').show()
     $('#sesionesNumero').val(0)
-    $('#sesionIndicacion').val("")    
+    $('#sesionIndicacion').val("")
+    $('#terapia1').append("<li>#{data.data.Ter_indicacion}</li>
+                                <p class='styleIndicacion'>Sesiones: #{data.data.Ter_Numero_Sesiones}</p>");
+    $('#terapia2').html("<a href='/consultas/pdfTerapia.pdf?tep=#{data.consulta.consulta_id}' onclick='window.open(this.href,\"popupwindow\", \"width=800,height=790,left=400,top=5,scrollbars,toolbar=0,resizable\"); return false;' class='btn btn-primary pull-right' id='btnEmpezarConsulta'><span class='glyphicon glyphicon-print' aria-hidden='true'></span> IMPRIMIR</a>");    
     showModal data.mensaje, 'success'
 $(document).on "ajax:error","form#terapia-form", (ev,data,xhr, settings)->
     showModal data.responseJSON.mensaje, 'error'

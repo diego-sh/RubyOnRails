@@ -8,7 +8,7 @@ body{
     background-size: 90%;
 }
 
-td{
-    font-size: 130%;
+td , ul, li{
+    font-size: 122%;
     line-height: 150%;
 }
