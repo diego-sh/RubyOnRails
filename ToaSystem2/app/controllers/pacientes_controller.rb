@@ -74,6 +74,6 @@ class PacientesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def paciente_params
-      params.require(:paciente).permit(:Pac_HC, :Pac_Cedula, :Pac_Pasaporte, :Pac_Apellido_Paterno, :Pac_Apellido_Materno, :Pac_Nombres, :Pac_Fecha_Nacimiento, :Pac_Nacionalidad, :Pac_Genero, :Pac_Estado_Civil, :Pac_Instruccion, :Pac_Ocupacion, :Pac_Telefono, :Pac_Grupo_Sanguineo,residencia_attributes:[:id,:Res_Sector,:Res_Calle_Principal, :Res_Calle_Secundaria, :Res_Numero_Casa, :Res_Provincia, :Res_Canton])
+      params.require(:paciente).permit(:Pac_HC, :Pac_Cedula, :Pac_Pasaporte, :Pac_Apellido_Paterno, :Pac_Apellido_Materno, :Pac_Nombres, :Pac_Fecha_Nacimiento, :Pac_Nacionalidad, :Pac_Genero, :Pac_Estado_Civil, :Pac_Instruccion, :Pac_Ocupacion, :Pac_Telefono, :Pac_Grupo_Sanguineo, :Pac_Correo_Electronico,residencia_attributes:[:id,:Res_Sector,:Res_Calle_Principal, :Res_Calle_Secundaria, :Res_Numero_Casa, :Res_Provincia, :Res_Canton])
     end
 end

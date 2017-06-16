@@ -93,16 +93,8 @@
         </div>
         <div class="col-lg-4">
           <div class="form-group">
-            <label for="genero">Género</label>
-            <div class="radio" style="margin-left:30px">
-              <%= f.radio_button(:Pac_Genero, 'M', ) %>
-              <label for="radio2"><span><span></span></span>Masculino</label>
-            </div>
-            <div class="radio" style="margin-left:30px">
-              <%= f.radio_button(:Pac_Genero, 'F', ) %>
-              <label for="radio2"><span><span></span></span>Femenino</label>
-            </div>
-
+            <label for="ocupacion">Correo Electrónico</label>
+            <%= f.email_field :Pac_Correo_Electronico,class:'form-control',id:'ocupacion', placeholder:'ejemplo@gmail.com' %>
           </div>
         </div>
       </div>
@@ -112,6 +104,19 @@
           <div class="form-group">
             <label for="ocupacion">A que se dedica</label>
             <%= f.text_field :Pac_Ocupacion,class:'form-control',id:'ocupacion', placeholder:'Ocupación' %>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="form-group">
+            <label for="genero">Género</label>
+            <div class="radio" style="margin-left:30px">
+              <%= f.radio_button(:Pac_Genero, 'M', ) %>
+              <label for="radio2"><span><span></span></span>Masculino</label>
+            </div>
+            <div class="radio" style="margin-left:30px">
+              <%= f.radio_button(:Pac_Genero, 'F', ) %>
+              <label for="radio2"><span><span></span></span>Femenino</label>
+            </div>              
           </div>
         </div>
       </div>
