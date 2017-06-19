@@ -12,7 +12,7 @@
 
 <div id="bloque" class="alert alert-warning" role="alert" style="width: 100%; margin-top: 40px">
   <div class="row" style="padding-left: 20px">
-    <h4><strong>BUSQUEDA DE CITAS</strong></h4>
+    <h4 style="font-size: 16px"><strong>BUSQUEDA DE CITAS</strong></h4>
   </div>
   <div class="row">
     <%= form_for :cita do |f| %>
@@ -27,7 +27,7 @@
           <div class="col-md-2"></div>                
       </div>
 
-      <div class="col-md-4">
+      <div class="col-md-3">
        <label>POR PACIENTE</label>
          <div class="input-group">
            <input type="text" class="form-control" id = 'paciente' placeholder="Cédula">
@@ -41,17 +41,15 @@
   </div>
 </div>
 
-<div class="row" style="margin-left:20px; margin-top:0px">
-  <div class=".col-xs-6">
-    <%= link_to new_cita_path, class:"btn btn-primary pull-right" do %>
-    <i class="glyphicon glyphicon-plus"></i> AGENDAR CITA
-    <% end %>  
-  </div>
-</div>
-
-</br>
-<div class="row" style="margin-top: 5px">
-  <div class="center-block" style="width:85%">
+<div class="row" style="padding-right: 15px">  
+  <%= link_to new_cita_path, class:"btn btn-primary pull-right" do %>
+  <i class="glyphicon glyphicon-plus"></i> AGENDAR CITA
+  <% end %>    
+</div>  
+<div class="row">
+  <div class="alert" style="padding-bottom: 0px">
+  <div style="width: 100%;">
     <div class="calendar"></div>
+  </div> 
   </div>
 </div>

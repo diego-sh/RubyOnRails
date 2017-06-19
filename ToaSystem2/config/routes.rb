@@ -22,11 +22,17 @@ Rails.application.routes.draw do
       post "createParteOperatorio"
       get "pdfTerapia"
       get "pdfReceta"
-      
+      post "finalizarConsulta"
+      post "finalizarConsultaEmergencia"      
     end
   end
   
-  resources :citas  
+  resources :citas do
+    collection do
+      post "buscarPaciente"
+    end    
+  end
+   
   resources :horarios
   resources :usuarios , path_names: {new: 'new/:id' } do
     collection do

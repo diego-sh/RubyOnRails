@@ -1,0 +1,35 @@
+<%= form_for @consulta, :url => { :action => "finalizarConsultaEmergencia" }, remote: true, html:{id: "finalizarEmergencia-form",format: :json} do |f| %>
+    <%= f.fields_for :estadoPaciente do |ep|%>
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="form-group">
+                    <label for="observacionSalida">OBSERVACIÓN SALIDA</label>
+                    <%= ep.select(:Stp_Observacion_Salida, options_for_select([['Domicilio', 'DOMICILIO'], ['Consulta Externa', 'CONSULTA EXTERNA'],['Internación', 'INTERNACION']]),{prompt: "Seleccione"},{ :class => 'form-control'}) %>
+                </div>                
+            </div>
+            <div class="col-lg-5">
+                <div class="form-group">
+                    <label for="condicionSalida">CONDICIÓN SALIDA</label>
+                    <%= ep.select(:Stp_Condicion_Salida, options_for_select([['Vivo', 'VIVO'], ['Estable', 'ESTABLE'],['Inestable', 'INESTABLE'],['Muerto','MUERTO']]),{prompt: "Seleccione"},{ :id=>'condicionSalida', :class => 'form-control'}) %>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="causaMuerte">CAUSA DE MUERTE</label>
+                    <%= ep.text_area :Stp_Causa_Muerte, class:'form-control', id:'causaMuerte',placeholder:'Añada la causa de muerte' %>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="actions">
+                    <button type="submit" class="btn btn-primary btn-sm">
+                    <span><i class="glyphicon glyphicon-plus"></i> GUARDAR</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    <% end %>
+<% end %>

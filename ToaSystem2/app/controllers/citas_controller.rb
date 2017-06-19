@@ -8,7 +8,7 @@ class CitasController < ApplicationController
   def index
     #@citas = Cita.all
     @especialistas=Persona.find_by_sql("SELECT CONCAT(CONCAT(p.Per_Apellido_Paterno,' '), p.Per_Nombres) AS Nombre, m.medico_id, p.persona_id FROM personas p INNER JOIN medicos m on p.persona_id = m.persona_id")
-    @citas = Cita.find_by_sql("SELECT *, p.pac_apellido_paterno AS apellidop, p.pac_nombres AS nombrep, p.pac_cedula AS cedulap, pe.per_apellido_paterno AS apellidod, pe.per_nombres AS nombred, c.cit_fecha AS fecha, c.cit_hora AS hora, CONCAT(c.cit_fecha,c.cit_hora) AS fechahora from citas c join pacientes p on p.paciente_id=c.paciente_id join medicos m on m.medico_id=c.medico_id join personas pe on pe.persona_id=m.persona_id")
+    @citas = Cita.find_by_sql("SELECT *, p.pac_apellido_paterno AS apellidop, p.pac_nombres AS nombrep, p.pac_cedula AS cedulap, pe.per_apellido_paterno AS apellidod, pe.per_nombres AS nombred, c.cit_fecha AS fecha, c.cit_hora AS hora, CONCAT(c.cit_fecha,c.cit_hora) AS fechahora from citas c join pacientes p on p.paciente_id=c.paciente_id join medicos m on m.medico_id=c.medico_id join personas pe on pe.persona_id=m.persona_id WHERE c.Cit_Estado!='Cancelado'")
   end
 
   # GET /citas/1
@@ -16,17 +16,28 @@ class CitasController < ApplicationController
   def show
   end
 
+  #ACCION QUE BUSCA AL PACIENTE
+  def buscarPaciente
+    respond_to do |format|
+      if params[:term]!= ""
+        @paciente=Paciente.search(params[:term])
+        @@pacienteTMP=@paciente[0]
+        @msg="Paciente encontrado"
+        format.json { render json: {data:@paciente}, status: :created }
+        format.html
+        
+      else
+        @msg="Favor ingresa un número de cédula.!"
+        format.json { render json:{mensaje:@msg}, status: :unprocessable_entity }
+      end
+      
+    end  
+  end
+
   # GET /citas/new
   def new
     @cita = Cita.new
     @especialistas=Persona.find_by_sql("SELECT CONCAT(CONCAT(p.Per_Apellido_Paterno,' '), p.Per_Nombres) AS Nombre, m.medico_id, p.persona_id FROM personas p INNER JOIN medicos m on p.persona_id = m.persona_id")
-    @paciente=Paciente.search(params[:term])
-    if !@paciente
-      #flash[:notice]='Paciente no existe!!'
-    else
-      @pacienteActual=@paciente[0]
-      @@pacienteTMP=@paciente[0]  
-    end
     
   end
 
@@ -37,43 +48,48 @@ class CitasController < ApplicationController
   # POST /citas
   # POST /citas.json
   def create
-    @cita = Cita.new(cita_params)
-    @cita.paciente_id=@@pacienteTMP.paciente_id
-    @citaV = Cita.find_by_sql(["SELECT * FROM citas WHERE medico_id=? and Cit_Fecha=? and Cit_Hora=?",@cita.medico_id,@cita.Cit_Fecha,@cita.Cit_Hora.strftime("%H:%M:%S")])
-    @citaP = Cita.find_by_sql(["SELECT * FROM citas WHERE paciente_id=? and Cit_Fecha=?",@cita.paciente_id,@cita.Cit_Fecha])
-
-    if @citaP.any?
-      respond_to do |format|
-        format.html { redirect_to :back , alert: 'EL PACIENTE YA CUENTA CON UNA CITA PARA LA FECHA SELECCIONADA!' }
+    respond_to do |format|
+      @cita = Cita.new(cita_params)
+      @cita.Cit_Estado="PENDIENTE"
+      @cita.Cit_Hora_Fin= @cita.Cit_Hora+30.minutes
+      @cita.paciente_id=@@pacienteTMP.paciente_id
+      @cita.usuario_id=session[:usuario]["usuario_id"]
+      @empleado=Empleado.find_by_persona_id(session[:persona]["persona_id"])
+      if @empleado !=nil
+        @cita.empleado_id=@empleado.empleado_id
       end
+      
+      @citaV = Cita.find_by_sql(["SELECT * FROM citas WHERE medico_id=? and Cit_Fecha=? and Cit_Hora=?",@cita.medico_id,@cita.Cit_Fecha,@cita.Cit_Hora.strftime("%H:%M:%S")])
+      @citaP = Cita.find_by_sql(["SELECT * FROM citas WHERE paciente_id=? and Cit_Fecha=?",@cita.paciente_id,@cita.Cit_Fecha])
 
-    elsif @citaV.any?
-      @cita.Cit_Entre_Cita = 1
-      respond_to do |format|
+      if @citaP.any?        
+        @msg="EL PACIENTE YA CUENTA CON UNA CITA PARA LA FECHA SELECCIONADA!"
+        format.json { render json:{mensaje:@msg}, status: :unprocessable_entity }
+
+      elsif @citaV.any?
+        @cita.Cit_Entre_Cita = 1
+        
         if @cita.save
-          format.html { redirect_to @cita, alert: 'INGRESADO COMO CITA ADICIONAL'}
-          format.json { render :show, status: :created, location: @cita }
+          @msg="Cita registrada satisfactoriamente, ENTRE CITAS"
+          format.json { render json: {data:@cita,mensaje:@msg}, status: :created }
+          #format.html { redirect_to @cita, alert: 'INGRESADO COMO CITA ADICIONAL'}
+          #format.json { render :show, status: :created, location: @cita }
+        else
+          format.html { render :new }
+          format.json { render json: @cita.errors, status: :unprocessable_entity }
+        end
+
+      else        
+        if @cita.save
+          #format.html { redirect_to @cita}
+          @msg="Cita registrada satisfactoriamente"
+          format.json { render json: {data:@cita,mensaje:@msg}, status: :created }
         else
           format.html { render :new }
           format.json { render json: @cita.errors, status: :unprocessable_entity }
         end
       end
-      #respond_to do |format|
-      #  format.html { redirect_to :back , alert: 'FECHA U HORARIO NO DISPONIBLES!' }
-      #end
-
-    else
-      #flash[:notice] = 'Fecha u horario No Disponibles!'
-      respond_to do |format|
-        if @cita.save
-          format.html { redirect_to @cita}
-          format.json { render :show, status: :created, location: @cita }
-        else
-          format.html { render :new }
-          format.json { render json: @cita.errors, status: :unprocessable_entity }
-        end
-      end
-    end
+    end  
   end
 
   # PATCH/PUT /citas/1
@@ -93,7 +109,7 @@ class CitasController < ApplicationController
   # DELETE /citas/1
   # DELETE /citas/1.json
   def destroy
-    @cita.destroy
+    @cita.update(:Cit_Estado=>'CANCELADO')
     respond_to do |format|
       format.html { redirect_to citas_url, alert: 'Cita Eliminada.' }
       format.json { head :no_content }

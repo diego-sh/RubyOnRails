@@ -17,7 +17,7 @@ $(document).on 'turbolinks:load', ->
     $('#cmbAyudantes').selectpicker();
     $('#cmbAnestesiologo').selectpicker();
     $('#cmbInstrumentista').selectpicker();
-    $('#cmbCirculante').selectpicker();    
+    $('#cmbCirculante').selectpicker(); 
     # DIV INFO DEL PACIENTE
     $('#pnlPacienteRecuperado').hide()
     $('#btnPedidoExamen').click ->
@@ -58,6 +58,8 @@ $(document).on 'turbolinks:load', ->
         else
             $('#condicionesLlegadaTexto').prop('disabled', true);
         return
+    ##BUTTOM FINALIZAR CONSULTA EMERGENCIA
+    $('#btnFinalizarEmergencia').hide();
     ##OPCIONES NO HABILITIDAS PARA CONSULTA EMERGENCIA
     $('#tabPanelConsulta a:first').hide()
     $('#btnCaracteristicasDolor').prop('disabled', true);
@@ -74,23 +76,27 @@ $(document).on 'turbolinks:load', ->
     
     ##CONSULTA EMERGENCIA-EXTERNA
     $('#cmbTipoConsulta').change ->
-        debugger
         value=$('#cmbTipoConsulta :selected').text()
-        console.log "hey"
-        console.log value
         if value == 'CONSULTA POR EMERGENCIA'          
             $('#tabPanelConsulta a:first').show()
             $('#tabPanelConsulta a:first').prop('style', display: 'block')
             $('#btnCaracteristicasDolor').prop('disabled', false);
             $('#btnExamenFisico').prop('disabled', false)
+            $('#btnFinalizarEmergencia').show();
+            $('#btnFinConsulta').hide();
+            $('#causaMuerte').prop('disabled', true)
         if value == 'CONSULTA EXTERNA'
             $('#tabPanelConsulta a:first').hide()
             $('#btnCaracteristicasDolor').prop('disabled', true);
             $('#btnExamenFisico').prop('disabled', true)
+            $('#btnFinalizarEmergencia').hide();
+            $('#btnFinConsulta').show();
     
     ##PANEL REGISTRAR PARTE OPERATORIO CIRUGIA MOSTRAR MODAL
     $('#btnCirugia').click ->
         $('#modalCirugia').modal()
+        $('#modalCirugia').on 'shown.bs.modal', ->
+            $(".calendariocirugia").fullCalendar('render');
 
     #BLOQUEO DE OPCIONES CIRUJANO-AYUDANTES EN PARTE OPERATORIO DE ACUERDO LA VALOR
     $('#cmbCirujano').change ->
@@ -139,6 +145,14 @@ $(document).on 'turbolinks:load', ->
     $('#btnCirugia').click ->
         valor= $('#diagnostico').val()
         $('#diagnosticoPreoperatorio').val(valor)
+    
+    #CONDICION DE SALIDA CONSULTA EMERGENCIA
+    $('#condicionSalida').change ->
+        value=$('#condicionSalida :selected').text()
+        if value == 'Muerto'
+            $('#causaMuerte').prop('disabled', false)
+        else
+            $('#causaMuerte').prop('disabled', true)
 
 #BUSCAR PACIENTE-CONSULTA
 $(document).on "ajax:success","form#buscarPaciente-form", (ev,data,xhr, settings)->
@@ -230,6 +244,10 @@ $(document).on "ajax:success","form#emergencia-form", (ev,data,xhr, settings)->
 $(document).on "ajax:success","form#parteOperatorio-form", (ev,data,xhr, settings)->   
     showModal data.mensaje, 'success'
 $(document).on "ajax:error","form#parteOperatorio-form", (ev,data,xhr, settings)->
+    showModal data.responseJSON.mensaje, 'error'
+
+#FINALIZAR EMERGENCIA
+$(document).on "ajax:error","form#finalizarEmergencia-form", (ev,data,xhr, settings)->
     showModal data.responseJSON.mensaje, 'error'
 
 

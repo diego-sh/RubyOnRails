@@ -2,13 +2,16 @@ class ConsultasController < ApplicationController
   before_action :set_paciente, only:[:new]
   before_action :list_antecedentes, only:[:new]
   after_action :save_cita, only:[:createConsulta]
+  before_action :set_medico, only:[:index]
   
   def index
-      @medico= Medico.find_by_persona_id(session[:persona]["persona_id"])
+    @@medico= Medico.find_by_persona_id(session[:persona]["persona_id"])
+    if @@medico !=nil
       @lstPacientesAtender=Cita.find_by_sql("SELECT c.cita_id,c.cit_fecha,c.cit_hora,c.cit_motivo, p.paciente_id, CONCAT(CONCAT(p.pac_apellido_paterno,' '),p.pac_apellido_materno)AS Apellidos, p.pac_nombres 
                                             FROM citas c INNER JOIN pacientes p ON p.paciente_id=c.paciente_id 
-                                            WHERE c.medico_id='#{@medico.medico_id}' AND c.cit_fecha=CURDATE() ORDER by c.cit_hora ASC")
-
+                                            WHERE c.medico_id='#{@@medico.medico_id}' AND c.cit_fecha=CURDATE() AND c.cit_estado!='Atendido' ORDER by c.cit_hora ASC")
+      
+    end
   end
 
   def show
@@ -159,11 +162,27 @@ class ConsultasController < ApplicationController
     end
   end
   
+  #ACCION CREAR CONSULTA
   def createConsulta
     @consulta=Consulta.new     
     respond_to do |format|
-      if !@@inserted
-        @consulta.cita_id=@@cita_idTMP
+      if @@consultaTMP==nil
+        if @@cita_idTMP!=nil
+          @consulta.cita_id=@@cita_idTMP
+        else
+          @citaExtra=Cita.new
+          @citaExtra.paciente_id=@@pacienteTMP.paciente_id
+          @citaExtra.Cit_Estado="CONSULTA EXTRA"
+          @citaExtra.Cit_Fecha=Date.today.strftime("%Y-%m-%d")
+          @citaExtra.Cit_Hora=Time.now.strftime("%H:%M")
+          @citaExtra.usuario_id=session[:usuario]["usuario_id"]
+          if @@medico!= nil
+             @citaExtra.medico_id=@@medico.medico_id
+          end
+          @citaExtra.save
+          @consulta.cita_id=@citaExtra.cita_id
+          @@cita_idTMP=@citaExtra.cita_id
+        end        
         @consulta.Con_Cronologia=params[:consulta][:Con_Cronologia]
         @consulta.Con_Diagnostico_Final= params[:consulta][:Con_Diagnostico_Final]
         @consulta.Con_Codigo_CIE=params[:consulta][:Con_Codigo_CIE]
@@ -182,10 +201,129 @@ class ConsultasController < ApplicationController
         @msg="Consulta guardada satisfactoriamente."
         format.json { render json: {data:@consulta, mensaje:@msg}, status: :created }  
       end      
-   end    
-    
+   end
   end
 
+  #CREAR CONSULTA EMERGENCIA
+  def createEmergencia
+    respond_to do |format|
+      @estadoPaciente=EstadoPaciente.new
+      @percance=Percance.new      
+      unless @@consultaTMP!=nil
+        @consulta=Consulta.new
+        @citaEmergencia=Cita.new
+        @citaEmergencia.paciente_id=@@pacienteTMP.paciente_id
+        @citaEmergencia.Cit_Estado="EMERGENCIA"
+        @citaEmergencia.Cit_Fecha=Date.today.strftime("%Y-%m-%d")
+        @citaEmergencia.Cit_Hora=Time.now.strftime("%H:%M")
+        @citaEmergencia.usuario_id=session[:usuario]["usuario_id"]
+        if @@medico!= nil
+             @citaEmergencia.medico_id=@@medico.medico_id
+        end
+        @citaEmergencia.save
+        @consulta.cita_id=@citaEmergencia.cita_id
+        @consulta.usuario_id=session[:usuario]["usuario_id"]
+        if @consulta.save
+          @@consultaTMP=@consulta
+        end
+      end
+      
+      if @@estadoPacienteTMP==nil
+        @estadoPaciente.consulta_id=@@consultaTMP.consulta_id
+        @estadoPaciente.Stp_Persona_Notificacion=params[:consulta][:estadoPaciente][:Stp_Persona_Notificacion]
+        @estadoPaciente.Stp_Parentesco_Afinidad=params[:consulta][:estadoPaciente][:Stp_Parentesco_Afinidad]
+        @estadoPaciente.Stp_Direccion_PN=params[:consulta][:estadoPaciente][:Stp_Direccion_PN]
+        @estadoPaciente.Stp_Telefono_PN=params[:consulta][:estadoPaciente][:Stp_Telefono_PN]
+        @estadoPaciente.Stp_Nombre_Acompaniante=params[:consulta][:estadoPaciente][:Stp_Nombre_Acompaniante]
+        @estadoPaciente.Stp_Cedula_Acompaniante=params[:consulta][:estadoPaciente][:Stp_Cedula_Acompaniante]
+        @estadoPaciente.Stp_Direccion_AC=params[:consulta][:estadoPaciente][:Stp_Direccion_AC]
+        @estadoPaciente.Stp_Telefono_Acompaniante=params[:consulta][:estadoPaciente][:Stp_Telefono_Acompaniante]
+        @estadoPaciente.Stp_Forma_Llegada=params[:consulta][:estadoPaciente][:Stp_Forma_Llegada]
+        @estadoPaciente.Stp_Fuente_Informacion=params[:consulta][:estadoPaciente][:Stp_Fuente_Informacion]
+        @estadoPaciente.Stp_Institucion=params[:consulta][:estadoPaciente][:Stp_Institucion]
+        @estadoPaciente.Stp_Telefono_Institucion=params[:consulta][:estadoPaciente][:Stp_Telefono_Institucion]
+        @estadoPaciente.Stp_Hora_Inicio=params[:consulta][:estadoPaciente][:Stp_Hora_Inicio]
+        @estadoPaciente.Stp_Via_Aerea=params[:consulta][:estadoPaciente][:Stp_Via_Aerea]
+        @estadoPaciente.Stp_Condicion_Llegada=params[:consulta][:estadoPaciente][:Stp_Condicion_Llegada]
+        @estadoPaciente.Stp_Motivo_Llegada=params[:consulta][:estadoPaciente][:Stp_Motivo_Llegada]
+        if @estadoPaciente.save
+          @@estadoPacienteTMP=@estadoPaciente
+          if params[:consulta][:percance][:Pca_Lugar_Evento]!=""
+            @percance.consulta_id=@@consultaTMP.consulta_id
+            @percance.Pca_Lugar_Evento=params[:consulta][:percance][:Pca_Lugar_Evento]
+            @percance.Pca_Direccion_Evento=params[:consulta][:percance][:Pca_Direccion_Evento]
+            @percance.Pca_Fecha=params[:consulta][:percance][:Pca_Fecha]
+            @percance.Pca_Hora=params[:consulta][:percance][:Pca_Hora]
+            @percance.Pca_Tipo_Objeto=params[:consulta][:percance][:Pca_Tipo_Objeto]
+            @percance.Pca_Tipo_Evento=params[:consulta][:percance][:Pca_Tipo_Evento]
+            @percance.Pca_Hora_Denuncia=params[:consulta][:percance][:Pca_Hora_Denuncia]
+            @percance.Pca_Custodia_Policial=params[:consulta][:percance][:Pca_Custodia_Policial]
+            @percance.Pca_Observacion_Evento=params[:consulta][:percance][:Pca_Observacion_Evento]
+            @percance.Pca_Aliento_Etilico=params[:consulta][:percance][:Pca_Aliento_Etilico]
+            @percance.Pca_Valor_Alcocheck=params[:consulta][:percance][:Pca_Valor_Alcocheck]
+            @percance.Pca_Hora_Examen=params[:consulta][:percance][:Pca_Hora_Examen]
+            @percance.Pca_Otras=params[:consulta][:percance][:Pca_Otras]
+            @percance.Pca_Violencia_Sospecha=params[:consulta][:percance][:Pca_Violencia_Sospecha]
+            @percance.Pca_Violencia_AbusoPsicologico=params[:consulta][:percance][:Pca_Violencia_AbusoPsicologico]
+            @percance.Pca_Violencia_AbusoFisico=params[:consulta][:percance][:Pca_Violencia_AbusoFisico]
+            @percance.Pca_Violencia_AbusoSexual=params[:consulta][:percance][:Pca_Violencia_AbusoSexual]
+            @percance.Pca_Observacion_Intoxicacion_Violencia=params[:consulta][:percance][:Pca_Observacion_Intoxicacion_Violencia]
+            @percance.Pca_Grado_Quemadura=params[:consulta][:percance][:Pca_Grado_Quemadura]
+            @percance.Pca_Quemadura_Porcentaje=params[:consulta][:percance][:Pca_Quemadura_Porcentaje]
+            @percance.Pca_Picadura=params[:consulta][:percance][:Pca_Picadura]
+            @percance.Pca_Mordedura=params[:consulta][:percance][:Pca_Mordedura]
+            @percance.save
+            @@percanceTMP=@percance
+          end
+          @msg='Admisión Emergencia guardada satisfactoriamente.!'
+          format.json { render json: {mensaje:@msg}, status: :created }
+        end        
+      else
+        @@estadoPacienteTMP.update(:Stp_Persona_Notificacion=>params[:consulta][:estadoPaciente][:Stp_Persona_Notificacion], :Stp_Parentesco_Afinidad=>params[:consulta][:estadoPaciente][:Stp_Parentesco_Afinidad], :Stp_Direccion_PN=>params[:consulta][:estadoPaciente][:Stp_Direccion_PN], :Stp_Telefono_PN=>params[:consulta][:estadoPaciente][:Stp_Telefono_PN],:Stp_Nombre_Acompaniante=>params[:consulta][:estadoPaciente][:Stp_Nombre_Acompaniante],
+        :Stp_Cedula_Acompaniante=>params[:consulta][:estadoPaciente][:Stp_Cedula_Acompaniante], :Stp_Direccion_AC=>params[:consulta][:estadoPaciente][:Stp_Direccion_AC], :Stp_Telefono_Acompaniante=>params[:consulta][:estadoPaciente][:Stp_Telefono_Acompaniante], :Stp_Forma_Llegada=>params[:consulta][:estadoPaciente][:Stp_Forma_Llegada], :Stp_Fuente_Informacion=>params[:consulta][:estadoPaciente][:Stp_Fuente_Informacion], :Stp_Institucion=>params[:consulta][:estadoPaciente][:Stp_Institucion],
+        :Stp_Telefono_Institucion=>params[:consulta][:estadoPaciente][:Stp_Telefono_Institucion], :Stp_Hora_Inicio=>params[:consulta][:estadoPaciente][:Stp_Hora_Inicio], :Stp_Via_Aerea=>params[:consulta][:estadoPaciente][:Stp_Via_Aerea], :Stp_Condicion_Llegada=>params[:consulta][:estadoPaciente][:Stp_Condicion_Llegada], :Stp_Motivo_Llegada=>params[:consulta][:estadoPaciente][:Stp_Motivo_Llegada])        
+        if @@percanceTMP!=nil
+          @@percanceTMP.update(:Pca_Lugar_Evento=>params[:consulta][:percance][:Pca_Lugar_Evento], :Pca_Direccion_Evento=>params[:consulta][:percance][:Pca_Direccion_Evento], :Pca_Fecha=>params[:consulta][:percance][:Pca_Fecha], :Pca_Tipo_Objeto=>params[:consulta][:percance][:Pca_Tipo_Objeto], :Pca_Hora_Denuncia=>params[:consulta][:percance][:Pca_Hora_Denuncia], :Pca_Custodia_Policial=>params[:consulta][:percance][:Pca_Custodia_Policial], :Pca_Observacion_Evento=>params[:consulta][:percance][:Pca_Observacion_Evento],
+          :Pca_Aliento_Etilico=>params[:consulta][:percance][:Pca_Aliento_Etilico],:Pca_Valor_Alcocheck=>params[:consulta][:percance][:Pca_Valor_Alcocheck], :Pca_Hora_Examen=>params[:consulta][:percance][:Pca_Hora_Examen], :Pca_Otras=>params[:consulta][:percance][:Pca_Otras], :Pca_Violencia_Sospecha=>params[:consulta][:percance][:Pca_Violencia_Sospecha], :Pca_Violencia_AbusoPsicologico=>params[:consulta][:percance][:Pca_Violencia_AbusoPsicologico], :Pca_Violencia_AbusoFisico=>params[:consulta][:percance][:Pca_Violencia_AbusoFisico], 
+          :Pca_Violencia_AbusoSexual=>params[:consulta][:percance][:Pca_Violencia_AbusoSexual], :Pca_Observacion_Intoxicacion_Violencia=>params[:consulta][:percance][:Pca_Observacion_Intoxicacion_Violencia], :Pca_Grado_Quemadura=>params[:consulta][:percance][:Pca_Grado_Quemadura], :Pca_Quemadura_Porcentaje=>params[:consulta][:percance][:Pca_Quemadura_Porcentaje], :Pca_Picadura=>params[:consulta][:percance][:Pca_Picadura], :Pca_Mordedura=>params[:consulta][:percance][:Pca_Mordedura], :Pca_Tipo_Evento=>params[:consulta][:percance][:Pca_Tipo_Evento])
+        else
+          if params[:consulta][:percance][:Pca_Lugar_Evento]!=""
+            @percance.consulta_id=@@consultaTMP.consulta_id
+            @percance.Pca_Lugar_Evento=params[:consulta][:percance][:Pca_Lugar_Evento]
+            @percance.Pca_Direccion_Evento=params[:consulta][:percance][:Pca_Direccion_Evento]
+            @percance.Pca_Fecha=params[:consulta][:percance][:Pca_Fecha]
+            @percance.Pca_Hora=params[:consulta][:percance][:Pca_Hora]
+            @percance.Pca_Tipo_Objeto=params[:consulta][:percance][:Pca_Tipo_Objeto]
+            @percance.Pca_Tipo_Evento=params[:consulta][:percance][:Pca_Tipo_Evento]
+            @percance.Pca_Hora_Denuncia=params[:consulta][:percance][:Pca_Hora_Denuncia]
+            @percance.Pca_Custodia_Policial=params[:consulta][:percance][:Pca_Custodia_Policial]
+            @percance.Pca_Observacion_Evento=params[:consulta][:percance][:Pca_Observacion_Evento]
+            @percance.Pca_Aliento_Etilico=params[:consulta][:percance][:Pca_Aliento_Etilico]
+            @percance.Pca_Valor_Alcocheck=params[:consulta][:percance][:Pca_Valor_Alcocheck]
+            @percance.Pca_Hora_Examen=params[:consulta][:percance][:Pca_Hora_Examen]
+            @percance.Pca_Otras=params[:consulta][:percance][:Pca_Otras]
+            @percance.Pca_Violencia_Sospecha=params[:consulta][:percance][:Pca_Violencia_Sospecha]
+            @percance.Pca_Violencia_AbusoPsicologico=params[:consulta][:percance][:Pca_Violencia_AbusoPsicologico]
+            @percance.Pca_Violencia_AbusoFisico=params[:consulta][:percance][:Pca_Violencia_AbusoFisico]
+            @percance.Pca_Violencia_AbusoSexual=params[:consulta][:percance][:Pca_Violencia_AbusoSexual]
+            @percance.Pca_Observacion_Intoxicacion_Violencia=params[:consulta][:percance][:Pca_Observacion_Intoxicacion_Violencia]
+            @percance.Pca_Grado_Quemadura=params[:consulta][:percance][:Pca_Grado_Quemadura]
+            @percance.Pca_Quemadura_Porcentaje=params[:consulta][:percance][:Pca_Quemadura_Porcentaje]
+            @percance.Pca_Picadura=params[:consulta][:percance][:Pca_Picadura]
+            @percance.Pca_Mordedura=params[:consulta][:percance][:Pca_Mordedura]
+            @percance.save
+            @@percanceTMP=@percance
+          end
+        end
+        @msg='Admisión Emergencia guardada satisfactoriamente.!'
+        format.json { render json: {mensaje:@msg}, status: :created }        
+      end
+    end
+    
+  end
+  
+
+  #ACCION CREAR SINTOMA
   def createSintoma
     @sintoma= Sintoma.new
     respond_to do |format|
@@ -219,6 +357,7 @@ class ConsultasController < ApplicationController
     end
   end
 
+  #ACCION CREAR EXAMEN FÍSICO
   def createExamenFisico
     @examenFisico= ExamenFisico.new
     respond_to do |format|
@@ -240,7 +379,7 @@ class ConsultasController < ApplicationController
     end     
   end
 
-
+  #ACCION CREAR PEDIDO DE IMAGENOLOGIA
   def createPedido
     @examen=Examen.new
     @prescripcion=Prescripcion.new
@@ -273,6 +412,7 @@ class ConsultasController < ApplicationController
     end    
   end
 
+  #ACCION CREAR TRATAMIENTO
   def createTratamiento
     @prescripcion=Prescripcion.new
     respond_to do |format|
@@ -302,6 +442,7 @@ class ConsultasController < ApplicationController
     end    
   end
 
+  #ACCION CREAR RECETA
   def createReceta
     @medicina=Medicina.new
     @prescripcion=Prescripcion.new
@@ -332,7 +473,7 @@ class ConsultasController < ApplicationController
     end    
   end
 
-#ACCION CREAR TERAPIA
+  #ACCION CREAR TERAPIA
   def createTerapia
     @terapia=Terapia.new
     respond_to do |format|
@@ -360,9 +501,39 @@ class ConsultasController < ApplicationController
     end    
   end
   
+  #ACCION FINALIZAR CONSULTA EXTERNA
+  def finalizarConsulta
+    respond_to do |format|
+      if @@consultaTMP != nil && @@prescripcionTMP!=nil 
+        if @@cita_idTMP!=nil
+          @citaAUX=Cita.find_by_cita_id(@@cita_idTMP)
+          if @citaAUX !=nil
+            @citaAUX.update(:Cit_Estado=>"ATENDIDO")
+            format.html { redirect_to consultas_path, notice: 'CONSULTA FINALIZADA Y GUARDADO CON ÉXITO' }
+          end        
+        end
+      else
+        @msg="Guarde primero la consulta y/o Tratamiento"
+        format.json { render json:{mensaje:@msg}, status: :unprocessable_entity }  
+      end
+    end    
+  end
+
+#ACCION FINALIZA CONSULTA EMERGENCIA
+  def finalizarConsultaEmergencia
+    respond_to do |format|
+      if @@estadoPacienteTMP!= nil && @@consultaTMP!= nil && @@prescripcionTMP!= nil
+        if params[:consulta][:estadoPaciente][:Stp_Observacion_Salida]!="" && params[:consulta][:estadoPaciente][:Stp_Condicion_Salida]!=""
+          @@estadoPacienteTMP.update(:Stp_Observacion_Salida=>params[:consulta][:estadoPaciente][:Stp_Observacion_Salida], :Stp_Condicion_Salida=>params[:consulta][:estadoPaciente][:Stp_Condicion_Salida], :Stp_Hora_Salida=>Time.now.strftime("%H:%M"), :Stp_Causa_Muerte=>params[:consulta][:estadoPaciente][:Stp_Causa_Muerte])
+          format.html { redirect_to consultas_path, notice: 'CONSULTA POR EMERGENCIA FINALIZADA Y GUARDADO CON ÉXITO' }
+        else
+          @msg="Algunos campos son necesarios"
+          format.json { render json:{mensaje:@msg}, status: :unprocessable_entity }
+        end
+      end
+    end
+  end
   
-
-
    private
     # Use callbacks to share common setup or constraints between actions.
     def set_paciente
@@ -373,16 +544,21 @@ class ConsultasController < ApplicationController
       @@inserted=false
       @@consultaTMP=nil
       @@prescripcionTMP=nil
+      @@percanceTMP=nil
+      @@estadoPacienteTMP=nil
     end
 
     def save_cita
       @@cita_idTMP= @@cita_idTMP
       @@inserted=true
-    end
-    
+    end    
 
     def list_antecedentes
       @antecedentes= Antecedente.find_by_sql("SELECT *FROM antecedentes WHERE paciente_id="+@@pacienteTMP.paciente_id.to_s+" ORDER BY Ant_tipo")
+    end
+    
+    def set_medico
+      @@medico=nil
     end
     
 end

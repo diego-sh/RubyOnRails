@@ -14,23 +14,25 @@
                 </thead>
 
                 <tbody style="font-size:13px">
-                    <% @lstPacientesAtender.each do |pcte| %>
-                        <tr>
-                            <td>
-                                <%= pcte.cit_hora.strftime('%H : %M') %>
-                            </td>
-                            <td>
-                                <%= pcte.Apellidos+" "+pcte.pac_nombres %>
-                            </td>
-                           
-                            <td>
-                                <%= pcte.cit_motivo %>
-                            </td>
-                            <td>
-                                <%= link_to 'Atender', new_consulta_path(:pcte => pcte.paciente_id, :cit => pcte.cita_id) %>
-                            </td>
-                        </tr>
+                    <% if @lstPacientesAtender!=nil %>
+                        <% @lstPacientesAtender.each do |pcte| %>
+                            <tr>
+                                <td>
+                                    <%= pcte.cit_hora.strftime('%H : %M') %>
+                                </td>
+                                <td>
+                                    <%= pcte.Apellidos+" "+pcte.pac_nombres %>
+                                </td>
+                            
+                                <td>
+                                    <%= pcte.cit_motivo %>
+                                </td>
+                                <td>
+                                    <%= link_to 'Atender', new_consulta_path(:pcte => pcte.paciente_id, :cit => pcte.cita_id) %>
+                                </td>
+                            </tr>
                         <% end %>
+                    <% end %>
                 </tbody>
             </table>
         </div>

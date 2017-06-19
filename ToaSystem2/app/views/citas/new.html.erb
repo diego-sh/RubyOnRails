@@ -5,3 +5,37 @@
         <%= render 'form', cita: @cita %>
     </div>
 </div>
+
+<!--MODAL ERROR-->
+
+<div class="modal fade" id="modalError" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #f44336">
+        <h5 class="modal-title" id="titleError" style="color: #fff"></h5>
+      </div>
+      <div class="modal-body" id="bodyError">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">ACEPTAR</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--MODAL SUCCESS-->
+
+<div class="modal fade" id="modalSuccess" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #66bb6a">
+        <h5 class="modal-title" id="titleSuccess" style="color: #fff"></h5>
+      </div>
+      <div class="modal-body" id="bodySuccess">
+      </div>
+      <div class="modal-footer" id="successAction">
+        <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">ACEPTAR</button>
+      </div>
+    </div>
+  </div>
+</div>

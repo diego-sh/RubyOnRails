@@ -14,6 +14,16 @@
     font-weight: bold;
 }
 
+.scroll-panelConsulta {
+  //min-height: 10;
+ max-height: 350px;
+    overflow-y: scroll;
+}
+
+.buttonOpctions{
+    position: absolute;
+}
+
 .body-pnl-consultas{
     border-bottom-color: #a1887f;
     border-bottom-width: 2px;
