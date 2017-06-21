@@ -10,7 +10,7 @@ class ConsultasController < ApplicationController
       @lstPacientesAtender=Cita.find_by_sql("SELECT c.cita_id,c.cit_fecha,c.cit_hora,c.cit_motivo, p.paciente_id, CONCAT(CONCAT(p.pac_apellido_paterno,' '),p.pac_apellido_materno)AS Apellidos, p.pac_nombres 
                                             FROM citas c INNER JOIN pacientes p ON p.paciente_id=c.paciente_id 
                                             WHERE c.medico_id='#{@@medico.medico_id}' AND c.cit_fecha=CURDATE() AND c.cit_estado!='Atendido' ORDER by c.cit_hora ASC")
-      
+      @cirugias = PartesOperatorio.find_by_sql("SELECT * FROM partes_operatorios")
     end
   end
 

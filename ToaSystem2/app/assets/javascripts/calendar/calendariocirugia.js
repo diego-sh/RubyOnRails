@@ -5,7 +5,7 @@ initialize_calendar = function(){
     $('.calendariocirugia').each(function(){
         var calendar = $(this);
         calendar.fullCalendar({
-            events: '',
+            events: '/consultas.json',
             header:{
                 left: 'prev, next today',
                 center: 'title',
