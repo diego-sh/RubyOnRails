@@ -546,6 +546,7 @@ class ConsultasController < ApplicationController
       @@prescripcionTMP=nil
       @@percanceTMP=nil
       @@estadoPacienteTMP=nil
+      @consultas = Consulta.find_by_sql("SELECT c.consulta_id, c.Con_Cronologia, c.Con_Diagnostico_Final, c.Con_Motivo, p.Pre_Procedimiento, p.Pre_Indicaciones_Generales, p.Pre_Observacion, ci.Cit_Fecha FROM consultas c JOIN citas ci ON c.cita_id = ci.cita_id JOIN prescripciones p ON c.consulta_id = p.consulta_id WHERE ci.paciente_id ="+params[:pcte])
     end
 
     def save_cita

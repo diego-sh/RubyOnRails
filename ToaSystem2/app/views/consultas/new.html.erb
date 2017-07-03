@@ -90,9 +90,9 @@
         </div>
       </div>
       <div class="col-xs-6 col-sm-6 col-md-4">
-        <%= link_to new_cita_path, class:"btn btn-warning pull-right" do %>
-          <i class="glyphicon glyphicon-search"></i> Ver Historial
-        <% end %>
+        <button id="btnVerHistorial" type="button" class="btn btn-warning pull-right" data-toggle="modal" data-target="#ModalHC">
+          <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Ver Historial
+        </button>
       </div>
     </div>
   </div>
@@ -299,6 +299,23 @@
      <!-- <div class="modal-footer">
         <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">ACEPTAR</button>
       </div>-->
+    </div>
+  </div>
+</div>
+
+<!-- DIALOG HISTORIAL-->
+<div class="modal fade" id="ModalHC" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" style="width: 1300px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">HISTORIAL</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= render 'frmHistorial' %>         
+      </div>
     </div>
   </div>
 </div>

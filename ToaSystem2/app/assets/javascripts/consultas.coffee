@@ -263,3 +263,11 @@ showModal = (message, type) ->
     $('#bodyError').html "#{message}"
     $('#modalError').modal()
   return
+
+@recetaHC = (codigo) ->
+    window.open '/consultas/pdfReceta.pdf?rec=' + codigo, '_blank', 'width=800,height=790,left=400,top=5,scrollbars,toolbar=0,resizable'
+    return
+
+@terapiaHC = (codigo) ->
+    window.open '/consultas/pdfTerapia.pdf?tep=' + codigo, '_blank', 'width=800,height=790,left=400,top=5,scrollbars,toolbar=0,resizable'
+    return
