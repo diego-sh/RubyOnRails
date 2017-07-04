@@ -1,0 +1,50 @@
+<%= form_for(@ingreso, :url => { :action => "createNotaEvolucion" }, remote: true, html:{id: "notasEvolucion-form",format: :json}, validate: true) do |f| %>
+    <% f.fields_for :nota do |n|%>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="fechaNota">FECHA</label>
+                    <%=n.date_field :Not_Fecha, value: Date.today.strftime("%Y-%m-%d"),min: Date.today, class:'form-control', id:'fechaNota'%>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="horaNota">HORA</label>
+                    <%=n.time_field :Not_Hora, value: Time.now.strftime("%H:%M"), class:'form-control', id:'horaNota'%>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="tipoNota">TIPO</label>
+                    <%= n.select(:Not_Tipo, options_for_select([['Ingreso', 'INGRESO'],['Evolución', 'EVOLUCIÓN'], ['Egreso', 'EGRESO']]),{prompt: "Seleccione"},{ :class => 'form-control'}) %>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="perfil">ESPECIALISTA ADICIONAL</label>
+                    <%= n.collection_select :medico_id, @especialistas, :medico_id, :Nombre,{prompt: "Seleccione"},{ :class => 'form-control'} %>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="notaEvolucion">NOTA</label>
+                    <%=n.text_area :Not_Nota, class:'form-control', id:'notaEvolucion', placeholder:'Añada su nota respectiva', rows:'7'%>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+        <div class="col-lg-12">
+            <div class="actions">
+                <button type="submit" class="btn btn-primary pull-right">
+                <span><i class="glyphicon glyphicon-plus"></i> Guardar</span>
+                </button>
+            </div>
+        </div>        
+    </div>
+    <% end %>    
+<% end %>

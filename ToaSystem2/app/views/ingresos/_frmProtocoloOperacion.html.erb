@@ -1,0 +1,69 @@
+<%= form_for(protocolo, :url => { :action => "createNotaEvolucion" }, remote: true, html:{id: "notasEvolucion-form",format: :json}, validate: true) do |f| %>
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label for="fechaNota">FECHA DE OPERACIÓN</label>
+                <%=f.date_field :Pdo_Fecha, value: Date.today.strftime("%Y-%m-%d"),min: Date.today, class:'form-control', id:'fechaNota'%>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label for="horaNota">HORA DE INICIO</label>
+                <%=f.time_field :Pdo_Hora_Inicio, value: Time.now.strftime("%H:%M"), class:'form-control', id:'horaNota'%>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label for="horaNota">HORA DE TERMINACIÓN</label>
+                <%=f.time_field :Pdo_Hora_Fin, value: Time.now.strftime("%H:%M"), class:'form-control', id:'horaNota'%>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="form-group">
+                <label for="horaNota">TIPO DE ANESTESIA</label>
+                <%=f.text_field :Pdo_Tipo_Anestecia, class:'form-control', id:'horaNota', placeholder:'Tipo'%>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label for="notaEvolucion">DIERESIS</label>
+                <%=f.text_area :Pdo_Dieresis, class:'form-control', id:'notaEvolucion', placeholder:'Añada su descripción', rows:'3'%>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label for="notaEvolucion">EXPOSICIÓN</label>
+                <%=f.text_area :Pdo_Exposicion, class:'form-control', id:'notaEvolucion', placeholder:'Añada su nota'%>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label for="notaEvolucion">EXPLORACIÓN Y HALLAZGOS QUIRURGICOS</label>
+                <%=f.text_area :Pdo_Hallazgos, class:'form-control', id:'notaEvolucion', placeholder:'Añada sus hallazgos'%>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label for="notaEvolucion">PROCEDIMIENTO OPERATORIO</label>
+                <%=f.text_area :Pdo_Procedimiento, class:'form-control', id:'notaEvolucion', placeholder:'Describa el procedimiento realizado'%>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label for="notaEvolucion">COMPLICACIONES</label>
+                <%=f.text_area :Pdo_Complicaciones, class:'form-control', id:'notaEvolucion', placeholder:'Describa las complicaciones'%>
+            </div>
+        </div>
+    </div>
+
+<%end%>

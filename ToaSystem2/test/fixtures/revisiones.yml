@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nota: one
+  medico: one
+
+two:
+  nota: two
+  medico: two

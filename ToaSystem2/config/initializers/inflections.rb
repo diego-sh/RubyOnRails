@@ -16,6 +16,14 @@
    inflect.irregular 'examen', 'examenes'
    inflect.irregular 'prescripcion', 'prescripciones'
    inflect.irregular 'terapia', 'terapias'
+   inflect.irregular 'configuracion_habitacion', 'configuracion_habitaciones'
+   inflect.irregular 'enfermeria_nota', 'enfermeria_notas'
+   inflect.irregular 'nota', 'notas'
+   inflect.irregular 'revision', 'revisiones'
+   inflect.irregular 'protocolo_operacion', 'protocolo_operaciones'
+
+   
+   
    
 #   inflect.uncountable %w( fish sheep )
  end

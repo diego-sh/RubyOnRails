@@ -92,6 +92,18 @@
                       <img src="/img/icon/x16/team.png" alt="rss feed" class="pull-right"/>
                   <% end %>
                 </li>
+              <% when 'Cirugias Programadas' %>
+                <li class="<%= yield(:cirugiasProgramadas) %>">
+                  <%= link_to cirugias_path do %>Cirugías Programadas P.Operatorio
+                      <img src="/img/icon/x16/calendar.png" alt="rss feed" class="pull-right"/>
+                  <% end %>
+                </li>
+              <% when 'Ingresos' %>
+                <li class="<%= yield(:ingresos) %>">
+                  <%= link_to ingresos_path do %>Ingresos
+                      <img src="/img/icon/x16/network.png" alt="rss feed" class="pull-right"/>
+                  <% end %>
+                </li>
             <% end %>
                  
           <% end %>

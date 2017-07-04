@@ -55,6 +55,22 @@ Rails.application.routes.draw do
    end
   end
 
+  resources :cirugias do
+    collection do
+      post "createIngreso"
+    end
+  end
+  
+  resources :ingresos do
+    collection do
+      post "createEnfermeriaNota"
+      post "createNotaEvolucion"
+      post "createSignosVitales"
+      post "createExamenCardiologico"
+    end
+  end
+  
+
   get 'welcome/index'
   root 'welcome#index'
 

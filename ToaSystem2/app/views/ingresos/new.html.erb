@@ -1,0 +1,568 @@
+<div style="padding-top: 45px;">
+    <div class="row" style="height: 100%">
+        <div class="col-md-2" style="padding-right: 0px">
+            <!-- It can be fixed with bootstrap affix http://getbootstrap.com/javascript/#affix-->
+            <div id="sidebar" class="well sidebar-nav">
+                <h5><i class="glyphicon glyphicon-align-justify"></i>
+                    <small><b>MENÚ DE OPCIONES</b></small>
+                </h5>
+                <ul class="nav nav-pills nav-stacked" style="padding-left:0px ">
+                    <li class="optionMenu">
+                        <button type="button" class="btn btn-warning btn-block" id="opSignosVitales" style="text-align: left">
+                            <span class="glyphicon glyphicon-list-alt pull-right"></span>
+                            SIGNOS VITALES
+                        </button>
+                    </li>
+                    <li class="optionMenu">
+                        <button type="button" class="btn btn-warning btn-block" id="opNotasEnfermeria" style="text-align: left">
+                            <span class="glyphicon glyphicon-list-alt pull-right"></span>
+                            NOTAS ENFERMERIA
+                        </button>
+                    </li>
+                    <li class="optionMenu">
+                        <button type="button" class="btn btn-warning btn-block" id="opNotasEvolucion" style="text-align: left">
+                            <span class="glyphicon glyphicon-list-alt pull-right"></span>
+                            NOTAS EVOLUCIÓN
+                        </button>
+                    </li>
+                    <li class="optionMenu">
+                        <button type="button" class="btn btn-warning btn-block" id="opMedicacion" style="text-align: left">
+                            <span class="glyphicon glyphicon-list-alt pull-right"></span>
+                            MEDICACIÓN
+                        </button>
+                    </li>
+                    <li class="optionMenu">
+                        <button type="button" class="btn btn-warning btn-block" id="opExamenCardiologico" style="text-align: left">
+                            <span class="glyphicon glyphicon-list-alt pull-right"></span>
+                            E. CARDIOLOGICO
+                        </button>
+                    </li>
+                    <li class="optionMenu">
+                        <button type="button" class="btn btn-warning btn-block" id="opProtocoloOperacion" style="text-align: left">
+                            <span class="glyphicon glyphicon-list-alt pull-right"></span>
+                            PROTO. OPERATORIO
+                        </button>
+                    </li>
+
+                </ul>
+                <h5><i class="glyphicon glyphicon-user"></i>
+                    <small><b>REGRESAR</b></small>
+                </h5>
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="optionMenu">
+                        <%= link_to 'MENÚ PRINCIPAL', ingresos_path, class:'btn btn-warning btn-block', style:'text-align: left' %>
+                            <!--<button type="button" class="btn btn-warning btn-block" style="text-align: left" >
+                            <span class="glyphicon glyphicon-arrow-left pull-right"></span>
+                            MENÚ PRINCIPAL
+                        </button>-->
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <!--PANEL PARA MOSTRAR LA INFORMACIÓN DEL PACIENTE-->
+            <div id="informacionPaciente">
+                <div class="alert alert-warning" style="margin-top:5px; margin-bottom: 10px">
+                    <div class="header-pnl-consultas">
+                        <p style="padding-top: 6px; padding-bottom: 5px;">INFORMACIÓN DEL PACIENTE INGRESADO</p>
+                    </div>
+                    <div class="body-pnl-consultas">
+                        <div class="col" style="margin-top: 10px; margin-bottom: 10px">
+                            <div class="row">
+                                <div class="col-md-2" style="margin-left:20px">
+                                    <div class="etiqueta">HISTORIA CLÍNICA:</div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="etiquetaValor">
+                                        <%= @paciente.Pac_HC%>
+                                    </div>
+                                </div>
+                                <div class="col-md-1" style="margin-left:20px">
+                                    <div class="etiqueta">NOMBRES:</div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="etiquetaValor">
+                                        <%= @paciente.Pac_Apellido_Paterno%> <%= @paciente.Pac_Apellido_Materno%> <%=@paciente.Pac_Nombres%>
+                                    </div>
+                                </div>
+                                <div class="col-md-1" style="margin-left:20px">
+                                    <div class="etiqueta">EDAD:</div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="etiquetaValor">
+                                        <%= @paciente.Edad %> AÑOS
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2" style="margin-left:20px">
+                                    <div class="etiqueta">IDENTIFICACIÓN:</div>
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="etiquetaValor">
+                                        <%= @paciente.Pac_Cedula%>
+                                    </div>
+                                </div>
+                                <div class="col-md-1" style="margin-left:20px">
+                                    <div class="etiqueta">DETALLE:</div>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="etiquetaValor">
+                                        <%= @infoIngreso.Pop_Cirugia_Propuesta%>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--PANEL PARA LAS NOTAS DE ENFERMERÍA-->
+            <div id="notasEnfermeria">
+                <div class="panel-success panel">
+                    <div class="panel-heading">NOTAS DE ENFERMERIA</div>
+                    <div class="panel-body scroll-panelNotas" id="pnlNotasEnfermeria">
+                        <div class="panel-group pnlNotasEnfermeria " id="accordion">
+                            <% @notasDeEnfermeria.each do |nota| %>
+                                <div class="panel panel-warning">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseNE<%=nota.enfermeria_nota_id%>">Fecha: <%= nota.Nde_Fecha%>    Hora:<%= nota.Nde_Hora.strftime('%r')%></a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseNE<%=nota.enfermeria_nota_id%>" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <%= simple_format(nota.Nde_Nota)%>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12" style="text-align: right; color: #1976d2; font-size: 12px">
+                                                    <strong>Responsable:</strong> <%=nota.Per_Apellido_Paterno%> <%=nota.Per_Nombres%>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            <%end%>
+                        </div>
+                    </div>
+                    <div class="panel-footer" style="text-align: right">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#modalEnfermeriaNota">Añadir Nota
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--PANEL PARA NOTAS DE EVOLUCIÓN-->
+            <div id="notasEvolucion">
+                <div class="panel-success panel">
+                    <div class="panel-heading">NOTAS EVOLUCIÓN</div>
+                    <div class="panel-body scroll-panelNotas" id="pnlNotasEvolucion">                        
+                        <div class="panel-group pnlNotasEvolucion" id="accordion">
+                            <% @notasEvolucion.each do |notaEvolucion|%>
+                                <div class="panel panel-warning">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseNE<%=notaEvolucion.nota_id%>">Fecha: <%= notaEvolucion.Not_Fecha%>    Hora:<%= notaEvolucion.Not_Hora.strftime('%r')%></a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseNE<%=notaEvolucion.nota_id%>" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <div class="row">
+                                               <div class="col-lg-12" style="color:#8a6d3b">
+                                                    NOTA DE <%=notaEvolucion.Not_Tipo%>
+                                                </div> 
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <%= simple_format(notaEvolucion.Not_Nota)%>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12" style="text-align: right; color: #1976d2; font-size: 12px">
+                                                    <strong>Responsable:</strong> 
+                                                    <% notaEvolucion.revisiones.each do |revision|%>
+                                                        Dr.<%= revision.medico.persona.Per_Apellido_Paterno%> <%= revision.medico.persona.Per_Nombres%>,
+                                                    <%end%>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>        
+                            <%end%>                           
+                        </div>
+
+                    </div>
+                    <div class="panel-footer" style="text-align: right">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#modalNotaEvolucion">Añadir Nota
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--PANEL PARA SGNOS VITALES-->
+            <div id="signosVitales">
+                <div class="panel-success panel">
+                    <div class="panel-heading">REGISTRO DE SIGNOS VITALES</div>
+                    <div class="panel-body scroll-panelNotas" id="pnlSignosVitales">
+                        <% @signosVitalesRegistrados.each do |signos| %>
+                        
+                        <div class="alert alert-warning" style="margin-bottom: 6px">
+                            <div class="row cabeceraNotas">
+                                <div class="col-lg-2">
+                                    <strong>Fecha:</strong> <%= signos.Siv_Fecha%>
+                                </div>
+                                <div class="col-lg-2">
+                                    <strong>Hora:</strong> <%= signos.Siv_Hora.strftime('%r')%>
+                                </div>
+                                <div class="col-lg-8" style="text-align: right">
+                                    <strong>Responsable:</strong> <%=signos.Per_Apellido_Paterno%> <%=signos.Per_Nombres%>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 10px">
+                                <div class="col-lg-2">
+                                    <strong>Temperatura:</strong> <%= signos.Siv_Temperatura%> °C
+                                </div>
+                                <div class="col-lg-2">
+                                    <strong>Pulso:</strong> <%= signos.Siv_Pulso%> x min
+                                </div>
+                                <div class="col-lg-2">
+                                    <strong>Saturación:</strong> <%= signos.Siv_Saturacion%> %
+                                </div>
+                                <div class="col-lg-2">
+                                    <strong>F. Respiratoria:</strong> <%= signos.Siv_Frecuencia_Respiratoria%> x min
+                                </div>
+                                <div class="col-lg-2">
+                                    <strong>Presión:</strong> <%= signos.Siv_Presion_Arterial_Diastolica%>/<%= signos.Siv_Presion_Arterial_Sistolica%> mmHg
+                                </div>
+                                <div class="col-lg-2">
+                                    <strong>Peso:</strong> <%= signos.Siv_Peso%> kg
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 5px">
+                                <div class="col-lg-6" style="text-align: center">
+                                    <strong>INGRESOS CC</strong>                                    
+
+                                </div>
+                                <div class="col-lg-6" style="text-align: center">
+                                    <strong>ELIMINACIONES CC</strong>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <strong>Parenteral:</strong> <%= signos.Siv_Ingresos_Parenteral%>
+                                </div>
+                                <div class="col-lg-2">
+                                    <strong>Via Oral:</strong> <%= signos.Siv_Ingresos_ViaOral%>
+                                </div>
+                                <div class="col-lg-2">
+                                    <strong>Total:</strong> <%= signos.Siv_Ingresos_Total%>
+                                </div>
+                                <div class="col-lg-2">
+                                    <strong>Orina:</strong> <%= signos.Siv_Eliminaciones_Orina%>
+                                </div>
+                                <div class="col-lg-2">
+                                    <strong>Drenaje:</strong> <%= signos.Siv_Eliminaciones_Drenaje%>
+                                </div>
+                                <div class="col-lg-2">
+                                    <strong>Total:</strong> <%= signos.Siv_Eliminaciones_Total%>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 7px">                                
+                                 <div class="col-lg-2">
+                                    <strong>Número Comidas:</strong> <%= signos.Siv_Numero_Comidas%>
+                                </div>
+                                 <div class="col-lg-2">
+                                    <strong>Numero Micciones:</strong> <%= signos.Siv_Numero_Micciones%>
+                                </div>
+                                 <div class="col-lg-2">
+                                    <strong>Número Deposiciones:</strong> <%= signos.Siv_Numero_Deposiciones%>
+                                </div>
+                                 <div class="col-lg-3">
+                                    <strong>Dieta Administrada:</strong> <%= signos.Siv_Dieta_Administrada%>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <strong>ACTIVIDADES</strong>
+                                </div>                                
+                            </div>
+                            <div class="row">
+                                <% if signos.Siv_Aseo!= "0" %>
+                                <div class="col-lg-1">
+                                    Aseo/Baño
+                                </div>                                    
+                                
+                                <%end%>
+                                <% if signos.Siv_Actividad_Fisica!= "0" %>
+                                <div class="col-lg-2">
+                                    Actividad Física
+                                </div>                                    
+                                
+                                <%end%>
+                                <% if signos.Siv_Cambio_Sonda!= "0" %>
+                                <div class="col-lg-2">
+                                    Cambio de sonda
+                                </div>                                    
+                                
+                                <%end%>
+                                <% if signos.Siv_Recanalizacion_Via!= "0" %>
+                                <div class="col-lg-2">
+                                    Recanalización de la vía
+                                </div>                                    
+                                
+                                <%end%>
+                                
+                            </div>
+
+                        </div>         
+
+                        <% end %>
+                    </div>
+                    <div class="panel-footer" style="text-align: right">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#modalSignosVitales">Registrar Signos Vitales
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+            <!--PANEL PARA EXAMEN CARDIOLOGICO-->
+            <div id="examenCardiologico">
+                <div class="panel-success panel">
+                    <div class="panel-heading">REGISTRO DE EXAMENES CARDIOLÓGICOS</div>
+                    <div class="panel-body scroll-panelNotas" id="pnlExameCardiologico">
+                        <div class="panel-group pnlExameCardiologico" id="accordion">
+                            <% @eCardiologicos.each do |examen| %>
+                                <div class="panel panel-warning">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseNE<%=examen.chequeos_cardiologico_id%>">Fecha: <%= examen.Chc_Fecha%>    Hora:<%= examen.Chc_Hora.strftime('%r')%></a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseNE<%=examen.chequeos_cardiologico_id%>" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <div class="row" style="color: #1976d2">
+                                                <div class="col-lg-3"><strong>EXAMEN FÍSICO</strong></div>
+                                            </div>
+                                            <div class="row">                                                
+                                                <div class="col-lg-10">
+                                                    <%= simple_format(examen.Chc_Examen_Fisico)%>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="color: #1976d2">
+                                                <div class="col-lg-3"><strong>ELECTROCARDIOGRAMA</strong></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-1"><strong>Ritmo:</strong></div>                                              
+                                                <div class="col-lg-2">
+                                                    <%=examen.Chc_Ritmo%>
+                                                </div>
+                                                <div class="col-lg-2"><strong>Frecuencia:</strong></div>                                              
+                                                <div class="col-lg-2">
+                                                    <%=examen.Chc_Frecuencia%>
+                                                </div>
+                                                <div class="col-lg-2"><strong>SAQRS:</strong></div>                                              
+                                                <div class="col-lg-2">
+                                                    <%=examen.Chc_SAQRS%>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-1"><strong>Onda P:</strong></div>                                              
+                                                <div class="col-lg-2">
+                                                    <%=examen.Chc_Onda_P%>
+                                                </div>
+                                                <div class="col-lg-2"><strong>Segmento PR:</strong></div>                                              
+                                                <div class="col-lg-2">
+                                                    <%=examen.Chc_Segmento_PR%>
+                                                </div>
+                                                <div class="col-lg-2"><strong>Complejo QRS:</strong></div>                                              
+                                                <div class="col-lg-2">
+                                                    <%=examen.Chc_Complejo_QRS%>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-1"><strong>Onda T:</strong></div>                                              
+                                                <div class="col-lg-2">
+                                                    <%=examen.Chc_Onda_T%>
+                                                </div>
+                                                <div class="col-lg-2"><strong>Signo Morris:</strong></div>                                              
+                                                <div class="col-lg-2">
+                                                    <%=examen.Chc_Signo_Morris%>
+                                                </div>
+                                                <div class="col-lg-2"><strong>Segmento QT:</strong></div>                                              
+                                                <div class="col-lg-2">
+                                                    <%=examen.Chc_Segmento_QT%>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-1"><strong>Indice Sokolov</strong></div>                                              
+                                                <div class="col-lg-2">
+                                                    <%=examen.Chc_Indice_SOCOLOV%>
+                                                </div>
+                                                <div class="col-lg-2"><strong>Segmento ST</strong></div>                                              
+                                                <div class="col-lg-2">
+                                                    <%=examen.Chc_Segmento_ST%>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="color: #1976d2">
+                                                <div class="col-lg-3"><strong>CONCLUSIONES</strong></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <%= simple_format(examen.Chc_Conclusiones)%>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="color: #1976d2">
+                                                <div class="col-lg-3"><strong>SUGERENCIAS</strong></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <%= simple_format(examen.Chc_Sugerencias)%>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="color: #1976d2">
+                                                <div class="col-lg-3"><strong>RIESGO QUIRÚRGICO</strong></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <%= simple_format(examen.Chc_Riesgo_Quirurgico)%>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-lg-12" style="text-align: right; color: #1976d2; font-size: 12px">
+                                                    <strong>Responsable:</strong> <%=examen.Per_Apellido_Paterno%> <%=examen.Per_Nombres%>
+                                                </div>
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                </div>
+
+                            <% end %>
+                        </div>
+                    </div>
+                    <div class="panel-footer" style="text-align: right">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#modalECardiologico">Registrar Examen Cardiologico
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--PANEL PARA PROTOCOLO DE OPERACION-->
+            <div id="protocoloOperacion">
+                <div class="panel-success panel">
+                    <div class="panel-heading">PROTOCOLO DE OPERACIÓN</div>
+                    <div class="panel-body scroll-panelNotas" id="pnlProtocoloOperacion">
+                        <%= render 'frmProtocoloOperacion', protocolo: @protocolo %>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- **************************** MODALS *******************************-->
+<!--INGRESAR NOTA ENFERMERIA-->
+<div class="modal fade" id="modalEnfermeriaNota" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">REGISTRAR NOTA DE ENFERMERÍA</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <%= render 'frmNotaEnfermeria' %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--INGRESAR NOTA EVOLUCION -->
+<div class="modal fade" id="modalNotaEvolucion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">REGISTRAR NOTA DE EVOLUCIÓN</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <%= render 'frmNotaEvolucion' %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--INGRESAR SIGNOS VITALES -->
+<div class="modal fade" id="modalSignosVitales" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="width: 1000px;" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">REGISTRAR SIGNOS VITALES</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <%= render 'frmSignosVitales' %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--INGRESAR EXAMEN CARDIOLOGICO-->
+<div class="modal fade" id="modalECardiologico" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">REGISTRAR EXAMEN CARDIOLÓGICO</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <%= render 'frmExamenCardiologico' %>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- *********************    MENSAJES DE LA APLICACION PARA EL USUARIO      *******************-->
+<!--MODAL ERROR-->
+<div class="modal fade" id="modalError" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #f44336">
+        <h5 class="modal-title" id="titleError" style="color: #fff"></h5>
+      </div>
+      <div class="modal-body" id="bodyError">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">ACEPTAR</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--MODAL SUCCESS-->
+<div class="modal fade" id="modalSuccess" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #66bb6a">
+        <h5 class="modal-title" id="titleSuccess" style="color: #fff"></h5>
+      </div>
+      <div class="modal-body" id="bodySuccess">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">ACEPTAR</button>
+      </div>
+    </div>
+  </div>
+</div>

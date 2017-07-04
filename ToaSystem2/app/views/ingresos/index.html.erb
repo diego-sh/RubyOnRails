@@ -1,0 +1,44 @@
+<% provide(:ingresos, 'active') %>
+    <div class="col" style="padding-top: 50px">
+        <div class="row" style="text-align:center">
+            <h3>PACIENTES HOSPITALIZADOS</h3>
+        </div>
+        <div class="center-block" style="width: 90%">
+            <div class="panel">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>HABITACIÓN</th>
+                            <th>PACIENTE</th>
+                            <th>EDAD</th>
+                            <th>FECHA INGRESO</th>
+                            <th colspan="1"></th>
+                        </tr>
+                    </thead>
+                    <tbody style="font-size:13px">
+                        <% @pacientesIngresados.each do |paciente|  %>
+                            <tr>
+                                <td>
+                                    <%= paciente.Ing_Habitacion %>
+                                </td>
+                                <td>
+                                    <%= paciente.Pac_Apellido_Paterno %>
+                                        <%= paciente.Pac_Apellido_Materno%>
+                                            <%= paciente.Pac_Nombres%>
+                                </td>
+                                <td>
+                                    <%= paciente.Age %>
+                                </td>
+                                <td>
+                                    <%= paciente.Ing_Fecha %>
+                                </td>
+                                <td>
+                                    <%= link_to 'Atender', new_ingreso_path(:pcte => paciente.paciente_id, :ingreso => paciente.ingreso_id), class:'btn btn-info' %>
+                                </td>
+                            </tr>
+                            <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

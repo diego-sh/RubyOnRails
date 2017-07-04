@@ -1,0 +1,35 @@
+<%= form_for(@ingreso, :url => { :action => "createIngreso" }, remote: true, html:{id: "ingreso-form",format: :json}, validate: true) do |f| %>
+    <%= f.text_field :partes_operatorio_id, id:'pOperatorio_id'%>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="fechaIngreso">FECHA INGRESO</label>
+                <%=f.date_field :Ing_Fecha, value: Date.today.strftime("%Y-%m-%d"),min: Date.today, class:'form-control', id:'fechaIngreso'%>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="fechaIngreso">HORA INGRESO</label>
+                <%=f.time_field :Ing_Hora, value: Time.now.strftime("%H:%M"), class:'form-control', id:'fechaIngreso'%>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+                <label for="habitacion">HABITACIÓN</label>
+                <%= f.select(:Ing_Habitacion, options_for_select([['201', '201'], ['202', '202'],['203', '203'],['204', '204'],['205', '205'],['206', '206'],['207', '207'],['208', '208']]),{prompt: "Seleccione Habitación"},{ :class => 'form-control'}) %>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="actions">
+                <button type="submit" class="btn btn-primary pull-right">
+                <span><i class="glyphicon glyphicon-plus"></i> Guardar</span>
+                </button>
+            </div>
+        </div>
+        
+    </div>
+<% end %>

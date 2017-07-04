@@ -1,0 +1,36 @@
+<%= form_for(@ingreso, :url => { :action => "createEnfermeriaNota" }, remote: true, html:{id: "notasEnfermeria-form",format: :json}, validate: true) do |f| %>
+    <% f.fields_for :enfermeriaNota do |e|%>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="fechaNota">FECHA</label>
+                    <%=e.date_field :Nde_Fecha, value: Date.today.strftime("%Y-%m-%d"),min: Date.today, class:'form-control', id:'fechaNota'%>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label for="horaNota">HORA</label>
+                    <%=e.time_field :Nde_Hora, value: Time.now.strftime("%H:%M"), class:'form-control', id:'horaNota'%>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="notaEnfermeria">NOTA</label>
+                    <%=e.text_area :Nde_Nota, class:'form-control', id:'notaEnfermeria', placeholder:'Añada su nota respectiva', rows:'7'%>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+        <div class="col-lg-12">
+            <div class="actions">
+                <button type="submit" class="btn btn-primary pull-right">
+                <span><i class="glyphicon glyphicon-plus"></i> Guardar</span>
+                </button>
+            </div>
+        </div>        
+    </div>
+    <% end %>    
+<% end %>

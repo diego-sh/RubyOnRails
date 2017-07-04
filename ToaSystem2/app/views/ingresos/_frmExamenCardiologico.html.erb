@@ -1,0 +1,137 @@
+<%= form_for(@ingreso, :url => { :action => "createExamenCardiologico" }, remote: true, html:{id: "examenCardiologico-form",format: :json}, validate: true) do |f| %>
+    <% f.fields_for :ChequeosCardiologico do |cr|%>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="fechaCardiologico">FECHA</label>
+                    <%=cr.date_field :Chc_Fecha, value: Date.today.strftime("%Y-%m-%d"),min: Date.today, class:'form-control', id:'fechaCardiologico'%>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="horaCardiologico">HORA</label>
+                    <%=cr.time_field :Chc_Hora, value: Time.now.strftime("%H:%M"), class:'form-control', id:'horaCardiologico'%>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="examenFisicoCardiologico">EXAMEN FÍSICO</label>
+                    <%=cr.text_area :Chc_Examen_Fisico, class:'form-control', id:'examenFisicoCardiologico', placeholder:'Describa el examen' %>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h5> ELECTROCARDIOGRAMA</h5>
+            </div>           
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="ritmoCardiologico">RITMO</label>
+                    <%=cr.text_field :Chc_Ritmo, class:'form-control', id:'ritmoCardiologico', placeholder:'Ritmo' %>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="frecuenciaCardiologico">FRECUENCIA</label>
+                    <%=cr.text_field :Chc_Frecuencia, class:'form-control', id:'frecuenciaCardiologico', placeholder:'Ritmo' %>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="SAQRSCardiologico">SAQRS</label>
+                    <%=cr.text_field :Chc_SAQRS, class:'form-control', id:'SAQRSCardiologico', placeholder:'SAQRS' %>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="ondaPCardiologico">ONDA P</label>
+                    <%=cr.text_field :Chc_Onda_P, class:'form-control', id:'ondaPCardiologico', placeholder:'Onda P' %>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="segmentoPRCardiologico">SEGMENTO PR</label>
+                    <%=cr.text_field :Chc_Segmento_PR, class:'form-control', id:'segmentoPRCardiologico', placeholder:'Segmento PR' %>
+                </div>                
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="complejoQRS">COMPLEJO QRS</label>
+                    <%=cr.text_field :Chc_Complejo_QRS, class:'form-control', id:'complejoQRS', placeholder:'Complejo' %>
+                </div>                
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="indiceSokolov">INDICE DE SOKOLOV</label>
+                    <%=cr.text_field :Chc_Indice_SOCOLOV, class:'form-control', id:'indiceSokolov', placeholder:'Indice' %>
+                </div>                
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="signoMorris">SIGNO DE MORRIS</label>
+                    <%=cr.text_field :Chc_Signo_Morris, class:'form-control', id:'signoMorris', placeholder:'Signo' %>
+                </div>                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="segmentoQT">SEGMENTO QT</label>
+                    <%=cr.text_field :Chc_Segmento_QT, class:'form-control', id:'segmentoQT', placeholder:'Segmento QT' %>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="ondaT">ONDA T</label>
+                    <%=cr.text_field :Chc_Onda_T, class:'form-control', id:'ondaT', placeholder:'Onda T' %>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="segmentoST">SEGMENTO ST</label>
+                    <%=cr.text_field :Chc_Segmento_ST, class:'form-control', id:'segmentoST', placeholder:'Segmento ST' %>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="conclusiones">CONCLUSIONES</label>
+                    <%=cr.text_area :Chc_Conclusiones, class:'form-control', id:'conclusiones', placeholder:'Describa' %>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="sugerencias">SUGERENCIAS</label>
+                    <%=cr.text_area :Chc_Sugerencias, class:'form-control', id:'sugerencias', placeholder:'Describa' %>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="riesgo">RIESGO QUIRÚRGICO</label>
+                    <%=cr.text_area :Chc_Riesgo_Quirurgico, class:'form-control', id:'riesgo', placeholder:'Describa el riesgo' %>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="actions">
+                    <button type="submit" class="btn btn-primary pull-right">
+                    <span><i class="glyphicon glyphicon-plus"></i> Guardar</span>
+                    </button>
+                </div>
+            </div>        
+        </div>
+
+    <%end%>
+<%end%>

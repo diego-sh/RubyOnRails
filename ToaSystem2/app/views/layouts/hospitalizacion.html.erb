@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+  <header>
+    <nav class=" navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div id="titulo">
+          <img src="/img/icon/clinicaTOA.png" alt="rss feed" width="7%" height="7%" />
+          <a class="navbar-brand" style="font-size: 45px">SISTEMA CLÍNICO</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>Usuario: <%=session[:persona]["Per_Apellido_Paterno"]%> <%=session[:persona]["Per_Apellido_Materno"]%> <%=session[:persona]["Per_Nombres"]%></a></li>
+            <li>
+              <%= link_to  "Cerrar Sesión", logout_usuarios_path, method: :logout %>
+            </li>
+            <!--<li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Opciones <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Editar Perfil</a></li>
+                <li role="separator" class="divider"></li>
+                <li><%= link_to  "Salir", logout_usuarios_path, method: :logout %></li>
+              </ul>
+            </li>-->
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container-fluid -->
+    </nav>
+  </header>
+
+  <div style="padding-left: 2px; padding-right: 20px">
+    <%= yield %>
+  </div>
+
+
+
+</body>
+
+</html>

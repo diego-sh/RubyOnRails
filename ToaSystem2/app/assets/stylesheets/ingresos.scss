@@ -1,0 +1,20 @@
+// Place all the styles related to the ingresos controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.optionMenu{
+    padding-bottom: 10px;
+}
+
+.scroll-panelNotas {
+  //min-height: 10;
+ max-height: 450px;
+    overflow-y: scroll;
+}
+
+.cabeceraNotas{
+    border-bottom-color: #d7ccc8;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    color:#1976d2;
+}

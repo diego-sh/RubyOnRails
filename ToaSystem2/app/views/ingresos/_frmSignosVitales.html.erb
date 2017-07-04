@@ -1,0 +1,240 @@
+<%= form_for(@ingreso, :url => { :action => "createSignosVitales" },  remote: true, html:{id: "signosVitales-form",format: :json}, validate: true) do |f| %>
+    <% f.fields_for :signosVitale do |sv|%>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="fechaSignosVitales">FECHA</label>
+                    <%=sv.date_field :Siv_Fecha, value: Date.today.strftime("%Y-%m-%d"),min: Date.today, class:'form-control', id:'fechaSignosVitales'%>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="horaSignosVitales">HORA</label>
+                    <%=sv.time_field :Siv_Hora, value: Time.now.strftime("%H:%M"), class:'form-control', id:'horaSignosVitales'%>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="tipoNota">DÍA INTERNACIÓN</label>
+                    <%=sv.number_field :Siv_Dia_Internacion, value: 1, class:'form-control', id:'horaSignosVitales'%>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="tipoNota">DÍA POSTQUIRÚRGICO</label>
+                    <%=sv.number_field :Siv_Dia_PostQuirurgico, value: 0, class:'form-control', id:'horaSignosVitales'%>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="pulso">PULSO</label>
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">                        
+                        <%=sv.number_field :Siv_Pulso, value: 0, class:'form-control', id:'pulso'%>
+                        <div class="input-group-addon">x min</div>
+                    </div>                    
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="temperatura">TEMPERATURA</label>
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <%=sv.number_field :Siv_Temperatura, value: 0, class:'form-control', id:'temperatura'%>
+                        <div class="input-group-addon">°C</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="saturacion">SATURACIÓN</label>
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <%=sv.number_field :Siv_Saturacion, value: 0, class:'form-control', id:'saturacion'%>
+                        <div class="input-group-addon">%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="frecuenciaRespiratoria">FRECUENCIA RESPIRATORIA</label>
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0"> 
+                        <%=sv.number_field :Siv_Frecuencia_Respiratoria, class:'form-control', id:'frecuenciaRespiratoria'%>
+                        <div class="input-group-addon">x min</div>
+                    </div>                    
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="presionArterial">PRESIÓN ARTERIAL</label>
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <%=sv.number_field :Siv_Presion_Arterial_Diastolica, value: 0, class:'form-control', id:'presionArterial'%>
+                        </div>
+                        <div class="col-lg-1">
+                             <h4>/</h4>
+                        </div>
+                        <div class="col-lg-5">
+                            <%=sv.number_field :Siv_Presion_Arterial_Sistolica, value: 0, class:'form-control', id:'presionArterial'%>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h5>BALANCE HIDRICO</h5>
+                <h5>INGRESOS</h5>
+            </div>            
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="parenteral">Parenteral</label>
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <%=sv.number_field :Siv_Ingresos_Parenteral, value: 0, class:'form-control', id:'parenteral'%>
+                        <div class="input-group-addon">CC</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="viaOral">Via Oral</label>
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <%=sv.number_field :Siv_Ingresos_ViaOral, value: 0, class:'form-control', id:'viaOral'%>
+                        <div class="input-group-addon">CC</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="ingresosTotal">TOTAL</label>
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <%=sv.number_field :Siv_Ingresos_Total, value: 0, class:'form-control', id:'ingresosTotal'%>
+                        <div class="input-group-addon">CC</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h5>ELIMINACIONES</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="form-group">
+                    <label for="orina">Orina</label>
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <%=sv.number_field :Siv_Eliminaciones_Orina, value: 0, class:'form-control', id:'orina'%>
+                        <div class="input-group-addon">CC</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="form-group">
+                    <label for="drenaje">Drenaje</label>
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <%=sv.number_field :Siv_Eliminaciones_Drenaje, value: 0, class:'form-control', id:'drenaje'%>
+                        <div class="input-group-addon">CC</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="form-group">
+                    <label for="otros">Otros</label>
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <%=sv.number_field :Siv_Eliminaciones_Otros, value: 0, class:'form-control', id:'otros'%>
+                        <div class="input-group-addon">CC</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label for="eliminacionesTotal">TOTAL</label>
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <%=sv.number_field :Siv_Eliminaciones_Total, value: 0, class:'form-control', id:'eliminacionesTotal'%>
+                        <div class="input-group-addon">CC</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <h5>MEDICIONES Y ACTIVIDADES</h5>
+            </div>            
+        </div>
+        <div class="row">            
+            <div class="col-lg-2">
+                 <div class="form-group">
+                    <label for="peso">PESO</label>
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <%=sv.number_field :Siv_Peso, value: 0, class:'form-control', id:'peso'%>
+                        <div class="input-group-addon">Kg</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="dieta">DIETA ADMINISTRADA</label>
+                    <%=sv.text_field :Siv_Dieta_Administrada, class:'form-control', id:'dieta',placeholder:'Dieta' %>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="form-group">
+                    <label for="dieta">N° COMIDAS</label>
+                    <%=sv.number_field :Siv_Numero_Comidas, class:'form-control', value:0, id:'dieta' %>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="form-group">
+                    <label for="dieta">N° MICCIONES</label>
+                    <%=sv.number_field :Siv_Numero_Micciones, class:'form-control', value:0, id:'dieta' %>
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="form-group">
+                    <label for="dieta">N° DESPOSICIONES</label>
+                    <%=sv.number_field :Siv_Numero_Deposiciones, class:'form-control', value:0, id:'dieta' %>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="checkbox" style="margin-left: 0px">                                
+                    <%= sv.check_box(:Siv_Aseo, id:'alientoEtilico') %>
+                    <label for="radio2"><span><span></span></span>ASEO/BAÑO</label>                                
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="checkbox" style="margin-left: 0px">                                
+                    <%= sv.check_box(:Siv_Cambio_Sonda, id:'alientoEtilico') %>
+                    <label for="radio2"><span><span></span></span>CAMBIO DE SONDA</label>                                
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="checkbox" style="margin-left: 0px">                                
+                    <%= sv.check_box(:Siv_Recanalizacion_Via, id:'alientoEtilico') %>
+                    <label for="radio2"><span><span></span></span>RECANALIZACIÓN VIA</label>                                
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="checkbox" style="margin-left: 0px">                                
+                    <%= sv.check_box(:Siv_Actividad_Fisica, id:'alientoEtilico') %>
+                    <label for="radio2"><span><span></span></span>ACTIVIDAD FÍSICA</label>                                
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <button type="submit" class="btn btn-primary pull-right">
+                    <span><i class="glyphicon glyphicon-plus"></i> Guardar</span>
+                </button>
+            </div>            
+        </div>
+    <%end%>
+<% end %>

@@ -1,0 +1,2 @@
+class ConfiguracionHabitacion < ApplicationRecord
+end
