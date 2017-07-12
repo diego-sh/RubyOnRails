@@ -14,8 +14,7 @@
 //= require jquery_ujs
 //= require jquery.turbolinks
 //= require dataTables/jquery.dataTables
-//= require dataTables/bootstrap/2/jquery.dataTables.bootstrap
-//= require dataTables/jquery.dataTables
+//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require jquery-ui
 //= require bootstrap-sprockets
 //= require rails.validations.coffee

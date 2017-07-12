@@ -1,59 +1,62 @@
 <% provide(:pacientes, 'active') %>
-<div class='row' id= "titulo" style="margin-left:20px; margin-top:50px"> 
-  <img src="/img/icon/people.png" alt="rss feed" />
-  <h3><strong>PACIENTES</strong></h3>
-</div>
-<div class="row" style="margin-left:20px; margin-top:10px;">
-    <% if notice %>
-      <div id="notice_panel" style="width: 80%; margin:0 auto">
-        <p id="notice">
-          <%= notice %>
-        </p>
-      </div>
-      <% end %>
-</div>
-
-<div class="row" style="margin-top:10px; width:95%">
-  <div class="col-md-3 col-md-offset-3"></div>
-      <div class="col-md-3 col-md-offset-3">
-        <form action="../pacientes/new" method="get">
-          <button type="submit" class="btn btn-primary pull-right">
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar
-          </button>
-        </form>
-      </div>
+<div class = "center-block" style="width: 100%">
+  <div class='row' id= "titulo" style="margin-left:20px; margin-top:50px"> 
+    <img src="/img/icon/people.png" alt="rss feed" />
+    <h3><strong>&nbsp PACIENTES</strong></h3>
+  </div>
+  <div class="row" style="margin-left:20px; margin-top:10px;">
+      <% if notice %>
+        <div id="notice_panel" style="width: 80%; margin:0 auto">
+          <p id="notice">
+            <%= notice %>
+          </p>
+        </div>
+        <% end %>
   </div>
 
-<div class='row' style="margin-left:20px; margin-top:10px; width: 90%">
-  <table id="tblPacientes" class="table table-striped" style="width:100%; margin:0 auto">
-  <thead>
-    <tr>
-      <th>Nro. HISTORIA</th>
-      <th>CÉDULA</th>
-      <th>APELLIDOS</th>
-      <th>NOMBRES</th>
-       <th>CONTACTO</th>
-      <th>EDAD</th>     
-      <th>OPCIONES</th>
-    </tr>
-  </thead>
-  <tbody style="font-size:13px">
-    <% @pacientes.each do |paciente| %>
-      <tr>
-        <td><%= paciente.Pac_HC %></td>
-        <td><%= paciente.Pac_Cedula %></td>
-        <td><%= paciente.Pac_Apellido_Paterno + " "+paciente.Pac_Apellido_Materno %></td>
-        <td><%= paciente.Pac_Nombres %></td>
-         <td><%= paciente.Pac_Telefono %></td>
-        <td><%= paciente.Age %></td>
-         <td><%= link_to("Ver", paciente, style:'margin-right:10px')%><%= link_to("Editar", edit_paciente_path(paciente)) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+  <div class="row" style="margin-top:10px; width:95%;">
+    <form action="../pacientes/new" method="get" style="padding-left: 3%">
+      <button type="submit" class="btn btn-primary pull-left">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Agregar
+      </button>
+    </form>
+  </div>
+  <br>
+  <div class='row' style="margin-left:20px; margin-top:10px; width: 90%">
+    <table id="tblPacientes" class="table table-striped" width="100%">
+      <thead>
+        <tr>
+          <th>Nro. HISTORIA</th>
+          <th>CÉDULA</th>
+          <th>APELLIDOS</th>
+          <th>NOMBRES</th>
+          <th>CONTACTO</th>
+          <th>EDAD</th>     
+          <th>OPCIONES</th>
+        </tr>
+      </thead>
+      <tbody style="font-size:13px">
+        <% @pacientes.each do |paciente| %>
+          <tr style="padding:12px">
+            <td><%= paciente.Pac_HC %></td>
+            <td><%= paciente.Pac_Cedula %></td>
+            <td><%= paciente.Pac_Apellido_Paterno + " "+paciente.Pac_Apellido_Materno %></td>
+            <td><%= paciente.Pac_Nombres %></td>
+            <td><%= paciente.Pac_Telefono %></td>
+            <td><%= paciente.Age %></td>
+            <td>
+              <div class="row">
+                <div class="col-boton">
+                <%= button_to("Ver", paciente, :method => "get", style:'float:left;', class: "boton boton-verde")%>
+                </div>
+                <div class="col-boton">
+                <%= button_to("Editar", edit_paciente_path(paciente), :method => "get", class: "boton boton-amarillo") %>
+                </div>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
-
-
-
-<br>

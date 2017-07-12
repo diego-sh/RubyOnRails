@@ -17,14 +17,24 @@
                     <td><%= persona.Especialidad %></td>
                 <% end %>
               <td>
-                <%= link_to 'Ver', persona, style:'margin-right:10px' %><%= link_to 'Editar', edit_persona_path(persona), style:'margin-right:10px' %>
-                <% if !persona.respond_to?("Rol") %>                  
-                    <%= link_to 'Horario', new_horario_path(:med => persona.medico_id), style:'margin-right:10px' %>
-                <% end %>
-                <% if persona.usuario_id == nil %>              
-                  <%= link_to 'Configurar Usuario', new_usuario_path(persona) %>
-                <% end %>
-                
+                <div class="row">
+                  <div class="col-boton">
+                    <%= button_to("Ver", persona, :method => "get", style:'float:left;', class: "boton boton-verde")%>
+                  </div>
+                  <div class="col-boton">
+                    <%= button_to("Editar", edit_persona_path(persona), :method => "get", class: "boton boton-amarillo") %>
+                  </div>
+                  <% if !persona.respond_to?("Rol") %>
+                    <div class="col-boton">                  
+                      <%= button_to("Horario", new_horario_path(:med => persona.medico_id), :method => "get", class: "boton boton-azul")%>
+                    </div>
+                  <% end %>
+                  <% if persona.usuario_id == nil %>
+                    <div class="col-boton">           
+                      <%= button_to("Crear Usuario", new_usuario_path(persona), :method => "get", class: "boton boton-azul")%>
+                    </div>
+                  <% end %>
+                </div>                
               </td>
               <!--<td>
                 <%= link_to 'Editar', edit_persona_path(persona) %>

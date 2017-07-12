@@ -1,8 +1,7 @@
 /*
  *= require jquery-ui
  *= require fullcalendar
- *= require dataTables/bootstrap/2/jquery.dataTables.bootstrap
- *= require dataTables/jquery.dataTables
+ *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
  *= require bootstrap-select
  */
 @import "bootstrap-sprockets";
@@ -156,4 +155,40 @@ body{
 
 table{
     font-size: 16px;
+}
+
+.boton{
+    border: none;
+    color: white;
+    padding: 3px 6px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: normal;
+    cursor: pointer;
+    border-radius:4px;
+}
+.boton-verde{
+    background-color: #4CAF50;
+}
+
+.boton-amarillo{
+    background-color: #f0ad4e;
+}
+.boton-rojo{
+    background-color: #f44336;
+}
+
+.boton-azul{
+    background-color: #008CBA;
+}
+
+.col-boton{
+    float: left; 
+    padding: 0px 3px 0px 0px;
+}
+
+td{
+    padding: 35px;
 }
