@@ -1,83 +1,101 @@
 <% provide(:consultas, 'active') %>
-<div class="alert alert-warning" role="alert" style="margin-top:50px">
+
+<div class="alert alert-warning" role="alert" style="margin-top:40px">
   <div class="center-block" style="width: 80%">
-    <div class="header-pnl-consultas">
+    <!--INFORMACION DEL PACIENTE-->
+    <div class="panel-heading" style="background-color: #ffa726">
+      <h5 class="panel-title" style="color: #fff">
+        <a data-toggle="collapse" href="#collapseInfo2">INFORMACIÓN DEL PACIENTE</a>
+      </h5>
+    </div>
+    <div id="collapseInfo2" class="panel-collapse collapse">
+      <!--<div class="header-pnl-consultas">
       <p style="padding-top: 6px; padding-bottom: 5px;">INFORMACIÓN GENERAL DEL PACIENTE</p>
+      </div>-->
+      <div class="body-pnl-consultas">
+        <div class="col" style="margin-top: 20px;">
+          <div class="row">
+            <div class="col-md-2" style="margin-left:20px">
+              <div class="etiqueta">HISTORIA CLÍNICA</div>
+            </div>
+            <div class="col-md-2">
+              <div class="etiquetaValor">
+                <%=@paciente.Pac_HC%>
+              </div>
+            </div>
+            <div class="col-md-3" style="margin-left:20px">
+              <div class="etiqueta">NOMBRES Y APELLIDOS</div>
+            </div>
+            <div class="col-md-4">
+              <div class="etiquetaValor">
+                <%=@paciente.Pac_Apellido_Paterno+' '+@paciente.Pac_Apellido_Materno+' '+@paciente.Pac_Nombres%>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top: 5px">
+            <div class="col-md-2" style="margin-left:20px">
+              <div class="etiqueta">IDENTIFICACIÓN</div>
+            </div>
+            <div class="col-md-2">
+              <div class="etiquetaValor">
+                <%=@paciente.Pac_Cedula%>
+              </div>
+            </div>
+            <!--<div class="col-md-3" style="margin-left:20px">
+              <div class="etiqueta">CONTACTO</div>
+            </div>
+            <div class="col-md-4">
+              <div class="etiquetaValor">
+                <%=@paciente.Pac_Telefono%>
+              </div>
+            </div>-->
+            <div class="col-md-3" style="margin-left:20px">
+              <div class="etiqueta">EDAD</div>
+            </div>
+            <div class="col-md-4">
+              <div class="etiquetaValor">
+                <%=@paciente.Edad.to_s+'  AÑOS' %>
+              </div>
+            </div>
+          </div>
+
+        <!-- <div class="row" style="margin-top: 5px">
+            <div class="col-md-2" style="margin-left:20px">
+              <div class="etiqueta">GÉNERO</div>
+            </div>
+            <div class="col-md-2">
+              <% if @paciente.Pac_Genero.eql? 'M' %>
+                <div class="etiquetaValor">MASCULINO</div>
+                <% else %>
+                  <div class="etiquetaValor">FEMENINO</div>
+                  <% end %>
+            </div>
+            <div class="col-md-3" style="margin-left:20px">
+              <div class="etiqueta">EDAD</div>
+            </div>
+            <div class="col-md-4">
+              <div class="etiquetaValor">
+                <%=@paciente.Edad.to_s+'  AÑOS' %>
+              </div>
+            </div>
+          </div>-->
+
+          <!--<div class="row" style="margin-top: 5px">
+            <div class="col-md-2" style="margin-left:20px">
+              <div class="etiqueta">GRUPO SANGUINEO</div>
+            </div>
+            <div class="col-md-2">
+              <div class="etiquetaValor">
+                <%=@paciente.Pac_Grupo_Sanguineo%>
+              </div>
+            </div>
+          </div>-->
+          <div class="row" style="margin-bottom: 10px"></div>
+        </div>
+      </div>      
     </div>
-    <div class="body-pnl-consultas">
-      <div class="col" style="margin-top: 20px;">
-        <div class="row">
-          <div class="col-md-2" style="margin-left:20px">
-            <div class="etiqueta">HISTORIA CLÍNICA</div>
-          </div>
-          <div class="col-md-2">
-            <div class="etiquetaValor">
-              <%=@paciente.Pac_HC%>
-            </div>
-          </div>
-          <div class="col-md-3" style="margin-left:20px">
-            <div class="etiqueta">NOMBRES Y APELLIDOS</div>
-          </div>
-          <div class="col-md-4">
-            <div class="etiquetaValor">
-              <%=@paciente.Pac_Apellido_Paterno+' '+@paciente.Pac_Apellido_Materno+' '+@paciente.Pac_Nombres%>
-            </div>
-          </div>
-        </div>
-
-        <div class="row" style="margin-top: 5px">
-          <div class="col-md-2" style="margin-left:20px">
-            <div class="etiqueta">IDENTIFICACIÓN</div>
-          </div>
-          <div class="col-md-2">
-            <div class="etiquetaValor">
-              <%=@paciente.Pac_Cedula%>
-            </div>
-          </div>
-          <div class="col-md-3" style="margin-left:20px">
-            <div class="etiqueta">CONTACTO</div>
-          </div>
-          <div class="col-md-4">
-            <div class="etiquetaValor">
-              <%=@paciente.Pac_Telefono%>
-            </div>
-          </div>
-        </div>
-
-        <div class="row" style="margin-top: 5px">
-          <div class="col-md-2" style="margin-left:20px">
-            <div class="etiqueta">GÉNERO</div>
-          </div>
-          <div class="col-md-2">
-            <% if @paciente.Pac_Genero.eql? 'M' %>
-              <div class="etiquetaValor">MASCULINO</div>
-              <% else %>
-                <div class="etiquetaValor">FEMENINO</div>
-                <% end %>
-          </div>
-          <div class="col-md-3" style="margin-left:20px">
-            <div class="etiqueta">EDAD</div>
-          </div>
-          <div class="col-md-4">
-            <div class="etiquetaValor">
-              <%=@paciente.Edad.to_s+'  AÑOS' %>
-            </div>
-          </div>
-        </div>
-
-        <div class="row" style="margin-top: 5px">
-          <div class="col-md-2" style="margin-left:20px">
-            <div class="etiqueta">GRUPO SANGUINEO</div>
-          </div>
-          <div class="col-md-2">
-            <div class="etiquetaValor">
-              <%=@paciente.Pac_Grupo_Sanguineo%>
-            </div>
-          </div>
-        </div>
-        <div class="row" style="margin-bottom: 20px"></div>
-      </div>
-    </div>
+    
 
     <div class="row" style="margin-top:10px">
       <div class="col-xs-12 col-sm-6 col-md-8">
@@ -90,9 +108,19 @@
         </div>
       </div>
       <div class="col-xs-6 col-sm-6 col-md-4">
-        <button id="btnVerHistorial" type="button" class="btn btn-warning pull-right" data-toggle="modal" data-target="#ModalHC">
+        <br>
+        <!--<button id="btnSalirConsulta" type="button" class="btn btn-danger pull-right" style="margin-left: 30px" data-toggle="modal" data-target="#ModalHC">
+          <span class="fa fa-sign-out" aria-hidden="true"></span> Salir
+        </button>-->
+          <!--<%= link_to consultas_path, class:"btn btn-danger pull-right", id:"btnSalirConsulta69", disabled:true do %>
+              <i class="fa fa-sign-out"></i> Salir
+          <%end%>-->
+          <a href="/consultas" class="btn btn-danger pull-right" id="btnSalirConsulta69">
+            <i class="fa fa-sign-out"></i> Salir
+          </a>
+        <button id="btnVerHistorial" type="button" class="btn btn-warning pull-right" style="margin-right: 30px" data-toggle="modal" data-target="#ModalHC">
           <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Ver Historial
-        </button>
+        </button>        
       </div>
     </div>
   </div>
@@ -144,119 +172,127 @@
   
   <!-- BEGIN CONSULTA-->
   <div id="consulta" class="tab-pane fade">
-    <div class="row", style="background-color: #fff8e1; margin-left: 1px; margin-right: 1px">
-      <div class="col-lg-7">
-        <%= render 'frmConsulta' %>  
+    <div class="panel-success panel">
+      <div class="panel-body" style="background-color: #fff8e1">
+          <%= render 'frmConsulta' %> 
       </div>
-    <div class="col-lg-5" style="padding-top:20px; background-color: #fff8e1">
-      <div id="pnlOpciones" style="padding-top: 50px">
-        <div class="row">
-          <button id="btnCaracteristicasDolor" type="button" class="btn btn-warning pull-right" style="width: 350px">REGISTRAR CARACTERISTICA DEL DOLOR</button>
-        </div>        
-        <div class="row" style="margin-top: 10px">
-          <button id="btnExamenFisico" type="button" class="btn btn-warning pull-right" style="width: 350px">REGISTRAR EXAMEN FÍSICO</button>
-        </div>
-        <div class="row" style="margin-top: 10px">
-          <button id="btnPedidoExamen" type="button" class="btn btn-warning pull-right" style="width: 350px">REGISTRAR PEDIDO IMAGENOLOGIA</button>
-        </div>
+      <div class="panel-footer" style="text-align: right">
+        <button id="btnPedidoExamen" type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalPedidoImagenologia" >PEDIDO IMAGENOLOGIA</button>
+        <button id="btnExamenFisico" type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalEFisico" >EXAMEN FÍSICO</button>
+        <button id="btnCaracteristicasDolor" type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalSintomas">CARACTERISTICA DEL DOLOR</button>
       </div>
-      
-      <div id="frmCaracteristicasDolor">
-        <div class="panel panel-info">
-          <div class="panel-heading">CARACTERISTICA DEL DOLOR</div>
-          <div class="panel-body">
-              <div>
-                 <%= render 'frmSintomas' %>
-              </div>
-          </div>
-        </div>        
-      </div>
-      <div id="frmPedidoImagenologia">
-        <div class="panel panel-info">
-          <div class="panel-heading">PEDIDO IMAGENOLOGIA</div>
-          <div class="panel-body">
-              <div>
-                 <%= render 'frmPedidoExamen' %> 
-              </div>
-          </div>
-        </div>   
-               
-      </div>
-      <div id="frmExamenFisico">
-        <div class="panel panel-info">
-          <div class="panel-heading">EXAMEN FÍSICO</div>
-          <div class="panel-body">
-              <div>
-                 <%= render 'frmExamenFisico' %>  
-              </div>
-          </div>
-        </div>          
-      </div>
-    </div>
-    </div>
-    
+    </div>   
       
   </div>
   <!--END CONUSLTA-->
   
   <!--END TRATAMIENTO-->
   <div id="planTratamiento" class="tab-pane fade ">
-    <div class="row"  style="background-color: #fff8e1; margin-left: 1px; margin-right: 1px">
-      <div class="col-lg-7">
-        <%= render 'frmTratamiento' %>
+    <div class="panel-success panel">
+      <div class="panel-body" style="background-color: #fff8e1">
+          <%= render 'frmTratamiento' %> 
       </div>
-        <div class="col-lg-5" style="padding-top:20px">
-          <div id="pnlOpcionesTratamiento" style="padding-top: 50px">
-            <div class="row">
-              <button id="btnRecetaMedica" type="button" class="btn btn-warning pull-right" style="width: 350px">REGISTRAR RECETA MÉDICA</button>
-            </div>
-            <div class="row" style="margin-top: 10px">
-              <button id="btnTerapia" type="button" class="btn btn-warning pull-right" style="width: 350px">REGISTRAR TERAPIA</button>
-            </div>
-            <div class="row" style="margin-top: 10px">
-              <button id="btnCirugia" type="button" class="btn btn-warning pull-right" style="width: 350px">REGISTRAR CIRUGÍA</button>
-            </div>
-            <div class="row" style="margin-top: 30px">
-              <%= form_for @consulta, :url => { :action => "finalizarConsulta" } do |f| %>
-                <div class="actions">
-                  <button id="btnFinConsulta" type="submit" class="btn btn-warning pull-right" style="width: 350px">FINALIZAR CONSULTA</button>
-                    <!--<button type="submit" class="btn btn-primary">
-                    <span><i class="glyphicon glyphicon-plus"></i> Guardar</span>
-                    </button>-->
-                </div>              
-              <% end %>
-            </div>
-            <div class="row" style="margin-top: 10px">
-              <button id="btnFinalizarEmergencia" type="button" class="btn btn-warning pull-right" style="width: 350px" data-toggle="modal" data-target="#myModal">FINALIZAR CONSULTA</button>
-            </div>
-          </div>
-          <div id="frmRecetaMedica">
-            <div class="panel panel-info">
-              <div class="panel-heading">REGISTRAR RECETA MÉDICA</div>
-              <div class="panel-body">
-                  <div>
-                    <%= render 'frmReceta' %> 
-                  </div>
-              </div>
-            </div> 
-          </div>
-          <div id="frmTerapia">
-            <div class="panel panel-info">
-              <div class="panel-heading">TERAPIA</div>
-              <div class="panel-body">
-                  <div>
-                    <%= render 'frmTerapia' %> 
-                  </div>
-              </div>
-            </div> 
-          </div>          
-        </div>
+      <div class="panel-footer" style="text-align: right">
+        <%= form_for @consulta, :url => { :action => "finalizarConsulta" } do |f| %>
+          <button id="btnRecetaMedica" type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalReceta" > RECETA MÉDICA</button>
+          <button id="btnTerapia" type="button" class="btn btn-warning " data-toggle="modal" data-target="#modalTerapia"  >TERAPIA</button>
+          <button id="btnCirugia" type="button" class="btn btn-warning" data-toggle="modal" data-target="#modalCirugia2"  >REGISTRAR CIRUGÍA</button>
+          <button id="btnFinConsulta" type="submit" class="btn btn-success" >FINALIZAR CONSULTA</button>
+          <button id="btnFinalizarEmergencia" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">FINALIZAR CONSULTA</button>
+        <% end %>
+      </div>
     </div>
-    
   </div>
   
 </div>
-<!-- DIALOG FINALIZAR CONSULTA POR EMERGENCIA-->
+<!-- ********************** MODALS PARA CONSULTA ******************-->
+<!--MODAL SINTOMAS-->
+<div class="modal fade" id="modalSintomas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title tituloModal" id="exampleModalLabel">REGISTRA CARACTERISTICAS DEL DOLOR</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= render 'frmSintomas' %>         
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--MODAL EXAMEN FÍSICO-->
+<div class="modal fade" id="modalEFisico" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title tituloModal" id="exampleModalLabel">REGISTRA EXAMEN FÍSICO</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= render 'frmExamenFisico' %>         
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--MODAL PEDIDO IMAGENOLOGIA-->
+<div class="modal fade" id="modalPedidoImagenologia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title tituloModal" id="exampleModalLabel">REGISTRA PEDIDO IMAGENOLOGIA</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= render 'frmPedidoExamen' %>         
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--MODAL RECETA-->
+<div class="modal fade" id="modalReceta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title tituloModal" id="exampleModalLabel">REGISTRAR MEDICAMENTO</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= render 'frmReceta' %>         
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--MODAL TERAPIA-->
+<div class="modal fade" id="modalTerapia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title tituloModal" id="exampleModalLabel">REGISTRAR TERAPIA</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= render 'frmTerapia' %>         
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL FINALIZAR CONSULTA POR EMERGENCIA-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -272,12 +308,12 @@
     </div>
   </div>
 </div>
-<!--DIALOG REGISTRAR CIRUGIA -->
-<div class="modal fade bd-example-modal-lg" id="modalCirugia" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<!--MODAL REGISTRAR CIRUGIA -->
+<div class="modal fade bd-example-modal-lg" id="modalCirugia2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" style="width: 1300px;">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">REGISTRAR CIRUGÍA</h5>
+        <h4 class="modal-title tituloModal">REGISTRAR CIRUGÍA</h4>
       </div>
       <div class="modal-body">
         <div class="row">
@@ -308,7 +344,7 @@
   <div class="modal-dialog modal-lg" style="width: 1300px;">
     <div class="modal-content">
       <div class="modal-header">
-        <h3 class="modal-title" id="exampleModalLabel">HISTORIAL</h3>
+        <h4 class="modal-title" id="exampleModalLabel">HISTORIAL</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

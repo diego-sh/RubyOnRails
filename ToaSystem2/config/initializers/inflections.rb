@@ -21,6 +21,7 @@
    inflect.irregular 'nota', 'notas'
    inflect.irregular 'revision', 'revisiones'
    inflect.irregular 'protocolo_operacion', 'protocolo_operaciones'
+   inflect.irregular 'indicacion', 'indicaciones'
 
    
    

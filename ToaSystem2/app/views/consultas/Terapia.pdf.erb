@@ -20,13 +20,13 @@
             </div>
         </div><hr>
         <div style="clear: both; height: 800px"><br>
-            <div style="float: left; width: 70%;">
+            <div style="float: left; width: 70%; font-size: 20px">
                 Terapia.
             </div>
-            <div style="float: left; width: 30%;" align="right">
+            <div style="float: left; width: 30%; font-size: 20px" align="right">
                 Quito, <%=l Time.now, :format => :long %>
             </div>
-            <div><br><br>
+            <div style="margin-top: 60px">
                 <% @terapias.each do |terapia| %>                   
                     <ul>
                         <li type="circle"><%= terapia.Ter_indicacion %></li>

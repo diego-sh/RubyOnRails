@@ -9,7 +9,7 @@ class ConsultasController < ApplicationController
     if @@medico !=nil
       @lstPacientesAtender=Cita.find_by_sql("SELECT c.cita_id,c.cit_fecha,c.cit_hora,c.cit_motivo, p.paciente_id, CONCAT(CONCAT(p.pac_apellido_paterno,' '),p.pac_apellido_materno)AS Apellidos, p.pac_nombres 
                                             FROM citas c INNER JOIN pacientes p ON p.paciente_id=c.paciente_id 
-                                            WHERE c.medico_id='#{@@medico.medico_id}' AND c.cit_fecha=CURDATE() AND c.cit_estado!='Atendido' ORDER by c.cit_hora ASC")
+                                            WHERE c.medico_id='#{@@medico.medico_id}' AND c.cit_fecha=CURDATE() AND c.cit_estado='Pendiente' ORDER by c.cit_hora ASC")
       @cirugias = PartesOperatorio.find_by_sql("SELECT * FROM partes_operatorios")
     end
   end
@@ -175,6 +175,7 @@ class ConsultasController < ApplicationController
           @citaExtra.Cit_Estado="CONSULTA EXTRA"
           @citaExtra.Cit_Fecha=Date.today.strftime("%Y-%m-%d")
           @citaExtra.Cit_Hora=Time.now.strftime("%H:%M")
+          @citaExtra.Cit_Hora_Fin=@citaExtra.Cit_Hora+30.minutes
           @citaExtra.usuario_id=session[:usuario]["usuario_id"]
           if @@medico!= nil
              @citaExtra.medico_id=@@medico.medico_id
@@ -508,8 +509,13 @@ class ConsultasController < ApplicationController
         if @@cita_idTMP!=nil
           @citaAUX=Cita.find_by_cita_id(@@cita_idTMP)
           if @citaAUX !=nil
-            @citaAUX.update(:Cit_Estado=>"ATENDIDO")
-            format.html { redirect_to consultas_path, notice: 'CONSULTA FINALIZADA Y GUARDADO CON ÉXITO' }
+            if @citaAUX.Cit_Estado=="CONSULTA EXTRA"
+              @citaAUX.update(:Cit_Estado=>"ATENDIDO EXTRA")
+              format.html { redirect_to consultas_path, notice: 'CONSULTA FINALIZADA Y GUARDADO CON ÉXITO' }
+            else
+              @citaAUX.update(:Cit_Estado=>"ATENDIDO")
+              format.html { redirect_to consultas_path, notice: 'CONSULTA FINALIZADA Y GUARDADO CON ÉXITO' }              
+            end
           end        
         end
       else

@@ -7,6 +7,7 @@ $(document).on 'turbolinks:load', ->
 #REGISTRA INGRESO
 $(document).on "ajax:success","form#ingreso-form", (ev,data,xhr, settings)->
     showModal data.mensaje, 'success'
+    $('#fullCalModal').modal('hide')
 $(document).on "ajax:error","form#ingreso-form", (ev,data,xhr, settings)->
     showModal data.responseJSON.mensaje, 'error'
 

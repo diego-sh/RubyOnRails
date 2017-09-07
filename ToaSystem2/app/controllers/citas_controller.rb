@@ -8,7 +8,10 @@ class CitasController < ApplicationController
   def index
     #@citas = Cita.all
     @especialistas=Persona.find_by_sql("SELECT CONCAT(CONCAT(p.Per_Apellido_Paterno,' '), p.Per_Nombres) AS Nombre, m.medico_id, p.persona_id FROM personas p INNER JOIN medicos m on p.persona_id = m.persona_id")
-    @citas = Cita.find_by_sql("SELECT *, p.pac_apellido_paterno AS apellidop, p.pac_nombres AS nombrep, p.pac_cedula AS cedulap, pe.per_apellido_paterno AS apellidod, pe.per_nombres AS nombred, c.cit_fecha AS fecha, c.cit_hora AS hora, CONCAT(c.cit_fecha,c.cit_hora) AS fechahora from citas c join pacientes p on p.paciente_id=c.paciente_id join medicos m on m.medico_id=c.medico_id join personas pe on pe.persona_id=m.persona_id WHERE c.Cit_Estado!='Cancelado'")
+    @citas = Cita.find_by_sql("SELECT *, p.pac_apellido_paterno AS apellidop, p.pac_nombres AS nombrep, p.pac_cedula AS cedulap, pe.per_apellido_paterno AS apellidod, pe.per_nombres AS nombred, 
+                              c.cit_fecha AS fecha, c.cit_hora AS hora, CONCAT(c.cit_fecha,c.cit_hora) AS fechahora 
+                              from citas c join pacientes p on p.paciente_id=c.paciente_id join medicos m on m.medico_id=c.medico_id 
+                              join personas pe on pe.persona_id=m.persona_id WHERE c.Cit_Estado!='Cancelado' AND c.Cit_Estado!='ATENDIDO EXTRA' AND c.Cit_Estado!='EMERGENCIA'")
   end
 
   # GET /citas/1

@@ -2,6 +2,7 @@ json.array!(@partesOperatorios) do |parteOperatorio|
     json.paciente parteOperatorio.Pac_Apellido_Paterno+" "+parteOperatorio.Pac_Nombres
     json.id parteOperatorio.partes_operatorio_id
     json.cirugia parteOperatorio.Pop_Cirugia_Propuesta
+    json.estadoIngreso parteOperatorio.Ing_Estado
     json.title parteOperatorio.Pac_Apellido_Paterno+" "+parteOperatorio.Pac_Nombres+"\n"+ parteOperatorio.Pop_Cirugia_Propuesta
     hora = parteOperatorio.Pop_Hora_Cirugia
     horaFin= parteOperatorio.Pop_Tiempo_Cirugia

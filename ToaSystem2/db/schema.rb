@@ -72,18 +72,6 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["paciente_id"], name: "FK_REFERENCE_4", using: :btree
   end
 
-  create_table "complicaciones", primary_key: "complicacion_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.bigint "protocolo_operacion_id"
-    t.string "Com_Descripcion",        limit: 1024, null: false
-    t.index ["protocolo_operacion_id"], name: "FK_REFERENCE_40", using: :btree
-  end
-
-  create_table "condiciones_egresos", primary_key: "condiciones_egreso_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.integer "epicrisi_id"
-    t.string  "Ceg_Descripcion", limit: 512
-    t.index ["epicrisi_id"], name: "FK_REFERENCE_33", using: :btree
-  end
-
   create_table "configuracion_habitaciones", primary_key: "configuracion_habitacion_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "Hab_Numero"
     t.string  "Hab_Estado", limit: 16
@@ -129,12 +117,21 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["ingreso_id"], name: "FK_REFERENCE_43", using: :btree
   end
 
-  create_table "epicrisis", primary_key: "epicrisi_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.bigint "ingreso_id"
-    t.string "Epi_Resumen_CuadroClinico",      limit: 512
-    t.string "Epi_Tipo_Egreso",                limit: 2
-    t.string "Epi_Resumen_Evo_Complicaciones", limit: 512
-    t.string "Epi_Resumen_Tratamiento",        limit: 512
+  create_table "epicrisis", primary_key: "epicrisi_id", id: :bigint, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.bigint   "ingreso_id"
+    t.text     "Epi_Resumen_CuadroClinico",         limit: 4294967295
+    t.text     "Epi_Resumen_Evo_Complicaciones",    limit: 4294967295
+    t.text     "Epi_Resumen_Tratamiento",           limit: 4294967295
+    t.text     "Epi_Condiciones_Egreso_Pronostico", limit: 4294967295
+    t.text     "Epi_Hallazgos_Relevantes",          limit: 4294967295
+    t.string   "Epi_Alta",                          limit: 32
+    t.string   "Epi_Retiro",                        limit: 32
+    t.string   "Epi_Condicion",                     limit: 32
+    t.string   "Epi_Defuncion",                     limit: 32
+    t.integer  "Epi_Estadia"
+    t.integer  "Epi_Incapacidad"
+    t.datetime "created_at"
+    t.integer  "usuario_id"
     t.index ["ingreso_id"], name: "FK_REFERENCE_32", using: :btree
   end
 
@@ -190,19 +187,20 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["prescripcion_id"], name: "FK_REFERENCE_25", using: :btree
   end
 
-  create_table "hallazgos_revelantes", primary_key: "hallazgos_relevante", id: :bigint, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.integer "epicrisi_id"
-    t.string  "Hre_Estudio_Tipo", limit: 16
-    t.string  "Hre_Descripcion",  limit: 512
-    t.index ["epicrisi_id"], name: "FK_REFERENCE_34", using: :btree
-  end
-
   create_table "horarios", primary_key: "horario_id", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "medico_id"
     t.time    "Hor_Hora_Inicio"
     t.time    "Hor_Hora_Fin"
     t.string  "Hor_Dia",         limit: 16
     t.index ["medico_id"], name: "FK_REFERENCE_16", using: :btree
+  end
+
+  create_table "indicaciones", primary_key: "indicacion_id", id: :bigint, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.bigint   "ingreso_id"
+    t.text     "Ind_Generales", limit: 4294967295
+    t.datetime "created_at"
+    t.integer  "usuario_id"
+    t.index ["ingreso_id"], name: "FK_REFERENCE_40_idx", using: :btree
   end
 
   create_table "ingresos", primary_key: "ingreso_id", id: :bigint, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -214,6 +212,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.datetime "updated_at"
     t.integer  "usuario_id"
     t.string   "Ing_Estado",           limit: 32
+    t.datetime "Ing_Fecha_Salida"
     t.index ["partes_operatorio_id"], name: "FK_REFERENCE_41", using: :btree
   end
 
@@ -222,6 +221,8 @@ ActiveRecord::Schema.define(version: 0) do
     t.string  "Ins_Nombre",      limit: 256
     t.string  "Ins_Indicacion",  limit: 512
     t.integer "Ins_Cantidad"
+    t.bigint  "indicacion_id"
+    t.index ["indicacion_id"], name: "FK_REFERENCE_39_idx", using: :btree
     t.index ["prescripcion_id"], name: "FK_REFERENCE_23", using: :btree
   end
 
@@ -455,6 +456,8 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer "prescripcion_id"
     t.integer "Ter_Numero_Sesiones"
     t.text    "Ter_indicacion",      limit: 4294967295
+    t.bigint  "indicacion_id"
+    t.index ["indicacion_id"], name: "FK_REFERENCE_44_idx", using: :btree
     t.index ["prescripcion_id"], name: "FK_REFERENCE_24", using: :btree
   end
 
@@ -473,8 +476,6 @@ ActiveRecord::Schema.define(version: 0) do
   add_foreign_key "citas", "empleados", primary_key: "empleado_id", name: "FK_REFERENCE_14"
   add_foreign_key "citas", "medicos", primary_key: "medico_id", name: "FK_REFERENCE_15"
   add_foreign_key "citas", "pacientes", primary_key: "paciente_id", name: "FK_REFERENCE_4"
-  add_foreign_key "complicaciones", "protocolo_operaciones", column: "protocolo_operacion_id", primary_key: "protocolo_operacion_id", name: "FK_REFERENCE_40"
-  add_foreign_key "condiciones_egresos", "epicrisis", column: "epicrisi_id", primary_key: "epicrisi_id", name: "FK_REFERENCE_33"
   add_foreign_key "consultas", "citas", primary_key: "cita_id", name: "FK_REFERENCE_3"
   add_foreign_key "diagnosticos", "consultas", primary_key: "consulta_id", name: "FK_REFERENCE_6"
   add_foreign_key "diagnosticos", "sintomas", primary_key: "sintoma_id", name: "FK_REFERENCE_5"
@@ -487,9 +488,10 @@ ActiveRecord::Schema.define(version: 0) do
   add_foreign_key "estado_pacientes", "consultas", primary_key: "consulta_id", name: "FK_REFERENCE_11"
   add_foreign_key "examen_fisicos", "consultas", primary_key: "consulta_id", name: "FK_REFERENCE_8"
   add_foreign_key "examenes", "prescripciones", primary_key: "prescripcion_id", name: "FK_REFERENCE_25"
-  add_foreign_key "hallazgos_revelantes", "epicrisis", column: "epicrisi_id", primary_key: "epicrisi_id", name: "FK_REFERENCE_34"
   add_foreign_key "horarios", "medicos", primary_key: "medico_id", name: "FK_REFERENCE_16"
+  add_foreign_key "indicaciones", "ingresos", primary_key: "ingreso_id", name: "FK_REFERENCE_40"
   add_foreign_key "ingresos", "partes_operatorios", primary_key: "partes_operatorio_id", name: "FK_REFERENCE_41"
+  add_foreign_key "medicinas", "indicaciones", primary_key: "indicacion_id", name: "FK_REFERENCE_39"
   add_foreign_key "medicinas", "prescripciones", primary_key: "prescripcion_id", name: "FK_REFERENCE_23"
   add_foreign_key "medicos", "personas", primary_key: "persona_id", name: "FK_REFERENCE_12"
   add_foreign_key "notas", "ingresos", primary_key: "ingreso_id", name: "FK_REFERENCE_35"
@@ -505,6 +507,7 @@ ActiveRecord::Schema.define(version: 0) do
   add_foreign_key "revisiones", "notas", primary_key: "nota_id", name: "FK_REFERENCE_36"
   add_foreign_key "signos_vitales", "ingresos", primary_key: "ingreso_id", name: "FK_REFERENCE_30"
   add_foreign_key "signos_vitales_basicos", "consultas", primary_key: "consulta_id", name: "FK_REFERENCE_10"
+  add_foreign_key "terapias", "indicaciones", primary_key: "indicacion_id", name: "FK_REFERENCE_44"
   add_foreign_key "terapias", "prescripciones", primary_key: "prescripcion_id", name: "FK_REFERENCE_24"
   add_foreign_key "usuarios", "perfiles", primary_key: "perfil_id", name: "FK_REFERENCE_20"
 end

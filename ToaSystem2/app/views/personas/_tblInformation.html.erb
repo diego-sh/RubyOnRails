@@ -26,7 +26,7 @@
                   </div>
                   <% if !persona.respond_to?("Rol") %>
                     <div class="col-boton">                  
-                      <%= button_to("Horario", new_horario_path(:med => persona.medico_id), :method => "get", class: "boton boton-azul")%>
+                      <!--<%= button_to("Horario", new_horario_path(:med => persona.medico_id), :method => "get", class: "boton boton-azul")%>-->
                     </div>
                   <% end %>
                   <% if persona.usuario_id == nil %>

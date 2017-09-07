@@ -1,6 +1,6 @@
-<%= form_for @consulta, :url => { :action => "createReceta" }, remote: true, html:{id: "receta-form",format: :json} do |f| %>
-    <%= f.fields_for :medicina do |me|%>
-            <div class="row">
+<%= form_for(@ingreso, :url => { :action => "addMedicamento" }, remote: true, html:{id: "recetaIngreso-form",format: :json}, validate: true) do |f| %>
+    <% f.fields_for :medicina do |me|%>
+        <div class="row">
                 <div class="col-lg-4">
                     <div class="form-group">
                         <label for="cantidad">CANTIDAD</label>
@@ -27,7 +27,7 @@
                 </div>
             </div>
 
-            <!--<div class="row" style="margin-top:10px">
+            <div class="row" style="margin-top:10px">
             <div class="col-lg-3">
                 <div class="actions">
                     <button type="submit" class="btn btn-primary">
@@ -35,20 +35,7 @@
                     </button>
                 </div>                
             </div>
-            <div class="col-lg-3">
-                <button id="btnCancelReceta" type="button" class="btn btn-primary">Cancelar</button>
-            </div>
-        </div>-->
-        <div class="row" class="center">
-            <div class="col-lg-12" style="text-align: center">
-                <button type="submit" class="btn btn-primary">
-                    <span><i class="fa fa-floppy-o"></i> Guardar</span>
-                </button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal" style="margin-left: 20px">
-                    <span><i class="fa fa-times" aria-hidden="true"></i> Cancelar</span>
-                </button>
-            </div>
-            
         </div>
-    <% end %>
-<% end %>
+
+    <%end%>
+<%end%>

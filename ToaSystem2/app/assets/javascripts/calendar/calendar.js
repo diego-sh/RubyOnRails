@@ -41,6 +41,10 @@ initialize_calendar = function(){
             selectHelper: true,
             editable: true,
             eventLimit: true,
+            eventMouseover:  function(event, jsEvent, view) {
+               /* $('#modalInfoCita').modal('hide');                               
+                $('#modalInfoCita').modal(); */                              
+            },
             eventRender: function eventRender( event, element, view ) {
                 switch(event.medico) {
                     case "1":

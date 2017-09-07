@@ -1,0 +1,13 @@
+<%= form_for(@ingreso, :url => { :action => "createExamenCardiologico" }, remote: true, html:{id: "indicacionesG-form",format: :json}, validate: true) do |f| %>
+    <% f.fields_for :indicacion do |i|%>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label for="medicamento">INDICACIONES GENERALES</label>
+                    <%= i.text_area :Ind_Generales, class:'form-control', id:'indicacionesGenerales', placeholder:'Describa las indicaciones', rows:'6'%>
+                </div>
+            </div>
+        </div>
+
+    <%end%>
+<%end%>

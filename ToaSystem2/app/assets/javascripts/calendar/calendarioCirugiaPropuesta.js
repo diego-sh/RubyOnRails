@@ -17,7 +17,16 @@ initialize_calendar = function(){
                 $('#cirugiaPropuesta').html(event.cirugia);
                 $('#pOperatorio_id').val(event.id);
                 $('#pOperatorio_id').hide();
-                $('#fullCalModal').modal();
+                if(event.estadoIngreso!= 'HOSPITALIZADO'){
+                    $('#fullCalModal').modal();
+                }
+                else{
+                    $('#infoPaciente2').html(event.paciente);
+                    $('#cirugiaPropuesta2').html(event.cirugia);
+                    $('#estado').html("EL PACIENTE YA SE ENCUENTRA "+event.estadoIngreso);
+                    $('#modalInfo').modal();
+                }
+                
             },
             lang: 'es',
             editable: false,

@@ -1,7 +1,7 @@
 require 'digest/sha1'
 
 class Usuario < ApplicationRecord
-  before_save :encrypt, :upperCase
+  before_save :upperCase
 
   belongs_to :perfil, inverse_of: :usuario
   has_one :persona, inverse_of: :usuario

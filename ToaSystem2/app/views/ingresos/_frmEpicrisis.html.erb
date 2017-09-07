@@ -1,0 +1,149 @@
+<%= form_for(epicrisis, :url => { :action => "createEpicrisis" }, remote: true, html:{id: "epicrisis-form",format: :json}, validate: true) do |f| %>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label for="notaEvolucion">RESUMEN DEL CUADRO CLÍNICO</label>
+                <% if epicrisis.Epi_Resumen_CuadroClinico !=nil || epicrisis.Epi_Resumen_CuadroClinico != "" %>
+                    <%=f.text_area :Epi_Resumen_CuadroClinico, class:'form-control', id:'resumenCuadroClinico', placeholder:'Esciba aqui el resumen', rows: '5', disabled:true%>
+                <%else%>
+                    <%=f.text_area :Epi_Resumen_CuadroClinico, class:'form-control', id:'resumenCuadroClinico', placeholder:'Esciba aqui el resumen', rows: '5'%>
+                <%end%>                
+            </div>
+        </div>        
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label for="notaEvolucion">RESUMEN DE EVOLUCIÓN Y COMPLICACIONES</label>
+                <% if epicrisis.Epi_Resumen_Evo_Complicaciones !=nil || epicrisis.Epi_Resumen_Evo_Complicaciones != "" %>
+                    <%=f.text_area :Epi_Resumen_Evo_Complicaciones, class:'form-control', id:'resumEvolucionesComplicaciones', placeholder:'Esciba aqui el resumen', rows: '5', disabled:true%>
+                <%else%>
+                    <%=f.text_area :Epi_Resumen_Evo_Complicaciones, class:'form-control', id:'resumEvolucionesComplicaciones', placeholder:'Esciba aqui el resumen', rows: '5'%>
+                <%end%>                
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label for="notaEvolucion">HALLAZGOS RELEVANTES DE EXAMENES Y PROCEDIMIENTOS DIAGNÓSTICOS</label>
+                <% if epicrisis.Epi_Hallazgos_Relevantes !=nil || epicrisis.Epi_Hallazgos_Relevantes != "" %>
+                    <%=f.text_area :Epi_Hallazgos_Relevantes, class:'form-control', id:'hallazgos', placeholder:'Detalle los hallazgos', rows: '5', disabled:true%>
+                <%else%>
+                    <%=f.text_area :Epi_Hallazgos_Relevantes, class:'form-control', id:'hallazgos', placeholder:'Detalle los hallazgos', rows: '5'%>
+                <%end%>                
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label for="notaEvolucion">RESUMEN DE TRATAMIENTO Y PROCEDIMIENTOS TERAPEUTICOS</label>
+                <% if epicrisis.Epi_Resumen_Tratamiento !=nil || epicrisis.Epi_Resumen_Tratamiento != "" %>
+                    <%=f.text_area :Epi_Resumen_Tratamiento, class:'form-control', id:'resumenTratamiento', placeholder:'Resumen', rows: '5', disabled:true %>
+                <%else%>
+                    <%=f.text_area :Epi_Resumen_Tratamiento, class:'form-control', id:'resumenTratamiento', placeholder:'Resumen', rows: '5'%>
+                <%end%>                
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group">
+                <label for="notaEvolucion">CONDICIONES DE EGRESO Y PRONÓSTICO</label>
+                <% if epicrisis.Epi_Condiciones_Egreso_Pronostico !=nil || epicrisis.Epi_Condiciones_Egreso_Pronostico != "" %>
+                    <%=f.text_area :Epi_Condiciones_Egreso_Pronostico, class:'form-control', id:'notaEvolucion', placeholder:'Condición de egreso', rows: '5', disabled:true %>
+                <%else%>
+                    <%=f.text_area :Epi_Condiciones_Egreso_Pronostico, class:'form-control', id:'notaEvolucion', placeholder:'Condición de egreso', rows: '5'%>
+                <%end%>                
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2">
+            <div class="form-group">
+                <label for="tipoNota">ALTA</label>
+                <% if epicrisis.Epi_Alta !=nil || epicrisis.Epi_Alta != "" %>
+                    <%= f.select(:Epi_Alta, options_for_select([['Definitiva', 'DEFINITIVA'],['Transitoria', 'TRANSITORIA']], epicrisis.Epi_Alta),{prompt: "Seleccione"},{ :class => 'form-control', :id=>"cmbAlta", :disabled=>true}) %>
+                <%else%>
+                    <%= f.select(:Epi_Alta, options_for_select([['Definitiva', 'DEFINITIVA'],['Transitoria', 'TRANSITORIA']]),{prompt: "Seleccione"},{ :class => 'form-control', :id=>"cmbAlta"}) %>
+                <%end%>
+                
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="form-group">
+                <label for="tipoNota">CONDICIÓN</label>
+                <% if epicrisis.Epi_Condicion !=nil || epicrisis.Epi_Condicion != "" %>
+                    <%= f.select(:Epi_Condicion, options_for_select([['Asintomatico', 'ASINTOMATICO'],['Discapacidad Leve', 'DISCAPACIDAD LEVE'], ['Discapacidad Moderada', 'DISCAPACIDAD MODERADA'],['Discapacidad Grave','DISCAPACIDAD GRAVE']],epicrisis.Epi_Condicion),{prompt: "Seleccione"},{ :class => 'form-control', :id=>'cmbCondicion', :disabled=>true}) %>
+                <%else%>
+                    <%= f.select(:Epi_Condicion, options_for_select([['Asintomatico', 'ASINTOMATICO'],['Discapacidad Leve', 'DISCAPACIDAD LEVE'], ['Discapacidad Moderada', 'DISCAPACIDAD MODERADA'],['Discapacidad Grave','DISCAPACIDAD GRAVE']]),{prompt: "Seleccione"},{ :class => 'form-control', :id=>'cmbCondicion'}) %>
+                <%end%>                
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="form-group">
+                <label for="tipoNota">RETIRO</label>
+                <% if epicrisis.Epi_Retiro !=nil || epicrisis.Epi_Retiro != "" %>
+                    <%= f.select(:Epi_Retiro, options_for_select([['Voluntario', 'VOLUNTARIO'],['Involuntario', 'INVOLUNTARIO']],epicrisis.Epi_Retiro),{prompt: "Seleccione"},{ :class => 'form-control', :id=>'cmbRetiro', :disabled=>true}) %>
+                <%else%>
+                    <%= f.select(:Epi_Retiro, options_for_select([['Voluntario', 'VOLUNTARIO'],['Involuntario', 'INVOLUNTARIO']]),{prompt: "Seleccione"},{ :class => 'form-control', :id=>'cmbRetiro'}) %>                    
+                <%end%>                
+            </div>
+        </div>
+        <div class="col-lg-2">
+            <div class="form-group">
+                <label for="tipoNota">DEFUNCIÓN</label>
+                <% if epicrisis.Epi_Defuncion !=nil || epicrisis.Epi_Defuncion != "" %>
+                    <%= f.select(:Epi_Defuncion, options_for_select([['Antes 48 Horas ', 'ANTES 48 HORAS'],['Despúes 48 Horas', 'DESPÚES 48 HORAS']],epicrisis.Epi_Defuncion),{prompt: "Seleccione"},{ :class => 'form-control', :id=>'cmbDefuncion', :disabled=>true}) %>                    
+                <%else%>
+                    <%= f.select(:Epi_Defuncion, options_for_select([['Antes 48 Horas ', 'ANTES 48 HORAS'],['Despúes 48 Horas', 'DESPÚES 48 HORAS']]),{prompt: "Seleccione"},{ :class => 'form-control', :id=>'cmbDefuncion'}) %>                    
+                <%end%>
+            </div>
+        </div>
+        <div class="col-lg-2">
+             <div class="form-group">
+                <label for="temperatura">ESTADIA</label>
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <% if epicrisis.Epi_Estadia !=nil || epicrisis.Epi_Estadia != "" %>
+                        <%=f.number_field :Epi_Estadia, class:'form-control', id:'estadia', disabled:true%>
+                    <%else%>
+                        <%=f.number_field :Epi_Estadia, value: 1, class:'form-control', id:'estadia'%>
+                    <%end%>                    
+                    <div class="input-group-addon">Día(s)</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2">
+             <div class="form-group">
+                <label for="temperatura">INCAPACIDAD</label>
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <% if epicrisis.Epi_Incapacidad !=nil || epicrisis.Epi_Incapacidad != "" %>
+                        <%=f.number_field :Epi_Incapacidad, class:'form-control', id:'incapacidad', disabled:true%>
+                    <%else%>
+                        <%=f.number_field :Epi_Incapacidad, value: 0, class:'form-control', id:'incapacidad'%>                        
+                    <%end%>
+                    
+                    <div class="input-group-addon">Día(s)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="actions">
+                <% if epicrisis.epicrisi_id !=nil || epicrisis.epicrisi_id != "" %>
+                    <button type="submit" class="btn btn-primary pull-right" disabled>
+                        <span><i class="glyphicon glyphicon-plus"></i> Guardar</span>
+                    </button>
+                <%else%>
+                    <button type="submit" class="btn btn-primary pull-right">
+                        <span><i class="glyphicon glyphicon-plus"></i> Guardar</span>
+                    </button>
+                <%end%>
+                
+            </div>
+        </div>        
+    </div> 
+
+<%end%>

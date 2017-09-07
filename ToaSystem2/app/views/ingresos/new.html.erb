@@ -9,7 +9,7 @@
                 <ul class="nav nav-pills nav-stacked" style="padding-left:0px ">
                     <li class="optionMenu">
                         <button type="button" class="btn btn-warning btn-block" id="opSignosVitales" style="text-align: left">
-                            <span class="glyphicon glyphicon-list-alt pull-right"></span>
+                            <i class="fa fa-stethoscope fa-lg pull-right"></i>
                             SIGNOS VITALES
                         </button>
                     </li>
@@ -21,26 +21,32 @@
                     </li>
                     <li class="optionMenu">
                         <button type="button" class="btn btn-warning btn-block" id="opNotasEvolucion" style="text-align: left">
-                            <span class="glyphicon glyphicon-list-alt pull-right"></span>
+                            <span class="fa fa-user-md fa-lg pull-right"></span>
                             NOTAS EVOLUCIÓN
                         </button>
                     </li>
                     <li class="optionMenu">
-                        <button type="button" class="btn btn-warning btn-block" id="opMedicacion" style="text-align: left">
+                        <button type="button" class="btn btn-warning btn-block" id="opRecetario" style="text-align: left">
                             <span class="glyphicon glyphicon-list-alt pull-right"></span>
-                            MEDICACIÓN
+                            RECETARIO
                         </button>
                     </li>
                     <li class="optionMenu">
                         <button type="button" class="btn btn-warning btn-block" id="opExamenCardiologico" style="text-align: left">
-                            <span class="glyphicon glyphicon-list-alt pull-right"></span>
+                            <span class="fa fa-heartbeat fa-lg pull-right"></span>
                             E. CARDIOLOGICO
                         </button>
                     </li>
                     <li class="optionMenu">
                         <button type="button" class="btn btn-warning btn-block" id="opProtocoloOperacion" style="text-align: left">
-                            <span class="glyphicon glyphicon-list-alt pull-right"></span>
+                            <span class="fa fa-medkit fa-lg pull-right"></span>
                             PROTO. OPERATORIO
+                        </button>
+                    </li>
+                    <li class="optionMenu">
+                        <button type="button" class="btn btn-warning btn-block" id="opEpicrisis" style="text-align: left">
+                            <span class="glyphicon glyphicon-list-alt pull-right"></span>
+                            EPICRISIS
                         </button>
                     </li>
 
@@ -64,7 +70,7 @@
             <div id="informacionPaciente">
                 <div class="alert alert-warning" style="margin-top:5px; margin-bottom: 10px">
                     <div class="header-pnl-consultas">
-                        <p style="padding-top: 6px; padding-bottom: 5px;">INFORMACIÓN DEL PACIENTE INGRESADO</p>
+                        <p style="padding-top: 6px; padding-bottom: 5px;">INFORMACIÓN DEL PACIENTE HOSPITALIZADO</p>
                     </div>
                     <div class="body-pnl-consultas">
                         <div class="col" style="margin-top: 10px; margin-bottom: 10px">
@@ -207,119 +213,166 @@
                 <div class="panel-success panel">
                     <div class="panel-heading">REGISTRO DE SIGNOS VITALES</div>
                     <div class="panel-body scroll-panelNotas" id="pnlSignosVitales">
-                        <% @signosVitalesRegistrados.each do |signos| %>
-                        
-                        <div class="alert alert-warning" style="margin-bottom: 6px">
-                            <div class="row cabeceraNotas">
-                                <div class="col-lg-2">
-                                    <strong>Fecha:</strong> <%= signos.Siv_Fecha%>
-                                </div>
-                                <div class="col-lg-2">
-                                    <strong>Hora:</strong> <%= signos.Siv_Hora.strftime('%r')%>
-                                </div>
-                                <div class="col-lg-8" style="text-align: right">
-                                    <strong>Responsable:</strong> <%=signos.Per_Apellido_Paterno%> <%=signos.Per_Nombres%>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-top: 10px">
-                                <div class="col-lg-2">
-                                    <strong>Temperatura:</strong> <%= signos.Siv_Temperatura%> °C
-                                </div>
-                                <div class="col-lg-2">
-                                    <strong>Pulso:</strong> <%= signos.Siv_Pulso%> x min
-                                </div>
-                                <div class="col-lg-2">
-                                    <strong>Saturación:</strong> <%= signos.Siv_Saturacion%> %
-                                </div>
-                                <div class="col-lg-2">
-                                    <strong>F. Respiratoria:</strong> <%= signos.Siv_Frecuencia_Respiratoria%> x min
-                                </div>
-                                <div class="col-lg-2">
-                                    <strong>Presión:</strong> <%= signos.Siv_Presion_Arterial_Diastolica%>/<%= signos.Siv_Presion_Arterial_Sistolica%> mmHg
-                                </div>
-                                <div class="col-lg-2">
-                                    <strong>Peso:</strong> <%= signos.Siv_Peso%> kg
-                                </div>
-                            </div>
-                            <div class="row" style="margin-top: 5px">
-                                <div class="col-lg-6" style="text-align: center">
-                                    <strong>INGRESOS CC</strong>                                    
+                        <table class="table dt-responsive no-wrap table-hover" width="100%">
+                            <thead style="font-size: 14px;">
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Hora</th>
+                                    <th>Internación <br> Dia</th>
+                                    <th>PostQuirurgico <br>Día  </th>
+                                    <th>Peso<div style="font-size: 10px; text-align: center">(Kg)</div></th>
+                                    <th>Pulso<div style="font-size: 10px; text-align: center">(x min)</div></th>
+                                    <th>Temperatura<div style="font-size: 10px; text-align: center">(°C)</div></th>
+                                    <th>Saturación<div style="font-size: 10px; text-align: center">(%)</div></th>
+                                    <th>F. Respiratoria<div style="font-size: 10px; text-align: center">(x min)</div></th>    
+                                    <th>Presión <br> Arterial</th>
+                                    <th>Balance<br>Hidrico</th>
+                                    <th>Mediciones<br>Actividades</th>
+                                    <th>Responsable</th>
+                                </tr>
+                            </thead>
 
-                                </div>
-                                <div class="col-lg-6" style="text-align: center">
-                                    <strong>ELIMINACIONES CC</strong>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <strong>Parenteral:</strong> <%= signos.Siv_Ingresos_Parenteral%>
-                                </div>
-                                <div class="col-lg-2">
-                                    <strong>Via Oral:</strong> <%= signos.Siv_Ingresos_ViaOral%>
-                                </div>
-                                <div class="col-lg-2">
-                                    <strong>Total:</strong> <%= signos.Siv_Ingresos_Total%>
-                                </div>
-                                <div class="col-lg-2">
-                                    <strong>Orina:</strong> <%= signos.Siv_Eliminaciones_Orina%>
-                                </div>
-                                <div class="col-lg-2">
-                                    <strong>Drenaje:</strong> <%= signos.Siv_Eliminaciones_Drenaje%>
-                                </div>
-                                <div class="col-lg-2">
-                                    <strong>Total:</strong> <%= signos.Siv_Eliminaciones_Total%>
-                                </div>
-                            </div>
-                            <div class="row" style="margin-top: 7px">                                
-                                 <div class="col-lg-2">
-                                    <strong>Número Comidas:</strong> <%= signos.Siv_Numero_Comidas%>
-                                </div>
-                                 <div class="col-lg-2">
-                                    <strong>Numero Micciones:</strong> <%= signos.Siv_Numero_Micciones%>
-                                </div>
-                                 <div class="col-lg-2">
-                                    <strong>Número Deposiciones:</strong> <%= signos.Siv_Numero_Deposiciones%>
-                                </div>
-                                 <div class="col-lg-3">
-                                    <strong>Dieta Administrada:</strong> <%= signos.Siv_Dieta_Administrada%>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <strong>ACTIVIDADES</strong>
-                                </div>                                
-                            </div>
-                            <div class="row">
-                                <% if signos.Siv_Aseo!= "0" %>
-                                <div class="col-lg-1">
-                                    Aseo/Baño
-                                </div>                                    
-                                
-                                <%end%>
-                                <% if signos.Siv_Actividad_Fisica!= "0" %>
-                                <div class="col-lg-2">
-                                    Actividad Física
-                                </div>                                    
-                                
-                                <%end%>
-                                <% if signos.Siv_Cambio_Sonda!= "0" %>
-                                <div class="col-lg-2">
-                                    Cambio de sonda
-                                </div>                                    
-                                
-                                <%end%>
-                                <% if signos.Siv_Recanalizacion_Via!= "0" %>
-                                <div class="col-lg-2">
-                                    Recanalización de la vía
-                                </div>                                    
-                                
-                                <%end%>
-                                
-                            </div>
+                            <tbody style="text-align: center; font-size: 13px" id="tblBodySignosVitales">
+                                <% @signosVitalesRegistrados.each do |signos| %>
+                                <tr>
+                                    <td><%= signos.Siv_Fecha %></td>
+                                    <td><%= signos.Siv_Hora.strftime('%H:%M') %></td>
+                                    <td><%= signos.Siv_Dia_Internacion %></td>
+                                    <td><%= signos.Siv_Dia_PostQuirurgico %></td>
+                                    <td><%= signos.Siv_Peso %></td>
+                                    <td><%= signos.Siv_Pulso %></td>
+                                    <td><%= signos.Siv_Temperatura %></td>
+                                    <td><%= signos.Siv_Saturacion %></td>
+                                    <td><%= signos.Siv_Frecuencia_Respiratoria %></td>
+                                    <td><%= signos.Siv_Presion_Arterial_Diastolica%>/<%= signos.Siv_Presion_Arterial_Sistolica%></td>                                
+                                    <td>
+                                        <!--BALANCE HIDRICO-->
+                                        <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalSignos<%=signos.signos_vitale_id%>">Ver
+                                        </button>
+                                        <div class="modal fade" id="modalSignos<%=signos.signos_vitale_id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                <div class="modal-header" style="background-color: #66bb6a">
+                                                    <h5 class="modal-title" id="titleSuccess" style="color: #fff">BALANCE HIDRICO</h5>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <table class="table dt-responsive no-wrap" width="100%">
+                                                        <tbody style="font-size: 14px">
+                                                            <tr style="background-color: #1976d2; color:#fff">
+                                                                <th  colspan="4">INGRESOS CC</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Parental</th>
+                                                                <th>Via Oral</th>
+                                                                <th colspan="2" style="text-align: right">Total</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><%= signos.Siv_Ingresos_Parenteral %></td>
+                                                                <td><%= signos.Siv_Ingresos_ViaOral %></td>
+                                                                <td colspan="2" style="text-align: right"><%= signos.Siv_Ingresos_Total%></td>
+                                                            </tr>
+                                                            <tr style="background-color: #f44336; color:#fff">
+                                                                <th  colspan="4">ELIMINACIONES cc</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Orina</th>
+                                                                <th>Drenaje</th>
+                                                                <th>Otros</th>
+                                                                <th style="text-align: right">Total</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><%= signos.Siv_Eliminaciones_Orina%></td>
+                                                                <td><%= signos.Siv_Eliminaciones_Drenaje%></td>
+                                                                <td><%= signos.Siv_Eliminaciones_Otros%></td>
+                                                                <td style="text-align: right"><%= signos.Siv_Eliminaciones_Total%></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">ACEPTAR</button>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
 
-                        </div>         
+                                    </td>
+                                    <td>
+                                        <!--MEDICIONES Y ACTIVIDADES-->
+                                        <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalMediciones<%=signos.signos_vitale_id%>">Ver
+                                        </button>
+                                        <div class="modal fade" id="modalMediciones<%=signos.signos_vitale_id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                <div class="modal-header" style="background-color: #66bb6a">
+                                                    <h5 class="modal-title" id="titleSuccess" style="color: #fff">MEDICIONES Y ACTIVIDADES</h5>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <table class="table dt-responsive no-wrap" width="100%">
+                                                        <tbody style="font-size: 14px">
+                                                            <tr>
+                                                                <th>Número De Comidas</th>
+                                                                <th>Número De Micciones</th>
+                                                                <th>Número De Deposiciones</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><%= signos.Siv_Numero_Comidas %></td>
+                                                                <td><%= signos.Siv_Numero_Micciones %></td>
+                                                                <td><%= signos.Siv_Numero_Deposiciones%></td>
+                                                            </tr>                                                            
+                                                        </tbody>
+                                                    </table>
+                                                    <div class="row" style="text-align: left">
+                                                        <div class="col-lg-12"><strong>Dieta Administrada:</strong> <%=signos.Siv_Dieta_Administrada%></div>
+                                                    </div>
+                                                    <div class="row" style="text-align: left">
+                                                        <div class="col-lg-12"><strong>Actividades:</strong>                                                           
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                         <% if signos.Siv_Aseo!= "0" %>
+                                                            <div class="col-lg-2">
+                                                                Aseo/Baño
+                                                            </div>                                    
+                                                            
+                                                            <%end%>
+                                                            <% if signos.Siv_Actividad_Fisica!= "0" %>
+                                                            <div class="col-lg-3">
+                                                                Actividad Física
+                                                            </div>                                    
+                                                            
+                                                            <%end%>
+                                                            <% if signos.Siv_Cambio_Sonda!= "0" %>
+                                                            <div class="col-lg-3">
+                                                                Cambio de sonda
+                                                            </div>                                    
+                                                            
+                                                            <%end%>
+                                                            <% if signos.Siv_Recanalizacion_Via!= "0" %>
+                                                            <div class="col-lg-3">
+                                                                Recanalización de la vía
+                                                            </div>                                    
+                                                            
+                                                            <%end%> 
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-success btn-sm" data-dismiss="modal">ACEPTAR</button>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
 
-                        <% end %>
+                                    </td>
+                                    <td style="font-size: 10px; color: #1976d2"><%=signos.Per_Apellido_Paterno%> <%=signos.Per_Nombres%></td>
+
+                                </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+                       
                     </div>
                     <div class="panel-footer" style="text-align: right">
                         <button class="btn btn-primary" data-toggle="modal" data-target="#modalSignosVitales">Registrar Signos Vitales
@@ -456,9 +509,63 @@
                     <div class="panel-body scroll-panelNotas" id="pnlProtocoloOperacion">
                         <%= render 'frmProtocoloOperacion', protocolo: @protocolo %>
                     </div>
+                    <%if @protocolo.protocolo_operacion_id != "" %>
+                        <div class="panel-footer" style="text-align: right">                   
+                            <button class="btn btn-primary" id="btnEditarProtocolo" >Editar
+                            </button>                    
+                        </div>
+                    <%end%>
                 </div>
+                 
 
+            </div>
+            <!--PANEL PARA EPICRISIS-->
+            <div id="epicrisis">
+                <div class="panel-success panel">
+                    <div class="panel-heading">EPICRISIS</div>
+                    <div class="panel-body scroll-panelNotas" id="pnlProtocoloOperacion">
+                        <%= render 'frmEpicrisis', epicrisis: @epicrisis %>
+                    </div>
+                    <%if @epicrisis.epicrisi_id != "" || @epicrisis.epicrisi_id!=nil %>
+                         <div class="panel-footer" style="text-align: right">                   
+                            <button class="btn btn-primary" id="btnEditarEpicrisis" >Editar
+                            </button>                    
+                        </div>
+                    <%end%>
+                </div>
+            </div>
+            <!--PANEL PARA RECETA MEDICA-->
+            <div id="recetario">
+                <div class="panel-success panel">
+                    <div class="panel-heading">RECETA E INDICACIONES</div>
+                    <div class="panel-body scroll-panelNotas">
+                        <div class="panel panel-success" id="pnlRecetaMedicaIngreso">
+                            <div class="panel-heading">RECETA MÉDICA</div>
+                            <div class="panel-body">
+                                <div class="row" style="text-align: center; color:#1976d2">
+                                    <div class="col-lg-6"><strong> Medicamentos</strong></div>
+                                    <div class="col-lg-6"><strong> Indicaciones</strong></div>
+                                </div>
+                                <ol id="prescripcionIngreso1">
+                                </ol>
+                                <div id="prescripcionIngreso2"></div>                            
+                            </div>
+                        </div>
 
+                        <div class="panel panel-success" id="pnlTerapiaIngreso">
+                            <div class="panel-heading">TERAPIA</div>
+                            <div class="panel-body">
+                                <ul id="terapiaIngreso1">
+                                </ul>
+                                <div id="terapiaIngreso2"></div>                     
+                            </div>
+                        </div>  
+                    </div>
+                    <div class="panel-footer" style="text-align: right">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#modalReceta">Añadir Medicamento</button>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#modalTerapia">Registrar Terapia</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -470,7 +577,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">REGISTRAR NOTA DE ENFERMERÍA</h5>
+                <h5 class="modal-title" id="exampleModalLabel" style="color:#1976d2">REGISTRAR NOTA DE ENFERMERÍA</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -487,7 +594,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">REGISTRAR NOTA DE EVOLUCIÓN</h5>
+                <h5 class="modal-title" id="exampleModalLabel" style="color:#1976d2">REGISTRAR NOTA DE EVOLUCIÓN</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -504,7 +611,7 @@
     <div class="modal-dialog modal-lg" style="width: 1000px;" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">REGISTRAR SIGNOS VITALES</h5>
+                <h5 class="modal-title" id="exampleModalLabel" style="color:#1976d2; font-weight: 600">REGISTRAR SIGNOS VITALES</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -521,7 +628,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">REGISTRAR EXAMEN CARDIOLÓGICO</h5>
+                <h5 class="modal-title" id="exampleModalLabel" style="color:#1976d2">REGISTRAR EXAMEN CARDIOLÓGICO</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -532,7 +639,39 @@
         </div>
     </div>
 </div>
+<!--INGRESAR RECETA MEDICA-->
+<div class="modal fade" id="modalReceta" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="color:#1976d2">AÑADIR MEDICAMENTO</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <%= render 'frmRecetario' %>
+            </div>
+        </div>
+    </div>
+</div>
 
+<!--INGRESAR TERAPIA-->
+<div class="modal fade" id="modalTerapia" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="color:#1976d2">REGISTRAR TERAPIA</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <%= render 'frmTerapiaIngreso' %>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- *********************    MENSAJES DE LA APLICACION PARA EL USUARIO      *******************-->
 <!--MODAL ERROR-->
@@ -556,7 +695,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header" style="background-color: #66bb6a">
-        <h5 class="modal-title" id="titleSuccess" style="color: #fff"></h5>
+        <h5 class="modal-title" id="titleSuccess" style="color: #fff">ÉXITO</h5>
       </div>
       <div class="modal-body" id="bodySuccess">
       </div>

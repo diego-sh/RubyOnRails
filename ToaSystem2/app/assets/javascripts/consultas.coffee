@@ -20,36 +20,6 @@ $(document).on 'turbolinks:load', ->
     $('#cmbCirculante').selectpicker(); 
     # DIV INFO DEL PACIENTE
     $('#pnlPacienteRecuperado').hide()
-    $('#btnPedidoExamen').click ->
-        $('#pnlOpciones').hide();
-        $('#frmPedidoImagenologia').show();
-    $('#btnCancelPedidoExamen').click ->
-        $('#frmPedidoImagenologia').hide();
-        $('#pnlOpciones').show();
-    $('#btnCaracteristicasDolor').click ->
-        $('#pnlOpciones').hide();
-        $('#frmCaracteristicasDolor').show();
-    $('#btnCancelSintomas').click ->
-        $('#frmCaracteristicasDolor').hide();
-        $('#pnlOpciones').show();
-    $('#btnExamenFisico').click ->
-        $('#pnlOpciones').hide();
-        $('#frmExamenFisico').show();
-    $('#btnCancelExamenFisico').click ->
-        $('#frmExamenFisico').hide();
-        $('#pnlOpciones').show();
-    $('#btnRecetaMedica').click ->
-        $('#pnlOpcionesTratamiento').hide();
-        $('#frmRecetaMedica').show();
-    $('#btnCancelReceta').click ->
-        $('#frmRecetaMedica').hide();
-        $('#pnlOpcionesTratamiento').show();
-    $('#btnTerapia').click ->
-        $('#pnlOpcionesTratamiento').hide();
-        $('#frmTerapia').show();
-    $('#btnCancelTerapia').click ->
-        $('#frmTerapia').hide();
-        $('#pnlOpcionesTratamiento').show();
     ##COMBO CONDICION DE LLEGADA
     $('#cmbCondicionesLlegada').change ->
         condicion=$('#cmbCondicionesLlegada :selected').text()
@@ -63,7 +33,6 @@ $(document).on 'turbolinks:load', ->
     ##OPCIONES NO HABILITIDAS PARA CONSULTA EMERGENCIA
     $('#tabPanelConsulta a:first').hide()
     $('#btnCaracteristicasDolor').prop('disabled', true);
-    $('#btnExamenFisico').prop('disabled', true)
     
     ##COMBO TIPO DE EVENTO
     $('#cmbTipoEvento').change ->
@@ -81,21 +50,21 @@ $(document).on 'turbolinks:load', ->
             $('#tabPanelConsulta a:first').show()
             $('#tabPanelConsulta a:first').prop('style', display: 'block')
             $('#btnCaracteristicasDolor').prop('disabled', false);
-            $('#btnExamenFisico').prop('disabled', false)
+            
             $('#btnFinalizarEmergencia').show();
             $('#btnFinConsulta').hide();
             $('#causaMuerte').prop('disabled', true)
         if value == 'CONSULTA EXTERNA'
             $('#tabPanelConsulta a:first').hide()
             $('#btnCaracteristicasDolor').prop('disabled', true);
-            $('#btnExamenFisico').prop('disabled', true)
+           
             $('#btnFinalizarEmergencia').hide();
             $('#btnFinConsulta').show();
     
     ##PANEL REGISTRAR PARTE OPERATORIO CIRUGIA MOSTRAR MODAL
     $('#btnCirugia').click ->
-        $('#modalCirugia').modal()
-        $('#modalCirugia').on 'shown.bs.modal', ->
+        #$('#modalCirugia2').modal()
+        $('#modalCirugia2').on 'shown.bs.modal', ->
             $(".calendariocirugia").fullCalendar('render');
 
     #BLOQUEO DE OPCIONES CIRUJANO-AYUDANTES EN PARTE OPERATORIO DE ACUERDO LA VALOR
@@ -180,6 +149,7 @@ $(document).on "ajax:success","form#sintomas-form", (ev,data,xhr, settings)->
     $('#rgAnatomica').val("")
     $('#pdoloroso').val("")
     $('#dgPresuntivo').val("")
+    $('#modalSintomas').modal('hide')
     showModal data.mensaje, 'success'  
 $(document).on "ajax:error","form#sintomas-form", (ev,data)->
     showModal data.responseJSON.mensaje, 'error'    
@@ -187,12 +157,14 @@ $(document).on "ajax:error","form#sintomas-form", (ev,data)->
 #CONSULTA
 $(document).on "ajax:success","form#consulta-form", (ev,data,xhr, settings)->
     showModal data.mensaje, 'success'
+    $('#btnSalirConsulta69').hide()
 $(document).on "ajax:error","form#consulta-form", (ev,data,xhr, settings)->
     console.log data
 
 #EXAMEN-FISICO
 $(document).on "ajax:success","form#examenFisico-form", (ev,data,xhr, settings)->
     $('#efobservacion').val("")
+    $('#modalEFisico').modal('hide')
     showModal data.mensaje, 'success'
 $(document).on "ajax:error","form#examenFisico-form", (ev,data)->
     showModal data.responseJSON.mensaje, 'error'
@@ -201,6 +173,7 @@ $(document).on "ajax:error","form#examenFisico-form", (ev,data)->
 $(document).on "ajax:success","form#pedidoExamen-form", (ev,data,xhr, settings)->
     $('#estudioDescripcion').val("")
     $('#estudioMotivo').val("")
+    $('#modalPedidoImagenologia').modal('hide')
     showModal data.mensaje, 'success'
 $(document).on "ajax:error","form#pedidoExamen-form", (ev,data,xhr, settings)->
     showModal data.responseJSON.mensaje, 'error'
@@ -222,6 +195,7 @@ $(document).on "ajax:success","form#receta-form", (ev,data,xhr, settings)->
                                 <p class='styleIndicacion'>Indicación: #{data.data.Ins_Indicacion}</p>");
     $('#prescripcion2').html("<a href='/consultas/pdfReceta.pdf?rec=#{data.consulta.consulta_id}' onclick='window.open(this.href,\"popupwindow\", \"width=800,height=790,left=400,top=5,scrollbars,toolbar=0,resizable\"); return false;' class='btn btn-primary pull-right' id='btnEmpezarConsulta'><span class='glyphicon glyphicon-print' aria-hidden='true'></span> IMPRIMIR</a>");
     showModal data.mensaje, 'success'
+    $('#modalReceta').modal('hide');
 $(document).on "ajax:error","form#receta-form", (ev,data,xhr, settings)->
     showModal data.responseJSON.mensaje, 'error'
 
@@ -234,6 +208,7 @@ $(document).on "ajax:success","form#terapia-form", (ev,data,xhr, settings)->
                                 <p class='styleIndicacion'>Sesiones: #{data.data.Ter_Numero_Sesiones}</p>");
     $('#terapia2').html("<a href='/consultas/pdfTerapia.pdf?tep=#{data.consulta.consulta_id}' onclick='window.open(this.href,\"popupwindow\", \"width=800,height=790,left=400,top=5,scrollbars,toolbar=0,resizable\"); return false;' class='btn btn-primary pull-right' id='btnEmpezarConsulta'><span class='glyphicon glyphicon-print' aria-hidden='true'></span> IMPRIMIR</a>");    
     showModal data.mensaje, 'success'
+    $('#modalTerapia').modal('hide');
 $(document).on "ajax:error","form#terapia-form", (ev,data,xhr, settings)->
     showModal data.responseJSON.mensaje, 'error'
 

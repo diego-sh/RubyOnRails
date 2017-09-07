@@ -10,7 +10,7 @@
                                         ['Torax','TORAX'],['Abdomen','ABDOMEN'],['Columna Vertebral','COLUMNA VERTEBRAL'],['Ingle-Perine','INGLE-PERINE'],
                                         ['Miembros Superiores','MIEMBROS SUPERIORES'],['Miembros Inferiores','MIEMBROS INFERIORES']],
                                         'SISTÉMICO'=>[['Organos De Los Sentidos','ORGANOS DE LOS SENTIDOS'],['Respiratorio','RESPIRATORIO'],['Cardio Vascular','CARDIO VASCULAR'],
-                                        ['Gigestivo','DIGESTIVO'],['Gentital','GENITAL'],['Urinario','URINARIO'],['Musculo Esquelético','MUSCULO ESQUELETICO'],['Endocrino','ENDOCRINO'],
+                                        ['Digestivo','DIGESTIVO'],['Genital','GENITAL'],['Urinario','URINARIO'],['Musculo Esquelético','MUSCULO ESQUELETICO'],['Endocrino','ENDOCRINO'],
                                         ['Hemo Linfático','HEMO LINFATICO'],['Neurológico','NEUROLOGICO']]),{prompt: "Seleccione"},{ :class => 'form-control',:id=>'parteCH'}) %>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                 
             <% end %>
 
-            <div class="row" style="margin-top:10px">
+           <!-- <div class="row" style="margin-top:10px">
                 <div class="col-md-3">
                 <div class="actions">
                     <button type="submit" class="btn btn-primary">
@@ -48,10 +48,21 @@
                 </div>
                 </div>
                 <div class="col-md-3">
-                    <button id="btnCancelExamenFisico" type="button" class="btn btn-primary">Cancelar</button>
+                    <button id="btnCancelExamenFisico" type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
                 </div>
                 <div class="col-md-4"></div>
+            </div>-->
 
+            <div class="row" class="center">
+                <div class="col-lg-12" style="text-align: center">
+                    <button type="submit" class="btn btn-primary">
+                        <span><i class="fa fa-floppy-o"></i> Guardar</span>
+                    </button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" style="margin-left: 20px">
+                        <span><i class="fa fa-times" aria-hidden="true"></i> Cancelar</span>
+                    </button>
+                </div>
+                
             </div>
     </div>
 

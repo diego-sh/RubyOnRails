@@ -11,5 +11,4 @@ json.array!(@cirugias) do |cirugia|
     dia = cirugia.Pop_Fecha_Cirugia
     json.start DateTime.new(dia.year, dia.month,dia.day, hora.hour,hora.min, hora.sec)
     json.end DateTime.new(dia.year, dia.month,dia.day, hora.hour+duracion.hour,hora.min+duracion.min, hora.sec+duracion.sec)
-    json.url consulta_url(cirugia, format: :html)
 end

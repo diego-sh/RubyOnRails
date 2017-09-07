@@ -1,6 +1,10 @@
 json.array!(@citas) do |cita|
     #json.extract! cita, :paciente_id, :empleado_id, :medico_id
     json.cedula cita.cedulap
+    json.medico2 cita.apellidod+" "+cita.nombred
+    json.fecha cita.Cit_Fecha
+    json.hora cita.Cit_Hora
+    json.motivo cita.Cit_Motivo
     json.className cita.cedulap
     json.medico cita.medico_id.to_s
     json.title cita.apellidop+" "+cita.nombrep

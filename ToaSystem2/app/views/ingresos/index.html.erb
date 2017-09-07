@@ -5,36 +5,85 @@
         </div>
         <div class="center-block" style="width: 90%">
             <div class="panel">
-                <table class="table table-bordered">
-                    <thead>
+                <table class="table table-hover">
+                    <thead style="background-color: #ffb74d; color:#fff">
                         <tr>
-                            <th>HABITACIÓN</th>
                             <th>PACIENTE</th>
                             <th>EDAD</th>
-                            <th>FECHA INGRESO</th>
+                            <th>FECHA DE INGRESO</th>
+                            <th>HABITACIÓN</th>
+                            <th>ESTADO</th>
                             <th colspan="1"></th>
                         </tr>
                     </thead>
-                    <tbody style="font-size:13px">
+                    <tbody style="background-color: #fff3e0; font-size:13px">
                         <% @pacientesIngresados.each do |paciente|  %>
                             <tr>
-                                <td>
-                                    <%= paciente.Ing_Habitacion %>
-                                </td>
-                                <td>
+                                <td >
+                                    <strong>
                                     <%= paciente.Pac_Apellido_Paterno %>
                                         <%= paciente.Pac_Apellido_Materno%>
                                             <%= paciente.Pac_Nombres%>
+                                    </strong>
                                 </td>
                                 <td>
                                     <%= paciente.Age %>
                                 </td>
-                                <td>
+                                <td style="width: 200px">
                                     <%= paciente.Ing_Fecha %>
                                 </td>
                                 <td>
-                                    <%= link_to 'Atender', new_ingreso_path(:pcte => paciente.paciente_id, :ingreso => paciente.ingreso_id), class:'btn btn-info' %>
+                                    <%= link_to new_ingreso_path(:pcte => paciente.paciente_id, :ingreso => paciente.ingreso_id), class:'btn btn-success', style:'width:100px' do %>
+                                            <i class="fa fa-h-square" aria-hidden="true"></i> <%=paciente.Ing_Habitacion%>
+                                    <%end%>
                                 </td>
+                                
+                                <% if paciente.Ing_Estado != "HOSPITALIZADO"%>
+                                    <td style="color: #1976d2">
+                                       <strong> CON ALTA</strong>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-success" data-toggle="modal" data-target="#modalSalida<%= paciente.ingreso_id%>">Registrar Salida</button>
+                                        <div class="modal fade" id="modalSalida<%= paciente.ingreso_id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog " role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel" style="color:#1976d2">REGISTRAR SALIDA</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <%= form_for(@ingreso, :url => { :action => "registrarSalida" }) do |f| %>
+                                                            <%= f.text_field :ingreso_id, id:'ingreso_id', value: paciente.ingreso_id %>
+                                                            <div class="row">
+                                                                <div class="col-lg-12" style="text-align: center">Esta seguro de registrar la salida del paciente ?</div>
+                                                            </div>
+                                                            <br>
+                                                            <div class="row" class="center">
+                                                                <div class="col-lg-12" style="text-align: center">
+                                                                    <button type="submit" class="btn btn-primary" style="margin-right:10px ">
+                                                                        <span><i class="fa fa-check" aria-hidden="true"></i> Aceptar</span>
+                                                                    </button>
+                                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                                                        <span><i class="fa fa-times" aria-hidden="true"></i> Cancelar</span>
+                                                                    </button>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                        <%end%>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                <%else%>
+                                    <td>
+                                        <%= paciente.Ing_Estado %>
+                                    </td>
+                                    <td></td>
+                                    
+                                <%end%>
                             </tr>
                             <% end %>
                     </tbody>
@@ -42,3 +91,4 @@
             </div>
         </div>
     </div>
+

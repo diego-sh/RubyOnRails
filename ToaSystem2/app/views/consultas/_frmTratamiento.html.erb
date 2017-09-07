@@ -1,33 +1,37 @@
 <%= form_for @consulta, :url => { :action => "createTratamiento" }, remote: true, html:{id: "tratamiento-form",format: :json} do |f| %>
-    <div style="margin-top: 10px">
+    <div style="margin-top: 0px">
         <%= f.fields_for :prescripcion do |pr|%>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="form-group">
+            <div class="col-lg-7">
+                <div class="row">
+                    <div class="form-group" style="padding-right: 20px">
                         <label for="procedimiento">PROCEDIMIENTOS</label>
                         <%= pr.text_area :Pre_Procedimiento, class:'form-control', id:'procedimiento',placeholder:'Describa procesos realizados al paciente', rows:'5'%>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="form-group">
+                <div class="row">               
+                    <div class="form-group" style="padding-right: 20px">
                         <label for="indicacionesGenerales">INDICACIONES GENERALES</label>
                         <%= pr.text_area :Pre_Indicaciones_Generales, class:'form-control', id:'indicacionesGenerales',placeholder:'Indicaciones', rows:'4'%>
-                    </div>
+                    </div>                
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="form-group">
+                <div class="row">
+                    <div class="form-group" style="padding-right: 20px">
                         <label for="prescripObservacion">OBSERVACIÓN</label>
                         <%= pr.text_area :Pre_Observacion, class:'form-control', id:'prescripObservacion',placeholder:'Detalle'%>
                     </div>
                 </div>
-            </div> 
-<!--BLOQUE QUE MUESTRA LA RECETA COMPLETA-->
-             <div class="row" id="showReceta">
-                <div class="col-lg-12">
+                <div class="row">
+                    <div class="actions">
+                        <button type="submit" class="btn btn-primary">
+                        <span><i class="fa fa-floppy-o"></i> Guardar</span>
+                        </button>
+                    </div> 
+                </div> 
+            </div>
+            <div class="col-lg-5">
+                <!--BLOQUE QUE MUESTRA LA RECETA COMPLETA-->
+                <div class="row" id="showReceta">
+            
                     <div class="panel panel-success">
                         <div class="panel-heading">RECETA MÉDICA</div>
                         <div class="panel-body">
@@ -37,12 +41,10 @@
                         </div>
                     </div> 
                 </div>
-            </div>
-    <!--FIN DEL BLOQUE QUE MUESTRA RECETA COMPLETA-->
+                <!--FIN DEL BLOQUE QUE MUESTRA RECETA COMPLETA-->
 
-<!--BLOQUE QUE MUESTRA LA TERAPIA COMPLETA-->
-             <div class="row" id="showTerapia">
-                <div class="col-lg-12">
+                <!--BLOQUE QUE MUESTRA LA TERAPIA COMPLETA-->
+                <div class="row" id="showTerapia">
                     <div class="panel panel-success">
                         <div class="panel-heading">TERAPIA</div>
                         <div class="panel-body">
@@ -52,21 +54,12 @@
                         </div>
                     </div> 
                 </div>
-            </div>
-    <!--FIN DEL BLOQUE QUE MUESTRA TERAPIA COMPLETA-->
+                <!--FIN DEL BLOQUE QUE MUESTRA TERAPIA COMPLETA-->
 
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="actions">
-                        <button type="submit" class="btn btn-primary">
-                        <span><i class="glyphicon glyphicon-plus"></i> Guardar</span>
-                        </button>
-                    </div>                
-                </div>
             </div>
              
         <% end %>
-        <div class="row" style="margin-bottom: 20px"></div>
+        
     </div>
 
 <% end %>

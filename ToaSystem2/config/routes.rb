@@ -67,6 +67,14 @@ Rails.application.routes.draw do
       post "createNotaEvolucion"
       post "createSignosVitales"
       post "createExamenCardiologico"
+      post "createProtocolo"
+      post "createEpicrisis"
+      post "addMedicamento"
+      post "createTerapiaIngreso"
+      get "pdfTerapiaIngreso"
+      get "pdfRecetaIngreso"
+      post "registrarSalida"     
+      
     end
   end
   

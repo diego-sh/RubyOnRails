@@ -3,39 +3,221 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).on 'turbolinks:load', ->
     $('#notasEvolucion').hide();
-    $('#signosVitales').hide();
+    $('#notasEnfermeria').hide();
     $('#examenCardiologico').hide();
     $('#protocoloOperacion').hide();
+    $('#epicrisis').hide();
+    $('#recetario').hide();
+    $('#pnlRecetaMedicaIngreso').hide();
+    $('#pnlTerapiaIngreso').hide();
+    $('#ingreso_id').hide();
+
     $('#opNotasEvolucion').click ->
         $('#notasEvolucion').show();
         $('#notasEnfermeria').hide();
         $('#signosVitales').hide();
         $('#examenCardiologico').hide();
         $('#protocoloOperacion').hide();
+        $('#epicrisis').hide();
+        $('#recetario').hide();
+        document.getElementById("opNotasEnfermeria").style["background-color"] = '#b0bec5';
+        document.getElementById("opNotasEnfermeria").style["width"] = '95%';
+        document.getElementById("opSignosVitales").style["background-color"] = '#b0bec5';
+        document.getElementById("opSignosVitales").style["width"] = '95%';
+        document.getElementById("opExamenCardiologico").style["background-color"] = '#b0bec5';
+        document.getElementById("opExamenCardiologico").style["width"] = '95%';
+        document.getElementById("opEpicrisis").style["background-color"] = '#b0bec5';
+        document.getElementById("opEpicrisis").style["width"] = '95%';
+        document.getElementById("opRecetario").style["background-color"] = '#b0bec5';
+        document.getElementById("opRecetario").style["width"] = '95%';
+        document.getElementById("opProtocoloOperacion").style["background-color"] = '#b0bec5';
+        document.getElementById("opProtocoloOperacion").style["width"] = '95%';
+        document.getElementById("opNotasEvolucion").style["background-color"] = '#f0ad4e';
+        document.getElementById("opNotasEvolucion").style["width"] = '100%';
     $('#opNotasEnfermeria').click ->
         $('#notasEvolucion').hide();
         $('#signosVitales').hide();
         $('#examenCardiologico').hide();
         $('#protocoloOperacion').hide();
         $('#notasEnfermeria').show();
+        $('#epicrisis').hide();
+        $('#recetario').hide();
+        document.getElementById("opNotasEnfermeria").style["background-color"] = '#f0ad4e';
+        document.getElementById("opNotasEnfermeria").style["width"] = '100%';
+        document.getElementById("opSignosVitales").style["background-color"] = '#b0bec5';
+        document.getElementById("opSignosVitales").style["width"] = '95%';
+        document.getElementById("opExamenCardiologico").style["background-color"] = '#b0bec5';
+        document.getElementById("opExamenCardiologico").style["width"] = '95%';
+        document.getElementById("opEpicrisis").style["background-color"] = '#b0bec5';
+        document.getElementById("opEpicrisis").style["width"] = '95%';
+        document.getElementById("opRecetario").style["background-color"] = '#b0bec5';
+        document.getElementById("opRecetario").style["width"] = '95%';
+        document.getElementById("opProtocoloOperacion").style["background-color"] = '#b0bec5';
+        document.getElementById("opProtocoloOperacion").style["width"] = '95%';
+        document.getElementById("opNotasEvolucion").style["background-color"] = '#b0bec5';
+        document.getElementById("opNotasEvolucion").style["width"] = '95%';
     $('#opSignosVitales').click ->
         $('#signosVitales').show();
         $('#notasEvolucion').hide();
         $('#notasEnfermeria').hide();
         $('#examenCardiologico').hide();
         $('#protocoloOperacion').hide();
+        $('#recetario').hide();
+        $('#epicrisis').hide();
+        document.getElementById("opNotasEnfermeria").style["background-color"] = '#b0bec5';
+        document.getElementById("opNotasEnfermeria").style["width"] = '95%';
+        document.getElementById("opSignosVitales").style["background-color"] = '#f0ad4e';
+        document.getElementById("opSignosVitales").style["width"] = '100%';
+        document.getElementById("opExamenCardiologico").style["background-color"] = '#b0bec5';
+        document.getElementById("opExamenCardiologico").style["width"] = '95%';
+        document.getElementById("opEpicrisis").style["background-color"] = '#b0bec5';
+        document.getElementById("opEpicrisis").style["width"] = '95%';
+        document.getElementById("opRecetario").style["background-color"] = '#b0bec5';
+        document.getElementById("opRecetario").style["width"] = '95%';
+        document.getElementById("opProtocoloOperacion").style["background-color"] = '#b0bec5';
+        document.getElementById("opProtocoloOperacion").style["width"] = '95%';
+        document.getElementById("opNotasEvolucion").style["background-color"] = '#b0bec5';
+        document.getElementById("opNotasEvolucion").style["width"] = '95%';
     $('#opExamenCardiologico').click ->
         $('#examenCardiologico').show();
         $('#signosVitales').hide();
         $('#notasEvolucion').hide();
         $('#notasEnfermeria').hide();
         $('#protocoloOperacion').hide();
+        $('#recetario').hide();
+        $('#epicrisis').hide();
+        document.getElementById("opNotasEnfermeria").style["background-color"] = '#b0bec5';
+        document.getElementById("opNotasEnfermeria").style["width"] = '95%';
+        document.getElementById("opSignosVitales").style["background-color"] = '#b0bec5';
+        document.getElementById("opSignosVitales").style["width"] = '95%';
+        document.getElementById("opExamenCardiologico").style["background-color"] = '#f0ad4e';
+        document.getElementById("opExamenCardiologico").style["width"] = '100%';
+        document.getElementById("opEpicrisis").style["background-color"] = '#b0bec5';
+        document.getElementById("opEpicrisis").style["width"] = '95%';
+        document.getElementById("opRecetario").style["background-color"] = '#b0bec5';
+        document.getElementById("opRecetario").style["width"] = '95%';
+        document.getElementById("opProtocoloOperacion").style["background-color"] = '#b0bec5';
+        document.getElementById("opProtocoloOperacion").style["width"] = '95%';
+        document.getElementById("opNotasEvolucion").style["background-color"] = '#b0bec5';
+        document.getElementById("opNotasEvolucion").style["width"] = '95%';
     $('#opProtocoloOperacion').click ->
         $('#protocoloOperacion').show();
         $('#examenCardiologico').hide();
         $('#signosVitales').hide();
         $('#notasEvolucion').hide();
         $('#notasEnfermeria').hide();
+        $('#recetario').hide();
+        $('#epicrisis').hide();
+        document.getElementById("opNotasEnfermeria").style["background-color"] = '#b0bec5';
+        document.getElementById("opNotasEnfermeria").style["width"] = '95%';
+        document.getElementById("opSignosVitales").style["background-color"] = '#b0bec5';
+        document.getElementById("opSignosVitales").style["width"] = '95%';
+        document.getElementById("opExamenCardiologico").style["background-color"] = '#b0bec5';
+        document.getElementById("opExamenCardiologico").style["width"] = '95%';
+        document.getElementById("opEpicrisis").style["background-color"] = '#b0bec5';
+        document.getElementById("opEpicrisis").style["width"] = '95%';
+        document.getElementById("opRecetario").style["background-color"] = '#b0bec5';
+        document.getElementById("opRecetario").style["width"] = '95%';
+        document.getElementById("opProtocoloOperacion").style["background-color"] = '#f0ad4e';
+        document.getElementById("opProtocoloOperacion").style["width"] = '100%';
+        document.getElementById("opNotasEvolucion").style["background-color"] = '#b0bec5';
+        document.getElementById("opNotasEvolucion").style["width"] = '95%';
+    $('#opEpicrisis').click ->
+        $('#protocoloOperacion').hide();
+        $('#examenCardiologico').hide();
+        $('#signosVitales').hide();
+        $('#notasEvolucion').hide();
+        $('#notasEnfermeria').hide();
+        $('#recetario').hide();
+        $('#epicrisis').show();
+        document.getElementById("opNotasEnfermeria").style["background-color"] = '#b0bec5';
+        document.getElementById("opNotasEnfermeria").style["width"] = '95%';
+        document.getElementById("opSignosVitales").style["background-color"] = '#b0bec5';
+        document.getElementById("opSignosVitales").style["width"] = '95%';
+        document.getElementById("opExamenCardiologico").style["background-color"] = '#b0bec5';
+        document.getElementById("opExamenCardiologico").style["width"] = '95%';
+        document.getElementById("opEpicrisis").style["background-color"] = '#f0ad4e';
+        document.getElementById("opEpicrisis").style["width"] = '100%';
+        document.getElementById("opRecetario").style["background-color"] = '#b0bec5';
+        document.getElementById("opRecetario").style["width"] = '95%';
+        document.getElementById("opProtocoloOperacion").style["background-color"] = '#b0bec5';
+        document.getElementById("opProtocoloOperacion").style["width"] = '95%';
+        document.getElementById("opNotasEvolucion").style["background-color"] = '#b0bec5';
+        document.getElementById("opNotasEvolucion").style["width"] = '95%';
+    $('#opRecetario').click ->
+        $('#protocoloOperacion').hide();
+        $('#examenCardiologico').hide();
+        $('#signosVitales').hide();
+        $('#notasEvolucion').hide();
+        $('#notasEnfermeria').hide();
+        $('#epicrisis').hide();
+        $('#recetario').show();
+        document.getElementById("opNotasEnfermeria").style["background-color"] = '#b0bec5';
+        document.getElementById("opNotasEnfermeria").style["width"] = '95%';
+        document.getElementById("opSignosVitales").style["background-color"] = '#b0bec5';
+        document.getElementById("opSignosVitales").style["width"] = '95%';
+        document.getElementById("opExamenCardiologico").style["background-color"] = '#b0bec5';
+        document.getElementById("opExamenCardiologico").style["width"] = '95%';
+        document.getElementById("opEpicrisis").style["background-color"] = '#b0bec5';
+        document.getElementById("opEpicrisis").style["width"] = '95%';
+        document.getElementById("opRecetario").style["background-color"] = '#f0ad4e';
+        document.getElementById("opRecetario").style["width"] = '100%';
+        document.getElementById("opProtocoloOperacion").style["background-color"] = '#b0bec5';
+        document.getElementById("opProtocoloOperacion").style["width"] = '95%';
+        document.getElementById("opNotasEvolucion").style["background-color"] = '#b0bec5';
+        document.getElementById("opNotasEvolucion").style["width"] = '95%';
+        
+
+    #EDITAR PPROTOCOLO DE OPERACIÓN
+    $('#btnEditarProtocolo').click ->
+        $("#protocolo-form :input").prop("disabled", false);
+    
+    #EDITAR EPICRISIS
+    $('#btnEditarEpicrisis').click ->
+        $("#epicrisis-form :input").prop("disabled", false);
+#AÑADIR RECETA MEDICA INGRESO
+$(document).on "ajax:success","form#recetaIngreso-form", (ev,data,xhr, settings)->
+    $('#modalReceta').modal('hide');
+    $('#pnlRecetaMedicaIngreso').show();
+    showModal data.mensaje, 'success'
+    $('#prescripcionIngreso1').append("<div class='col-lg-12'>
+                                
+                                <div class='row'>
+                                    <div class='col-lg-6'>
+                                        <li>#{data.data.Ins_Nombre} Número: #{data.data.Ins_Cantidad} </li> 
+                                    </div>
+                                    <div class='col-lg-6'>
+                                         #{data.data.Ins_Indicacion}
+                                    </div>
+                                </div>
+                            ")
+    $('#prescripcionIngreso2').html("<a href='/ingresos/pdfRecetaIngreso.pdf?recIngreso=#{data.ingreso.ingreso_id}&recIndicacion=#{data.indicacion.indicacion_id}' onclick='window.open(this.href,\"popupwindow\", \"width=800,height=790,left=400,top=5,scrollbars,toolbar=0,resizable\"); return false;' class='btn btn-primary pull-right' id='btnEmpezarConsulta'><span class='glyphicon glyphicon-print' aria-hidden='true'></span> IMPRIMIR</a>");
+
+#AÑADIR TERAPIA DE INGRESO
+$(document).on "ajax:success","form#terapiaIngreso-form", (ev,data,xhr, settings)->
+    $('#modalTerapia').modal('hide');
+    $('#pnlTerapiaIngreso').show();
+    showModal data.mensaje, 'success'
+    $('#terapiaIngreso1').html("
+                                <li>#{data.data.Ter_indicacion}</li>
+                                <p class='styleIndicacion'>Sesiones: #{data.data.Ter_Numero_Sesiones}</p>
+                                ")
+    $('#terapiaIngreso2').html("<a href='/ingresos/pdfTerapiaIngreso.pdf?tepIngreso=#{data.ingreso.ingreso_id}&recIndicacion=#{data.indicacion.indicacion_id}' onclick='window.open(this.href,\"popupwindow\", \"width=800,height=790,left=400,top=5,scrollbars,toolbar=0,resizable\"); return false;' class='btn btn-primary pull-right' id='btnEmpezarConsulta'><span class='glyphicon glyphicon-print' aria-hidden='true'></span> IMPRIMIR</a>");
+
+#REGISTRAR EPICRISIS
+$(document).on "ajax:success","form#epicrisis-form", (ev,data,xhr, settings)->
+    showModal data.mensaje, 'success'
+    $("#epicrisis-form :input").prop("disabled", true);
+$(document).on "ajax:error","form#epicrisis-form", (ev,data,xhr, settings)->
+     showModal data.responseJSON.mensaje, 'error'
+ 
+#REGISTRAR PROTOCOLO DE OPERACIÓN
+$(document).on "ajax:success","form#protocolo-form", (ev,data,xhr, settings)->
+    showModal data.mensaje, 'success'
+    $("#protocolo-form :input").prop("disabled", true);
+$(document).on "ajax:error","form#protocolo-form", (ev,data,xhr, settings)->
+     showModal data.responseJSON.mensaje, 'error'
+
 
 #REGISTRAR EXAMEN CARDIOLOGICO
 $(document).on "ajax:success","form#examenCardiologico-form", (ev,data,xhr, settings)->
@@ -239,98 +421,127 @@ $(document).on "ajax:success","form#signosVitales-form", (ev,data,xhr, settings)
     formatHora=hora.getHours()+":"+hora.getMinutes()
     actividades='';
     if data.data.Siv_Aseo != '0'
-        actividades="<div class='col-lg-1'>Aseo/Baño</div>"
+        actividades="<div class='col-lg-2'>Aseo/Baño</div>"
     if data.data.Siv_Actividad_Fisica !='0'
-        actividades=actividades+"<div class='col-lg-2'>Actividad Física</div>"
+        actividades=actividades+"<div class='col-lg-3'>Actividad Física</div>"
     if data.data.Siv_Cambio_Sonda !='0'
-        actividades=actividades+"<div class='col-lg-2'>Cambio de sonda</div>"
+        actividades=actividades+"<div class='col-lg-3'>Cambio de sonda</div>"
     if data.data.Siv_Recanalizacion_Via !='0'
-        actividades=actividades+"<div class='col-lg-2'>Recanalización de la vía</div>"
+        actividades=actividades+"<div class='col-lg-3'>Recanalización de la vía</div>"
 
-    $('#pnlSignosVitales').append("
-    <div class='alert alert-success' style='margin-bottom: 6px'>
-                            <div class='row cabeceraNotas'>
-                                <div class='col-lg-2'>
-                                    <strong>Fecha:</strong> #{data.data.Siv_Fecha}
-                                </div>
-                                <div class='col-lg-2'>
-                                    <strong>Hora:</strong> #{formatHora}
-                                </div>
-                                <div class='col-lg-8' style='text-align: right'>
-                                    <strong>Responsable:</strong> #{data.responsable}
-                                </div>
-                            </div>
-                            <div class='row' style='margin-top: 10px'>
-                                <div class='col-lg-2'>
-                                    <strong>Temperatura:</strong> #{data.data.Siv_Temperatura} °C
-                                </div>
-                                <div class='col-lg-2'>
-                                    <strong>Pulso:</strong> #{data.data.Siv_Pulso} x min
-                                </div>
-                                <div class='col-lg-2'>
-                                    <strong>Saturación:</strong> #{data.data.Siv_Saturacion} %
-                                </div>
-                                <div class='col-lg-2'>
-                                    <strong>F. Respiratoria:</strong> #{data.data.Siv_Frecuencia_Respiratoria} x min
-                                </div>
-                                <div class='col-lg-2'>
-                                    <strong>Presión:</strong> #{data.data.Siv_Presion_Arterial_Diastolica}/ #{data.data.Siv_Presion_Arterial_Sistolica} mmHg
-                                </div>
-                                <div class='col-lg-2'>
-                                    <strong>Peso:</strong> #{data.data.Siv_Peso} kg
-                                </div>
-                            </div>
-                            <div class='row' style='margin-top: 5px'>
-                                <div class='col-lg-6' style='text-align: center'>
-                                    <strong>INGRESOS CC</strong>                                    
+    $('#tblBodySignosVitales').append("
+    <tr class='success'>
+                                    <td> #{data.data.Siv_Fecha} </td>
+                                    <td> #{formatHora}</td>
+                                    <td> #{data.data.Siv_Dia_Internacion} </td>
+                                    <td> #{data.data.Siv_Dia_PostQuirurgico} </td>
+                                    <td> #{data.data.Siv_Peso} </td>
+                                    <td> #{data.data.Siv_Pulso} </td>
+                                    <td> #{data.data.Siv_Temperatura} </td>
+                                    <td> #{data.data.Siv_Saturacion} </td>
+                                    <td> #{data.data.Siv_Frecuencia_Respiratoria} </td>
+                                    <td> #{data.data.Siv_Presion_Arterial_Diastolica}/ #{data.data.Siv_Presion_Arterial_Sistolica}</td>                                
+                                    <td>
+                                        <!--BALANCE HIDRICO-->
+                                        <button class='btn btn-success btn-sm' data-toggle='modal' data-target='#modalSignos#{data.data.signos_vitale_id}'>Ver
+                                        </button>
+                                        <div class='modal fade' id='modalSignos#{data.data.signos_vitale_id}' tabindex='-1' role='dialog' aria-labelledby='exampleModalLongTitle' aria-hidden='true'>
+                                            <div class='modal-dialog' role='document'>
+                                                <div class='modal-content'>
+                                                <div class='modal-header' style='background-color: #66bb6a'>
+                                                    <h5 class='modal-title' id='titleSuccess' style='color: #fff'>BALANCE HIDRICO</h5>
+                                                </div>
+                                                <div class='modal-body'>
+                                                    <table class='table dt-responsive no-wrap' width='100%'>
+                                                        <tbody style='font-size: 14px'>
+                                                            <tr style='background-color: #1976d2; color:#fff'>
+                                                                <th  colspan='4'>INGRESOS CC</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Parental</th>
+                                                                <th>Via Oral</th>
+                                                                <th colspan='2' style='text-align: right'>Total</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td> #{data.data.Siv_Ingresos_Parenteral}</td>
+                                                                <td> #{data.data.Siv_Ingresos_ViaOral} </td>
+                                                                <td colspan='2' style='text-align: right'> #{data.data.Siv_Ingresos_Total}</td>
+                                                            </tr>
+                                                            <tr style='background-color: #f44336; color:#fff'>
+                                                                <th  colspan='4'>ELIMINACIONES cc</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Orina</th>
+                                                                <th>Drenaje</th>
+                                                                <th>Otros</th>
+                                                                <th style='text-align: right'>Total</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td> #{data.data.Siv_Eliminaciones_Orina}</td>
+                                                                <td> #{data.data.Siv_Eliminaciones_Drenaje}</td>
+                                                                <td> #{data.data.Siv_Eliminaciones_Otros}</td>
+                                                                <td style='text-align: right'> #{data.data.Siv_Eliminaciones_Total}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class='modal-footer'>
+                                                    <button type='button' class='btn btn-success btn-sm' data-dismiss='modal'>ACEPTAR</button>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
 
-                                </div>
-                                <div class='col-lg-6' style='text-align: center'>
-                                    <strong>ELIMINACIONES CC</strong>
-                                </div>
-                            </div>
-                            <div class='row'>
-                                <div class='col-lg-2'>
-                                    <strong>Parenteral:</strong> #{data.data.Siv_Ingresos_Parenteral}
-                                </div>
-                                <div class='col-lg-2'>
-                                    <strong>Via Oral:</strong> #{data.data.Siv_Ingresos_ViaOral}
-                                </div>
-                                <div class='col-lg-2'>
-                                    <strong>Total:</strong> #{data.data.Siv_Ingresos_Total}
-                                </div>
-                                <div class='col-lg-2'>
-                                    <strong>Orina:</strong> #{data.data.Siv_Eliminaciones_Orina}
-                                </div>
-                                <div class='col-lg-2'>
-                                    <strong>Drenaje:</strong> #{data.data.Siv_Eliminaciones_Drenaje}
-                                </div>
-                                <div class='col-lg-2'>
-                                    <strong>Total:</strong> #{data.data.Siv_Eliminaciones_Total}
-                                </div>
-                            </div>
-                            <div class='row' style='margin-top: 7px'>                                
-                                 <div class='col-lg-2'>
-                                    <strong>Número Comidas:</strong> #{data.data.Siv_Numero_Comidas}
-                                </div>
-                                 <div class='col-lg-2'>
-                                    <strong>Numero Micciones:</strong> #{data.data.Siv_Numero_Micciones}
-                                </div>
-                                 <div class='col-lg-2'>
-                                    <strong>Número Deposiciones:</strong> #{data.data.Siv_Numero_Deposiciones}
-                                </div>
-                                 <div class='col-lg-3'>
-                                    <strong>Dieta Administrada:</strong> #{data.data.Siv_Dieta_Administrada}
-                                </div>
-                            </div>
-                            <div class='row'>
-                                <div class='col-lg-12'>
-                                    <strong>ACTIVIDADES</strong>
-                                </div>                                
-                            </div>
-                            <div class='row'>
-                                #{actividades}
-                            </div>
+                                    </td>
+                                    <td>
+                                        <!--MEDICIONES Y ACTIVIDADES-->
+                                        <button class='btn btn-success btn-sm' data-toggle='modal' data-target='#modalMediciones#{data.data.signos_vitale_id}'>Ver
+                                        </button>
+                                        <div class='modal fade' id='modalMediciones#{data.data.signos_vitale_id}' tabindex='-1' role='dialog' aria-labelledby='exampleModalLongTitle' aria-hidden='true'>
+                                            <div class='modal-dialog' role='document'>
+                                                <div class='modal-content'>
+                                                <div class='modal-header' style='background-color: #66bb6a'>
+                                                    <h5 class='modal-title' id='titleSuccess' style='color: #fff'>MEDICIONES Y ACTIVIDADES</h5>
+                                                </div>
+                                                <div class='modal-body'>
+                                                    <table class='table dt-responsive no-wrap' width='100%'>
+                                                        <tbody style='font-size: 14px'>
+                                                            <tr>
+                                                                <th>Número De Comidas</th>
+                                                                <th>Número De Micciones</th>
+                                                                <th>Número De Deposiciones</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td> #{data.data.Siv_Numero_Comidas} </td>
+                                                                <td> #{data.data.Siv_Numero_Micciones}</td>
+                                                                <td> #{data.data.Siv_Numero_Deposiciones}</td>
+                                                            </tr>                                                            
+                                                        </tbody>
+                                                    </table>
+                                                    <div class='row' style='text-align: left'>
+                                                        <div class='col-lg-12'><strong>Dieta Administrada:</strong> #{data.data.Siv_Dieta_Administrada}</div>
+                                                    </div>
+                                                    <div class='row' style='text-align: left'>
+                                                        <div class='col-lg-12'><strong>Actividades:</strong>                                                           
+                                                        </div>
+                                                    </div>
+                                                    <div class='row'>
+                                                        #{actividades}
+                                                    </div>
+                                                </div>
+                                                <div class='modal-footer'>
+                                                    <button type='button' class='btn btn-success btn-sm' data-dismiss='modal'>ACEPTAR</button>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+
+                                    </td>
+                                    <td style='font-size: 10px; color: #1976d2'>#{data.responsable}</td>
+
+                                </tr>
     ")
 $(document).on "ajax:error","form#signosVitales-form", (ev,data,xhr, settings)->
     console.log data
@@ -338,7 +549,7 @@ $(document).on "ajax:error","form#signosVitales-form", (ev,data,xhr, settings)->
 ###FUNCIONES DE AYUDA ###
 showModal = (message, type) ->
   if type == 'success'
-    $('#titleSuccess').html 'ÉXITO'
+    $('#titleSuccess').html("ÉXITO")
     $('#bodySuccess').html "#{message}"
     $('#modalSuccess').modal()
   if type == 'error'

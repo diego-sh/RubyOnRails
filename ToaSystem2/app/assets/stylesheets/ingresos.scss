@@ -18,3 +18,25 @@
     border-bottom-style: solid;
     color:#1976d2;
 }
+
+//style para tabla signos vitales
+th.rotate {
+  /* Something you can count on */
+  height: 140px;
+  white-space: nowrap;
+}
+
+th.rotate > div {
+  transform: 
+    /* Magic Numbers */
+    translate(25px, 1px)
+    /* 45 is really 360 - 45 */
+    rotate(315deg);
+  width: 30px;
+}
+th.rotate > div > span {
+  //border-bottom: 1px solid #ccc;
+  padding: 5px 10px;
+}
+
+

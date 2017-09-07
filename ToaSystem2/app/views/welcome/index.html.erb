@@ -1,17 +1,12 @@
 <% provide(:home, 'active') %>
-<h1>CLINICA TOA</h1>
-<%= notice%>
-<!--<% if session[:usuario] %> 
-    <%= session[:menus] %>
-    <%session[:menus].each do |menu| %>
+<div class="row" style="margin-top: 50px">
+    <div class="col-lg-12">
+        <div class="alert alert-warning">
+            <h3>BIENVENIDO AL SISTEMA CLÍNICO</h3>
+        <%=session[:persona]["Per_Apellido_Materno"]%> <%=session[:persona]["Per_Nombres"]%>
+        <%= notice%>
+        </div>
         
-        <li class="<%= %>">
-            <%= link_to menu["menu_path"] do %><%= menu["menu_nombre"]%>
-              <%= image_tag(menu["menu_icono"], :alt => "rss feed", :class=>"pull-right") %>
-            <% end %>
-          </li>
-        
-    <% end %>
-    <%= link_to  "Salir", logout_usuarios_path, method: :logout %>
-<% else %>
-<% end %>-->
+    </div>
+</div>
+

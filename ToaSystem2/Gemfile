@@ -73,3 +73,6 @@ gem 'momentjs-rails'
 ##PDF
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
+
+##FONT AWESOME
+gem 'font-awesome-sass'

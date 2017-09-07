@@ -1,27 +1,107 @@
-<%= form_for(protocolo, :url => { :action => "createNotaEvolucion" }, remote: true, html:{id: "notasEvolucion-form",format: :json}, validate: true) do |f| %>
+<%= form_for(protocolo, :url => { :action => "createProtocolo" }, remote: true, html:{id: "protocolo-form",format: :json}, validate: true) do |f| %>
+    <fieldset id="fieldsetProtocolo">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="row" style="color: #1976d2; text-align: center"><strong>DIAGNÓSTICOS</strong></div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <strong>PRE-OPERATORIO:</strong>  <%= @infoIngreso.Pop_Diagnostico_PreOperatorio%>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label for="notaEvolucion">POST-OPERATORIO</label>
+                        <% if protocolo.Pdo_Diagnostico_PostOperatorio !=nil || protocolo.Pdo_Diagnostico_PostOperatorio != "" %>
+                            <%=f.text_area :Pdo_Diagnostico_PostOperatorio, class:'form-control', id:'dPostOperatorio', placeholder:'Añada diagnóstico', disabled:true%>
+                        <%else%>
+                            <%=f.text_area :Pdo_Diagnostico_PostOperatorio, class:'form-control', id:'dPostOperatorio', placeholder:'Añada diagnóstico'%>                            
+                        <%end%>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-6">
+            <div class="row" style="color: #1976d2; text-align: center"><strong>OPERACIÓN</strong></div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <strong>PROYECTADA:</strong>  <%= @infoIngreso.Pop_Cirugia_Propuesta%>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label for="notaEvolucion">REALIZADA</label>
+                        <% if protocolo.Pdo_Realizada !=nil || protocolo.Pdo_Realizada != "" %>
+                            <%=f.text_area :Pdo_Realizada, class:'form-control', id:'cirugiaRealizada', placeholder:'Añada diagnóstico', disabled:true%>
+                        <%else%>
+                            <%=f.text_area :Pdo_Realizada, class:'form-control', id:'cirugiaRealizada', placeholder:'Añada diagnóstico'%>
+                        <%end%>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="color: #1976d2; text-align: center"><strong>EQUIPO OPERATORIO</strong></div>
+    <div class="row">
+        <div class="col-lg-6">
+            <%if @equipo!=nil%>
+            <% @equipo.each do |team|%>
+            <div class="row">
+                <div class="col-lg-12">
+                    <strong><%= team.Rol_Funcion%>:</strong> <%= team.Per_Apellido_Paterno%> <%= team.Per_Nombres%>
+                </div>
+            </div>                
+            <%end%>
+            <%end%>
+
+        </div>
+        <div class="col-lg-6">
+
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg-3">
             <div class="form-group">
                 <label for="fechaNota">FECHA DE OPERACIÓN</label>
-                <%=f.date_field :Pdo_Fecha, value: Date.today.strftime("%Y-%m-%d"),min: Date.today, class:'form-control', id:'fechaNota'%>
+                <% if protocolo.Pdo_Fecha !=nil || protocolo.Pdo_Fecha != "" %>
+                    <%=f.date_field :Pdo_Fecha ,min: Date.today, class:'form-control', id:'fechaNota', disabled:true%>
+                <%else%>
+                    <%=f.date_field :Pdo_Fecha, value: Date.today.strftime("%Y-%m-%d"),min: Date.today, class:'form-control', id:'fechaOperacion'%>
+                <%end%>
             </div>
         </div>
         <div class="col-lg-3">
             <div class="form-group">
                 <label for="horaNota">HORA DE INICIO</label>
-                <%=f.time_field :Pdo_Hora_Inicio, value: Time.now.strftime("%H:%M"), class:'form-control', id:'horaNota'%>
+                <% if protocolo.Pdo_Hora_Inicio !=nil || protocolo.Pdo_Hora_Inicio != "" %>
+                    <%=f.time_field :Pdo_Hora_Inicio, class:'form-control', id:'horaNota', disabled:true%>
+                <%else%>
+                    <%=f.time_field :Pdo_Hora_Inicio, value: Time.now.strftime("%H:%M"), class:'form-control', id:'horaInicioOperacion'%>
+                <%end%>
             </div>
         </div>
         <div class="col-lg-3">
             <div class="form-group">
                 <label for="horaNota">HORA DE TERMINACIÓN</label>
-                <%=f.time_field :Pdo_Hora_Fin, value: Time.now.strftime("%H:%M"), class:'form-control', id:'horaNota'%>
+                <% if protocolo.Pdo_Hora_Fin !=nil || protocolo.Pdo_Hora_Fin != "" %>
+                    <%=f.time_field :Pdo_Hora_Fin, class:'form-control', id:'horaNota', disabled:true%>
+                <%else%>
+                    <%=f.time_field :Pdo_Hora_Fin, value: Time.now.strftime("%H:%M"), class:'form-control', id:'horaFinOperacion'%>
+                <%end%>
+                
             </div>
         </div>
         <div class="col-lg-3">
             <div class="form-group">
                 <label for="horaNota">TIPO DE ANESTESIA</label>
-                <%=f.text_field :Pdo_Tipo_Anestecia, class:'form-control', id:'horaNota', placeholder:'Tipo'%>
+                <% if protocolo.Pdo_Tipo_Anestecia !=nil || protocolo.Pdo_Tipo_Anestecia != "" %>
+                    <%=f.text_field :Pdo_Tipo_Anestecia, class:'form-control', id:'tipoAnestesia', placeholder:'Tipo', disabled:true%>
+                <%else%>
+                    <%=f.text_field :Pdo_Tipo_Anestecia, class:'form-control', id:'tipoAnestesia', placeholder:'Tipo'%>
+                <%end%>
             </div>
         </div>
     </div>
@@ -29,7 +109,11 @@
         <div class="col-lg-12">
             <div class="form-group">
                 <label for="notaEvolucion">DIERESIS</label>
-                <%=f.text_area :Pdo_Dieresis, class:'form-control', id:'notaEvolucion', placeholder:'Añada su descripción', rows:'3'%>
+                <% if protocolo.Pdo_Dieresis !=nil || protocolo.Pdo_Dieresis != "" %>
+                    <%=f.text_area :Pdo_Dieresis, class:'form-control', id:'dieresis', placeholder:'Añada su descripción', rows:'3', disabled:true%>
+                <%else%>
+                    <%=f.text_area :Pdo_Dieresis, class:'form-control', id:'dieresis', placeholder:'Añada su descripción', rows:'3'%>                    
+                <%end%>                
             </div>
         </div>
     </div>
@@ -37,15 +121,24 @@
         <div class="col-lg-12">
             <div class="form-group">
                 <label for="notaEvolucion">EXPOSICIÓN</label>
-                <%=f.text_area :Pdo_Exposicion, class:'form-control', id:'notaEvolucion', placeholder:'Añada su nota'%>
+                <% if protocolo.Pdo_Exposicion !=nil || protocolo.Pdo_Exposicion != "" %>
+                    <%=f.text_area :Pdo_Exposicion, class:'form-control', id:'exposicion', placeholder:'Añada su nota', disabled:true%>
+                <%else%>
+                    <%=f.text_area :Pdo_Exposicion, class:'form-control', id:'exposicion', placeholder:'Añada su nota'%>
+                <%end%>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="form-group">
-                <label for="notaEvolucion">EXPLORACIÓN Y HALLAZGOS QUIRURGICOS</label>
-                <%=f.text_area :Pdo_Hallazgos, class:'form-control', id:'notaEvolucion', placeholder:'Añada sus hallazgos'%>
+                <label for="notaEvolucion">EXPLORACIÓN Y HALLAZGOS QUIRÚRGICOS</label>
+                <% if protocolo.Pdo_Hallazgos !=nil || protocolo.Pdo_Hallazgos != "" %>
+                    <%=f.text_area :Pdo_Hallazgos, class:'form-control', id:'hallazgosQuirurgicos', placeholder:'Añada sus hallazgos', disabled:true%>
+                <%else%>
+                    <%=f.text_area :Pdo_Hallazgos, class:'form-control', id:'hallazgosQuirurgicos', placeholder:'Añada sus hallazgos'%>
+                <%end%>
+                
             </div>
         </div>
     </div>
@@ -53,7 +146,11 @@
         <div class="col-lg-12">
             <div class="form-group">
                 <label for="notaEvolucion">PROCEDIMIENTO OPERATORIO</label>
-                <%=f.text_area :Pdo_Procedimiento, class:'form-control', id:'notaEvolucion', placeholder:'Describa el procedimiento realizado'%>
+                <% if protocolo.Pdo_Procedimiento !=nil || protocolo.Pdo_Procedimiento != "" %>
+                    <%=f.text_area :Pdo_Procedimiento, class:'form-control', id:'procedimiento', placeholder:'Describa el procedimiento realizado', rows:'5', disabled:true%>
+                <%else%>
+                    <%=f.text_area :Pdo_Procedimiento, class:'form-control', id:'procedimiento', placeholder:'Describa el procedimiento realizado'%>
+                <%end%>                
             </div>
         </div>
     </div>
@@ -61,9 +158,42 @@
         <div class="col-lg-12">
             <div class="form-group">
                 <label for="notaEvolucion">COMPLICACIONES</label>
-                <%=f.text_area :Pdo_Complicaciones, class:'form-control', id:'notaEvolucion', placeholder:'Describa las complicaciones'%>
+                <% if protocolo.Pdo_Complicaciones !=nil || protocolo.Pdo_Complicaciones != "" %>
+                    <%=f.text_area :Pdo_Complicaciones, class:'form-control', id:'complicaciones', placeholder:'Describa las complicaciones', disabled:true%>
+                <%else%>
+                    <%=f.text_area :Pdo_Complicaciones, class:'form-control', id:'complicaciones', placeholder:'Describa las complicaciones'%>
+                <%end%>                
             </div>
         </div>
     </div>
-
+     <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="perfil">DICTADA POR:</label>
+                    <% if protocolo.Pdo_Dictada !=nil || protocolo.Pdo_Dictada!= "" %>
+                        <%= f.collection_select :Pdo_Dictada, @especialistas, :Nombre, :Nombre,{prompt: "Seleccione"},{ :class => 'form-control', :id=>'cmbDictada', disabled:true} %>
+                    <%else%>
+                        <%= f.collection_select :Pdo_Dictada, @especialistas, :Nombre, :Nombre,{prompt: "Seleccione"},{ :class => 'form-control', :id=>'cmbDictada'} %>
+                    <%end%>
+                    
+                </div>
+            </div>
+        </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="actions">
+                <% if protocolo.Pdo_Diagnostico_PostOperatorio !=nil || protocolo.Pdo_Diagnostico_PostOperatorio != "" %>
+                    <button type="submit" class="btn btn-primary pull-right" disabled=true>
+                        <span><i class="glyphicon glyphicon-plus"></i> Guardar</span>
+                    </button>
+                <%else%>
+                    <button type="submit" class="btn btn-primary pull-right">
+                        <span><i class="glyphicon glyphicon-plus"></i> Guardar</span>
+                    </button>
+                <%end%>
+                
+            </div>
+        </div>        
+    </div>
+    </fieldset>
 <%end%>

@@ -16,7 +16,7 @@
 
 .scroll-panelConsulta {
   //min-height: 10;
- max-height: 350px;
+ max-height: 490px;
     overflow-y: scroll;
 }
 
@@ -48,4 +48,9 @@ h3,h4, #hc{
 
 .panel-heading a.collapsed:after {
     content:"\e080";
+}
+
+.tituloModal{
+    color: #1976d2;
+    font-weight: 600;
 }

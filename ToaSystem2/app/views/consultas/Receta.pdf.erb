@@ -20,21 +20,20 @@
             </div>
         </div><hr>
         <div style="clear: both; height: 405px"><br>
-            <div style="float: left; width: 70%;">
+            <div style="float: left; width: 70%; font-size: 18">
                 Rp.
             </div>
-            <div style="float: left; width: 30%;" align="right">
+            <div style="float: left; width: 30%; font-size: 18px" align="right">
                 Quito, <%=l Time.now, :format => :long %>
             </div>
             <div><br><br>
                 <table style="width: 100%">
                     <thead>
                     </thead>
-                    <tbody>
+                    <tbody style="font-size:18px">
                         <% @medicinas.each do |medicina| %>
                             <tr>
-                                <td style="width: 7%"><%= medicina.Ins_Cantidad %></td>
-                                <td><%= medicina.Ins_Nombre %></td>
+                                <td><%= medicina.Ins_Nombre %>  , # <%= medicina.Ins_Cantidad %></td>
                             </tr>
                         <% end %>
                     <tbody>
@@ -69,17 +68,17 @@
             </div>
         </div><hr>
         <div style="clear: both; height: 405px"><br>
-            <div style="float: left; width: 70%;">
+            <div style="float: left; width: 70%; font-size: 18">
                 Indicaciones.
             </div>
-            <div style="float: left; width: 30%;" align="right">
+            <div style="float: left; width: 30%; font-size: 18px" align="right">
                 Quito, <%=l Time.now, :format => :long %>
             </div>
             <div><br><br>
                 <table>
                     <thead>
                     </thead>
-                    <tbody>
+                    <tbody style="font-size:18px">
                         <% @medicinas.each do |medicina| %>
                             <tr>
                                 <td><%= medicina.Ins_Nombre %> : </td>
